@@ -1,1 +1,5 @@
-Good line for me
+<<<<<<< HEAD
+Morrowind sucks
+=======
+Morrowind
+>>>>>>> 73a11d682bca5f8d7d9a7f36029d87397dccf8c4
