@@ -10,4 +10,8 @@ Morrowind
 >>>>>>> 73a11d682bca5f8d7d9a7f36029d87397dccf8c4
 >>>>>>> 454a9d915a5b28689b1de7f9e235bb2ca1
 
+<<<<<<< HEAD
 a different change
+=======
+another  FROGS & PIGS & DUCKLINGS change
+>>>>>>> 74a798ec2dd6836445540fb76fb70733330965b5
