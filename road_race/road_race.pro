@@ -18,3 +18,6 @@ SOURCES += main.cpp\
 HEADERS  += roadrace.h
 
 FORMS    += roadrace.ui
+
+CONFIG += c++11
+
