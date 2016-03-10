@@ -14,9 +14,11 @@ TEMPLATE = app
 CONFIG += c++11
 
 SOURCES += main.cpp\
-        roadrace.cpp
+        roadrace.cpp \
+    highscore.cpp
 
-HEADERS  += roadrace.h
+HEADERS  += roadrace.h \
+    highscore.h
 
 FORMS    += roadrace.ui
 
