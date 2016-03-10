@@ -13,9 +13,11 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        roadrace.cpp
+        roadrace.cpp \
+    network.cpp
 
-HEADERS  += roadrace.h
+HEADERS  += roadrace.h \
+    network.h
 
 FORMS    += roadrace.ui
 
