@@ -1,14 +1,17 @@
 #ifndef GAMEMODEL_
 #define GAMEMODEL_
 
-#endif // GAMEMODEL_
+
+#include <string>
+using namespace std;
+
 class game{
 
   private:
 
   public:
     bool save();
-    string load(instream file);
+    string load();
     void update();
 
 
@@ -17,15 +20,15 @@ class game{
 
 class Command{
 public:
-    virtual bool execute();
-    virtual ~command(){};
+    virtual bool execute()=0;
+
 };
 
 class buildCommand: public Command{
 private:
     int id;
 public:
-    buildCommmand(int newId){
+    buildCommand(int newId){
         id = newId;
     }
 
@@ -46,13 +49,13 @@ private:
     int squareid;
     int playerId;
 public:
-    resourceCommand(int id1,id2){
+    resourceCommand(int id1,int id2){
         squareid = id1;
         playerId = id2;
     }
     bool execute();
-    bool get();
-    bool store();
+    int get();
+    int store();
 };
 class dragonCommand: public Command{
 private:
@@ -69,3 +72,4 @@ public:
     bool die();
     bool damage();
 };
+#endif // GAMEMODEL_
