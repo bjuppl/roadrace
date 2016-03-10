@@ -14,7 +14,8 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         roadrace.cpp \
-    network.cpp
+    network.cpp \
+    gamemodel.cpp
 
 HEADERS  += roadrace.h \
     network.h \
