@@ -1,5 +1,6 @@
 #ifndef ROADRACE_H
 #define ROADRACE_H
+#include "network.h"
 
 #include <QMainWindow>
 
@@ -15,8 +16,14 @@ public:
     explicit RoadRace(QWidget *parent = 0);
     ~RoadRace();
 
+private slots:
+    void on_btnStuff_clicked();
+    void dataReceived();
+    void serverDisconnected();
+
 private:
     Ui::RoadRace *ui;
+    QTcpSocket *server;
 };
 
 #endif // ROADRACE_H
