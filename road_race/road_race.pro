@@ -11,15 +11,19 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = road_race
 TEMPLATE = app
 
+CONFIG += c++11
 
 SOURCES += main.cpp\
         roadrace.cpp \
-    network.cpp \
-    gamemodel.cpp
+        network.cpp \
+        gamemodel.cpp\
+        highscore.cpp
 
 HEADERS  += roadrace.h \
-    network.h \
-    gamemodel.h
+            network.h \
+            gamemodel.h\
+            highscore.h
+
 
 FORMS    += roadrace.ui
 
