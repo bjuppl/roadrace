@@ -17,7 +17,8 @@ SOURCES += main.cpp\
     network.cpp
 
 HEADERS  += roadrace.h \
-    network.h
+    network.h \
+    gamemodel.h
 
 FORMS    += roadrace.ui
 
