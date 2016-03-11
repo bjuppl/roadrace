@@ -38,6 +38,19 @@ public:
        vector<Square*> getSquares(){
            return squareList;
        }
+       void setWood(int newWood){
+           woodCount = newWood;
+       }
+       void setGold(int gold){
+           goldCount = gold;
+       }
+       void setStone(int stone){
+           stoneCount = stone;
+       }
+       void setWater(int water){
+           waterCount = water;
+       }
 };
+
 
 #endif // PLAYER_H
