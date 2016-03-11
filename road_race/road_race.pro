@@ -17,12 +17,14 @@ SOURCES += main.cpp\
         roadrace.cpp \
         network.cpp \
         gamemodel.cpp\
-        highscore.cpp
+        highscore.cpp \
+    square.cpp
 
 HEADERS  += roadrace.h \
             network.h \
             gamemodel.h\
-            highscore.h
+            highscore.h \
+    square.h
 
 
 FORMS    += roadrace.ui
