@@ -11,17 +11,17 @@ RoadRace::RoadRace(QWidget *parent) :
     connect(server, &QTcpSocket::readyRead, this, &RoadRace::dataReceived);
     connect(server, &QTcpSocket::disconnected, this, &RoadRace::serverDisconnected);
 }
-
+//destructor
 RoadRace::~RoadRace()
 {
     delete ui;
 }
-
+//handle the btnStuff clicked event
 void RoadRace::on_btnStuff_clicked()
 {
 
 }
-
+//receive data from the serveer
 void RoadRace::dataReceived() {
 
     while (server->canReadLine()) {
@@ -31,7 +31,7 @@ void RoadRace::dataReceived() {
     }
 
 }
-
+//handles a client disconnecting from a server
 void RoadRace::serverDisconnected()
 {
      ui->statusBar->showMessage("Disconnected.");
