@@ -20,6 +20,7 @@ private slots:
     void on_btnStuff_clicked();
     void dataReceived();
     void serverDisconnected();
+    void loadFile();
 
 private:
     Ui::RoadRace *ui;

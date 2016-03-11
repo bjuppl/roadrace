@@ -32,7 +32,7 @@ public:
        int getWater(){
            return waterCount;
        }
-       int goldCount(){
+       int getGold(){
            return goldCount;
        }
        vector<Square*> getSquares(){

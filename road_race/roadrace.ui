@@ -37,6 +37,13 @@
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuNew_Game">
+    <property name="title">
+     <string>New Game</string>
+    </property>
+    <addaction name="actionFrom_file"/>
+   </widget>
+   <addaction name="menuNew_Game"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -47,6 +54,11 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionFrom_file">
+   <property name="text">
+    <string>From file...</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

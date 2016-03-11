@@ -37,4 +37,7 @@ void RoadRace::serverDisconnected()
      ui->statusBar->showMessage("Disconnected.");
      //ui->btnConnect->setEnabled(true);
 }
+void RoadRace::loadFile() {
+
+}
 
