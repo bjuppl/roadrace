@@ -3,11 +3,13 @@
 
 
 #include <string>
+#include <vector>
 using namespace std;
 //the actual game model
 class game{
 
   private:
+    vector<Sqaure*> squares;
     //for singleton if needed
    game(){}
   public:
@@ -90,6 +92,22 @@ class eventHandler{
     int length;
 public:
     virtual bool execute() = 0;
+};
+class Square{
+    string type;
+    string image;
+    int id;
+    int resources;
+
+public:
+    Square(string newtype,string newImage,int newResources){
+        type = newtype;
+        image = newtype;
+        image = newImage;
+    }
+    virtual bool mine()=0;
+    virtual bool destroy()=0;
+
 };
 
 #endif // GAMEMODEL_
