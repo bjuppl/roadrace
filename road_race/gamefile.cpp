@@ -5,7 +5,7 @@ GameFileManager::GameFileManager (std::vector<std::string> contents ) {
 
 }
 
-GameFileManager GameFileManager::fromFile( std::string fileName ) {
+GameFileManager *GameFileManager::fromFile( std::string fileName ) {
 
     std::string line;
 
@@ -24,5 +24,5 @@ GameFileManager GameFileManager::fromFile( std::string fileName ) {
         std::cerr << "Game file " << fileName << " does not exist.";
     }
 
-    return GameFileManager(contents);
+    return new GameFileManager(contents);
 }

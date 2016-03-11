@@ -1,5 +1,10 @@
 #include "roadrace.h"
 #include "ui_roadrace.h"
+#include "gamefile.h"
+#include "gamemodel.h"
+
+class Game;
+class GameFileManager;
 
 RoadRace::RoadRace(QWidget *parent) :
     QMainWindow(parent),
@@ -41,3 +46,11 @@ void RoadRace::loadFile() {
 
 }
 
+
+void RoadRace::on_btnOpenGame_clicked()
+{
+    std::string fileName = ui->iptGameFileName->text().toStdString();
+
+    Game::instance().setGameLoader(GameFileManager::fromFile(fileName));
+
+}
