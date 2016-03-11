@@ -12,7 +12,7 @@ private:
     int stoneCount;
     int waterCount;
     string name;
-    vector<Square> squareList;
+    vector<Square*> squareList;
 public:
     Player(string newName){
         name = newName;
@@ -22,6 +22,21 @@ public:
        }
        string getName(){
            return name;
+       }
+       int getWood(){
+           return woodCount;
+       }
+       int getStone(){
+           return stoneCount;
+       }
+       int getWater(){
+           return waterCount;
+       }
+       int goldCount(){
+           return goldCount;
+       }
+       vector<Square*> getSquares(){
+           return squareList;
        }
 };
 
