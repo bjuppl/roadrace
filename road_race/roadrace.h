@@ -22,6 +22,8 @@ private slots:
     void serverDisconnected();
     void loadFile();
 
+    void on_btnOpenGame_clicked();
+
 private:
     Ui::RoadRace *ui;
     QTcpSocket *server;

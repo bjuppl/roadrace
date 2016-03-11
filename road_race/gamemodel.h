@@ -5,16 +5,18 @@
 #include <string>
 #include <vector>
 #include "square.h"
+#include "gamefile.h"
 
 using namespace std;
 
 //the actual game model
-class game{
+class Game{
 
   private:
     vector<Square*> squares;
     //for singleton if needed
-   game(){}
+    GameFileManager *loader;
+   Game(){}
   public:
     bool save();
     string load();
@@ -22,10 +24,11 @@ class game{
 
     //moar singleton functionality
 private:
-    static game* instance_;
+    static Game* instance_;
 
 public:
-    static game& instance();
+    static Game& instance();
+    void setGameLoader ( GameFileManager * gfm );
 
 
 };
