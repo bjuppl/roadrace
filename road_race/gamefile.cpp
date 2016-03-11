@@ -2,7 +2,9 @@
 
 GameFileManager::GameFileManager (std::vector<std::string> contents ) {
 
-
+    for ( size_t i=0; i<contents.size();i++) {
+        std::cout<< contents[i] << std::endl;
+    }
 }
 
 GameFileManager *GameFileManager::fromFile( std::string fileName ) {
