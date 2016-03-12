@@ -2,9 +2,11 @@
 #include "ui_roadrace.h"
 #include "gamefile.h"
 #include "gamemodel.h"
+#include "gui.h"
 
 class Game;
 class GameFileManager;
+class GuiManager;
 
 RoadRace::RoadRace(QWidget *parent) :
     QMainWindow(parent),
@@ -53,10 +55,12 @@ void RoadRace::on_btnOpenGame_clicked()
 
     Game::instance().setGameLoader(GameFileManager::fromFile(fileName));
 
+    GuiManager::instance().setUi( ui );
+
     vector<Player*> players = Game::instance().getPlayerList();
 
 
-    for(int i=0;i<players.size();i++){
+    for(size_t i=0;i<players.size();i++){
         Player *proc = players.at(i);
         string name = proc->getName();
           QString msg;
@@ -68,7 +72,7 @@ void RoadRace::on_btnOpenGame_clicked()
           Water += proc->getWater();
           gold  += proc->getGold();
           stone += proc->getStone();
-        if(i=0){
+        if(i==0){
             msg.fromUtf8(name.c_str());
             ui->player1->setText("Player 1:");
             ui->wo1->setText(wood);
@@ -76,8 +80,7 @@ void RoadRace::on_btnOpenGame_clicked()
             ui->Sto1->setText(stone);
             ui->Wa1->setText(Water);
             ui->name1->setText(msg);
-        }
-        if(i=1){
+        } else if(i==1){
             msg.fromUtf8(name.c_str());
             ui->player2->setText("Player 2:");
             ui->wo2->setText(wood);
@@ -85,8 +88,7 @@ void RoadRace::on_btnOpenGame_clicked()
             ui->Sto2->setText(stone);
             ui->Wa2->setText(Water);
             ui->name2->setText(msg);
-        }
-        if(i=2){
+        } else if(i==2){
             msg.fromUtf8(name.c_str());
             ui->player3->setText("Player 3:");
             ui->wo3->setText(wood);
@@ -94,8 +96,7 @@ void RoadRace::on_btnOpenGame_clicked()
             ui->Sto3->setText(stone);
             ui->Wa3->setText(Water);
             ui->name3->setText(msg);
-        }
-        if(i=3){
+        } else if(i==3){
             msg.fromUtf8(name.c_str());
             ui->player4->setText("Player 4:");
             ui->wo4->setText(wood);

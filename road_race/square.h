@@ -4,6 +4,7 @@
 #include <string>
 #include <QLabel>
 #include <QGridLayout>
+#include <QWidget>
 #include "player.h"
 #include "roadrace.h"
 
@@ -96,7 +97,7 @@ class SquareLabel : public QLabel{
     Q_OBJECT
     Square *square;
 public:
-    explicit SquareLabel (Square *square_, QGridLayout *parent): QLabel(parent), square(square_) {
+    explicit SquareLabel (Square *square_, QWidget *parent): QLabel(parent), square(square_) {
     }
 
 };
