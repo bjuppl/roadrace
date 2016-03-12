@@ -2,9 +2,11 @@
 #include "ui_roadrace.h"
 #include "gamefile.h"
 #include "gamemodel.h"
+#include "gui.h"
 
 class Game;
 class GameFileManager;
+class GuiManager;
 
 RoadRace::RoadRace(QWidget *parent) :
     QMainWindow(parent),
@@ -53,9 +55,11 @@ void RoadRace::on_btnOpenGame_clicked()
 
     Game::instance().setGameLoader(GameFileManager::fromFile(fileName));
 
-    vector<Player*> players = Game::instance().getPlayerList();
+    GuiManager::instance().setUi( ui );
 
-int i = 0;
+    vector<Player*> players = Game::instance().getPlayerList();
+     
+      int i = 0;
     while(i<players.size()){
         Player *proc = players.at(i);
         string name = proc->getName();
@@ -111,6 +115,7 @@ int i = 0;
         }
         msg="";
         i++;
+    }
     }
         /*int height = Game::instance().getHeight();
         int width = Game::instance().getWidth();

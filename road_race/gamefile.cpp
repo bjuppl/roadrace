@@ -138,7 +138,7 @@ GameFileManager::GameFileManager (std::vector<std::string> contents ) {
 GameFileManager *GameFileManager::fromFile( std::string fileName ) {
 
     if ( fileName.size() == 0) {
-        fileName = "../../../../../road_race/gamefile.rr";
+        fileName = "gamefile.rr";
     }
     std::string line;
 

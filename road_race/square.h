@@ -4,6 +4,7 @@
 #include <string>
 #include <QLabel>
 #include <QGridLayout>
+#include <QWidget>
 #include "player.h"
 #include "roadrace.h"
 
