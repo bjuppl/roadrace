@@ -124,6 +124,7 @@ GameFileManager::GameFileManager (std::vector<std::string> contents ) {
                    Player *owner = Game::instance().getPlayer(ownerName);
                    squares[i].push_back( new Square(terrain,addition,owner));
                 }
+
             }
         } else if ( identifier == endFile ) {
             break;
