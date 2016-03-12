@@ -126,6 +126,7 @@ GameFileManager::GameFileManager (std::vector<std::string> contents ) {
                 }
 
             }
+            Game::instance().setSquares(squares);
         } else if ( identifier == endFile ) {
             break;
         }
@@ -136,6 +137,9 @@ GameFileManager::GameFileManager (std::vector<std::string> contents ) {
 
 GameFileManager *GameFileManager::fromFile( std::string fileName ) {
 
+    if ( fileName.size() == 0) {
+        fileName = "../../../../../road_race/gamefile.rr";
+    }
     std::string line;
 
     std::vector<std::string> contents;
@@ -150,7 +154,7 @@ GameFileManager *GameFileManager::fromFile( std::string fileName ) {
     }
 
     else {
-        std::cerr << "Game file " << fileName << " does not exist.";
+        std::cerr << "Game file '" << fileName << " does not exist.";
     }
 
     return new GameFileManager(contents);

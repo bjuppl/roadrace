@@ -2,7 +2,10 @@
 #define SQUARE_H
 
 #include <string>
+#include <QLabel>
+#include <QGridLayout>
 #include "player.h"
+#include "roadrace.h"
 
 using namespace std;
 
@@ -43,6 +46,7 @@ class Wall: public Structure{
 class Bridge: public Structure{
 
 };
+
 class Square{
     string type;
     string image;
@@ -50,10 +54,10 @@ class Square{
     string addition;
     Structure *path;
 public:
-    Square(string type_,string addition_,Player *owner_) : type(type_), image(type_), addition(addition_), owner(owner_){}
-    Square(string type_,string addition_) : type(type_), image(type_), addition(addition_), owner(NULL){}
-    Square(string type_) : type(type_), image(type_), addition(""), owner(NULL){}
-    Square(string type_,Player *owner_) : type(type_), image(type_), addition(""), owner(owner_){}
+    Square(string type_,string addition_,Player *owner_) : type(type_), image(type_), owner(owner_), addition(addition_){}
+    Square(string type_,string addition_) : type(type_), image(type_), owner(NULL), addition(addition_){}
+    Square(string type_) : type(type_), image(type_), owner(NULL), addition(""){}
+    Square(string type_,Player *owner_) : type(type_), image(type_), owner(owner_), addition(""){}
 
     //TODO: make Square pure virtual with inherited types.
     //This will require updating in gamefile.cpp.
@@ -87,6 +91,17 @@ class PlainSq: public Square{
 class CanyonSq: public Square{
 
 };
+
+class SquareLabel : public QLabel{
+    Q_OBJECT
+    Square *square;
+public:
+    explicit SquareLabel (Square *square_, QGridLayout *parent): QLabel(parent), square(square_) {
+    }
+
+};
+
+
 
 
 #endif // SQUARE_H

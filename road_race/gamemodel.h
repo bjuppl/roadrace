@@ -60,6 +60,7 @@ public:
     void setHeight ( int h ) { height = h; }
 
 };
+
 // implement a command structure
 class Command{
 public:
