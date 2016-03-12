@@ -18,6 +18,7 @@ RoadRace::RoadRace(QWidget *parent) :
     connect(server, &QTcpSocket::readyRead, this, &RoadRace::dataReceived);
     connect(server, &QTcpSocket::disconnected, this, &RoadRace::serverDisconnected);
 }
+
 //destructor
 RoadRace::~RoadRace()
 {
@@ -51,15 +52,21 @@ void RoadRace::loadFile() {
 
 void RoadRace::on_btnOpenGame_clicked()
 {
+
     std::string fileName = ui->iptGameFileName->text().toStdString();
 
+    //Open a game with the properties in the given file
     Game::instance().setGameLoader(GameFileManager::fromFile(fileName));
 
+    //Give our GUI manager access to ui
     GuiManager::instance().setUi( ui );
+
+    //Show the squares
+    GuiManager::instance().generateSquareGrid();
 
     vector<Player*> players = Game::instance().getPlayerList();
      
-      int i = 0;
+     size_t i = 0;
     while(i<players.size()){
         Player *proc = players.at(i);
         string name = proc->getName();
@@ -136,5 +143,3 @@ void RoadRace::on_btnOpenGame_clicked()
             lbl->show();
             index++;
         }*/
-
-}

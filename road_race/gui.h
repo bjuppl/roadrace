@@ -1,6 +1,7 @@
 #ifndef GUI_H
 #define GUI_H
 
+#include "ui_roadrace.h"
 #include "roadrace.h"
 #include "gamemodel.h"
 
@@ -14,6 +15,7 @@ private:
  public:
     static GuiManager& instance();
     void setUi ( Ui::RoadRace *ui_ ) { ui = ui_; }
+    Ui::RoadRace *getUi ( ) { return ui; }
 
     void generateSquareGrid();
 };
