@@ -38,6 +38,25 @@ public:
     static Game& instance();
     void setGameLoader ( GameFileManager * gfm );
 
+    vector<vector<Square*>> getSquares() { return squares; }
+    Square *getSquare ( int x, int y) { return squares[x][y]; }
+    string getId() { return id; }
+    string getAlias() { return alias; }
+    string getPassword() { return password; }
+    int getRoundNum() { return round_num; }
+    vector<Player*> getPlayerList() { return player_list; }
+    int getWidth() { return width; }
+    int getHeight() { return height; }
+
+    void setSquares ( vector<vector<Square*>> sq ) { squares = sq; }
+    void setSquare ( Square * sq, int x, int y ) { squares[x][y] = sq; }
+    void setId ( string _id ) { id = _id; }
+    void setAlias ( string a ) { alias = a; }
+    void setPassword ( string p ) { password = p; }
+    void setRoundNum ( int rn ) { round_num = rn; }
+    void setPlayerList ( vector<Player*> pl ) { player_list = pl; }
+    void setWidth ( int w ) { width = w; }
+    void setHeight ( int h ) { height = h; }
 
 };
 // implement a command structure

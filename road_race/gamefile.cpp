@@ -3,8 +3,17 @@
 GameFileManager::GameFileManager (std::vector<std::string> contents ) {
 
     // /Users/jbrazeal/Desktop/School/2015-2016/Spring/CpS_209/TPfork/roadrace/road_race/gamefile.rr
+
+    std::stringstream stream;
+
     for ( size_t i=0; i<contents.size();i++) {
-        std::cout<< contents[i] << std::endl;
+        stream << contents[i] << std::endl;
+    }
+
+    while ( stream ) {
+        std::string identifier;
+        stream >> identifier;
+
     }
 }
 
