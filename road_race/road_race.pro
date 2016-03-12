@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     square.cpp \
     gamefile.cpp \
     player.cpp \
-    utils.cpp
+    utils.cpp \
+    
 
 HEADERS  += roadrace.h \
             network.h \
@@ -30,7 +31,8 @@ HEADERS  += roadrace.h \
     square.h \
     gamefile.h \
     player.h \
-    utils.h
+    utils.h \
+    
 
 
 FORMS    += roadrace.ui

@@ -7,13 +7,48 @@
 using namespace std;
 
 class Player;
+class Structure{
+    //resprsent type of pathway
+    string type;
+    string image;
+    //set owner
 
+    Player *owner;
+    //set owning Sqaure e.g. Square 3X4 has a road on it
+public:
+    Structure(string ntype, string nimage, Player* nowner): type(ntype), image(nimage), owner(nowner){}
+    //set a square's path
+    virtual void build() = 0;
+    //destory the path, but not the square
+    virtual void destroy() = 0;
+    //destructor
+    virtual ~Structure(){}
+    string getType() { return type; }
+    string getImage() { return image; }
+    Player *getOwner() { return owner; }
+    void setType(string nt){type = nt;}
+    void setImage(string ni){image = ni;}
+    void setOwner(Player *no){owner = no;}
+
+};
+class Boat: public Structure{
+
+};
+class Tunnel: public Structure{
+
+};
+class Wall: public Structure{
+
+};
+class Bridge: public Structure{
+
+};
 class Square{
     string type;
     string image;
     Player *owner;
     string addition;
-
+    Structure *path;
 public:
     Square(string type_,string addition_,Player *owner_) : type(type_), image(type_), owner(owner_), addition(addition_){}
     Square(string type_,string addition_) : type(type_), image(type_), owner(NULL), addition(addition_){}
@@ -37,6 +72,21 @@ public:
     void setAddition ( string a ) { addition = a; }
 };
 
+class ForestSq: public Square{
+
+};
+class MountainSq: public Square{
+
+};
+class RiverSq: public Square{
+
+};
+class PlainSq: public Square{
+
+};
+class CanyonSq: public Square{
+
+};
 
 
 #endif // SQUARE_H
