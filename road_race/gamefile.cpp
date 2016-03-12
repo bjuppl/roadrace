@@ -149,7 +149,7 @@ GameFileManager *GameFileManager::fromFile( std::string fileName ) {
     }
 
     else {
-        std::cerr << "Game file " << fileName << " does not exist.";
+        std::cerr << "Game file '" << fileName << "'' does not exist.";
     }
 
     return new GameFileManager(contents);
