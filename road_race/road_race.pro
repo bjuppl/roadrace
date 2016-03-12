@@ -22,6 +22,7 @@ SOURCES += main.cpp\
     gamefile.cpp \
     player.cpp \
     utils.cpp \
+    gui.cpp
     
 
 HEADERS  += roadrace.h \
@@ -32,6 +33,7 @@ HEADERS  += roadrace.h \
     gamefile.h \
     player.h \
     utils.h \
+    gui.h
     
 
 
