@@ -1,9 +1,13 @@
-#include "gamemodel.h"
 #include <string>
 #include <iostream>
 #include <istream>
 
+#include "gamemodel.h"
+#include "player.h"
+
 using namespace std;
+
+class Player;
 
 Game *Game::instance_ = NULL;
 
@@ -36,6 +40,17 @@ Game& Game::instance() {
 
 void Game::setGameLoader(GameFileManager *gfm) {
     loader = gfm;
+}
+
+Player *Game::getPlayer(string name){
+
+    for ( size_t i=0; i<player_list.size(); i++ ) {
+        if ( player_list[i]->getName() == name   ) {
+            return player_list[i];
+        }
+    }
+
+    return NULL;
 }
 
 //destory a road or forturess on a square

@@ -45,6 +45,7 @@ public:
     string getPassword() { return password; }
     int getRoundNum() { return round_num; }
     vector<Player*> getPlayerList() { return player_list; }
+    Player *getPlayer ( std::string name);
     int getWidth() { return width; }
     int getHeight() { return height; }
 
