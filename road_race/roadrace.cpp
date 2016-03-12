@@ -60,28 +60,48 @@ void RoadRace::on_btnOpenGame_clicked()
         Player *proc = players.at(i);
         string name = proc->getName();
           QString msg;
+          QString wood;
+          QString gold;
+          QString stone;
+          QString Water;
+          wood += proc->getWood();
+          Water += proc->getWater();
+          gold  += proc->getGold();
+          stone += proc->getStone();
         if(i=0){
             msg.fromUtf8(name.c_str());
             ui->player1->setText("Player 1:");
-
+            ui->wo1->setText(wood);
+            ui->Go1->setText(gold);
+            ui->Sto1->setText(stone);
+            ui->Wa1->setText(Water);
             ui->name1->setText(msg);
         }
         if(i=1){
             msg.fromUtf8(name.c_str());
             ui->player2->setText("Player 2:");
-
+            ui->wo2->setText(wood);
+            ui->Go2->setText(gold);
+            ui->Sto2->setText(stone);
+            ui->Wa2->setText(Water);
             ui->name2->setText(msg);
         }
         if(i=2){
             msg.fromUtf8(name.c_str());
             ui->player3->setText("Player 3:");
-
+            ui->wo3->setText(wood);
+            ui->Go3->setText(gold);
+            ui->Sto3->setText(stone);
+            ui->Wa3->setText(Water);
             ui->name3->setText(msg);
         }
         if(i=3){
             msg.fromUtf8(name.c_str());
             ui->player4->setText("Player 4:");
-
+            ui->wo4->setText(wood);
+            ui->Go4->setText(gold);
+            ui->Sto4->setText(stone);
+            ui->Wa4->setText(Water);
             ui->name4->setText(msg);
         }
     }
