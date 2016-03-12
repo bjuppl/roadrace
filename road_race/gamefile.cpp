@@ -1,4 +1,5 @@
 #include "gamefile.h"
+#include "gamemodel.h"
 
 GameFileManager::GameFileManager (std::vector<std::string> contents ) {
 
@@ -10,9 +11,25 @@ GameFileManager::GameFileManager (std::vector<std::string> contents ) {
         stream << contents[i] << std::endl;
     }
 
+    const std::string fileIdentifier = "RoadRaceDoc",
+            gameAlias = "alias",
+            gamePassword = "password",
+            roundNum = "round",
+            playerList = "players",
+            playerResourceList = "resources",
+            playerStatus = "status",
+            boardStart = "board",
+            endFile = "EndRoadRaceDoc";
+
     while ( stream ) {
         std::string identifier;
+        std::string command;
         stream >> identifier;
+
+        if (identifier == fileIdentifier) {
+            stream >> command;
+            Game::instance().setId(command);
+        } else if ( identifier)
 
     }
 }
