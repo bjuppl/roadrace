@@ -53,4 +53,36 @@ void RoadRace::on_btnOpenGame_clicked()
 
     Game::instance().setGameLoader(GameFileManager::fromFile(fileName));
 
+    vector<Player*> players = Game::instance().getPlayerList();
+
+
+    for(int i=0;i<players.size();i++){
+        Player *proc = players.at(i);
+        string name = proc->getName();
+          QString msg;
+        if(i=0){
+            msg.fromUtf8(name.c_str());
+            ui->player1->setText("Player 1:");
+
+            ui->name1->setText(msg);
+        }
+        if(i=1){
+            msg.fromUtf8(name.c_str());
+            ui->player2->setText("Player 2:");
+
+            ui->name2->setText(msg);
+        }
+        if(i=2){
+            msg.fromUtf8(name.c_str());
+            ui->player3->setText("Player 3:");
+
+            ui->name3->setText(msg);
+        }
+        if(i=3){
+            msg.fromUtf8(name.c_str());
+            ui->player4->setText("Player 4:");
+
+            ui->name4->setText(msg);
+        }
+    }
 }
