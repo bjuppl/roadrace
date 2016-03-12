@@ -58,9 +58,9 @@ void RoadRace::on_btnOpenGame_clicked()
     GuiManager::instance().setUi( ui );
 
     vector<Player*> players = Game::instance().getPlayerList();
-
-
-    for(size_t i=0;i<players.size();i++){
+     
+      int i = 0;
+    while(i<players.size()){
         Player *proc = players.at(i);
         string name = proc->getName();
           QString msg;
@@ -68,36 +68,44 @@ void RoadRace::on_btnOpenGame_clicked()
           QString gold;
           QString stone;
           QString Water;
-          wood += proc->getWood();
-          Water += proc->getWater();
-          gold  += proc->getGold();
-          stone += proc->getStone();
+           int woodint = proc->getWood();
+           wood = QString::number(woodint);
+           int waterint = proc->getWater();
+           Water = QString::number(waterint);
+           int goldint = proc->getGold();
+           int stoneint = proc->getStone();
+
+            gold = QString::number(goldint);
+           stone = QString::number(stoneint);
         if(i==0){
-            msg.fromUtf8(name.c_str());
+            msg = QString::fromUtf8(name.c_str());
             ui->player1->setText("Player 1:");
             ui->wo1->setText(wood);
             ui->Go1->setText(gold);
             ui->Sto1->setText(stone);
             ui->Wa1->setText(Water);
             ui->name1->setText(msg);
-        } else if(i==1){
-            msg.fromUtf8(name.c_str());
+        }
+        if(i==1){
+            msg = QString::fromUtf8(name.c_str());
             ui->player2->setText("Player 2:");
             ui->wo2->setText(wood);
             ui->Go2->setText(gold);
             ui->Sto2->setText(stone);
             ui->Wa2->setText(Water);
             ui->name2->setText(msg);
-        } else if(i==2){
-            msg.fromUtf8(name.c_str());
+        }
+        if(i==2){
+            msg = QString::fromUtf8(name.c_str());
             ui->player3->setText("Player 3:");
             ui->wo3->setText(wood);
             ui->Go3->setText(gold);
             ui->Sto3->setText(stone);
             ui->Wa3->setText(Water);
             ui->name3->setText(msg);
-        } else if(i==3){
-            msg.fromUtf8(name.c_str());
+        }
+        if(i==3){
+            msg = QString::fromUtf8(name.c_str());
             ui->player4->setText("Player 4:");
             ui->wo4->setText(wood);
             ui->Go4->setText(gold);
@@ -105,5 +113,28 @@ void RoadRace::on_btnOpenGame_clicked()
             ui->Wa4->setText(Water);
             ui->name4->setText(msg);
         }
+        msg="";
+        i++;
     }
+    }
+        /*int height = Game::instance().getHeight();
+        int width = Game::instance().getWidth();
+        QRect rect;
+        rect.setHeight(height);
+        rect.setWidth(width);
+        ui->gridLayout->setGeometry(rect);
+        vector<Square*> squareList;
+        int index = 0;
+        while(index < squareList.size()){
+            Square *square = squareList.at(index);
+            SquareLabel *lbl = new SquareLabel(square,ui->gridLayoutWidget);
+             QRect rect2;
+             //rect2.setHeight(picheight);
+             //rect2.setWidth(pichwidth);
+             //lbl.setGeometry(rect2);
+            //pixmap stuff
+            lbl->show();
+            index++;
+        }*/
+
 }

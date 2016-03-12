@@ -1,0 +1,19 @@
+int height = Game::instance().getHeight();
+        int width = Game::instance().getWidth();
+        QRect rect;
+        rect.setHeight(height);
+        rect.setWidth(width);
+        ui->gridLayout->setGeometry(rect);
+        vector<Square*> squareList;
+        int index = 0;
+        while(index < squareList.size()){
+            Square *square = squareList.at(index);
+            SquareLabel *lbl = new SquareLabel(square,ui->gridLayoutWidget);
+             QRect rect2;
+             //rect2.setHeight(picheight);
+             //rect2.setWidth(pichwidth);
+             //lbl.setGeometry(rect2);
+            //pixmap stuff
+            lbl->show();
+            index++;
+        }*/
