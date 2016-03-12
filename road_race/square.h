@@ -96,7 +96,7 @@ class SquareLabel : public QLabel{
     Q_OBJECT
     Square *square;
 public:
-    explicit SquareLabel (Square *square_, QGridLayout *parent): QLabel(parent), square(square_) {
+    explicit SquareLabel (Square *square_, QWidget *parent): QLabel(parent), square(square_) {
     }
 
 };
