@@ -2,12 +2,14 @@
 #define GUI_H
 
 #include "roadrace.h"
+#include "gamemodel.h"
 
 class GuiManager {
 
 private:
     static GuiManager *instance_;
     Ui::RoadRace *ui;
+
     GuiManager(){}
  public:
     static GuiManager& instance();

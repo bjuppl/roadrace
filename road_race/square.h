@@ -54,6 +54,7 @@ class Square{
     Player *owner;
     string addition;
     Structure *path;
+    int width, height;
 public:
     Square(string type_,string addition_,Player *owner_) : type(type_), image(type_), owner(owner_), addition(addition_){}
     Square(string type_,string addition_) : type(type_), image(type_), owner(NULL), addition(addition_){}
@@ -70,11 +71,15 @@ public:
     string getImage() { return image; }
     Player *getOwner() { return owner; }
     string getAddition() { return addition; }
+    int getHeight () { return height; }
+    int getWidth () { return width; }
 
     void setType ( string t ) { type = t; }
     void setImage ( string i ) { image = i; }
     void setOwner ( Player *o ) { owner = o; }
     void setAddition ( string a ) { addition = a; }
+    void setHeight ( int height_ ) { height = height_; }
+    void setWidth ( int width_ ) { width = width_; }
 };
 
 class ForestSq: public Square{
