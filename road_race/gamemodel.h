@@ -6,6 +6,7 @@
 #include <vector>
 #include "square.h"
 #include "gamefile.h"
+#include "player.h"
 
 using namespace std;
 
@@ -13,9 +14,16 @@ using namespace std;
 class Game{
 
   private:
-    vector<Square*> squares;
+    vector<vector<Square*>> squares;
     //for singleton if needed
     GameFileManager *loader;
+    string id;
+    string alias;
+    string password;
+    int round_num;
+    vector<Player*> player_list;
+    int width, height;
+
    Game(){}
   public:
     bool save();
