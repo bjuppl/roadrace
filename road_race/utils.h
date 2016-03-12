@@ -7,6 +7,6 @@
 //From JacobB/prog1
 //Returns vector of all strings in <str> between <delim>s.
 //Returns an empty string ("") between consecutive occurences of <delim>.
-vector<string> split( string& str, char delim );
+std::vector<std::string> split( std::string& str, char delim );
 
 #endif // UTILS_H

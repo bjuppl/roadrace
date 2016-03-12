@@ -2,6 +2,7 @@
 
 GameFileManager::GameFileManager (std::vector<std::string> contents ) {
 
+    // /Users/jbrazeal/Desktop/School/2015-2016/Spring/CpS_209/TPfork/roadrace/road_race/gamefile.rr
     for ( size_t i=0; i<contents.size();i++) {
         std::cout<< contents[i] << std::endl;
     }

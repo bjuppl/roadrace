@@ -1,10 +1,10 @@
 #include "utils.h"
 
-vector<string> split( string& str, char delim ) {
+std::vector<std::string> split( std::string& str, char delim ) {
 
-    vector<string> ret;
+    std::vector<std::string> ret;
 
-    string curChunk = "";
+    std::string curChunk = "";
 
     auto size = str.size();
 
