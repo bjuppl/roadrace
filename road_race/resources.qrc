@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="canyon">canyon.jpg</file>
+        <file alias="forrest">forrest.jpg</file>
+        <file alias="grass">grass.jpg</file>
+        <file alias="mountain">mountain.jpg</file>
+        <file alias="wall">wall.jpg</file>
+        <file alias="water">water.jpg</file>
+        <file alias="bridge">wooden_bridge_clip_art_17037.jpg</file>
+    </qresource>
+</RCC>
