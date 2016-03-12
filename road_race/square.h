@@ -2,7 +2,10 @@
 #define SQUARE_H
 
 #include <string>
+#include <QLabel>
+#include <QGridLayout>
 #include "player.h"
+#include "roadrace.h"
 
 using namespace std;
 
@@ -43,6 +46,7 @@ class Wall: public Structure{
 class Bridge: public Structure{
 
 };
+
 class Square{
     string type;
     string image;
@@ -87,6 +91,17 @@ class PlainSq: public Square{
 class CanyonSq: public Square{
 
 };
+
+class SquareLabel : public QLabel{
+    Q_OBJECT
+    Square *square;
+public:
+    explicit SquareLabel (Square *square_, QGridLayout *parent): QLabel(parent), square(square_) {
+    }
+
+};
+
+
 
 
 #endif // SQUARE_H
