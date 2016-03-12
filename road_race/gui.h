@@ -3,6 +3,12 @@
 
 class GuiManager {
 
+private:
+    GuiManager *instance_;
+    GuiManager();
+ public:
+    GuiManager& instance();
+
 };
 
 
