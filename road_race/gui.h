@@ -18,6 +18,7 @@ private:
     Ui::RoadRace *getUi ( ) { return ui; }
 
     void generateSquareGrid();
+    QPixmap setmap(Square *sq);
 };
 
 
