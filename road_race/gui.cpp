@@ -13,43 +13,59 @@ GuiManager& GuiManager::instance() {
 
 void GuiManager::generateSquareGrid() {
     std::cout << getUi()->label->text().toStdString() << std::endl;
+
     int hi = Game::instance().getHeight();
     int wi = Game::instance().getWidth();
     vector<vector<Square*>> squaresList = Game::instance().getSquares();
-    vector<Square*> squares = squaresList.at(0);
+    int i2 = 0;
+     int hit=1;
+    while(i2 < squaresList.size()){
+    vector<Square*> squares = squaresList.at(i2);
     int index = 0;
+
+    int wid=0;
     for(index = 0;index<squares.size();index++){
+              int i = squares.size();
+        wid++;
+
        Square *proc = squares.at(index);
        SquareLabel *lbl = new SquareLabel(proc,ui->gridLayoutWidget);
        QPixmap map = setmap(proc);
        lbl->setPixmap(map);
-       ui->gameLayout->addWidget(lbl,0,0,0,0,0);
+       ui->gameLayout->addWidget(lbl,wid,hit,wid,hit,0);
        lbl->show();
     }
-
+            i2++;
+            hit++;
 }
-
+}
 QPixmap GuiManager::setmap(Square *sq){
     string image = sq->getImage();
 
     if(image == "Fo"){
-        QPixmap result(":/forrest");
+        QPixmap map(":/forrest");
+        QPixmap result = map.scaled(QSize(40,40), Qt::KeepAspectRatio);
+
         return result;
     }
     if(image == "Ca"){
-        QPixmap result(":/canyon");
+        QPixmap map(":/canyon");
+        QPixmap result = map.scaled(QSize(40,40), Qt::KeepAspectRatio);
         return result;
     }
     if(image == "Ri"){
-        QPixmap result(":/water");
+        QPixmap map(":/water");
+          QPixmap result = map.scaled(QSize(40,40), Qt::KeepAspectRatio);
         return result;
     }
     if (image == "Mo"){
-        QPixmap result(":/mountain");
+        QPixmap map(":/mountain");
+          QPixmap result = map.scaled(QSize(40,40), Qt::KeepAspectRatio);
         return result;
     }
     if(image == "Pl"){
-        QPixmap result(":/grass");
+        QPixmap map(":/grass");
+          QPixmap result = map.scaled(QSize(40,40), Qt::KeepAspectRatio);
         return result;
     }
 }
