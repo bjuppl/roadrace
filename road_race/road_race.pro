@@ -41,6 +41,5 @@ FORMS    += roadrace.ui
 
 CONFIG += c++11
 
-RESOURCES += \
-    resources.qrc
+RESOURCES += resources.qrc
 
