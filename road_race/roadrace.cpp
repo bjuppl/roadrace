@@ -3,6 +3,7 @@
 #include "gamefile.h"
 #include "gamemodel.h"
 #include "gui.h"
+#include "levelmanager.h"
 
 class Game;
 class GameFileManager;
@@ -27,6 +28,17 @@ RoadRace::~RoadRace()
 //handle the btnStuff clicked event
 void RoadRace::on_btnStuff_clicked()
 {
+    //Give our GUI manager access to ui
+    GuiManager::instance().setUi( ui );
+
+    Game::instance().setGameLoader(
+          new GameFileManager(
+              LevelManager::instance().getLevel("test")
+         )
+     );
+
+    GuiManager::instance().generateSquareGrid();
+
 
 }
 //receive data from the serveer
