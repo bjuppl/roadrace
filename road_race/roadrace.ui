@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Do Stuff</string>
+     <string>Use Test Case</string>
     </property>
    </widget>
    <widget class="QToolButton" name="btnOpenGame">

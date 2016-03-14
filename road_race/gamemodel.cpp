@@ -39,6 +39,7 @@ Game& Game::instance() {
 }
 
 void Game::setGameLoader(GameFileManager *gfm) {
+    delete gfm;
     loader = gfm;
 }
 
