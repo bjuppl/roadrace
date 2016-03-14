@@ -32,12 +32,17 @@ void GuiManager::generateSquareGrid() {
        SquareLabel *lbl = new SquareLabel(proc,ui->gridLayoutWidget);
        QPixmap map = setmap(proc);
        lbl->setPixmap(map);
-       ui->gameLayout->addWidget(lbl,wid,hit,wid,hit,0);
+        lbl->resize(40,40);
+       ui->gameLayout->addWidget(lbl,wid,hit,wid+1,hit,0);
+
+       int w = lbl->width();
+       int h = lbl->height();
        lbl->show();
     }
             i2++;
             hit++;
 }
+     ui->gameLayout->setSpacing(0);
 }
 QPixmap GuiManager::setmap(Square *sq){
     string image = sq->getImage();

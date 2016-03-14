@@ -1,7 +1,7 @@
 #ifndef ROADRACE_H
 #define ROADRACE_H
 #include "network.h"
-
+#include "title.h"
 #include <QMainWindow>
 
 namespace Ui {
@@ -15,7 +15,7 @@ class RoadRace : public QMainWindow
 public:
     explicit RoadRace(QWidget *parent = 0);
     ~RoadRace();
-
+    title *child;
 private slots:
     void on_btnStuff_clicked();
     void dataReceived();
