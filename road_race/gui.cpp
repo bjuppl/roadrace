@@ -25,7 +25,7 @@ void GuiManager::generateSquareGrid() {
 
     int wid=0;
     for(index = 0;index<squares.size();index++){
-              int i = squares.size();
+        int i = squares.size();
         wid++;
 
        Square *proc = squares.at(index);
@@ -35,8 +35,8 @@ void GuiManager::generateSquareGrid() {
        ui->gameLayout->addWidget(lbl,wid,hit,wid,hit,0);
        lbl->show();
     }
-            i2++;
-            hit++;
+    i2++;
+    hit++;
 }
 }
 QPixmap GuiManager::setmap(Square *sq){
