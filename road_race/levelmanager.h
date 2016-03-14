@@ -3,6 +3,13 @@
 
 class levelManager {
 
+private:
+    static levelManager *instance_;
+
+    levelManager(){}
+ public:
+    static levelManager& instance();
+
 };
 
 
