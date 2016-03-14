@@ -39,6 +39,8 @@ void RoadRace::on_btnStuff_clicked()
 
     GuiManager::instance().generateSquareGrid();
 
+    std::cout << Game::instance().getGameLoader()->toGameFile() << std::endl;
+
 
 }
 //receive data from the serveer
