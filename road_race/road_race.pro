@@ -23,7 +23,9 @@ SOURCES += main.cpp\
     player.cpp \
     utils.cpp \
     gui.cpp \
-    title.cpp
+    title.cpp\
+    levelmanager.cpp
+
     
 
 HEADERS  += roadrace.h \
@@ -35,7 +37,8 @@ HEADERS  += roadrace.h \
     player.h \
     utils.h \
     gui.h \
-    title.h
+    title.h\
+    levelmanager.h
     
 
 

@@ -25,7 +25,7 @@ void GuiManager::generateSquareGrid() {
 
     int wid=0;
     for(index = 0;index<squares.size();index++){
-              int i = squares.size();
+        int i = squares.size();
         wid++;
 
        Square *proc = squares.at(index);
@@ -39,8 +39,8 @@ void GuiManager::generateSquareGrid() {
        int h = lbl->height();
        lbl->show();
     }
-            i2++;
-            hit++;
+    i2++;
+    hit++;
 }
      ui->gameLayout->setSpacing(0);
 }
