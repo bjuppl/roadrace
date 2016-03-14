@@ -15,9 +15,7 @@ private:
     std::string name;
     std::vector<Square*> squareList;
 public:
-    Player(std::string newName){
-        name = newName;
-    }
+    Player(std::string newName) : name(newName), goldCount(0), stoneCount(0), waterCount(0), woodCount(0) { }
        void setName(std::string name2){ name = name2;}
        std::string getName(){ return name; }
        int getWood(){ return woodCount;}

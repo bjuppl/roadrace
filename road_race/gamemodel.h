@@ -38,6 +38,10 @@ public:
     static Game& instance();
     void setGameLoader ( GameFileManager * gfm );
 
+    ~Game();
+
+    GameFileManager *getGameLoader () { return loader; }
+
     vector<vector<Square*>> getSquares() { return squares; }
     Square *getSquare ( int x, int y) { return squares[x][y]; }
     string getId() { return id; }
@@ -49,8 +53,8 @@ public:
     int getWidth() { return width; }
     int getHeight() { return height; }
 
-    void setSquares ( vector<vector<Square*>> sq ) { squares = sq; }
-    void setSquare ( Square * sq, int x, int y ) { squares[x][y] = sq; }
+    void setSquares ( vector<vector<Square*>> sq );
+    void setSquare ( Square * sq, int x, int y ) { delete squares[x][y]; squares[x][y] = sq; }
     void setId ( string _id ) { id = _id; }
     void setAlias ( string a ) { alias = a; }
     void setPassword ( string p ) { password = p; }
