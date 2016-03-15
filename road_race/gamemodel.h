@@ -1,9 +1,10 @@
 #ifndef GAMEMODEL_
 #define GAMEMODEL_
 
-
 #include <string>
 #include <vector>
+
+#include <QTimer>
 
 #include "square.h"
 #include "gamefile.h"
@@ -46,6 +47,10 @@ public:
 
     GameFileManager *getGameLoader () { return loader; }
 
+    void updateResources();
+
+    //getters n setters
+
     vector<vector<Square*>> getSquares() { return squares; }
     Square *getSquare ( int x, int y) { return squares[x][y]; }
     string getId() { return id; }
@@ -71,9 +76,15 @@ public:
 
 class Updater {
 private:
-    Updater *instance_;
+    static Updater *instance_;
+    QTimer *timer;
+    Updater() {}
 public:
-    Updater &instance();
+    static Updater &instance();
+
+    void start();
+    void stop();
+
     ~Updater () { delete instance_; }
 };
 
