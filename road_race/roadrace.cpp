@@ -9,7 +9,6 @@
 
 #include "levelmanager.h"
 
-
 class Game;
 class GameFileManager;
 class GuiManager;
