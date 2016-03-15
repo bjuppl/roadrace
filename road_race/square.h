@@ -9,7 +9,9 @@
 #include <QMouseEvent>
 #include <QGridLayout>
 #include <QMainWindow>
+#include <QHoverEvent>
 #include <QWidget>
+
 using namespace std;
 
 class Player;
@@ -107,15 +109,21 @@ class CanyonSq: public Square{
 
 class SquareLabel : public QLabel{
     Q_OBJECT
-    Square *square;
 
+    Square *square;
+    bool mouseTracking;
 public:
     explicit SquareLabel (Square *square_, QWidget *parent): QLabel(parent), square(square_) {
         setMouseTracking(true);
+        this->setAttribute(Qt::WA_Hover,true);
         connect(this,SIGNAL(clicked()),this,SLOT(labelClicked()));
     }
    void mousePressEvent(QMouseEvent *ev);
-    void ReleaseEvent(QMouseEvent *ev);
+   void mouseMoveEvent(QMouseEvent *ev);
+   void enterEvent(QHoverEvent *event);
+   void leaveEvent(QHoverEvent *event);
+   bool event(QEvent *e);
+   QPixmap setmap(string image);
 private slots:
     void labelClicked(){
         int i = 0;
@@ -123,6 +131,8 @@ private slots:
 
 signals:
     void clicked();
+    void hovered();
+
 };
 
 

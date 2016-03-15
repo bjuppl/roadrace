@@ -71,9 +71,9 @@ public:
 
 class Updater {
 private:
-    Updater *instance_;
+    static Updater *instance_;
 public:
-    Updater &instance();
+    static Updater &instance();
     ~Updater () { delete instance_; }
 };
 
