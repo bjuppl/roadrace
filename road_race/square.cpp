@@ -66,3 +66,74 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
     }
     emit clicked();
 }
+void SquareLabel::mouseMoveEvent(QMouseEvent *ev){
+    /*QPixmap map = setmap(square->getImage());
+
+        QString owner = QString::fromUtf8(square->getOwner()->getName().c_str());
+        this->setText(owner);
+    if(ev->x() < this->width()){
+        this->setPixmap(map);
+    }
+    */
+}
+QPixmap SquareLabel::setmap(string image){
+
+
+    if(image == "Fo"){
+        QPixmap map(":/forrest");
+        QPixmap result = map.scaled(QSize(40,40), Qt::KeepAspectRatio);
+
+        return result;
+    }
+    if(image == "Ca"){
+        QPixmap map(":/canyon");
+        QPixmap result = map.scaled(QSize(40,40), Qt::KeepAspectRatio);
+        return result;
+    }
+    if(image == "Ri"){
+        QPixmap map(":/water");
+          QPixmap result = map.scaled(QSize(40,40), Qt::KeepAspectRatio);
+        return result;
+    }
+    if (image == "Mo"){
+        QPixmap map(":/mountain");
+          QPixmap result = map.scaled(QSize(40,40), Qt::KeepAspectRatio);
+        return result;
+    }
+    if(image == "Pl"){
+        QPixmap map(":/grass");
+          QPixmap result = map.scaled(QSize(40,40), Qt::KeepAspectRatio);
+        return result;
+    }
+}
+void SquareLabel::enterEvent(QHoverEvent *event){
+
+          if(square->getOwner() != nullptr){
+            QString owner = QString::fromUtf8(square->getOwner()->getName().c_str());
+            this->setText(owner);
+          }
+          else{
+              this->setText("Unowned");
+          }
+}
+void SquareLabel::leaveEvent(QHoverEvent *event){
+    QPixmap map = setmap(square->getImage());
+
+           this->setPixmap(map);
+}
+
+bool SquareLabel::event(QEvent *e){
+    switch(e->type()){
+    case QEvent::HoverEnter:
+        enterEvent(static_cast<QHoverEvent*>(e));
+        return true;
+        break;
+    case QEvent::HoverLeave:
+         leaveEvent(static_cast<QHoverEvent*>(e));
+         return true;
+         break;
+    default:
+        break;
+    }
+    return QWidget::event(e);
+}

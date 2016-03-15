@@ -76,7 +76,6 @@ public:
 
 class Updater {
 private:
-    static Updater *instance_;
     QTimer *timer;
     Updater() {}
 public:
@@ -85,6 +84,8 @@ public:
     void start();
     void stop();
 
+public:
+    static Updater &instance();
     ~Updater () { delete instance_; }
 };
 
