@@ -23,6 +23,7 @@ private:
  public:
     static LevelManager& instance();
 
+    ~LevelManager() { delete instance_; }
     void increaseLevel();
     std::vector<std::string> getLevel( std::string name );
     std::vector<std::string> getLevel( int num );
