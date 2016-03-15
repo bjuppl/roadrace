@@ -1,6 +1,8 @@
 #include "gui.h"
 #include "roadrace.h"
 #include "gamemodel.h"
+#include "ui_roadrace.h"
+#include <QLabel>
 GuiManager *GuiManager::instance_ = NULL;
 
 GuiManager& GuiManager::instance() {
@@ -14,8 +16,7 @@ GuiManager& GuiManager::instance() {
 void GuiManager::generateSquareGrid() {
     std::cout << getUi()->label->text().toStdString() << std::endl;
 
-    int hi = Game::instance().getHeight();
-    int wi = Game::instance().getWidth();
+
     vector<vector<Square*>> squaresList = Game::instance().getSquares();
     int i2 = 0;
      int hit=1;
@@ -32,11 +33,12 @@ void GuiManager::generateSquareGrid() {
        SquareLabel *lbl = new SquareLabel(proc,ui->gridLayoutWidget);
        QPixmap map = setmap(proc);
        lbl->setPixmap(map);
-        lbl->resize(40,40);
-       ui->gameLayout->addWidget(lbl,wid,hit,wid+1,hit,0);
+        lbl->setFixedHeight(40);
+        lbl->setFixedWidth(40);
+       ui->gameLayout->addWidget(lbl,wid,hit,0);
 
-       int w = lbl->width();
-       int h = lbl->height();
+      proc->setX(wid);
+      proc->setY(hit);
        lbl->show();
     }
     i2++;
