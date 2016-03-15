@@ -84,8 +84,6 @@ public:
     void start();
     void stop();
 
-public:
-    static Updater &instance();
     ~Updater () { delete instance_; }
 };
 
