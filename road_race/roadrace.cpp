@@ -3,8 +3,13 @@
 #include "gamefile.h"
 #include "gamemodel.h"
 #include "gui.h"
+
 #include "square.h"
 #include <QLabel>
+
+#include "levelmanager.h"
+
+>>>>>>> upstream/master
 class Game;
 class GameFileManager;
 class GuiManager;
@@ -28,6 +33,19 @@ RoadRace::~RoadRace()
 //handle the btnStuff clicked event
 void RoadRace::on_btnStuff_clicked()
 {
+    //Give our GUI manager access to ui
+    GuiManager::instance().setUi( ui );
+
+    Game::instance().setGameLoader(
+          new GameFileManager(
+              LevelManager::instance().getLevel("test")
+         )
+     );
+
+    GuiManager::instance().generateSquareGrid();
+
+    std::cout << Game::instance().getGameLoader()->toGameFile() << std::endl;
+
 
 }
 //receive data from the serveer
@@ -127,7 +145,7 @@ void RoadRace::on_btnOpenGame_clicked()
 
        this->loadFile();
 
-       \
+       
        }
 
 

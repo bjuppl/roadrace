@@ -16,6 +16,18 @@ bool buildCommand::execute(){
     return true;
 }
 
+Game::~Game() {
+    for ( size_t i=0; i<player_list.size(); i++ ) {
+        delete player_list[i];
+    }
+    for ( size_t i=0; i<squares.size(); i++ ) {
+        for ( size_t j=0; j<squares.at(i).size(); j ++ ) {
+            delete squares[i][j];
+        }
+    }
+
+}
+
 //save the game by writing to a file
 bool Game::save(){
     return true;
@@ -39,6 +51,7 @@ Game& Game::instance() {
 }
 
 void Game::setGameLoader(GameFileManager *gfm) {
+    delete gfm;
     loader = gfm;
 }
 
@@ -52,6 +65,16 @@ Player *Game::getPlayer(string name){
 
     return NULL;
 }
+
+void Game::setSquares ( vector<vector<Square*>> sq ) {
+    for ( size_t i=0; i<squares.size(); i++ ) {
+        for (size_t j=0; j<squares.at(i).size(); j++ ) {
+            delete squares[i][j];
+        }
+    }
+    squares = sq;
+}
+
 
 //destory a road or forturess on a square
 bool destroyCommand::execute(){
