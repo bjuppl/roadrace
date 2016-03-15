@@ -12,6 +12,22 @@ class Player;
 Game *Game::instance_ = NULL;
 Updater *Updater::instance_ = NULL;
 
+Game::Game() {
+    vector<Resource*> rl;
+    rl.push_back(new Resource("water","Wa",10));
+    rl.push_back(new Resource("wood","Wo",3));
+    rl.push_back(new Resource("stone","St",1));
+    rl.push_back(new Resource("gold","Go",1));
+    resource_types = rl;
+}
+
+
+void Game::updateResources() {
+
+
+
+}
+
 //used for construction of bridges/roads
 bool buildCommand::execute(){
     return true;
@@ -25,6 +41,9 @@ Game::~Game() {
         for ( size_t j=0; j<squares.at(i).size(); j ++ ) {
             delete squares[i][j];
         }
+    }
+    for ( size_t i=0; i<resource_types.size(); i++ ) {
+            delete resource_types.at(i);
     }
 
 }
@@ -97,6 +116,15 @@ Player *Game::getPlayer(string name){
     return NULL;
 }
 
+Resource *Game::getResource(string shortName) {
+    for ( size_t i=0; i<resource_types.size(); i++ ) {
+        if ( resource_types[i]->shortName == shortName ) {
+            return resource_types[i];
+        }
+    }
+    return nullptr;
+}
+
 void Game::setSquares ( vector<vector<Square*>> sq ) {
     for ( size_t i=0; i<squares.size(); i++ ) {
         for (size_t j=0; j<squares.at(i).size(); j++ ) {
@@ -105,6 +133,15 @@ void Game::setSquares ( vector<vector<Square*>> sq ) {
     }
     squares = sq;
 }
+
+
+void Game::setResources(vector<Resource *> vr) {
+    for ( size_t i=0; i< resource_types.size(); i++ ) {
+            delete resource_types[i];
+    }
+    resource_types = vr;
+}
+
 
 
 //destory a road or forturess on a square
