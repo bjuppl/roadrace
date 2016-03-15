@@ -6,8 +6,10 @@
 #include <QGridLayout>
 #include <QWidget>
 #include "player.h"
-#include "roadrace.h"
-
+#include <QMouseEvent>
+#include <QGridLayout>
+#include <QMainWindow>
+#include <QWidget>
 using namespace std;
 
 class Player;
@@ -55,6 +57,7 @@ class Square{
     string addition;
     Structure *path;
     int width, height;
+    int x,y;
 public:
     Square(string type_,string addition_,Player *owner_) : type(type_), image(type_), owner(owner_), addition(addition_){}
     Square(string type_,string addition_) : type(type_), image(type_), owner(NULL), addition(addition_){}
@@ -80,6 +83,10 @@ public:
     void setAddition ( string a ) { addition = a; }
     void setHeight ( int height_ ) { height = height_; }
     void setWidth ( int width_ ) { width = width_; }
+    int getX(){return x;}
+    int getY(){return y;}
+    void setX(int nx){x = nx;}
+    void setY(int ny){y = ny;}
 };
 
 class ForestSq: public Square{
@@ -101,10 +108,21 @@ class CanyonSq: public Square{
 class SquareLabel : public QLabel{
     Q_OBJECT
     Square *square;
+
 public:
     explicit SquareLabel (Square *square_, QWidget *parent): QLabel(parent), square(square_) {
+        setMouseTracking(true);
+        connect(this,SIGNAL(clicked()),this,SLOT(labelClicked()));
+    }
+   void mousePressEvent(QMouseEvent *ev);
+    void ReleaseEvent(QMouseEvent *ev);
+private slots:
+    void labelClicked(){
+        int i = 0;
     }
 
+signals:
+    void clicked();
 };
 
 

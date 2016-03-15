@@ -23,7 +23,9 @@ SOURCES += main.cpp\
     player.cpp \
     utils.cpp \
     gui.cpp \
+    title.cpp\
     levelmanager.cpp
+
     
 
 HEADERS  += roadrace.h \
@@ -35,11 +37,13 @@ HEADERS  += roadrace.h \
     player.h \
     utils.h \
     gui.h \
+    title.h\
     levelmanager.h
     
 
 
-FORMS    += roadrace.ui
+FORMS    += roadrace.ui \
+    title.ui
 
 CONFIG += c++11
 
