@@ -179,10 +179,15 @@ GameFileManager::GameFileManager (std::vector<std::string> contents ) {
                    std:string terrain = square[0],
                            addition = square[1],
                            ownerName = square[2];
+                         if(ownerName == "No"){
+                             Player *noOne = nullptr;
+                              squares[i].push_back( new Square(terrain,addition,noOne));
+                         }
+                         else{
                    Player *owner = Game::instance().getPlayer(ownerName);
                    squares[i].push_back( new Square(terrain,addition,owner));
                 }
-
+                 }
             }
             Game::instance().setSquares(squares);
         } else if ( identifier == endFile ) {

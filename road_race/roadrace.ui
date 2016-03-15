@@ -426,7 +426,7 @@
       <height>601</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gameLayout"/>
+    <layout class="QGridLayout" name="gameLayout" columnminimumwidth="0"/>
    </widget>
    <widget class="QLabel" name="wo1">
     <property name="geometry">
