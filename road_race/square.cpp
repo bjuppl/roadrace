@@ -3,6 +3,7 @@
 #include <QMouseEvent>
 #include <QWidget>
 #include <QLabel>
+#include <QMessageBox>
 void SquareLabel::mousePressEvent(QMouseEvent *ev){
 
     vector<vector<Square*>> squareList = Game::instance().getSquares();
@@ -15,21 +16,48 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
         int height = Game::instance().getHeight();
         int width = Game::instance().getWidth();
         QString owner;
-        /*if((x-1) >0){
+        if((x-1) == 0){
             Square *comp = Game::instance().getSquare(x+1,y);
             Player *newowner = comp->getOwner();
             proc->setOwner(newowner);
             owner = QString::fromUtf8(newowner->getName().c_str());
         }
-        if((x+1) <= width){
+        else if((x+1) <= width){
+            Square *comp = Game::instance().getSquare(x-1,y);
+            Square *comp2;
+            Square *comp3;
+            Player *newowner;
+            if(Game::instance().getSquare(x,y+1) != nullptr){
+              comp2 = Game::instance().getSquare(x,y+1);
+            }
+            if(Game::instance().getSquare(x,y-1) != nullptr){
+             comp3 = Game::instance().getSquare(x,y-1);
+            }
+            if(comp->getOwner() != nullptr){
+            newowner = comp->getOwner();
+            }
+            else if (comp2->getOwner() != nullptr){
+                newowner = comp2->getOwner();
+            }
+            else {
+                newowner = comp3->getOwner();
+            }
+            if (newowner != nullptr){
+            proc->setOwner(newowner);
+            owner = QString::fromUtf8(newowner->getName().c_str());
+            }
+            else{
+                 QMessageBox::information(this,"Alert","You cannot claim this square!",0,1);
+            }
+        }
+        else if((y-1) > 0){
             Square *comp = Game::instance().getSquare(x+1,y);
         }
-        if((y-1) > 0){
+        else if((y+1) <= height){
             Square *comp = Game::instance().getSquare(x+1,y);
-        }
-        if((y+1) <= height){
-            Square *comp = Game::instance().getSquare(x+1,y);
-        */}
+             }
+        this->setText(owner);
+    }
 
     else{
             QString owner;

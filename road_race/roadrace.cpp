@@ -9,7 +9,7 @@
 
 #include "levelmanager.h"
 
->>>>>>> upstream/master
+
 class Game;
 class GameFileManager;
 class GuiManager;

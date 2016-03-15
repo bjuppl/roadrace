@@ -127,7 +127,7 @@ public:
         player4->setGeometry(QRect(20, 370, 55, 17));
         label = new QLabel(centralWidget);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(20, 80, 61, 17));
+        label->setGeometry(QRect(20, 80, 81, 17));
         label_2 = new QLabel(centralWidget);
         label_2->setObjectName(QStringLiteral("label_2"));
         label_2->setGeometry(QRect(20, 180, 61, 17));
@@ -258,7 +258,7 @@ public:
     {
         RoadRace->setWindowTitle(QApplication::translate("RoadRace", "RoadRace", 0));
         actionFrom_file->setText(QApplication::translate("RoadRace", "From file...", 0));
-        btnStuff->setText(QApplication::translate("RoadRace", "Do Stuff", 0));
+        btnStuff->setText(QApplication::translate("RoadRace", "Use Test Case", 0));
         btnOpenGame->setText(QApplication::translate("RoadRace", "&Open Game...", 0));
         iptGameFileName->setText(QString());
         player1->setText(QApplication::translate("RoadRace", "Player 1", 0));
