@@ -43,6 +43,28 @@ void Game::update(){
 
 }
 
+bool Game::applyCommand(string command) {
+    std::vector<std::string> itms;
+    itms = split(command,' ');
+
+    std::string identifier = itms[0];
+
+    const std::string scores = "scores",
+            start = "start",
+            end = "end";
+    if ( identifier == scores) {
+
+    } else if ( identifier == start ) {
+
+    } else if ( identifier == end ) {
+
+    } else {
+
+    }
+
+    return true;
+}
+
 Game& Game::instance() {
     if (instance_ == NULL ) {
         instance_ = new Game();

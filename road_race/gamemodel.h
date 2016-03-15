@@ -4,9 +4,12 @@
 
 #include <string>
 #include <vector>
+
 #include "square.h"
 #include "gamefile.h"
 #include "player.h"
+
+#include "utils.h"
 
 using namespace std;
 
@@ -26,6 +29,7 @@ class Game{
 
    Game(){}
   public:
+    bool applyCommand( std::string command );
     bool save();
     string load();
     void update();
