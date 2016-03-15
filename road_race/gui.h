@@ -17,6 +17,8 @@ private:
     void setUi ( Ui::RoadRace *ui_ ) { ui = ui_; }
     Ui::RoadRace *getUi ( ) { return ui; }
 
+    ~GuiManager() { delete instance_; }
+
     void generateSquareGrid();
     QPixmap setmap(Square *sq);
 };

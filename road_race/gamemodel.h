@@ -69,6 +69,14 @@ public:
 
 };
 
+class Updater {
+private:
+    Updater *instance_;
+public:
+    Updater &instance();
+    ~Updater () { delete instance_; }
+};
+
 // implement a command structure
 class Command{
 public:

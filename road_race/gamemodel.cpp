@@ -10,6 +10,7 @@ using namespace std;
 class Player;
 
 Game *Game::instance_ = NULL;
+Updater *Updater::instance_ = NULL;
 
 //used for construction of bridges/roads
 bool buildCommand::execute(){
@@ -68,6 +69,14 @@ bool Game::applyCommand(string command) {
 Game& Game::instance() {
     if (instance_ == NULL ) {
         instance_ = new Game();
+    }
+    return *instance_;
+}
+
+
+Updater& Updater::instance() {
+    if (instance_ == NULL ) {
+        instance_ = new Updater();
     }
     return *instance_;
 }
