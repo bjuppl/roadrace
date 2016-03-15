@@ -22,7 +22,7 @@ void GuiManager::generateSquareGrid() {
      int hit=1;
     while(i2 < squaresList.size()){
     vector<Square*> squares = squaresList.at(i2);
-    int index = 0;
+    size_t index = 0;
 
     int wid=0;
     for(index = 0;index<squares.size();index++){
