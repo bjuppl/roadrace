@@ -35,7 +35,7 @@ void GuiManager::generateSquareGrid() {
        lbl->setPixmap(map);
         lbl->setFixedHeight(40);
         lbl->setFixedWidth(40);
-       ui->gameLayout->addWidget(lbl,wid,hit,0);
+       ui->gameLayout->addWidget(lbl,hit,wid,0);
 
       proc->setX(wid);
       proc->setY(hit);
