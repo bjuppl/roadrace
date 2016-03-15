@@ -4,6 +4,64 @@
 #include "square.h"
 #include "utils.h"
 
+std::string GameFileManager::toGameFile() {
+
+    std::string output = "";
+
+    //Add header file
+    output += "RoadRaceDoc " + Game::instance().getId() + "\n";
+
+    //Add alias/password line
+    output += "alias " + Game::instance().getAlias() + " password " + Game::instance().getPassword() + "\n";
+
+    //Add round number
+     output += "round " + std::to_string(Game::instance().getRoundNum()) + "\n";
+
+    //Add player list
+    output += "players ";
+
+    for ( size_t i = 0; i<Game::instance().getPlayerList().size(); i++ ) {
+        output += Game::instance().getPlayerList().at(i)->getName() + " ";
+    }
+
+    output += "\n";
+
+    //Add player info
+    for ( size_t i = 0; i<Game::instance().getPlayerList().size(); i++ ) {
+        Player *p = Game::instance().getPlayerList().at(i);
+        output += "info " + p->getName() + " resources ";
+        output += "Go," + std::to_string(p->getGold()) + " ";
+        output += "Wo," + std::to_string(p->getWood()) + " ";
+        output += "St," + std::to_string(p->getStone()) + " ";
+        output += "Wa," +std::to_string(p->getWater()) + " ";
+        output += "status ";
+        output += "score," + std::to_string(p->getScore()) + " ";
+        output += "startTime," + std::to_string(p->getStartTime());
+        output += "\n";
+    }
+
+    //Add board head
+    output += "board " + std::to_string(Game::instance().getWidth()) + "," + std::to_string(Game::instance().getHeight()) + "\n";
+
+    //Add board contents
+    for ( size_t i=0; i<Game::instance().getSquares().size(); i++ ) {
+        for ( size_t j=0; j<Game::instance().getSquares().at(i).size(); j++ ) {
+            Square *s = Game::instance().getSquare(i,j);
+               std::string type = s->getType(),
+                       addition = s->getAddition(),
+                       owner = s->getOwner() == NULL ? "" : s->getOwner()->getName();
+              output += type + "," + addition + "," + owner + " ";
+        }
+        output += "\n";
+    }
+
+    //Add endfile
+    output += "EndRoadRaceDoc";
+
+    return output;
+
+}
+
 GameFileManager::GameFileManager (std::vector<std::string> contents ) {
 
     // /Users/jbrazeal/Desktop/School/2015-2016/Spring/CpS_209/TPfork/roadrace/road_race/gamefile.rr
@@ -121,10 +179,15 @@ GameFileManager::GameFileManager (std::vector<std::string> contents ) {
                    std:string terrain = square[0],
                            addition = square[1],
                            ownerName = square[2];
+                         if(ownerName == "No"){
+                             Player *noOne = nullptr;
+                              squares[i].push_back( new Square(terrain,addition,noOne));
+                         }
+                         else{
                    Player *owner = Game::instance().getPlayer(ownerName);
                    squares[i].push_back( new Square(terrain,addition,owner));
                 }
-
+                 }
             }
             Game::instance().setSquares(squares);
         } else if ( identifier == endFile ) {

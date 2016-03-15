@@ -4,6 +4,11 @@
 #include "gamemodel.h"
 #include "gui.h"
 
+#include "square.h"
+#include <QLabel>
+
+#include "levelmanager.h"
+
 class Game;
 class GameFileManager;
 class GuiManager;
@@ -27,6 +32,19 @@ RoadRace::~RoadRace()
 //handle the btnStuff clicked event
 void RoadRace::on_btnStuff_clicked()
 {
+    //Give our GUI manager access to ui
+    GuiManager::instance().setUi( ui );
+
+    Game::instance().setGameLoader(
+          new GameFileManager(
+              LevelManager::instance().getLevel("test")
+         )
+     );
+
+    GuiManager::instance().generateSquareGrid();
+
+    std::cout << Game::instance().getGameLoader()->toGameFile() << std::endl;
+
 
 }
 //receive data from the serveer
@@ -46,26 +64,12 @@ void RoadRace::serverDisconnected()
      //ui->btnConnect->setEnabled(true);
 }
 void RoadRace::loadFile() {
-
-}
-
-
-void RoadRace::on_btnOpenGame_clicked()
-{
-
-    std::string fileName = ui->iptGameFileName->text().toStdString();
-
-    //Open a game with the properties in the given file
-    Game::instance().setGameLoader(GameFileManager::fromFile(fileName));
-
-    //Give our GUI manager access to ui
-    GuiManager::instance().setUi( ui );
-
     //Show the squares
     GuiManager::instance().generateSquareGrid();
 
+
     vector<Player*> players = Game::instance().getPlayerList();
-     
+
      size_t i = 0;
     while(i<players.size()){
         Player *proc = players.at(i);
@@ -123,23 +127,29 @@ void RoadRace::on_btnOpenGame_clicked()
         msg="";
         i++;
     }
-    }
-        /*int height = Game::instance().getHeight();
-        int width = Game::instance().getWidth();
-        QRect rect;
-        rect.setHeight(height);
-        rect.setWidth(width);
-        ui->gridLayout->setGeometry(rect);
-        vector<Square*> squareList;
-        int index = 0;
-        while(index < squareList.size()){
-            Square *square = squareList.at(index);
-            SquareLabel *lbl = new SquareLabel(square,ui->gridLayoutWidget);
-             QRect rect2;
-             //rect2.setHeight(picheight);
-             //rect2.setWidth(pichwidth);
-             //lbl.setGeometry(rect2);
-            //pixmap stuff
-            lbl->show();
-            index++;
-        }*/
+
+}
+
+
+void RoadRace::on_btnOpenGame_clicked()
+{
+
+    std::string fileName = ui->iptGameFileName->text().toStdString();
+
+    //Open a game with the properties in the given file
+    Game::instance().setGameLoader(GameFileManager::fromFile(fileName));
+
+    //Give our GUI manager access to ui
+    GuiManager::instance().setUi( ui );
+
+       this->loadFile();
+
+       
+       }
+
+
+
+void RoadRace::labelClicked(){
+    SquareLabel *proc = dynamic_cast<SquareLabel*>(sender());
+
+}

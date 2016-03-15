@@ -10,10 +10,23 @@ using namespace std;
 class Player;
 
 Game *Game::instance_ = NULL;
+Updater *Updater::instance_ = NULL;
 
 //used for construction of bridges/roads
 bool buildCommand::execute(){
     return true;
+}
+
+Game::~Game() {
+    for ( size_t i=0; i<player_list.size(); i++ ) {
+        delete player_list[i];
+    }
+    for ( size_t i=0; i<squares.size(); i++ ) {
+        for ( size_t j=0; j<squares.at(i).size(); j ++ ) {
+            delete squares[i][j];
+        }
+    }
+
 }
 
 //save the game by writing to a file
@@ -31,6 +44,28 @@ void Game::update(){
 
 }
 
+bool Game::applyCommand(string command) {
+    std::vector<std::string> itms;
+    itms = split(command,' ');
+
+    std::string identifier = itms[0];
+
+    const std::string scores = "scores",
+            start = "start",
+            end = "end";
+    if ( identifier == scores) {
+
+    } else if ( identifier == start ) {
+
+    } else if ( identifier == end ) {
+
+    } else {
+
+    }
+
+    return true;
+}
+
 Game& Game::instance() {
     if (instance_ == NULL ) {
         instance_ = new Game();
@@ -38,7 +73,16 @@ Game& Game::instance() {
     return *instance_;
 }
 
+
+Updater& Updater::instance() {
+    if (instance_ == NULL ) {
+        instance_ = new Updater();
+    }
+    return *instance_;
+}
+
 void Game::setGameLoader(GameFileManager *gfm) {
+    delete gfm;
     loader = gfm;
 }
 
@@ -52,6 +96,16 @@ Player *Game::getPlayer(string name){
 
     return NULL;
 }
+
+void Game::setSquares ( vector<vector<Square*>> sq ) {
+    for ( size_t i=0; i<squares.size(); i++ ) {
+        for (size_t j=0; j<squares.at(i).size(); j++ ) {
+            delete squares[i][j];
+        }
+    }
+    squares = sq;
+}
+
 
 //destory a road or forturess on a square
 bool destroyCommand::execute(){

@@ -1,14 +1,34 @@
 #ifndef LEVELMANAGER_H
 #define LEVELMANAGER_H
 
-class levelManager {
+#include <QFile>
+#include <QResource>
+#include <QTextStream>
+#include <QIODevice>
+
+#include <iostream>
+#include <string>
+#include <vector>
+
+#include "gui.h"
+#include "utils.h"
+
+class LevelManager {
 
 private:
-    static levelManager *instance_;
+    int curLevel{0};
+    static LevelManager *instance_;
 
-    levelManager(){}
+    LevelManager(){}
  public:
-    static levelManager& instance();
+    static LevelManager& instance();
+
+    ~LevelManager() { delete instance_; }
+    void increaseLevel();
+    std::vector<std::string> getLevel( std::string name );
+    std::vector<std::string> getLevel( int num );
+
+    std::vector<std::string> resourceFileContents( std::string alias );
 
 };
 
