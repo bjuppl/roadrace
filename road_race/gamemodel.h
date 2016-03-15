@@ -78,6 +78,8 @@ class Updater {
 private:
     QTimer *timer;
     Updater() {}
+    static Updater *instance_;
+
 public:
     static Updater &instance();
 
