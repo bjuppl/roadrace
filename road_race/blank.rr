@@ -1,0 +1,14 @@
+RoadRaceDoc 1b2830iii00001
+alias blankName password getGoing
+round 1
+players Phil,Bob,Sally,Mark
+info Phil resources Go,0 Wo,0 St,0 Wa,0 status score,0 start_time,50045422
+info Bob resources Go,0 Wo,0 St,0 Wa,0 status score,0 start_time,50045412
+info Sally resources Go,0 Wo,0 St,0 Wa,0 status score,0 start_time,5045432
+info Mark resources Go,0 Wo,0 St,0 Wa,0 status score,0 start_time,50045441
+board 4,7
+Fo,Br,Mark Ca,Br,No Pl,Tu,No Pl,Bo,No Mo,Wa,No Ca,Br,No Fo,Br,Sally
+Ri,Wa,No Mo,Bo,No Fo,Wa,No Pl,Wa,No Pl,Wa,No Ca,Br,No Ri,Wa,No
+Mo,Bo,No Ri,Tu,No Mo,Bl,No Pl,Tu,No Ri,Br,No Ca,Br,No Fo,Br,No
+Pl,Wa,Phil Fo,Bo,No Fo,Wa,No Ca,Tu,No Ri,Wa,No Pl,Tu,No Fo,Wa,Bob
+EndRoadRaceDoc

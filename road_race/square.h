@@ -112,6 +112,8 @@ class SquareLabel : public QLabel{
 
     Square *square;
     bool mouseTracking;
+    QFrame *frame;
+    QPalette *color;
 public:
     explicit SquareLabel (Square *square_, QWidget *parent): QLabel(parent), square(square_) {
         setMouseTracking(true);
@@ -124,9 +126,22 @@ public:
    void leaveEvent(QHoverEvent *event);
    bool event(QEvent *e);
    QPixmap setmap(string image);
+   void setFrame(QFrame *f){
+       frame = f;
+   }
+   void setColor(QPalette *p){
+       color = p;
+   }
+   QPalette* getColor(){return color;}
+   QFrame* getFrame(){return frame;}
+   ~SquareLabel(){
+       delete frame;
+       delete color;
+   }
+
 private slots:
     void labelClicked(){
-        int i = 0;
+
     }
 
 signals:

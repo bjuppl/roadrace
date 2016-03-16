@@ -7,7 +7,7 @@
 void SquareLabel::mousePressEvent(QMouseEvent *ev){
 
     vector<vector<Square*>> squareList = Game::instance().getSquares();
-
+   int i = squareList.size();
     Square *proc = square;
     int x = this->x();
     if (proc->getOwner() == nullptr){
@@ -17,8 +17,11 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
         int width = Game::instance().getWidth();
         QString owner;
         if((x-1) == 0){
-            Square *comp = Game::instance().getSquare(x+1,y);
+            vector<Square*> list = squareList.at(0);
+            Square *comp = list.at(0);
             Player *newowner = comp->getOwner();
+            QPalette *color = this->getColor();
+            this->getFrame()->setPalette(*color);
             proc->setOwner(newowner);
             owner = QString::fromUtf8(newowner->getName().c_str());
         }
@@ -67,14 +70,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
     emit clicked();
 }
 void SquareLabel::mouseMoveEvent(QMouseEvent *ev){
-    /*QPixmap map = setmap(square->getImage());
 
-        QString owner = QString::fromUtf8(square->getOwner()->getName().c_str());
-        this->setText(owner);
-    if(ev->x() < this->width()){
-        this->setPixmap(map);
-    }
-    */
 }
 QPixmap SquareLabel::setmap(string image){
 
