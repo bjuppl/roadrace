@@ -4,6 +4,7 @@
 
 #include "gamemodel.h"
 #include "player.h"
+#include "square.h"
 
 using namespace std;
 
@@ -18,14 +19,36 @@ Game::Game() {
     rl.push_back(new Resource("wood","Wo",3));
     rl.push_back(new Resource("stone","St",1));
     rl.push_back(new Resource("gold","Go",1));
+    rl.push_back(new Resource("[none]","",0)); //so resourceType gets can return nempty string and we know what to do with it
     resource_types = rl;
 }
 
-
 void Game::updateResources() {
 
+    for ( size_t i=0; i<player_list.size(); i++ ) {
+        vector<Square*> mysquares;
+        Player *p = player_list[i];
+        mysquares = getPlayerSquares(p);
+        for ( size_t j=0; j<mysquares.size(); i++ ) {
+            std::string rtype = mysquares.at(j)->getResourceType();
+            int add = getResource(rtype)->value;
+            p->incResource(rtype, add);
+        }
+    }
 
+}
 
+vector<Square*> Game::getPlayerSquares(Player *owner) {
+    vector<Square*> list;
+    for ( size_t i=0; i<squares.size(); i++ ) {
+        for ( size_t j=0; j<squares[i].size(); j++ ) {
+            if ( squares[i][j]->getOwner()->getName() == owner->getName() ) {
+                list.push_back(squares[i][j]);
+
+            }
+        }
+    }
+    return list;
 }
 
 //used for construction of bridges/roads
@@ -124,6 +147,19 @@ Resource *Game::getResource(string shortName) {
     }
     return nullptr;
 }
+
+Square *Game::getSquare(int id) {
+   for (size_t i=0; i<squares.size(); i++ ) {
+         for ( size_t j=0; j<squares.at(i).size(); j++ ) {
+            if (squares.at(i).at(j)->getId() == id ) {
+                return squares.at(i).at(j);
+            }
+        }
+   }
+
+  return nullptr;
+}
+
 
 void Game::setSquares ( vector<vector<Square*>> sq ) {
     for ( size_t i=0; i<squares.size(); i++ ) {
