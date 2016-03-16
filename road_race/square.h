@@ -53,7 +53,7 @@ class Bridge: public Structure{
 };
 
 class Square{
-    static int count{0};
+    static int count;
     int id;
     string type;
     string image;
@@ -63,10 +63,10 @@ class Square{
     int width, height;
     int x,y;
 public:
-    Square(string type_,string addition_,Player *owner_) : type(type_), image(type_), owner(owner_), addition(addition_), id(count) { count++; }
-    Square(string type_,string addition_) : type(type_), image(type_), owner(NULL), addition(addition_), id(count) { count++; }
-    Square(string type_) : type(type_), image(type_), owner(NULL), addition(""), id(count) { count++; }
-    Square(string type_,Player *owner_) : type(type_), image(type_), owner(owner_), addition(""), id(count) { count++; }
+    Square(string type_,string addition_,Player *owner_) : id(count), type(type_), image(type_), owner(owner_), addition(addition_) { count++; }
+    Square(string type_,string addition_) : id(count), type(type_), image(type_), owner(NULL), addition(addition_) { count++; }
+    Square(string type_) : id(count), type(type_), image(type_), owner(NULL), addition("") { count++; }
+    Square(string type_,Player *owner_) : id(count), type(type_), image(type_), owner(owner_), addition("") { count++; }
 
     //TODO: make Square pure virtual with inherited types.
     //This will require updating in gamefile.cpp.
@@ -80,6 +80,7 @@ public:
     string getAddition() { return addition; }
     int getHeight () { return height; }
     int getWidth () { return width; }
+    std::string getResourceType();
     int getId() { return id; }
 
     void setType ( string t ) { type = t; }

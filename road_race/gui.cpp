@@ -18,7 +18,7 @@ void GuiManager::generateSquareGrid() {
 
 
     vector<vector<Square*>> squaresList = Game::instance().getSquares();
-    int i2 = 0;
+    size_t i2 = 0;
      int hit=1;
     while(i2 < squaresList.size()){
     vector<Square*> squares = squaresList.at(i2);
@@ -62,6 +62,7 @@ void GuiManager::generateSquareGrid() {
             i3++;
         }
         frame->setPalette(*color);
+
         lbl->setFrame(frame);
         lbl->setColor(color);
        ui->gameLayout->addWidget(lbl,hit,wid,0);
@@ -73,7 +74,7 @@ void GuiManager::generateSquareGrid() {
     i2++;
     hit++;
 }
-     ui->gameLayout->setSpacing(0);
+     ui->gameLayout->setSpacing(100);
 }
 QPixmap GuiManager::setmap(Square *sq){
     string image = sq->getImage();

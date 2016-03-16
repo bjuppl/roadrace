@@ -24,8 +24,12 @@ public:
        int getGold(){  return goldCount;}
        int getScore(){  return score;}
        int getStartTime(){  return startTime;}
+       int getResource (std::string type );
+
 
        std::vector<Square*> getSquares(){ return squareList; }
+       void setResource(std::string type, int amt );
+       void incResource(std::string type, int amt );
        void setWood(int newWood){ woodCount = newWood;}
        void setGold(int gold){ goldCount = gold;}
        void setStone(int stone){ stoneCount = stone; }
