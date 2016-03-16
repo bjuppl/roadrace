@@ -18,23 +18,53 @@ void GuiManager::generateSquareGrid() {
 
 
     vector<vector<Square*>> squaresList = Game::instance().getSquares();
-    int i2 = 0;
+    size_t i2 = 0;
      int hit=1;
     while(i2 < squaresList.size()){
     vector<Square*> squares = squaresList.at(i2);
-    int index = 0;
+    size_t index = 0;
 
     int wid=0;
     for(index = 0;index<squares.size();index++){
         int i = squares.size();
         wid++;
 
+       QPalette *color = new QPalette();
        Square *proc = squares.at(index);
        SquareLabel *lbl = new SquareLabel(proc,ui->gridLayoutWidget);
+       QFrame *frame = new QFrame(lbl);
+       frame->setFrameStyle(QFrame::Box);
        QPixmap map = setmap(proc);
        lbl->setPixmap(map);
         lbl->setFixedHeight(40);
         lbl->setFixedWidth(40);
+        frame->setFixedSize(lbl->size());
+        Player *owner = proc->getOwner();
+        vector<Player*> ownList = Game::instance().getPlayerList();
+        int i3 = 0;
+        while(i3<ownList.size()){
+            if((owner == ownList.at(i3)) && i3 == 0){
+                color->setColor(QPalette::Foreground,Qt::red);
+                break;
+            }
+            if((owner == ownList.at(i3)) && i3 == 1){
+                color->setColor(QPalette::Foreground,Qt::yellow);
+                break;
+            }
+            if((owner == ownList.at(i3)) && i3 == 2){
+                color->setColor(QPalette::Foreground,Qt::green);
+                break;
+            }
+            if((owner == ownList.at(i3)) && i3 == 3){
+                color->setColor(QPalette::Foreground,Qt::blue);
+                break;
+            }
+            i3++;
+        }
+        frame->setPalette(*color);
+
+        lbl->setFrame(frame);
+        lbl->setColor(color);
        ui->gameLayout->addWidget(lbl,hit,wid,0);
 
       proc->setX(wid);
@@ -44,7 +74,7 @@ void GuiManager::generateSquareGrid() {
     i2++;
     hit++;
 }
-     ui->gameLayout->setSpacing(0);
+     ui->gameLayout->setSpacing(100);
 }
 QPixmap GuiManager::setmap(Square *sq){
     string image = sq->getImage();

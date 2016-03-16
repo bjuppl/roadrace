@@ -1,9 +1,10 @@
 #ifndef GAMEMODEL_
 #define GAMEMODEL_
 
-
 #include <string>
 #include <vector>
+
+#include <QTimer>
 
 #include "square.h"
 #include "gamefile.h"
@@ -13,11 +14,19 @@
 
 using namespace std;
 
+// This is a way to keep track of information and rules about specific resources.
+struct Resource {
+    std::string name, shortName;
+    int value;
+    Resource(string name_, string shortName_, int value_): name(name_), shortName(shortName_), value(value_) {}
+};
+
 //the actual game model
 class Game{
 
   private:
     vector<vector<Square*>> squares;
+    vector<Resource*> resource_types;
     //for singleton if needed
     GameFileManager *loader;
     string id;
@@ -27,7 +36,7 @@ class Game{
     vector<Player*> player_list;
     int width, height;
 
-   Game(){}
+   Game();
   public:
     bool applyCommand( std::string command );
     bool save();
@@ -46,8 +55,16 @@ public:
 
     GameFileManager *getGameLoader () { return loader; }
 
+    void updateResources();
+
+    //getters n setters
+
+    vector<Resource*> getResources() { return resource_types; }
+    Resource *getResource ( string shortName );
     vector<vector<Square*>> getSquares() { return squares; }
     Square *getSquare ( int x, int y) { return squares[x][y]; }
+    Square *getSquare ( int id );
+    vector<Square*> getPlayerSquares ( Player *owner );
     string getId() { return id; }
     string getAlias() { return alias; }
     string getPassword() { return password; }
@@ -57,6 +74,8 @@ public:
     int getWidth() { return width; }
     int getHeight() { return height; }
 
+    void setResources ( vector<Resource*> vr );
+    void addResource ( Resource * r ) { resource_types.push_back(r); }
     void setSquares ( vector<vector<Square*>> sq );
     void setSquare ( Square * sq, int x, int y ) { delete squares[x][y]; squares[x][y] = sq; }
     void setId ( string _id ) { id = _id; }
@@ -71,9 +90,16 @@ public:
 
 class Updater {
 private:
-    Updater *instance_;
+    QTimer *timer;
+    Updater() {}
+    static Updater *instance_;
+
 public:
-    Updater &instance();
+    static Updater &instance();
+
+    void start();
+    void stop();
+
     ~Updater () { delete instance_; }
 };
 

@@ -4,6 +4,7 @@
 
 #include "gamemodel.h"
 #include "player.h"
+#include "square.h"
 
 using namespace std;
 
@@ -11,6 +12,44 @@ class Player;
 
 Game *Game::instance_ = NULL;
 Updater *Updater::instance_ = NULL;
+
+Game::Game() {
+    vector<Resource*> rl;
+    rl.push_back(new Resource("water","Wa",10));
+    rl.push_back(new Resource("wood","Wo",3));
+    rl.push_back(new Resource("stone","St",1));
+    rl.push_back(new Resource("gold","Go",1));
+    rl.push_back(new Resource("[none]","",0)); //so resourceType gets can return nempty string and we know what to do with it
+    resource_types = rl;
+}
+
+void Game::updateResources() {
+
+    for ( size_t i=0; i<player_list.size(); i++ ) {
+        vector<Square*> mysquares;
+        Player *p = player_list[i];
+        mysquares = getPlayerSquares(p);
+        for ( size_t j=0; j<mysquares.size(); i++ ) {
+            std::string rtype = mysquares.at(j)->getResourceType();
+            int add = getResource(rtype)->value;
+            p->incResource(rtype, add);
+        }
+    }
+
+}
+
+vector<Square*> Game::getPlayerSquares(Player *owner) {
+    vector<Square*> list;
+    for ( size_t i=0; i<squares.size(); i++ ) {
+        for ( size_t j=0; j<squares[i].size(); j++ ) {
+            if ( squares[i][j]->getOwner()->getName() == owner->getName() ) {
+                list.push_back(squares[i][j]);
+
+            }
+        }
+    }
+    return list;
+}
 
 //used for construction of bridges/roads
 bool buildCommand::execute(){
@@ -25,6 +64,9 @@ Game::~Game() {
         for ( size_t j=0; j<squares.at(i).size(); j ++ ) {
             delete squares[i][j];
         }
+    }
+    for ( size_t i=0; i<resource_types.size(); i++ ) {
+            delete resource_types.at(i);
     }
 
 }
@@ -97,6 +139,28 @@ Player *Game::getPlayer(string name){
     return NULL;
 }
 
+Resource *Game::getResource(string shortName) {
+    for ( size_t i=0; i<resource_types.size(); i++ ) {
+        if ( resource_types[i]->shortName == shortName ) {
+            return resource_types[i];
+        }
+    }
+    return nullptr;
+}
+
+Square *Game::getSquare(int id) {
+   for (size_t i=0; i<squares.size(); i++ ) {
+         for ( size_t j=0; j<squares.at(i).size(); j++ ) {
+            if (squares.at(i).at(j)->getId() == id ) {
+                return squares.at(i).at(j);
+            }
+        }
+   }
+
+  return nullptr;
+}
+
+
 void Game::setSquares ( vector<vector<Square*>> sq ) {
     for ( size_t i=0; i<squares.size(); i++ ) {
         for (size_t j=0; j<squares.at(i).size(); j++ ) {
@@ -105,6 +169,15 @@ void Game::setSquares ( vector<vector<Square*>> sq ) {
     }
     squares = sq;
 }
+
+
+void Game::setResources(vector<Resource *> vr) {
+    for ( size_t i=0; i< resource_types.size(); i++ ) {
+            delete resource_types[i];
+    }
+    resource_types = vr;
+}
+
 
 
 //destory a road or forturess on a square
