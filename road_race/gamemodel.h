@@ -63,6 +63,8 @@ public:
     Resource *getResource ( string shortName );
     vector<vector<Square*>> getSquares() { return squares; }
     Square *getSquare ( int x, int y) { return squares[x][y]; }
+    Square *getSquare ( int id );
+    vector<Square*> getPlayerSquares ( Player *owner );
     string getId() { return id; }
     string getAlias() { return alias; }
     string getPassword() { return password; }

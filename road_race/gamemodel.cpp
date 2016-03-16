@@ -4,6 +4,7 @@
 
 #include "gamemodel.h"
 #include "player.h"
+#include "square.h"
 
 using namespace std;
 
@@ -21,11 +22,18 @@ Game::Game() {
     resource_types = rl;
 }
 
-
 void Game::updateResources() {
 
 
+}
 
+vector<Square*> Game::getPlayerSquares(Player *owner) {
+    vector<Square*> list;
+    for ( size_t i=0; i<squares.size(); i++ ) {
+        for ( size_t j=0; j<squares[i].size(); j++ ) {
+            if ( squares[i][j].
+        }
+    }
 }
 
 //used for construction of bridges/roads
@@ -124,6 +132,19 @@ Resource *Game::getResource(string shortName) {
     }
     return nullptr;
 }
+
+Square *Game::getSquare(int id) {
+   for (size_t i=0; i<squares.size(); i++ ) {
+         for ( size_t j=0; j<squares.at(i).size(); j++ ) {
+            if (squares.at(i).at(j).getId() == id ) {
+                return squares.at(i).at(j);
+            }
+        }
+   }
+
+  return nullptr;
+}
+
 
 void Game::setSquares ( vector<vector<Square*>> sq ) {
     for ( size_t i=0; i<squares.size(); i++ ) {
