@@ -62,6 +62,8 @@ void GuiManager::generateSquareGrid() {
             i3++;
         }
         frame->setPalette(*color);
+        lbl->setFrame(frame);
+        lbl->setColor(color);
        ui->gameLayout->addWidget(lbl,hit,wid,0);
 
       proc->setX(wid);
