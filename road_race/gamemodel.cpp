@@ -3,6 +3,7 @@
 #include <istream>
 
 #include "gamemodel.h"
+#include "gui.h"
 #include "player.h"
 #include "square.h"
 
@@ -115,6 +116,14 @@ Game& Game::instance() {
     return *instance_;
 }
 
+
+void Updater::start(){
+    timer->start(interval_ms);
+}
+
+void Updater::stop() {
+    timer->stop();
+}
 
 Updater& Updater::instance() {
     if (instance_ == NULL ) {

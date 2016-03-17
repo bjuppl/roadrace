@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 
+#include <QObject>
 #include <QTimer>
 
 #include "square.h"
@@ -11,9 +12,11 @@
 #include "player.h"
 
 #include "utils.h"
+#include "gui.h"
 
 using namespace std;
 
+class GuiManager;
 // This is a way to keep track of information and rules about specific resources.
 struct Resource {
     std::string name, shortName;
@@ -25,6 +28,8 @@ struct Resource {
 class Game{
 
   private:
+
+    bool isLocalGame {false};
     vector<vector<Square*>> squares;
     vector<Resource*> resource_types;
     //for singleton if needed
@@ -73,7 +78,9 @@ public:
     Player *getPlayer ( std::string name);
     int getWidth() { return width; }
     int getHeight() { return height; }
+    bool getIsLocalGame() { return isLocalGame; }
 
+    void setIsLocalGame( bool tf) { isLocalGame = tf; }
     void setResources ( vector<Resource*> vr );
     void addResource ( Resource * r ) { resource_types.push_back(r); }
     void setSquares ( vector<vector<Square*>> sq );
@@ -88,11 +95,21 @@ public:
 
 };
 
-class Updater {
+class Updater : public QObject{
+    Q_OBJECT
+
 private:
     QTimer *timer;
-    Updater() {}
+    int interval_ms{1000}; //default
+    Updater() {
+
+            timer = new QTimer();
+            //connect(timer,SIGNAL(timeout()), this, SLOT(run()));
+    }
+
     static Updater *instance_;
+private slots:
+    void run() { Game::instance().update();}
 
 public:
     static Updater &instance();
@@ -100,7 +117,9 @@ public:
     void start();
     void stop();
 
-    ~Updater () { delete instance_; }
+    int getMs() { return interval_ms; }
+    void setMs ( int ms ) { interval_ms = ms; }
+    ~Updater () { delete instance_; delete timer; }
 };
 
 // implement a command structure
