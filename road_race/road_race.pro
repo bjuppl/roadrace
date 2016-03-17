@@ -51,3 +51,6 @@ CONFIG += c++11
 
 RESOURCES += resources.qrc
 
+DISTFILES += \
+    single-player.rr
+
