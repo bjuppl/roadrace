@@ -202,10 +202,10 @@ GameFileManager::GameFileManager (std::vector<std::string> contents ) {
                              Player *noOne = nullptr;
                               squares[i].push_back( new Square(terrain,addition,noOne));
                          }
-                         else{
+                 else{
                    Player *owner = Game::instance().getPlayer(ownerName);
                    squares[i].push_back( new Square(terrain,addition,owner));
-                }
+                    }
                  }
             }
             Game::instance().setSquares(squares);

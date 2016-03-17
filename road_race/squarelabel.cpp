@@ -27,12 +27,14 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
 
         QString owner;
         if((y) == 0){
+
             Square *c1;
             Square *c2;
             Square *c3;
             vector<Square*> list1;
             vector<Square*> list2;
             vector<Square*> list3;
+            bool valid = false;
             Player *newowner;
             if(x >= 0 && x != squareList.size()){
              list1 = squareList.at(x);
@@ -40,6 +42,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
              c1 = list1.at(0);
               c2 = list2.at(0);
               c3 = list1.at(1);
+
             }
             else{
                 list2 = squareList.at(x2);
@@ -50,18 +53,25 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             }
             if((c1!= nullptr) && (c1->getOwner() != nullptr)){
                 newowner = c1->getOwner();
+                valid = true;
             }
             else if((c2!= nullptr) && (c2->getOwner() != nullptr)){
                 newowner = c2->getOwner();
+              valid = true;
             }
             else if(c3->getOwner() != nullptr){
                 newowner = c3->getOwner();
+                valid = true;
             }
+            else{
+                QMessageBox::information(this,"Alert!","You do not currently own a square adjacent to this one.",0,0);
+            }if(valid == true){
             c1=nullptr;
             c2=nullptr;
             c3=nullptr;
             proc->setOwner(newowner);
             owner = QString::fromUtf8(newowner->getName().c_str());
+            }
         }
         else if(y == (width-1)){
             Square *c1;
@@ -71,6 +81,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             vector<Square*> list2;
             vector<Square*> list3;
             Player *newowner;
+            bool valid = false;
             if(x > 0 && (x != squareList.size()-1)){
              list1 = squareList.at(x+1);
              if(x2 >= 0){
@@ -79,10 +90,15 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
              }
              list3 = squareList.at(x);
              c1 = list1.at(y);
-             c3 = list1.at(y-1);
+             c3 = list3.at(y-1);
             }
             else{
+                if(x2 == -1){
+                  list2 = squareList.at(x+1);
+                }
+                else{
                 list2 = squareList.at(x2);
+                }
                 list3 = squareList.at(x);
                 c1=nullptr;
                 c2 = list2.at(y);
@@ -90,19 +106,26 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             }
             if((c1!= nullptr) && (c1->getOwner() != nullptr)){
                 newowner = c1->getOwner();
+                valid = true;
             }
             else if((c2!= nullptr) && (c2->getOwner() != nullptr)){
                 newowner = c2->getOwner();
+                valid = true;
             }
             else if(c3->getOwner() != nullptr){
                 newowner = c3->getOwner();
+                valid = true;
             }
+            else{
+                QMessageBox::information(this,"Alert!","You do not currently own a square adjacent to this one.",0,0);
+            }
+            if(valid == true){
             c1=nullptr;
             c2=nullptr;
             c3=nullptr;
             proc->setOwner(newowner);
             owner = QString::fromUtf8(newowner->getName().c_str());
-
+            }
         }
         else {
             Square *c1;
@@ -113,12 +136,14 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             vector<Square*> list2;
             vector<Square*> list3;
             Player *newowner;
+            bool valid = false;
             if (x == 0){
                 list1 = squareList.at(x);
                 list2 = squareList.at(x+1);
                 c1 = list1.at(y+1);
                 c2 = list1.at(y-1);
                 c3 = list2.at(y);
+
             }
             else if (x == height-1){
                 list1 = squareList.at(x);
@@ -138,22 +163,34 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             }
             if((c1!= nullptr) && (c1->getOwner() != nullptr)){
                 newowner = c1->getOwner();
+                valid = true;
             }
             else if((c2!= nullptr) && (c2->getOwner() != nullptr)){
                 newowner = c2->getOwner();
+                valid = true;
             }
             else if((c3!= nullptr) && (c3->getOwner() != nullptr)){
                 newowner = c3->getOwner();
+                valid = true;
             }
             else if((c4!= nullptr) && (c4->getOwner() != nullptr)){
                 newowner = c4->getOwner();
+                valid = true;
             }
+            else{
+                QMessageBox::information(this,"Alert!","You do not currently own a square adjacent to this one.",0,0);
+            }
+            if(valid == true){
             c1=nullptr;
             c2=nullptr;
             c3=nullptr;
+            c4=nullptr;
             proc->setOwner(newowner);
             owner = QString::fromUtf8(newowner->getName().c_str());
+            }
+
         }
+
         this->setText(owner);
     }
 
