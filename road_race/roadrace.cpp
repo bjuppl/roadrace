@@ -43,6 +43,8 @@ void RoadRace::on_btnStuff_clicked()
 
     GuiManager::instance().generateSquareGrid();
 
+    //Updater::instance().start();
+
     std::cout << Game::instance().getGameLoader()->toGameFile() << std::endl;
 
     ui->btnStuff->setDisabled(true);
@@ -70,6 +72,9 @@ void RoadRace::loadFile() {
 
     //update resource list
     GuiManager::instance().fillResourceList();
+
+    //Set the timer ticking!
+    Updater::instance().start();
 
     vector<Player*> players = Game::instance().getPlayerList();
 

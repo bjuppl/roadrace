@@ -46,14 +46,22 @@ void Game::updateResources() {
 
 vector<Square*> Game::getPlayerSquares(Player *owner) {
     vector<Square*> list;
+
+    std::cout<<"We gonna get da square list!" << std::endl;
+
+    if ( owner == NULL ) {
+        return list;
+    }
     for ( size_t i=0; i<squares.size(); i++ ) {
         for ( size_t j=0; j<squares[i].size(); j++ ) {
-            if ( squares[i][j]->getOwner()->getName() == owner->getName() ) {
+            if (squares[i][j]->getOwner() != NULL && squares[i][j]->getOwner()->getName() == owner->getName() ) {
                 list.push_back(squares[i][j]);
 
             }
         }
     }
+
+    std::cout<<"We got da square list!" << std::endl;
     return list;
 }
 
@@ -91,7 +99,9 @@ string Game::load(){
 
 //update the game world
 void Game::update(){
-
+    Game::instance().updateResources();
+    GuiManager::instance().fillResourceList();
+    std::cout<<"hi\n";
 }
 
 bool Game::applyCommand(string command) {
@@ -122,8 +132,6 @@ Game& Game::instance() {
     }
     return *instance_;
 }
-
-
 void Updater::start(){
     timer->start(interval_ms);
 }

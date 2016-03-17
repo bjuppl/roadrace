@@ -107,12 +107,12 @@ private:
     Updater() {
 
             timer = new QTimer();
-            //connect(timer,SIGNAL(timeout()), this, SLOT(run()));
+            connect(timer,SIGNAL(timeout()),this,SLOT(run()));
     }
 
     static Updater *instance_;
 private slots:
-    void run() { Game::instance().update();}
+    void run() { std::cout<<"tick!"<<std::endl; Game::instance().update(); }
 
 public:
     static Updater &instance();

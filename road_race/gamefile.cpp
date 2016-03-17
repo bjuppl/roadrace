@@ -186,6 +186,7 @@ GameFileManager::GameFileManager (std::vector<std::string> contents ) {
                    stream >> command;
                    std::vector<std::string> square;
                    square = split(command,',');
+                   std::cout << square.size() << std::endl;
                    std:string terrain = square[0],
                            addition = square[1],
                            ownerName = square[2];
