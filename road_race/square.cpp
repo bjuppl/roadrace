@@ -8,7 +8,7 @@
 int Square::count = 0, Square::size = 0, Square::border = 0;
 
 std::string Square::getResourceType() {
-    // Pl = plain, Ri = river, Mo = mountain, Fo = forest, Ca = canyon
+    // Pl = plain, Ri = river, Mo = mountain, Fo = forest, Ca = canyon, Wi = winning block
     if ( type == "Pl") {
         return "";
     } else if ( type == "Ri" ) {

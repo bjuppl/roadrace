@@ -6,7 +6,7 @@ info me resources Wa,0 status score,0 start_time,0
 board 5,5
 Ri,No,me Ca,No,No Fo,No,No Ca,No,No Ri,No,No
 Pl,No,No Ca,No,No Mo,No,No Mo,No,No Fo,No,No
-Ca,No,No Mo,No,No Ca,No,No Mo,No,No Pl,No,No
+Ca,No,No Mo,No,No Wi,No,No Mo,No,No Pl,No,No
 Ri,No,No Mo,No,No Ri,No,No Ri,No,No Ca,No,No
-Ca,No,No Ca,No,No Fo,No,No Mo,No,No Wi,No,No
+Ca,No,No Ca,No,No Fo,No,No Mo,No,No Ri,No,No
 EndRoadRaceDoc
