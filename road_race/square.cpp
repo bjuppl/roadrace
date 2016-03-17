@@ -23,6 +23,7 @@ std::string Square::getResourceType() {
         return "";
     }
 }
+<<<<<<< HEAD
 
 
 
@@ -227,3 +228,5 @@ bool Square::canGet(Square *prev){
 
 }
 */
+=======
+>>>>>>> upstream/master

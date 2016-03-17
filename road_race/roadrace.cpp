@@ -45,6 +45,7 @@ void RoadRace::on_btnStuff_clicked()
 
     std::cout << Game::instance().getGameLoader()->toGameFile() << std::endl;
 
+    ui->btnStuff->setDisabled(true);
 
 }
 //receive data from the serveer
@@ -71,7 +72,7 @@ void RoadRace::loadFile() {
     vector<Player*> players = Game::instance().getPlayerList();
 
      size_t i = 0;
-    while(i<players.size()){
+    /*while(i<players.size()){
         Player *proc = players.at(i);
         string name = proc->getName();
           QString msg;
@@ -126,7 +127,7 @@ void RoadRace::loadFile() {
         }
         msg="";
         i++;
-    }
+    }*/
 
 }
 
