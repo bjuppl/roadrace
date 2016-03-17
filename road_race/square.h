@@ -75,7 +75,7 @@ public:
     Square(string type_) : id(count), type(type_), image(type_), owner(NULL), addition("") { count++; }
     Square(string type_,Player *owner_) : id(count), type(type_), image(type_), owner(owner_), addition("") { count++; }
 
-    ~Square () { delete lbl; }
+    ~Square () { }
     //TODO: make Square pure virtual with inherited types.
     //This will require updating in gamefile.cpp.
     //virtual bool mine()=0;

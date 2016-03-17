@@ -46,7 +46,7 @@ void GuiManager::generateSquareGrid() {
         return;
     }
 
-    size_t i2 = 0;
+
     int border=5;
     int size = ui->gridLayoutWidget->width()/squares.size()/2;
 

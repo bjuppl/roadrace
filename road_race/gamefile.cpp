@@ -3,6 +3,7 @@
 #include "player.h"
 #include "square.h"
 #include "utils.h"
+#include <iostream>
 
 std::string GameFileManager::toGameFile() {
 
@@ -186,18 +187,23 @@ GameFileManager::GameFileManager (std::vector<std::string> contents ) {
                    stream >> command;
                    std::vector<std::string> square;
                    square = split(command,',');
+
+
                    std::cout << square.size() << std::endl;
                    std:string terrain = square[0],
+
                            addition = square[1],
                            ownerName = square[2];
+
+
                          if(ownerName == "No"){
                              Player *noOne = nullptr;
                               squares[i].push_back( new Square(terrain,addition,noOne));
                          }
-                         else{
+                 else{
                    Player *owner = Game::instance().getPlayer(ownerName);
                    squares[i].push_back( new Square(terrain,addition,owner));
-                }
+                    }
                  }
             }
             Game::instance().setSquares(squares);
