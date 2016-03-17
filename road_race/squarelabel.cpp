@@ -1,6 +1,7 @@
 #include "squarelabel.h"
 #include "gamemodel.h"
 #include "gui.h"
+#include <iostream>
 #include <QMessageBox>
 
 using namespace std;
@@ -188,7 +189,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
 
         }
         if(owner != nullptr){
-            if( this->square && this->square->getResourceType() == "Wi") {
+            if(this->square->getType() == "Wi") {
                 QMessageBox::information(this,"Congratualtions!!","You have won the game! But can you do it again?.",0,0);
             }
             this->setText(owner);

@@ -163,6 +163,7 @@ Resource *Game::getResource(string shortName) {
     for ( size_t i=0; i<resource_types.size(); i++ ) {
         if ( resource_types[i]->shortName == shortName ) {
             return resource_types[i];
+            cout<<"ok";
         }
     }
     return nullptr;
