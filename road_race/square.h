@@ -92,11 +92,9 @@ public:
     int getId() { return id; }
 
     bool canGet(Square *prev);
-
     static int getSize() { return size; }
     static int getBorder() { return border; }
     SquareLabel *getLabel () { return lbl; }
-
 
     void setLabel( SquareLabel *l ) { lbl = l; }
     static void setSize ( int s ) { size = s; }
