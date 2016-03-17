@@ -34,7 +34,7 @@ void Game::updateResources() {
         vector<Square*> mysquares;
         Player *p = player_list[i];
         mysquares = getPlayerSquares(p);
-        for ( size_t j=0; j<mysquares.size(); i++ ) {
+        for ( size_t j=0; j<mysquares.size(); j++ ) {
             std::string rtype = mysquares.at(j)->getResourceType();
             int add = getResource(rtype)->value;
             p->incResource(rtype, add);
@@ -46,8 +46,6 @@ void Game::updateResources() {
 
 vector<Square*> Game::getPlayerSquares(Player *owner) {
     vector<Square*> list;
-
-    std::cout<<"We gonna get da square list!" << std::endl;
 
     if ( owner == NULL ) {
         return list;
@@ -61,7 +59,6 @@ vector<Square*> Game::getPlayerSquares(Player *owner) {
         }
     }
 
-    std::cout<<"We got da square list!" << std::endl;
     return list;
 }
 
@@ -101,7 +98,6 @@ string Game::load(){
 void Game::update(){
     Game::instance().updateResources();
     GuiManager::instance().fillResourceList();
-    std::cout<<"hi\n";
 }
 
 bool Game::applyCommand(string command) {

@@ -43,7 +43,7 @@ void RoadRace::on_btnStuff_clicked()
 
     GuiManager::instance().generateSquareGrid();
 
-    //Updater::instance().start();
+    Updater::instance().start();
 
     std::cout << Game::instance().getGameLoader()->toGameFile() << std::endl;
 

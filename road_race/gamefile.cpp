@@ -116,12 +116,12 @@ GameFileManager::GameFileManager (std::vector<std::string> contents ) {
                 }
                 players.push_back(new Player(names[i]));
 
-                players.at(players.size()-1)->setColor(defaultColorList.at(i));
+                players.at(i)->setColor(defaultColorList.at(i));
 
             }
             Game::instance().setPlayerList(players);
             //hacky. TODO: figure out real cur player for multi-player networking!
-            Game::instance().setCurPlayer(NULL);
+            Game::instance().setCurPlayer(players.at(0));
         } else if ( identifier == playerInfo) {
             stream >> command;
             Player * pl = Game::instance().getPlayer(command);

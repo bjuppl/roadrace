@@ -21,6 +21,10 @@ GuiManager& GuiManager::instance() {
 }
 
 void GuiManager::fillResourceList(){
+    if ( Game::instance().getCurPlayer() == NULL ) {
+        std::cout << "There is no current player. Oopsies!" <<std::endl;
+        return;
+    }
     ui->Go1->setText(QString::fromStdString(to_string(Game::instance().getCurPlayer()->getGold())));
     ui->Wa1->setText(QString::fromStdString(to_string(Game::instance().getCurPlayer()->getWater())));
     ui->wo1->setText(QString::fromStdString(to_string(Game::instance().getCurPlayer()->getWood())));
