@@ -68,6 +68,8 @@ void RoadRace::loadFile() {
     //Show the squares
     GuiManager::instance().generateSquareGrid();
 
+    //update resource list
+    GuiManager::instance().fillResourceList();
 
     vector<Player*> players = Game::instance().getPlayerList();
 
