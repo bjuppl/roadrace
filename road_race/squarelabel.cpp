@@ -1,5 +1,6 @@
 #include "squarelabel.h"
 #include "gamemodel.h"
+#include "gui.h"
 #include <QMessageBox>
 
 using namespace std;
@@ -8,16 +9,11 @@ using namespace std;
 void SquareLabel::mousePressEvent(QMouseEvent *ev){
 
     vector<vector<Square*>> squareList = Game::instance().getSquares();
-   int i = squareList.size();
     Square *proc = square;
 
-    int x = this->x();
-
-    int x2 = this->x();
-
     if (proc->getOwner() == nullptr){
-        int x = proc->getX();
-        int y = proc->getY();
+        size_t x = proc->getX();
+        size_t y = proc->getY();
         int height = Game::instance().getHeight();
         int width = Game::instance().getWidth();
 
@@ -124,7 +120,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             c2=nullptr;
             c3=nullptr;
             proc->setOwner(newowner);
-            owner = QString::fromUtf8(newowner->getName().c_str());
+            owner = QString::fromStdString(newowner->getName());
             }
         }
         else {
@@ -233,6 +229,7 @@ QPixmap SquareLabel::setmap(string image){
         QPixmap result = map.scaled(QSize(Square::getSize(),Square::getSize()), Qt::KeepAspectRatio);
         return result;
     }
+
 }
 void SquareLabel::enterEvent(QHoverEvent *event){
 

@@ -76,9 +76,9 @@ void RoadRace::loadFile() {
     //Set the timer ticking!
     Updater::instance().start();
 
-    vector<Player*> players = Game::instance().getPlayerList();
+    //vector<Player*> players = Game::instance().getPlayerList();
 
-     size_t i = 0;
+     //size_t i = 0;
     /*while(i<players.size()){
         Player *proc = players.at(i);
         string name = proc->getName();
@@ -158,6 +158,6 @@ void RoadRace::on_btnOpenGame_clicked()
 
 
 void RoadRace::labelClicked(){
-    SquareLabel *proc = dynamic_cast<SquareLabel*>(sender());
+
 
 }

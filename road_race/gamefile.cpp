@@ -4,11 +4,7 @@
 #include "square.h"
 #include "utils.h"
 #include <iostream>
-/*READ THIS COMMMENT! IMPORTANT!
-This code will initiaizle a square as ownerless, if , in the test file, The square is as follows
-x,y,No
-where x is any type, y is no addition, No is meant as in "No Owner" Or "UNowned"etc. any toher variation will cause a crash.
-*/
+
 std::string GameFileManager::toGameFile() {
 
     std::string output = "";
@@ -191,7 +187,7 @@ GameFileManager::GameFileManager (std::vector<std::string> contents ) {
                    stream >> command;
                    std::vector<std::string> square;
                    square = split(command,',');
-                   std:string terrain = square.at(0),
+
 
                    std::cout << square.size() << std::endl;
                    std:string terrain = square[0],
