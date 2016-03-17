@@ -5,6 +5,10 @@
 #include "roadrace.h"
 #include "gamemodel.h"
 
+#include "square.h"
+
+class Square;
+
 class GuiManager {
 
 private:
@@ -19,8 +23,10 @@ private:
 
     ~GuiManager() { delete instance_; }
 
+    void init();
     void generateSquareGrid();
-    QPixmap setmap(Square *sq);
+    void fillResourceList();
+    QPixmap setmap(Square *sq, int size);
 };
 
 

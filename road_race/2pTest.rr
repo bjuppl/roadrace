@@ -1,0 +1,12 @@
+RoadRaceDoc00000000000
+alias Name none Password Irrelevant
+round 1
+players nerevar,vivec,
+info nerevar resources Go,16 Wa,54 Sto,74 Wo,92 status score,0 start_time,000000
+info vivec resources Go,57 Wa,9 Sto,87 Wo,48 status score,0 start_time,000000
+board 4,4
+Mo,No,nerevar Ca,No,No Ri,No,No Fo,No,vivec 
+Pl,No,No Ca,No,No Ri,No,No Pl,No,No 
+Ca,No,No Ri,No,No Mo,No,No Mo,No,No 
+Mo,No,No Mo,No,No Mo,No,No Pl,No,No 
+EndRoadRaceDoc

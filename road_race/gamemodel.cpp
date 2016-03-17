@@ -3,6 +3,7 @@
 #include <istream>
 
 #include "gamemodel.h"
+#include "gui.h"
 #include "player.h"
 #include "square.h"
 
@@ -23,33 +24,45 @@ Game::Game() {
     resource_types = rl;
 }
 
+void Game::start(){
+    Updater::instance().start();
+}
+
 void Game::updateResources() {
 
     for ( size_t i=0; i<player_list.size(); i++ ) {
         vector<Square*> mysquares;
         Player *p = player_list[i];
         mysquares = getPlayerSquares(p);
-        for ( size_t j=0; j<mysquares.size(); i++ ) {
+        for ( size_t j=0; j<mysquares.size(); j++ ) {
             std::string rtype = mysquares.at(j)->getResourceType();
             int add = getResource(rtype)->value;
             p->incResource(rtype, add);
         }
     }
 
+
 }
 
 vector<Square*> Game::getPlayerSquares(Player *owner) {
     vector<Square*> list;
+
+    if ( owner == NULL ) {
+        return list;
+    }
     for ( size_t i=0; i<squares.size(); i++ ) {
         for ( size_t j=0; j<squares[i].size(); j++ ) {
-            if ( squares[i][j]->getOwner()->getName() == owner->getName() ) {
+            if (squares[i][j]->getOwner() != NULL && squares[i][j]->getOwner()->getName() == owner->getName() ) {
                 list.push_back(squares[i][j]);
 
             }
         }
     }
+
     return list;
 }
+
+
 
 //used for construction of bridges/roads
 bool buildCommand::execute(){
@@ -83,7 +96,8 @@ string Game::load(){
 
 //update the game world
 void Game::update(){
-
+    Game::instance().updateResources();
+    GuiManager::instance().fillResourceList();
 }
 
 bool Game::applyCommand(string command) {
@@ -114,7 +128,13 @@ Game& Game::instance() {
     }
     return *instance_;
 }
+void Updater::start(){
+    timer->start(interval_ms);
+}
 
+void Updater::stop() {
+    timer->stop();
+}
 
 Updater& Updater::instance() {
     if (instance_ == NULL ) {

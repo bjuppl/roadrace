@@ -2,7 +2,14 @@
 #include "roadrace.h"
 #include "gamemodel.h"
 #include "ui_roadrace.h"
+
+#include "square.h"
+#include "player.h"
 #include <QLabel>
+
+class Square;
+class Player;
+
 GuiManager *GuiManager::instance_ = NULL;
 
 GuiManager& GuiManager::instance() {
@@ -13,96 +20,99 @@ GuiManager& GuiManager::instance() {
     return *instance_;
 }
 
+void GuiManager::init() {
+    fillResourceList();
+    generateSquareGrid();
+}
+
+void GuiManager::fillResourceList(){
+    if ( Game::instance().getCurPlayer() == NULL ) {
+        std::cout << "There is no current player. Oopsies!" <<std::endl;
+        return;
+    }
+    ui->Go1->setText(QString::fromStdString(to_string(Game::instance().getCurPlayer()->getGold())));
+    ui->Wa1->setText(QString::fromStdString(to_string(Game::instance().getCurPlayer()->getWater())));
+    ui->wo1->setText(QString::fromStdString(to_string(Game::instance().getCurPlayer()->getWood())));
+    ui->Sto1->setText(QString::fromStdString(to_string(Game::instance().getCurPlayer()->getStone())));
+
+}
+
 void GuiManager::generateSquareGrid() {
     std::cout << getUi()->label->text().toStdString() << std::endl;
 
 
+    ui->gameLayout->setContentsMargins(100,100,100,100);
     vector<vector<Square*>> squaresList = Game::instance().getSquares();
-    size_t i2 = 0;
-     int hit=1;
-    while(i2 < squaresList.size()){
-    vector<Square*> squares = squaresList.at(i2);
-    size_t index = 0;
 
-    int wid=0;
-    for(index = 0;index<squares.size();index++){
-        int i = squares.size();
-        wid++;
 
-       QPalette *color = new QPalette();
-       Square *proc = squares.at(index);
-       SquareLabel *lbl = new SquareLabel(proc,ui->gridLayoutWidget);
-       QFrame *frame = new QFrame(lbl);
-       frame->setFrameStyle(QFrame::Box);
-       QPixmap map = setmap(proc);
-       lbl->setPixmap(map);
-        lbl->setFixedHeight(40);
-        lbl->setFixedWidth(40);
-        frame->setFixedSize(lbl->size());
-        Player *owner = proc->getOwner();
-        vector<Player*> ownList = Game::instance().getPlayerList();
-        int i3 = 0;
-        while(i3<ownList.size()){
-            if((owner == ownList.at(i3)) && i3 == 0){
-                color->setColor(QPalette::Foreground,Qt::red);
-                break;
-            }
-            if((owner == ownList.at(i3)) && i3 == 1){
-                color->setColor(QPalette::Foreground,Qt::yellow);
-                break;
-            }
-            if((owner == ownList.at(i3)) && i3 == 2){
-                color->setColor(QPalette::Foreground,Qt::green);
-                break;
-            }
-            if((owner == ownList.at(i3)) && i3 == 3){
-                color->setColor(QPalette::Foreground,Qt::blue);
-                break;
-            }
-            i3++;
-        }
-        frame->setPalette(*color);
+    vector<vector<Square*>> squares = Game::instance().getSquares();
 
-        lbl->setFrame(frame);
-        lbl->setColor(color);
-       ui->gameLayout->addWidget(lbl,hit,wid,0);
-
-      proc->setX(wid);
-      proc->setY(hit);
-       lbl->show();
+    if ( squares.size() == 0) {
+        return;
     }
-    i2++;
-    hit++;
+
+
+    int border=5;
+    int size = ui->gridLayoutWidget->width()/squares.size()/2;
+
+    Square::setSize(size);
+    Square::setBorder(border);
+
+    for(size_t index = 0;index<squares.size();index++){
+        for (size_t sub_index = 0; sub_index <squares.at(index).size(); sub_index++ ) {
+
+            Square *proc = squares.at(index).at(sub_index);
+
+            SquareLabel *lbl = new SquareLabel(proc,ui->gridLayoutWidget);
+
+            proc->setLabel(lbl);
+            QPixmap map = setmap(proc, size);
+            lbl->setPixmap(map);
+            lbl->setFixedHeight(size);
+            lbl->setFixedWidth(size);
+            Player *owner = proc->getOwner();
+            std::string color = owner == NULL ? "black" : owner->getColor();
+            lbl->setStyleSheet("border:" + QString::fromStdString(to_string(border)) +  "px solid " + QString::fromStdString(color) + ";\n");
+            ui->gameLayout->addWidget(lbl,index,sub_index,0);
+
+
+            proc->setX(index);
+            proc->setY(sub_index);
+            lbl->show();
+        }
+        //ui->gameLayout->set(index,size);
+        //ui->gameLayout->setRowMinimumHeight(index,size);
+
+    }
+     ui->gameLayout->setSpacing(0);
 }
-     ui->gameLayout->setSpacing(100);
-}
-QPixmap GuiManager::setmap(Square *sq){
+QPixmap GuiManager::setmap(Square *sq, int size){
     string image = sq->getImage();
 
     if(image == "Fo"){
         QPixmap map(":/forrest");
-        QPixmap result = map.scaled(QSize(40,40), Qt::KeepAspectRatio);
+        QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
 
         return result;
     }
     if(image == "Ca"){
         QPixmap map(":/canyon");
-        QPixmap result = map.scaled(QSize(40,40), Qt::KeepAspectRatio);
+        QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
         return result;
     }
     if(image == "Ri"){
         QPixmap map(":/water");
-          QPixmap result = map.scaled(QSize(40,40), Qt::KeepAspectRatio);
+          QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
         return result;
     }
     if (image == "Mo"){
         QPixmap map(":/mountain");
-          QPixmap result = map.scaled(QSize(40,40), Qt::KeepAspectRatio);
+          QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
         return result;
     }
     if(image == "Pl"){
         QPixmap map(":/grass");
-          QPixmap result = map.scaled(QSize(40,40), Qt::KeepAspectRatio);
+          QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
         return result;
     }
 }
