@@ -32,5 +32,27 @@ private:
 
 };
 
+struct difficultyStruct{
+    int woodMod;
+    int goldMod;
+    int waterMod;
+    int stoneMod;
+    difficultyStruct(int wm,int gm, int wam, int stm,){
+          woodMod = wm;
+          goldMod = gm;
+          waterMod = wam;
+          stoneMod = stm;
+         }
+
+};
+struct easyStruct: public difficultyStruct{
+
+};
+struct medStruct: public difficultyStruct{
+
+};
+struct HardStruct: public difficultyStruct{
+
+};
 
 #endif // LEVELMANAGER_H
