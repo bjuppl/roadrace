@@ -54,7 +54,7 @@ public:
     {
         if (RoadRace->objectName().isEmpty())
             RoadRace->setObjectName(QStringLiteral("RoadRace"));
-        RoadRace->resize(834, 704);
+        RoadRace->resize(922, 709);
         actionFrom_file = new QAction(RoadRace);
         actionFrom_file->setObjectName(QStringLiteral("actionFrom_file"));
         centralWidget = new QWidget(RoadRace);
@@ -91,7 +91,7 @@ public:
         label_20->setGeometry(QRect(70, 120, 21, 17));
         gridLayoutWidget = new QWidget(centralWidget);
         gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(170, 60, 651, 601));
+        gridLayoutWidget->setGeometry(QRect(170, 60, 731, 601));
         gameLayout = new QGridLayout(gridLayoutWidget);
         gameLayout->setSpacing(6);
         gameLayout->setContentsMargins(11, 11, 11, 11);
