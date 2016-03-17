@@ -83,7 +83,8 @@ OBJECTS       = main.o \
 		moc_gamemodel.o \
 		moc_title.o \
 		moc_squarelabel.o
-DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
+DIST          = ../road_race/single-player.rr \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/shell-unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -375,6 +376,7 @@ qrc_resources.cpp: ../road_race/resources.qrc \
 		../road_race/wooden_bridge_clip_art_17037.jpg \
 		../road_race/grass.jpg \
 		../road_race/wall.jpg \
+		../road_race/single-player.rr \
 		../road_race/mountain.jpg \
 		../road_race/gamefile.rr
 	/usr/lib/x86_64-linux-gnu/qt5/bin/rcc -name resources ../road_race/resources.qrc -o qrc_resources.cpp

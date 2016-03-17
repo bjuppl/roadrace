@@ -16,48 +16,12 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
     int x2 = this->x();
 
     if (proc->getOwner() == nullptr){
-        int x = proc->getX();
-        int y = proc->getY();
+        int x = proc->getY();
+        int y = proc->getX();
         int height = Game::instance().getHeight();
         int width = Game::instance().getWidth();
 
-        QString owner;
-        if((x-1) == 0){
-            vector<Square*> list = squareList.at(0);
-            Square *comp = list.at(0);
-            Player *newowner = comp->getOwner();
-            //QPalette *color = this->getColor();
-            //this->getFrame()->setPalette(*color);
-            proc->setOwner(newowner);
-            owner = QString::fromUtf8(newowner->getName().c_str());
-        }
-        else if((x+1) <= width){
-            Square *comp = Game::instance().getSquare(x-1,y);
-            Square *comp2;
-            Square *comp3;
-            Player *newowner;
-            if(Game::instance().getSquare(x,y+1) != nullptr){
-              comp2 = Game::instance().getSquare(x,y+1);
-            }
-            if(Game::instance().getSquare(x,y-1) != nullptr){
-             comp3 = Game::instance().getSquare(x,y-1);
-            }
-            if(comp->getOwner() != nullptr){
-            newowner = comp->getOwner();
-            }
-            else if (comp2->getOwner() != nullptr){
-                newowner = comp2->getOwner();
-            }
-            else {
-                newowner = comp3->getOwner();
-            }
-            if (newowner != nullptr){
-            proc->setOwner(newowner);
-            owner = QString::fromUtf8(newowner->getName().c_str());
-            }
-            else{
-                 QMessageBox::information(this,"Alert","You cannot claim this square!",0,1);
-            }
+
 
         int y2 = (y-2);
 
@@ -70,7 +34,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             vector<Square*> list2;
             vector<Square*> list3;
             Player *newowner;
-            if(y > 0 && y != squareList.size()){
+            if(y >= 0 && y != squareList.size()){
              list1 = squareList.at(y);
              list2 = squareList.at(y2);
              c1 = list1.at(0);

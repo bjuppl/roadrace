@@ -4,9 +4,11 @@
 #include "ui_roadrace.h"
 
 #include "square.h"
+#include "player.h"
 #include <QLabel>
 
 class Square;
+class Player;
 
 GuiManager *GuiManager::instance_ = NULL;
 
@@ -34,7 +36,7 @@ void GuiManager::generateSquareGrid() {
 
     size_t i2 = 0;
     int border=5;
-    int size = ui->gridLayoutWidget->width()/squares.size() + 2*border;
+    int size = ui->gridLayoutWidget->width()/squares.size()/2;
 
     Square::setSize(size);
     Square::setBorder(border);
@@ -51,11 +53,9 @@ void GuiManager::generateSquareGrid() {
             lbl->setPixmap(map);
             lbl->setFixedHeight(size);
             lbl->setFixedWidth(size);
-                        Player *owner = proc->getOwner();
-            int i3 = 0;
-
-        //std::cout<<owner->getColor()<<std::endl;
-         //lbl->setStyleSheet("border:" + border +  "px solid " + QString::fromStdString(owner->getColor()) + ";\n");
+            Player *owner = proc->getOwner();
+            std::string color = owner == NULL ? "black" : owner->getColor();
+            lbl->setStyleSheet("border:" + QString::fromStdString(to_string(border)) +  "px solid " + QString::fromStdString(color) + ";\n");
             ui->gameLayout->addWidget(lbl,index,sub_index,0);
 
 
