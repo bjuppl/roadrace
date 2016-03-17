@@ -19,6 +19,8 @@ std::string Square::getResourceType() {
         return "Wo";
     } else if ( type == "Ca") {
         return "Go";
+    } else if ( type == "Wi") {
+        return "Wi";
     } else {
         return "";
     }

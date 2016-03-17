@@ -120,11 +120,6 @@ public:
     void setHeight ( int h ) { height = h; }
 
 };
-class Updater {
-private
-    static Updater *instance_;
-public:
-    static Updater &instance();
 class Updater : public QObject{
     Q_OBJECT
 

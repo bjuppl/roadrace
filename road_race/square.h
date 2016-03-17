@@ -93,5 +93,8 @@ class PlainSq: public Square{
 class CanyonSq: public Square{
 
 };
+class WinSq: public Square{
+
+};
 
 #endif // SQUARE_H
