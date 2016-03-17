@@ -41,7 +41,7 @@ void RoadRace::on_btnStuff_clicked()
          )
      );
 
-    GuiManager::instance().generateSquareGrid();
+    GuiManager::instance().init();
 
     Updater::instance().start();
 

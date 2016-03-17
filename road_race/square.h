@@ -6,6 +6,7 @@
 #include <QGridLayout>
 #include <QWidget>
 #include "player.h"
+#include "gamemodel.h"
 #include <QMouseEvent>
 #include <QGridLayout>
 #include <QMainWindow>
@@ -16,42 +17,7 @@
 using namespace std;
 
 class Player;
-class Structure{
-    //resprsent type of pathway
-    string type;
-    string image;
-    //set owner
-
-    Player *owner;
-    //set owning Sqaure e.g. Square 3X4 has a road on it
-public:
-    Structure(string ntype, string nimage, Player* nowner): type(ntype), image(nimage), owner(nowner){}
-    //set a square's path
-    virtual void build() = 0;
-    //destory the path, but not the square
-    virtual void destroy() = 0;
-    //destructor
-    virtual ~Structure(){}
-    string getType() { return type; }
-    string getImage() { return image; }
-    Player *getOwner() { return owner; }
-    void setType(string nt){type = nt;}
-    void setImage(string ni){image = ni;}
-    void setOwner(Player *no){owner = no;}
-
-};
-class Boat: public Structure{
-
-};
-class Tunnel: public Structure{
-
-};
-class Wall: public Structure{
-
-};
-class Bridge: public Structure{
-
-};
+struct Structure;
 
 class SquareLabel;
 

@@ -17,11 +17,34 @@
 using namespace std;
 
 class GuiManager;
+class Square;
+
+class Player;
+
 // This is a way to keep track of information and rules about specific resources.
 struct Resource {
     std::string name, shortName;
     int value;
     Resource(string name_, string shortName_, int value_): name(name_), shortName(shortName_), value(value_) {}
+};
+
+struct Structure {
+    std::string name, shortName;
+    int cost;
+    Structure(std::string name_, std::string shortName_, int cost_): name(name_), shortName(shortName_), cost(cost_) {}
+};
+
+class Boat: public Structure{
+
+};
+class Tunnel: public Structure{
+
+};
+class Wall: public Structure{
+
+};
+class Bridge: public Structure{
+
 };
 
 //the actual game model

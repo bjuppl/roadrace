@@ -186,10 +186,10 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             }
 
         }
-
-        this->setText(owner);
-        this->setStyleSheet("border:" + QString::fromStdString(to_string(proc->getBorder())) + "px solid " + QString::fromStdString(proc->getOwner()->getColor()));
-
+       if ( owner != nullptr ) {
+            this->setText(owner);
+            this->setStyleSheet("border:" + QString::fromStdString(to_string(proc->getBorder())) + "px solid " + QString::fromStdString(proc->getOwner()->getColor()));
+        }
     }
 
     else{
