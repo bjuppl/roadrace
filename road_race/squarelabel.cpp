@@ -104,12 +104,56 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             owner = QString::fromUtf8(newowner->getName().c_str());
 
         }
-        else if((y-1) > 0){
-            Square *comp = Game::instance().getSquare(x+1,y);
+        else {
+            Square *c1;
+            Square *c2;
+            Square *c3;
+            Square *c4;
+            vector<Square*> list1;
+            vector<Square*> list2;
+            vector<Square*> list3;
+            Player *newowner;
+            if (x == 0){
+                list1 = squareList.at(x);
+                list2 = squareList.at(x+1);
+                c1 = list1.at(y+1);
+                c2 = list1.at(y-1);
+                c3 = list2.at(y);
+            }
+            else if (x == height-1){
+                list1 = squareList.at(x);
+                list2 = squareList.at(x-1);
+                c1 = list1.at(y+1);
+                c2 = list1.at(y-1);
+                c3 = list2.at(y);
+            }
+            else{
+                list1 = squareList.at(x);
+                list2 = squareList.at(x+1);
+                list3 = squareList.at(x-1);
+                c1 = list1.at(y+1);
+                c2 = list1.at(y-1);
+                c3 = list2.at(y);
+                c4 = list3.at(y);
+            }
+            if((c1!= nullptr) && (c1->getOwner() != nullptr)){
+                newowner = c1->getOwner();
+            }
+            else if((c2!= nullptr) && (c2->getOwner() != nullptr)){
+                newowner = c2->getOwner();
+            }
+            else if((c3!= nullptr) && (c3->getOwner() != nullptr)){
+                newowner = c3->getOwner();
+            }
+            else if((c4!= nullptr) && (c4->getOwner() != nullptr)){
+                newowner = c4->getOwner();
+            }
+            c1=nullptr;
+            c2=nullptr;
+            c3=nullptr;
+            proc->setOwner(newowner);
+            owner = QString::fromUtf8(newowner->getName().c_str());
         }
-        else if((y+1) <= height){
-            Square *comp = Game::instance().getSquare(x+1,y);
-             }
         this->setText(owner);
     }
 
