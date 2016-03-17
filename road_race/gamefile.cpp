@@ -108,10 +108,6 @@ GameFileManager::GameFileManager (std::vector<std::string> contents ) {
             std::vector<std::string> names;
             std::vector<Player*> players;
             vector<std::string> defaultColorList = {"red","green","yellow","blue"};
-            /*defaultColorList.push_back("red");
-            defaultColorList.push_back("blue");
-            defaultColorList.push_back("green");
-            defaultColorList.push_back("yellow");*/
 
             names = split(command,',');
             for (size_t i=0; i<names.size(); i++) {
@@ -119,10 +115,13 @@ GameFileManager::GameFileManager (std::vector<std::string> contents ) {
                     continue;
                 }
                 players.push_back(new Player(names[i]));
+
                 players.at(players.size()-1)->setColor(defaultColorList.at(i));
 
             }
             Game::instance().setPlayerList(players);
+            //hacky. TODO: figure out real cur player for multi-player networking!
+            Game::instance().setCurPlayer(NULL);
         } else if ( identifier == playerInfo) {
             stream >> command;
             Player * pl = Game::instance().getPlayer(command);

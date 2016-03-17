@@ -39,6 +39,7 @@ class Game{
     string password;
     int round_num;
     vector<Player*> player_list;
+    Player *curPlayer;
     int width, height;
    Game();
   public:
@@ -54,6 +55,7 @@ private:
 public:
     static Game& instance();
     void setGameLoader ( GameFileManager * gfm );
+    void start();
 
     ~Game();
 
@@ -78,7 +80,9 @@ public:
     int getWidth() { return width; }
     int getHeight() { return height; }
     bool getIsLocalGame() { return isLocalGame; }
+    Player *getCurPlayer(  ) { return curPlayer; }
 
+    void setCurPlayer( Player* c ) { curPlayer = c; }
     void setIsLocalGame( bool tf) { isLocalGame = tf; }
     void setResources ( vector<Resource*> vr );
     void addResource ( Resource * r ) { resource_types.push_back(r); }

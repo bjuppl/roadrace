@@ -24,6 +24,10 @@ Game::Game() {
     resource_types = rl;
 }
 
+void Game::start(){
+    Updater::instance().start();
+}
+
 void Game::updateResources() {
 
     for ( size_t i=0; i<player_list.size(); i++ ) {
@@ -36,6 +40,7 @@ void Game::updateResources() {
             p->incResource(rtype, add);
         }
     }
+
 
 }
 
@@ -51,6 +56,8 @@ vector<Square*> Game::getPlayerSquares(Player *owner) {
     }
     return list;
 }
+
+
 
 //used for construction of bridges/roads
 bool buildCommand::execute(){
