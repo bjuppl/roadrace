@@ -149,7 +149,7 @@ void RoadRace::on_btnOpenGame_clicked()
 
     //Give our GUI manager access to ui
     GuiManager::instance().setUi( ui );
-
+    GuiManager::instance().newDiff();
        this->loadFile();
 
        

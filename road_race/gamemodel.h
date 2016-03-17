@@ -41,6 +41,7 @@ class Game{
     vector<Player*> player_list;
     Player *curPlayer;
     int width, height;
+    string diff;
    Game();
   public:
     bool applyCommand( std::string command );
@@ -49,6 +50,10 @@ class Game{
     void update();
 
     //moar singleton functionality
+    string getDiff(){return diff;}
+    void setDiff(string newdiff){
+        newdiff = diff;
+    }
 private:
     static Game* instance_;
 
