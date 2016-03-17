@@ -21,6 +21,10 @@ std::vector<std::string> split( std::string& str, char delim ) {
         }
     }
 
+    if ( str[str.size()-1] == delim ) {
+        ret.push_back("");
+    }
+
     return ret;
 
 }

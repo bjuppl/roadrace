@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 
+#include <QObject>
 #include <QTimer>
 
 #include "square.h"
@@ -11,8 +12,14 @@
 #include "player.h"
 
 #include "utils.h"
+#include "gui.h"
 
 using namespace std;
+
+class GuiManager;
+class Square;
+
+class Player;
 
 // This is a way to keep track of information and rules about specific resources.
 struct Resource {
@@ -21,10 +28,31 @@ struct Resource {
     Resource(string name_, string shortName_, int value_): name(name_), shortName(shortName_), value(value_) {}
 };
 
+struct Structure {
+    std::string name, shortName;
+    int cost;
+    Structure(std::string name_, std::string shortName_, int cost_): name(name_), shortName(shortName_), cost(cost_) {}
+};
+
+class Boat: public Structure{
+
+};
+class Tunnel: public Structure{
+
+};
+class Wall: public Structure{
+
+};
+class Bridge: public Structure{
+
+};
+
 //the actual game model
 class Game{
 
   private:
+
+    bool isLocalGame {false};
     vector<vector<Square*>> squares;
     vector<Resource*> resource_types;
     //for singleton if needed
@@ -34,8 +62,8 @@ class Game{
     string password;
     int round_num;
     vector<Player*> player_list;
+    Player *curPlayer;
     int width, height;
-
    Game();
   public:
     bool applyCommand( std::string command );
@@ -50,6 +78,7 @@ private:
 public:
     static Game& instance();
     void setGameLoader ( GameFileManager * gfm );
+    void start();
 
     ~Game();
 
@@ -73,7 +102,11 @@ public:
     Player *getPlayer ( std::string name);
     int getWidth() { return width; }
     int getHeight() { return height; }
+    bool getIsLocalGame() { return isLocalGame; }
+    Player *getCurPlayer(  ) { return curPlayer; }
 
+    void setCurPlayer( Player* c ) { curPlayer = c; }
+    void setIsLocalGame( bool tf) { isLocalGame = tf; }
     void setResources ( vector<Resource*> vr );
     void addResource ( Resource * r ) { resource_types.push_back(r); }
     void setSquares ( vector<vector<Square*>> sq );
@@ -88,11 +121,21 @@ public:
 
 };
 
-class Updater {
+class Updater : public QObject{
+    Q_OBJECT
+
 private:
     QTimer *timer;
-    Updater() {}
+    int interval_ms{1000}; //default
+    Updater() {
+
+            timer = new QTimer();
+            connect(timer,SIGNAL(timeout()),this,SLOT(run()));
+    }
+
     static Updater *instance_;
+private slots:
+    void run() { Game::instance().update(); }
 
 public:
     static Updater &instance();
@@ -100,7 +143,9 @@ public:
     void start();
     void stop();
 
-    ~Updater () { delete instance_; }
+    int getMs() { return interval_ms; }
+    void setMs ( int ms ) { interval_ms = ms; }
+    ~Updater () { delete instance_; delete timer; }
 };
 
 // implement a command structure

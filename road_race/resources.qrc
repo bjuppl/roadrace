@@ -8,5 +8,6 @@
         <file alias="water">water.jpg</file>
         <file alias="bridge">wooden_bridge_clip_art_17037.jpg</file>
         <file alias="sampleGame">gamefile.rr</file>
+        <file alias="single-player">single-player.rr</file>
     </qresource>
 </RCC>

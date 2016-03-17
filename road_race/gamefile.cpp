@@ -3,6 +3,7 @@
 #include "player.h"
 #include "square.h"
 #include "utils.h"
+#include <iostream>
 
 std::string GameFileManager::toGameFile() {
 
@@ -107,11 +108,21 @@ GameFileManager::GameFileManager (std::vector<std::string> contents ) {
             stream >> command;
             std::vector<std::string> names;
             std::vector<Player*> players;
+            vector<std::string> defaultColorList = {"red","green","yellow","blue"};
+
             names = split(command,',');
             for (size_t i=0; i<names.size(); i++) {
+                if (names[i].size() == 0) {
+                    continue;
+                }
                 players.push_back(new Player(names[i]));
+
+                players.at(i)->setColor(defaultColorList.at(i));
+
             }
             Game::instance().setPlayerList(players);
+            //hacky. TODO: figure out real cur player for multi-player networking!
+            Game::instance().setCurPlayer(players.at(0));
         } else if ( identifier == playerInfo) {
             stream >> command;
             Player * pl = Game::instance().getPlayer(command);
@@ -176,17 +187,21 @@ GameFileManager::GameFileManager (std::vector<std::string> contents ) {
                    stream >> command;
                    std::vector<std::string> square;
                    square = split(command,',');
+
                    std:string terrain = square[0],
+
                            addition = square[1],
                            ownerName = square[2];
+
+
                          if(ownerName == "No"){
                              Player *noOne = nullptr;
                               squares[i].push_back( new Square(terrain,addition,noOne));
                          }
-                         else{
+                 else{
                    Player *owner = Game::instance().getPlayer(ownerName);
                    squares[i].push_back( new Square(terrain,addition,owner));
-                }
+                    }
                  }
             }
             Game::instance().setSquares(squares);

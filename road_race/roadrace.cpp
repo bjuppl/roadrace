@@ -41,10 +41,13 @@ void RoadRace::on_btnStuff_clicked()
          )
      );
 
-    GuiManager::instance().generateSquareGrid();
+    GuiManager::instance().init();
+
+    Updater::instance().start();
 
     std::cout << Game::instance().getGameLoader()->toGameFile() << std::endl;
 
+    ui->btnStuff->setDisabled(true);
 
 }
 //receive data from the serveer
@@ -67,11 +70,16 @@ void RoadRace::loadFile() {
     //Show the squares
     GuiManager::instance().generateSquareGrid();
 
+    //update resource list
+    GuiManager::instance().fillResourceList();
 
-    vector<Player*> players = Game::instance().getPlayerList();
+    //Set the timer ticking!
+    Updater::instance().start();
 
-     size_t i = 0;
-    while(i<players.size()){
+    //vector<Player*> players = Game::instance().getPlayerList();
+
+     //size_t i = 0;
+    /*while(i<players.size()){
         Player *proc = players.at(i);
         string name = proc->getName();
           QString msg;
@@ -126,7 +134,7 @@ void RoadRace::loadFile() {
         }
         msg="";
         i++;
-    }
+    }*/
 
 }
 
@@ -150,6 +158,6 @@ void RoadRace::on_btnOpenGame_clicked()
 
 
 void RoadRace::labelClicked(){
-    SquareLabel *proc = dynamic_cast<SquareLabel*>(sender());
+
 
 }
