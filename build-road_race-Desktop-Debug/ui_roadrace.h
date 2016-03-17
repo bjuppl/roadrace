@@ -19,6 +19,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QToolBar>
@@ -49,6 +50,10 @@ public:
     QLabel *Wa1;
     QLabel *name1;
     QTextBrowser *textBrowser;
+    QPushButton *helpBtn;
+    QRadioButton *EsyBtn;
+    QRadioButton *MedBtn;
+    QRadioButton *HardBtn;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -101,16 +106,16 @@ public:
         gameLayout->setContentsMargins(0, 0, 0, 0);
         wo1 = new QLabel(centralWidget);
         wo1->setObjectName(QStringLiteral("wo1"));
-        wo1->setGeometry(QRect(70, 140, 21, 17));
+        wo1->setGeometry(QRect(70, 140, 101, 17));
         Sto1 = new QLabel(centralWidget);
         Sto1->setObjectName(QStringLiteral("Sto1"));
-        Sto1->setGeometry(QRect(70, 180, 21, 17));
+        Sto1->setGeometry(QRect(70, 180, 91, 17));
         Go1 = new QLabel(centralWidget);
         Go1->setObjectName(QStringLiteral("Go1"));
-        Go1->setGeometry(QRect(70, 200, 21, 17));
+        Go1->setGeometry(QRect(70, 200, 91, 17));
         Wa1 = new QLabel(centralWidget);
         Wa1->setObjectName(QStringLiteral("Wa1"));
-        Wa1->setGeometry(QRect(70, 160, 21, 17));
+        Wa1->setGeometry(QRect(70, 160, 91, 17));
         name1 = new QLabel(centralWidget);
         name1->setObjectName(QStringLiteral("name1"));
         name1->setGeometry(QRect(149, 70, 20, 20));
@@ -118,6 +123,18 @@ public:
         textBrowser->setObjectName(QStringLiteral("textBrowser"));
         textBrowser->setGeometry(QRect(20, 241, 111, 181));
         textBrowser->setStyleSheet(QStringLiteral("background:transparent;"));
+        helpBtn = new QPushButton(centralWidget);
+        helpBtn->setObjectName(QStringLiteral("helpBtn"));
+        helpBtn->setGeometry(QRect(500, 10, 85, 27));
+        EsyBtn = new QRadioButton(centralWidget);
+        EsyBtn->setObjectName(QStringLiteral("EsyBtn"));
+        EsyBtn->setGeometry(QRect(30, 460, 102, 22));
+        MedBtn = new QRadioButton(centralWidget);
+        MedBtn->setObjectName(QStringLiteral("MedBtn"));
+        MedBtn->setGeometry(QRect(30, 480, 102, 22));
+        HardBtn = new QRadioButton(centralWidget);
+        HardBtn->setObjectName(QStringLiteral("HardBtn"));
+        HardBtn->setGeometry(QRect(30, 500, 102, 22));
         RoadRace->setCentralWidget(centralWidget);
         mainToolBar = new QToolBar(RoadRace);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -152,8 +169,12 @@ public:
         textBrowser->setHtml(QApplication::translate("RoadRace", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'.Helvetica Neue DeskInterface'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">Currently in single-player mode. Upgrade for more options.</span></p></body></html>", 0));
+"</style></head><body style=\" font-family:'Droid Sans'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'.Helvetica Neue DeskInterface';\">Currently in single-player mode. Upgrade for more options.</span></p></body></html>", 0));
+        helpBtn->setText(QApplication::translate("RoadRace", "Help!", 0));
+        EsyBtn->setText(QApplication::translate("RoadRace", "n00b mode", 0));
+        MedBtn->setText(QApplication::translate("RoadRace", "normal Mode", 0));
+        HardBtn->setText(QApplication::translate("RoadRace", "l33t mode", 0));
     } // retranslateUi
 
 };
