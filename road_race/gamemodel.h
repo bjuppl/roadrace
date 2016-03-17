@@ -112,7 +112,7 @@ private:
 
     static Updater *instance_;
 private slots:
-    void run() { std::cout<<"tick!"<<std::endl; Game::instance().update(); }
+    void run() { Game::instance().update(); }
 
 public:
     static Updater &instance();
