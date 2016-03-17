@@ -10,6 +10,4 @@ bool HighScore::load()
     //} else {
       //create highscore.txt
     //}
-
-
 }
