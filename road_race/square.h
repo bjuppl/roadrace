@@ -9,7 +9,9 @@
 #include <QMouseEvent>
 #include <QGridLayout>
 #include <QMainWindow>
+#include <QHoverEvent>
 #include <QWidget>
+
 using namespace std;
 
 class Player;
@@ -51,6 +53,8 @@ class Bridge: public Structure{
 };
 
 class Square{
+    static int count;
+    int id;
     string type;
     string image;
     Player *owner;
@@ -59,10 +63,10 @@ class Square{
     int width, height;
     int x,y;
 public:
-    Square(string type_,string addition_,Player *owner_) : type(type_), image(type_), owner(owner_), addition(addition_){}
-    Square(string type_,string addition_) : type(type_), image(type_), owner(NULL), addition(addition_){}
-    Square(string type_) : type(type_), image(type_), owner(NULL), addition(""){}
-    Square(string type_,Player *owner_) : type(type_), image(type_), owner(owner_), addition(""){}
+    Square(string type_,string addition_,Player *owner_) : id(count), type(type_), image(type_), owner(owner_), addition(addition_) { count++; }
+    Square(string type_,string addition_) : id(count), type(type_), image(type_), owner(NULL), addition(addition_) { count++; }
+    Square(string type_) : id(count), type(type_), image(type_), owner(NULL), addition("") { count++; }
+    Square(string type_,Player *owner_) : id(count), type(type_), image(type_), owner(owner_), addition("") { count++; }
 
     //TODO: make Square pure virtual with inherited types.
     //This will require updating in gamefile.cpp.
@@ -76,6 +80,8 @@ public:
     string getAddition() { return addition; }
     int getHeight () { return height; }
     int getWidth () { return width; }
+    std::string getResourceType();
+    int getId() { return id; }
 
     void setType ( string t ) { type = t; }
     void setImage ( string i ) { image = i; }
@@ -107,22 +113,45 @@ class CanyonSq: public Square{
 
 class SquareLabel : public QLabel{
     Q_OBJECT
-    Square *square;
 
+    Square *square;
+    bool mouseTracking;
+    QFrame *frame;
+    QPalette *color;
 public:
     explicit SquareLabel (Square *square_, QWidget *parent): QLabel(parent), square(square_) {
         setMouseTracking(true);
+        this->setAttribute(Qt::WA_Hover,true);
         connect(this,SIGNAL(clicked()),this,SLOT(labelClicked()));
     }
    void mousePressEvent(QMouseEvent *ev);
-    void ReleaseEvent(QMouseEvent *ev);
+   void mouseMoveEvent(QMouseEvent *ev);
+   void enterEvent(QHoverEvent *event);
+   void leaveEvent(QHoverEvent *event);
+   bool event(QEvent *e);
+   QPixmap setmap(string image);
+   void setFrame(QFrame *f){
+       frame = f;
+   }
+   void setColor(QPalette *p){
+       color = p;
+   }
+   QPalette* getColor(){return color;}
+   QFrame* getFrame(){return frame;}
+   ~SquareLabel(){
+       delete frame;
+       delete color;
+   }
+
 private slots:
     void labelClicked(){
-        int i = 0;
+
     }
 
 signals:
     void clicked();
+    void hovered();
+
 };
 
 
