@@ -22,6 +22,10 @@ void GuiManager::generateSquareGrid() {
     std::cout << getUi()->label->text().toStdString() << std::endl;
 
 
+    ui->gameLayout->setContentsMargins(100,100,100,100);
+    vector<vector<Square*>> squaresList = Game::instance().getSquares();
+
+
     vector<vector<Square*>> squares = Game::instance().getSquares();
     if ( squares.size() == 0) {
         return;

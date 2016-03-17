@@ -90,9 +90,13 @@ public:
     int getWidth () { return width; }
     std::string getResourceType();
     int getId() { return id; }
+
+    bool canGet(Square *prev);
+
     static int getSize() { return size; }
     static int getBorder() { return border; }
     SquareLabel *getLabel () { return lbl; }
+
 
     void setLabel( SquareLabel *l ) { lbl = l; }
     static void setSize ( int s ) { size = s; }
@@ -107,6 +111,7 @@ public:
     int getY(){return y;}
     void setX(int nx){x = nx;}
     void setY(int ny){y = ny;}
+
 };
 
 class ForestSq: public Square{
