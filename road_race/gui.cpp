@@ -27,7 +27,9 @@ void GuiManager::generateSquareGrid() {
 
 
     vector<vector<Square*>> squares = Game::instance().getSquares();
-
+    if ( squares.size() == 0) {
+        return;
+    }
     size_t i2 = 0;
     int border=5;
     int size = ui->gridLayoutWidget->width()/squares.size() + 2*border;
