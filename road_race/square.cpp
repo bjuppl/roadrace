@@ -30,49 +30,90 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
     vector<vector<Square*>> squareList = Game::instance().getSquares();
    int i = squareList.size();
     Square *proc = square;
-    int x = this->x();
+    int x2 = this->x();
     if (proc->getOwner() == nullptr){
         int x = proc->getX();
         int y = proc->getY();
         int height = Game::instance().getHeight();
         int width = Game::instance().getWidth();
+        int y2 = (y-2);
+
         QString owner;
         if((x-1) == 0){
-            vector<Square*> list = squareList.at(0);
-            Square *comp = list.at(0);
-            Player *newowner = comp->getOwner();
-            QPalette *color = this->getColor();
-            this->getFrame()->setPalette(*color);
+            Square *c1;
+            Square *c2;
+            Square *c3;
+            vector<Square*> list1;
+            vector<Square*> list2;
+            vector<Square*> list3;
+            Player *newowner;
+            if(y > 0 && y != squareList.size()){
+             list1 = squareList.at(y);
+             list2 = squareList.at(y2);
+             c1 = list1.at(0);
+              c2 = list2.at(0);
+              c3 = list1.at(1);
+            }
+            else{
+                list2 = squareList.at(y2);
+                list3 = squareList.at(y-1);
+                c1=nullptr;
+                c2 = list2.at(0);
+                c3 = list3.at(1);
+            }
+            if((c1!= nullptr) && (c1->getOwner() != nullptr)){
+                newowner = c1->getOwner();
+            }
+            else if((c2!= nullptr) && (c2->getOwner() != nullptr)){
+                newowner = c2->getOwner();
+            }
+            else if(c3->getOwner() != nullptr){
+                newowner = c3->getOwner();
+            }
+            c1=nullptr;
+            c2=nullptr;
+            c3=nullptr;
             proc->setOwner(newowner);
             owner = QString::fromUtf8(newowner->getName().c_str());
         }
-        else if((x+1) <= width){
-            Square *comp = Game::instance().getSquare(x-1,y);
-            Square *comp2;
-            Square *comp3;
+        else if(x == width){
+            Square *c1;
+            Square *c2;
+            Square *c3;
+            vector<Square*> list1;
+            vector<Square*> list2;
+            vector<Square*> list3;
             Player *newowner;
-            if(Game::instance().getSquare(x,y+1) != nullptr){
-              comp2 = Game::instance().getSquare(x,y+1);
-            }
-            if(Game::instance().getSquare(x,y-1) != nullptr){
-             comp3 = Game::instance().getSquare(x,y-1);
-            }
-            if(comp->getOwner() != nullptr){
-            newowner = comp->getOwner();
-            }
-            else if (comp2->getOwner() != nullptr){
-                newowner = comp2->getOwner();
-            }
-            else {
-                newowner = comp3->getOwner();
-            }
-            if (newowner != nullptr){
-            proc->setOwner(newowner);
-            owner = QString::fromUtf8(newowner->getName().c_str());
+            if(y > 0 && y != squareList.size()){
+             list1 = squareList.at(y);
+             if(y2 >= 0){
+             list2 = squareList.at(y2);
+              c2 = list2.at(x-1);
+             }
+             c1 = list1.at(x-1);
+             c3 = list1.at(x-2);
             }
             else{
-                 QMessageBox::information(this,"Alert","You cannot claim this square!",0,1);
+                list2 = squareList.at(y2);
+                list3 = squareList.at(y-1);
+                c1=nullptr;
+                c2 = list2.at(x-1);
+                c3 = list3.at(x-2);
             }
+            if((c1!= nullptr) && (c1->getOwner() != nullptr)){
+                newowner = c1->getOwner();
+            }
+            else if((c2!= nullptr) && (c2->getOwner() != nullptr)){
+                newowner = c2->getOwner();
+            }
+            else if(c3->getOwner() != nullptr){
+                newowner = c3->getOwner();
+            }
+            c1=nullptr;
+            c2=nullptr;
+            c3=nullptr;
+            proc->setOwner(newowner);
+            owner = QString::fromUtf8(newowner->getName().c_str());
         }
         else if((y-1) > 0){
             Square *comp = Game::instance().getSquare(x+1,y);
@@ -153,4 +194,34 @@ bool SquareLabel::event(QEvent *e){
         break;
     }
     return QWidget::event(e);
+}
+bool Square::canGet(Square *prev){
+    if (this->getType() == "Ri"){
+        if(prev->getAddition() == "Bo"){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    if(this->getType() == "Mo"){
+        if(prev->getAddition() == "Tu"){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    if(this->getType() == "Ca"){
+        if(prev->getAddition() == "Br"){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    else{
+        return true;
+    }
+
 }

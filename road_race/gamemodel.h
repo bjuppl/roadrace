@@ -35,7 +35,6 @@ class Game{
     int round_num;
     vector<Player*> player_list;
     int width, height;
-
    Game();
   public:
     bool applyCommand( std::string command );

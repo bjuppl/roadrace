@@ -82,6 +82,7 @@ public:
     int getWidth () { return width; }
     std::string getResourceType();
     int getId() { return id; }
+    bool canGet(Square *prev);
 
     void setType ( string t ) { type = t; }
     void setImage ( string i ) { image = i; }
@@ -93,6 +94,7 @@ public:
     int getY(){return y;}
     void setX(int nx){x = nx;}
     void setY(int ny){y = ny;}
+
 };
 
 class ForestSq: public Square{
