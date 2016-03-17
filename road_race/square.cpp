@@ -5,7 +5,7 @@
 #include <QLabel>
 #include <QMessageBox>
 
-int Square::count = 0;
+int Square::count = 0, Square::size = 0, Square::border = 0;
 
 std::string Square::getResourceType() {
     // Pl = plain, Ri = river, Mo = mountain, Fo = forest, Ca = canyon
@@ -23,6 +23,7 @@ std::string Square::getResourceType() {
         return "";
     }
 }
+
 
 
 void SquareLabel::mousePressEvent(QMouseEvent *ev){

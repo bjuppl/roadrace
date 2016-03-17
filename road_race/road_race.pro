@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     utils.cpp \
     gui.cpp \
     title.cpp\
-    levelmanager.cpp
+    levelmanager.cpp \
+    squarelabel.cpp
 
     
 
@@ -38,7 +39,8 @@ HEADERS  += roadrace.h \
     utils.h \
     gui.h \
     title.h\
-    levelmanager.h
+    levelmanager.h \
+    squarelabel.h
     
 
 

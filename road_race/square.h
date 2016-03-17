@@ -10,7 +10,8 @@
 #include <QGridLayout>
 #include <QMainWindow>
 #include <QHoverEvent>
-#include <QWidget>
+
+#include "squarelabel.h"
 
 using namespace std;
 
@@ -52,22 +53,29 @@ class Bridge: public Structure{
 
 };
 
-class Square{
+class SquareLabel;
+
+class Square {
     static int count;
+    static int size, border;
     int id;
     string type;
     string image;
     Player *owner;
     string addition;
+
+    SquareLabel *lbl;
     Structure *path;
     int width, height;
     int x,y;
+    string color;
 public:
     Square(string type_,string addition_,Player *owner_) : id(count), type(type_), image(type_), owner(owner_), addition(addition_) { count++; }
     Square(string type_,string addition_) : id(count), type(type_), image(type_), owner(NULL), addition(addition_) { count++; }
     Square(string type_) : id(count), type(type_), image(type_), owner(NULL), addition("") { count++; }
     Square(string type_,Player *owner_) : id(count), type(type_), image(type_), owner(owner_), addition("") { count++; }
 
+    ~Square () { delete lbl; }
     //TODO: make Square pure virtual with inherited types.
     //This will require updating in gamefile.cpp.
     //virtual bool mine()=0;
@@ -82,8 +90,17 @@ public:
     int getWidth () { return width; }
     std::string getResourceType();
     int getId() { return id; }
+
     bool canGet(Square *prev);
 
+    static int getSize() { return size; }
+    static int getBorder() { return border; }
+    SquareLabel *getLabel () { return lbl; }
+
+
+    void setLabel( SquareLabel *l ) { lbl = l; }
+    static void setSize ( int s ) { size = s; }
+    static void setBorder ( int b ) { border = b; }
     void setType ( string t ) { type = t; }
     void setImage ( string i ) { image = i; }
     void setOwner ( Player *o ) { owner = o; }
@@ -112,51 +129,5 @@ class PlainSq: public Square{
 class CanyonSq: public Square{
 
 };
-
-class SquareLabel : public QLabel{
-    Q_OBJECT
-
-    Square *square;
-    bool mouseTracking;
-    QFrame *frame;
-    QPalette *color;
-public:
-    explicit SquareLabel (Square *square_, QWidget *parent): QLabel(parent), square(square_) {
-        setMouseTracking(true);
-        this->setAttribute(Qt::WA_Hover,true);
-        connect(this,SIGNAL(clicked()),this,SLOT(labelClicked()));
-    }
-   void mousePressEvent(QMouseEvent *ev);
-   void mouseMoveEvent(QMouseEvent *ev);
-   void enterEvent(QHoverEvent *event);
-   void leaveEvent(QHoverEvent *event);
-   bool event(QEvent *e);
-   QPixmap setmap(string image);
-   void setFrame(QFrame *f){
-       frame = f;
-   }
-   void setColor(QPalette *p){
-       color = p;
-   }
-   QPalette* getColor(){return color;}
-   QFrame* getFrame(){return frame;}
-   ~SquareLabel(){
-       delete frame;
-       delete color;
-   }
-
-private slots:
-    void labelClicked(){
-
-    }
-
-signals:
-    void clicked();
-    void hovered();
-
-};
-
-
-
 
 #endif // SQUARE_H
