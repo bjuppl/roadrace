@@ -17,11 +17,34 @@
 using namespace std;
 
 class GuiManager;
+class Square;
+
+class Player;
+
 // This is a way to keep track of information and rules about specific resources.
 struct Resource {
     std::string name, shortName;
     int value;
     Resource(string name_, string shortName_, int value_): name(name_), shortName(shortName_), value(value_) {}
+};
+
+struct Structure {
+    std::string name, shortName;
+    int cost;
+    Structure(std::string name_, std::string shortName_, int cost_): name(name_), shortName(shortName_), cost(cost_) {}
+};
+
+class Boat: public Structure{
+
+};
+class Tunnel: public Structure{
+
+};
+class Wall: public Structure{
+
+};
+class Bridge: public Structure{
+
 };
 
 //the actual game model
@@ -32,6 +55,7 @@ class Game{
     bool isLocalGame {false};
     vector<vector<Square*>> squares;
     vector<Resource*> resource_types;
+    vector<Structure*> structure_types;
     //for singleton if needed
     GameFileManager *loader;
     string id;
@@ -70,6 +94,8 @@ public:
 
     //getters n setters
 
+    vector<Structure*> getStructure() { return structure_types; }
+    Structure *getStructure ( string shortName );
     vector<Resource*> getResources() { return resource_types; }
     Resource *getResource ( string shortName );
     vector<vector<Square*>> getSquares() { return squares; }
@@ -89,6 +115,8 @@ public:
 
     void setCurPlayer( Player* c ) { curPlayer = c; }
     void setIsLocalGame( bool tf) { isLocalGame = tf; }
+    void setStructures ( vector<Structure*> sl );
+    void addStructure ( Structure * s ) { structure_types.push_back(s); }
     void setResources ( vector<Resource*> vr );
     void addResource ( Resource * r ) { resource_types.push_back(r); }
     void setSquares ( vector<vector<Square*>> sq );
@@ -117,7 +145,7 @@ private:
 
     static Updater *instance_;
 private slots:
-    void run() { std::cout<<"tick!"<<std::endl; Game::instance().update(); }
+    void run() { Game::instance().update(); }
 
 public:
     static Updater &instance();

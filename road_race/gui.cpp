@@ -20,6 +20,11 @@ GuiManager& GuiManager::instance() {
     return *instance_;
 }
 
+void GuiManager::init() {
+    fillResourceList();
+    generateSquareGrid();
+}
+
 void GuiManager::fillResourceList(){
     if ( Game::instance().getCurPlayer() == NULL ) {
         std::cout << "There is no current player. Oopsies!" <<std::endl;

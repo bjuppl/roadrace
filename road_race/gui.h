@@ -7,6 +7,8 @@
 
 #include "square.h"
 
+class Square;
+
 class GuiManager {
 
 private:
@@ -21,6 +23,7 @@ private:
 
     ~GuiManager() { delete instance_; }
 
+    void init();
     void generateSquareGrid();
     void fillResourceList();
     QPixmap setmap(Square *sq, int size);

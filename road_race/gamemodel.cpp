@@ -168,6 +168,15 @@ Resource *Game::getResource(string shortName) {
     return nullptr;
 }
 
+Structure *Game::getStructure(string shortName) {
+    for ( size_t i=0; i<structure_types.size(); i++ ) {
+        if ( structure_types[i]->shortName == shortName ) {
+            return structure_types[i];
+        }
+    }
+    return nullptr;
+}
+
 Square *Game::getSquare(int id) {
    for (size_t i=0; i<squares.size(); i++ ) {
          for ( size_t j=0; j<squares.at(i).size(); j++ ) {
