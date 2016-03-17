@@ -22,6 +22,7 @@ private:
     ~GuiManager() { delete instance_; }
 
     void generateSquareGrid();
+    void fillResourceList();
     QPixmap setmap(Square *sq, int size);
 };
 

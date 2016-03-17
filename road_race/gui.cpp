@@ -20,6 +20,14 @@ GuiManager& GuiManager::instance() {
     return *instance_;
 }
 
+void GuiManager::fillResourceList(){
+    ui->Go1->setText(QString::fromStdString(to_string(Game::instance().getCurPlayer()->getGold())));
+    ui->Wa1->setText(QString::fromStdString(to_string(Game::instance().getCurPlayer()->getWater())));
+    ui->wo1->setText(QString::fromStdString(to_string(Game::instance().getCurPlayer()->getWood())));
+    ui->Sto1->setText(QString::fromStdString(to_string(Game::instance().getCurPlayer()->getStone())));
+
+}
+
 void GuiManager::generateSquareGrid() {
     std::cout << getUi()->label->text().toStdString() << std::endl;
 
