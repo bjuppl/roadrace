@@ -198,6 +198,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
     else{
             QString owner;
             owner = QString::fromUtf8(proc->getOwner()->getName().c_str());
+            this->setStyleSheet("border:" + QString::fromStdString(to_string(proc->getBorder())) + "px solid " + QString::fromStdString(proc->getOwner()->getColor()));
             this->setText(owner);
     }
     emit clicked();

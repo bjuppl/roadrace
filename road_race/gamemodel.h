@@ -28,10 +28,16 @@ struct Resource {
     Resource(string name_, string shortName_, int value_): name(name_), shortName(shortName_), value(value_) {}
 };
 
+struct Price {
+    std::string type;
+    int amount;
+    Price( std::string t, int a) : type(t), amount(a) {}
+};
+
 struct Structure {
     std::string name, shortName;
-    int cost;
-    Structure(std::string name_, std::string shortName_, int cost_): name(name_), shortName(shortName_), cost(cost_) {}
+    vector<Price> cost;
+    Structure(std::string name_, std::string shortName_, vector<Price> cost_): name(name_), shortName(shortName_), cost(cost_) {}
 };
 
 class Boat: public Structure{

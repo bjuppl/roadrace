@@ -20,8 +20,23 @@ Game::Game() {
     rl.push_back(new Resource("wood","Wo",3));
     rl.push_back(new Resource("stone","St",1));
     rl.push_back(new Resource("gold","Go",1));
+    rl.push_back(new Resource("[none]","No",0)); //so resourceType gets can return "No" and we know what to do with it
     rl.push_back(new Resource("[none]","",0)); //so resourceType gets can return nempty string and we know what to do with it
     resource_types = rl;
+
+    vector<Structure*> sl;
+    //Bo = boat, Br = bridge, Wa = wall, Tu = tunnel
+    vector<Price> a = {Price("Wo",100),Price("St",50)};
+    sl.push_back(new Structure("boat","Bo",a));
+    vector<Price> b = {Price("Wo",200),Price("St",100)};
+    sl.push_back(new Structure("bridge","Br",b));
+    vector<Price> c = {Price("Wo",50),Price("St",300)};
+    sl.push_back(new Structure("wall","wa",c));
+    vector<Price> d = {Price("Wa",50),Price("Go",100),Price("St",50)};
+    sl.push_back(new Structure("tunnel","Tu",d));
+
+    structure_types = sl;
+
 }
 
 void Game::start(){
