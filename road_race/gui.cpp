@@ -2,11 +2,11 @@
 #include "roadrace.h"
 #include "gamemodel.h"
 #include "ui_roadrace.h"
-
 #include "square.h"
 #include "player.h"
 #include <QLabel>
 #include <QMessageBox>
+
 class Square;
 class Player;
 
@@ -143,4 +143,10 @@ void GuiManager::newDiff(){
         string easy = "Ez";
         Game::instance().setDiff(easy);
     }
+}
+
+void GuiManager::endGame(SquareLabel* x)
+{
+    Updater::instance().stop();
+    QMessageBox::information(x,"Congratualtions!!","You have won the game! But can you do it again?.",0,0);
 }

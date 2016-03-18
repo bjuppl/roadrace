@@ -45,7 +45,6 @@ void Game::start(){
 }
 
 void Game::updateResources() {
-
     for ( size_t i=0; i<player_list.size(); i++ ) {
         vector<Square*> mysquares;
         Player *p = player_list[i];
@@ -60,8 +59,6 @@ void Game::updateResources() {
             }
         }
     }
-
-
 }
 
 vector<Square*> Game::getPlayerSquares(Player *owner) {
