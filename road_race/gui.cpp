@@ -115,4 +115,9 @@ QPixmap GuiManager::setmap(Square *sq, int size){
           QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
         return result;
     }
+    if(image == "Wi"){
+        QPixmap map(":/win");
+          QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
+        return result;
+    }
 }
