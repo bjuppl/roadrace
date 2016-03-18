@@ -44,7 +44,7 @@ void RoadRace::on_btnStuff_clicked()
     GuiManager::instance().init();
 
     Updater::instance().start();
-
+   GuiManager::instance().newDiff();
     std::cout << Game::instance().getGameLoader()->toGameFile() << std::endl;
 
     ui->btnStuff->setDisabled(true);
