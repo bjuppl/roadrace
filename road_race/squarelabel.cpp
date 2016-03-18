@@ -190,11 +190,12 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
         }
         }
         if(owner != nullptr){
-            if(this->square->getType() == "Wi") {
-                QMessageBox::information(this,"Congratualtions!!","You have won the game! But can you do it again?.",0,0);
-            }
             this->setText(owner);
             this->setStyleSheet("border:" + QString::fromStdString(to_string(proc->getBorder())) + "px solid " + QString::fromStdString(proc->getOwner()->getColor()));
+            if(this->square->getType() == "Wi") {
+                QMessageBox::information(this,"Congratualtions!!","You have won the game! But can you do it again?.",0,0);
+
+            }
         }
 
 
@@ -265,7 +266,7 @@ void SquareLabel::leaveEvent(QHoverEvent *event){
 
 
 
-        
+
 }
 
 bool SquareLabel::event(QEvent *e){
