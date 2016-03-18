@@ -128,7 +128,6 @@ public:
     void setHeight ( int h ) { height = h; }
 
 };
-
 class Updater : public QObject{
     Q_OBJECT
 

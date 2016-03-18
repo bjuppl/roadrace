@@ -31,9 +31,13 @@ void Game::updateResources() {
         Player *p = player_list[i];
         mysquares = getPlayerSquares(p);
         for ( size_t j=0; j<mysquares.size(); j++ ) {
-            std::string rtype = mysquares.at(j)->getResourceType();
-            int add = getResource(rtype)->value;
-            p->incResource(rtype, add);
+            if(mysquares.at(j)->getType() != "Wi")
+            {
+                std::string rtype = mysquares.at(j)->getResourceType();
+                int add = getResource(rtype)->value;
+
+                p->incResource(rtype, add);
+            }
         }
     }
 
@@ -159,6 +163,7 @@ Resource *Game::getResource(string shortName) {
     for ( size_t i=0; i<resource_types.size(); i++ ) {
         if ( resource_types[i]->shortName == shortName ) {
             return resource_types[i];
+            cout<<"ok";
         }
     }
     return nullptr;
@@ -234,6 +239,7 @@ bool dragonCommand::damage(){
     return true;
 }
 //takes <newdif> and sets the duff struct accordingly
+
 void Game::setDiff(string newdiff){
     diff = newdiff;
 //sets modifiers
