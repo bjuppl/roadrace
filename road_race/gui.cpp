@@ -6,7 +6,7 @@
 #include "square.h"
 #include "player.h"
 #include <QLabel>
-
+#include <QMessageBox>
 class Square;
 class Player;
 
@@ -114,5 +114,33 @@ QPixmap GuiManager::setmap(Square *sq, int size){
         QPixmap map(":/grass");
           QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
         return result;
+    }
+    if(image == "Wi"){
+        QPixmap map(":/win");
+          QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
+        return result;
+    }
+}
+
+void GuiManager::on_helpBtn_clicked()
+{
+    //QMessageBox(this,"Help Screen","",0,0);
+}
+void GuiManager::newDiff(){
+    if(ui->EsyBtn->isChecked()){
+        string easy = "Ez";
+        Game::instance().setDiff(easy);
+    }
+    else if(ui->MedBtn->isChecked()){
+        string medium = "Md";
+        Game::instance().setDiff(medium);
+    }
+    else if(ui->HardBtn->isChecked()){
+        string hard = "Ha";
+        Game::instance().setDiff(hard);
+    }
+    else{
+        string easy = "Ez";
+        Game::instance().setDiff(easy);
     }
 }

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'roadrace.ui'
 **
-** Created by: Qt User Interface Compiler version 5.4.1
+** Created by: Qt User Interface Compiler version 5.5.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -131,10 +131,10 @@ public:
         EsyBtn->setGeometry(QRect(30, 460, 102, 22));
         MedBtn = new QRadioButton(centralWidget);
         MedBtn->setObjectName(QStringLiteral("MedBtn"));
-        MedBtn->setGeometry(QRect(30, 480, 102, 22));
+        MedBtn->setGeometry(QRect(30, 480, 121, 22));
         HardBtn = new QRadioButton(centralWidget);
         HardBtn->setObjectName(QStringLiteral("HardBtn"));
-        HardBtn->setGeometry(QRect(30, 500, 102, 22));
+        HardBtn->setGeometry(QRect(30, 500, 111, 22));
         RoadRace->setCentralWidget(centralWidget);
         mainToolBar = new QToolBar(RoadRace);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -169,12 +169,12 @@ public:
         textBrowser->setHtml(QApplication::translate("RoadRace", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Droid Sans'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'.Helvetica Neue DeskInterface';\">Currently in single-player mode. Upgrade for more options.</span></p></body></html>", 0));
+"</style></head><body style=\" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'.Helvetica Neue DeskInterface'; font-size:10pt;\">Currently in single-player mode. Upgrade for more options.</span></p></body></html>", 0));
         helpBtn->setText(QApplication::translate("RoadRace", "Help!", 0));
-        EsyBtn->setText(QApplication::translate("RoadRace", "n00b mode", 0));
+        EsyBtn->setText(QApplication::translate("RoadRace", "n00b Mode", 0));
         MedBtn->setText(QApplication::translate("RoadRace", "normal Mode", 0));
-        HardBtn->setText(QApplication::translate("RoadRace", "l33t mode", 0));
+        HardBtn->setText(QApplication::translate("RoadRace", "l33t Mode", 0));
     } // retranslateUi
 
 };

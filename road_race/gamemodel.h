@@ -13,7 +13,7 @@
 
 #include "utils.h"
 #include "gui.h"
-
+#include "levelmanager.h"
 using namespace std;
 
 class GuiManager;
@@ -71,6 +71,8 @@ class Game{
     vector<Player*> player_list;
     Player *curPlayer;
     int width, height;
+    string diff;
+
    Game();
   public:
     bool applyCommand( std::string command );
@@ -79,6 +81,8 @@ class Game{
     void update();
 
     //moar singleton functionality
+    string getDiff(){return diff;}
+    void setDiff(string newdiff);
 private:
     static Game* instance_;
 
@@ -88,7 +92,6 @@ public:
     void start();
 
     ~Game();
-
     GameFileManager *getGameLoader () { return loader; }
 
     void updateResources();
@@ -131,7 +134,6 @@ public:
     void setHeight ( int h ) { height = h; }
 
 };
-
 class Updater : public QObject{
     Q_OBJECT
 

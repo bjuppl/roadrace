@@ -1,6 +1,7 @@
 #include "squarelabel.h"
 #include "gamemodel.h"
 #include "gui.h"
+#include <iostream>
 #include <QMessageBox>
 
 using namespace std;
@@ -187,11 +188,15 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             }
 
         }
-        if(owner != nullptr){
-        this->setText(owner);
-        this->setStyleSheet("border:" + QString::fromStdString(to_string(proc->getBorder())) + "px solid " + QString::fromStdString(proc->getOwner()->getColor()));
         }
-    }
+        if(owner != nullptr){
+            if(this->square->getType() == "Wi") {
+                QMessageBox::information(this,"Congratualtions!!","You have won the game! But can you do it again?.",0,0);
+            }
+            this->setText(owner);
+            this->setStyleSheet("border:" + QString::fromStdString(to_string(proc->getBorder())) + "px solid " + QString::fromStdString(proc->getOwner()->getColor()));
+        }
+
 
     }
 
@@ -233,6 +238,11 @@ QPixmap SquareLabel::setmap(string image){
     }
     if(image == "Pl"){
         QPixmap map(":/grass");
+        QPixmap result = map.scaled(QSize(Square::getSize(),Square::getSize()), Qt::KeepAspectRatio);
+        return result;
+    }
+    if(image == "Wi"){
+        QPixmap map(":/win");
         QPixmap result = map.scaled(QSize(Square::getSize(),Square::getSize()), Qt::KeepAspectRatio);
         return result;
     }

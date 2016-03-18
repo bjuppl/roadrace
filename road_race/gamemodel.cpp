@@ -6,7 +6,7 @@
 #include "gui.h"
 #include "player.h"
 #include "square.h"
-
+#include "levelmanager.h"
 using namespace std;
 
 class Player;
@@ -41,6 +41,7 @@ Game::Game() {
 
 void Game::start(){
     Updater::instance().start();
+
 }
 
 void Game::updateResources() {
@@ -50,9 +51,13 @@ void Game::updateResources() {
         Player *p = player_list[i];
         mysquares = getPlayerSquares(p);
         for ( size_t j=0; j<mysquares.size(); j++ ) {
-            std::string rtype = mysquares.at(j)->getResourceType();
-            int add = getResource(rtype)->value;
-            p->incResource(rtype, add);
+            if(mysquares.at(j)->getType() != "Wi")
+            {
+                std::string rtype = mysquares.at(j)->getResourceType();
+                int add = getResource(rtype)->value;
+
+                p->incResource(rtype, add);
+            }
         }
     }
 
@@ -178,6 +183,7 @@ Resource *Game::getResource(string shortName) {
     for ( size_t i=0; i<resource_types.size(); i++ ) {
         if ( resource_types[i]->shortName == shortName ) {
             return resource_types[i];
+            cout<<"ok";
         }
     }
     return nullptr;
@@ -251,4 +257,40 @@ bool dragonCommand::die(){
 //when a dragon takes damage
 bool dragonCommand::damage(){
     return true;
+}
+void Game::setDiff(string newdiff){
+    diff = newdiff;
+
+    if (diff == "Ez"){
+        LevelManager::instance().getDuff()->waterMod = 20;
+        LevelManager::instance().getDuff()->goldMod = 5;
+        LevelManager::instance().getDuff()->woodMod = 10;
+        LevelManager::instance().getDuff()->stoneMod = 5;
+
+    }
+    else if (diff == "Md"){
+        LevelManager::instance().getDuff()->waterMod = 15;
+        LevelManager::instance().getDuff()->goldMod = 3;
+        LevelManager::instance().getDuff()->woodMod = 5;
+        LevelManager::instance().getDuff()->stoneMod = 3;
+    }
+    else {
+        LevelManager::instance().getDuff()->waterMod = 10;
+        LevelManager::instance().getDuff()->goldMod = 1;
+        LevelManager::instance().getDuff()->woodMod = 3;
+        LevelManager::instance().getDuff()->stoneMod = 1;
+    }
+    for (size_t i=0; i<resource_types.size(); i++ ) {
+        delete resource_types[i];
+    }
+    vector<Resource*> rl;
+    rl.push_back(new Resource("water","Wa",LevelManager::instance().getDuff()->waterMod));
+    rl.push_back(new Resource("wood","Wo",LevelManager::instance().getDuff()->woodMod));
+    rl.push_back(new Resource("stone","St",LevelManager::instance().getDuff()->stoneMod));
+    rl.push_back(new Resource("gold","Go",LevelManager::instance().getDuff()->goldMod));
+    rl.push_back(new Resource("[none]","",0)); //so resourceType gets can return nempty string and we know what to do with it
+    resource_types = rl;
+
+    std::cout << "OK!" << std::endl;
+
 }
