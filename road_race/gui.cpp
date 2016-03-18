@@ -144,7 +144,6 @@ void GuiManager::newDiff(){
         Game::instance().setDiff(easy);
     }
 }
-
 void GuiManager::endGame(SquareLabel* x)
 {
     Updater::instance().stop();
