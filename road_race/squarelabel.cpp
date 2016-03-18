@@ -203,6 +203,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
         }
         if(owner != nullptr){
 
+
             //set text/border
         this->setText(owner);
         this->setStyleSheet("border:" + QString::fromStdString(to_string(proc->getBorder())) + "px solid " + QString::fromStdString(proc->getOwner()->getColor()));
@@ -213,6 +214,14 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             this->setText(owner);
             this->setStyleSheet("border:" + QString::fromStdString(to_string(proc->getBorder())) + "px solid " + QString::fromStdString(proc->getOwner()->getColor()));
 
+
+            //set text/border
+            this->setText(owner);
+            this->setStyleSheet("border:" + QString::fromStdString(to_string(proc->getBorder())) + "px solid " + QString::fromStdString(proc->getOwner()->getColor()));
+            if(this->square->getType() == "Wi") {
+                QMessageBox::information(this,"Congratualtions!!","You have won the game! But can you do it again?.",0,0);
+            }
+
         }
 
 
@@ -222,6 +231,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
         //handle owned squares until I decide what to do with them.
             QString owner;
             owner = QString::fromUtf8(proc->getOwner()->getName().c_str());
+            this->setStyleSheet("border:" + QString::fromStdString(to_string(proc->getBorder())) + "px solid " + QString::fromStdString(proc->getOwner()->getColor()));
             this->setText(owner);
     }
     emit clicked();
