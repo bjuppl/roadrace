@@ -238,9 +238,11 @@ bool dragonCommand::die(){
 bool dragonCommand::damage(){
     return true;
 }
+//takes <newdif> and sets the duff struct accordingly
+
 void Game::setDiff(string newdiff){
     diff = newdiff;
-
+//sets modifiers
     if (diff == "Ez"){
         LevelManager::instance().getDuff()->waterMod = 20;
         LevelManager::instance().getDuff()->goldMod = 5;
@@ -260,6 +262,7 @@ void Game::setDiff(string newdiff){
         LevelManager::instance().getDuff()->woodMod = 3;
         LevelManager::instance().getDuff()->stoneMod = 1;
     }
+    //initialize resources moved to here b/c orignal positon did wierd things with the modifiers
     vector<Resource*> rl;
     rl.push_back(new Resource("water","Wa",LevelManager::instance().getDuff()->waterMod));
     rl.push_back(new Resource("wood","Wo",LevelManager::instance().getDuff()->woodMod));
