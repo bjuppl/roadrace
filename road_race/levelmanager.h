@@ -13,7 +13,7 @@
 #include "gui.h"
 #include "utils.h"
 struct difficultyStruct{
-
+//mods change based on various difficulties
     int woodMod;
     int goldMod;
     int waterMod;
@@ -33,7 +33,7 @@ class LevelManager {
 private:
     int curLevel{0};
     static LevelManager *instance_;
-    difficultyStruct *duff;
+    difficultyStruct *duff{new difficultyStruct()};
     LevelManager(){}
  public:
     static LevelManager& instance();
