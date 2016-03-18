@@ -13,7 +13,7 @@
 #include "gui.h"
 #include "utils.h"
 struct difficultyStruct{
-
+//mods change based on various difficulties
     int woodMod;
     int goldMod;
     int waterMod;

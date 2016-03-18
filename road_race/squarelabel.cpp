@@ -10,18 +10,19 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
 
     vector<vector<Square*>> squareList = Game::instance().getSquares();
     Square *proc = square;
-
+    //handle if square is not currently owned
     if (proc->getOwner() == nullptr){
         size_t x = proc->getX();
         size_t y = proc->getY();
+    //use for comparison against x and y
         int height = Game::instance().getHeight();
         int width = Game::instance().getWidth();
-
-
+    // alias x-1
 
         int x2 = (x-1);
 
         QString owner;
+        //handles cases in which a square is against the left most bracket
         if((y) == 0){
 
             Square *c1;
@@ -32,6 +33,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             vector<Square*> list3;
             bool valid = false;
             Player *newowner;
+            //normal squares
             if(x >= 0 && x != squareList.size()){
              list1 = squareList.at(x);
              list2 = squareList.at(x2);
@@ -40,6 +42,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
               c3 = list1.at(1);
 
             }
+            //handle bottom left corner
             else{
                 list2 = squareList.at(x2);
                 list3 = squareList.at(x-1);
@@ -62,6 +65,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             else{
                 QMessageBox::information(this,"Alert!","You do not currently own a square adjacent to this one.",0,0);
             }if(valid == true){
+                //helps with calling again
             c1=nullptr;
             c2=nullptr;
             c3=nullptr;
@@ -69,7 +73,9 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             owner = QString::fromUtf8(newowner->getName().c_str());
             }
         }
+        //handles the right most edge
         else if(y == (width-1)){
+
             Square *c1;
             Square *c2;
             Square *c3;
@@ -78,6 +84,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             vector<Square*> list3;
             Player *newowner;
             bool valid = false;
+            //normal processing
             if(x > 0 && (x != squareList.size()-1)){
              list1 = squareList.at(x+1);
              if(x2 >= 0){
@@ -88,6 +95,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
              c1 = list1.at(y);
              c3 = list3.at(y-1);
             }
+            //bottom & top right corners
             else{
                 if(x2 == -1){
                   list2 = squareList.at(x+1);
@@ -123,6 +131,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             owner = QString::fromStdString(newowner->getName());
             }
         }
+        //handles inner squares
         else {
             Square *c1;
             Square *c2;
@@ -133,6 +142,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             vector<Square*> list3;
             Player *newowner;
             bool valid = false;
+            //topmost
             if (x == 0){
                 list1 = squareList.at(x);
                 list2 = squareList.at(x+1);
@@ -141,6 +151,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
                 c3 = list2.at(y);
 
             }
+            //bottom most
             else if (x == height-1){
                 list1 = squareList.at(x);
                 list2 = squareList.at(x-1);
@@ -148,6 +159,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
                 c2 = list1.at(y-1);
                 c3 = list2.at(y);
             }
+            //normal
             else{
                 list1 = squareList.at(x);
                 list2 = squareList.at(x+1);
@@ -189,6 +201,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
         }
         }
         if(owner != nullptr){
+            //set text/border
         this->setText(owner);
         this->setStyleSheet("border:" + QString::fromStdString(to_string(proc->getBorder())) + "px solid " + QString::fromStdString(proc->getOwner()->getColor()));
         }
@@ -197,6 +210,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
     }
 
     else{
+        //handle owned squares until I decide what to do with them.
             QString owner;
             owner = QString::fromUtf8(proc->getOwner()->getName().c_str());
             this->setText(owner);
