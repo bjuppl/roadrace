@@ -182,7 +182,8 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             c3=nullptr;
             c4=nullptr;
             proc->setOwner(newowner);
-            owner = QString::fromUtf8(newowner->getName().c_str());
+            if ( newowner != nullptr ) {
+                owner = QString::fromUtf8(newowner->getName().c_str());
             }
 
         }
@@ -195,6 +196,8 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
         }
     }
 
+    }
+
     else{
             QString owner;
             owner = QString::fromUtf8(proc->getOwner()->getName().c_str());
@@ -202,6 +205,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
     }
     emit clicked();
 }
+
 void SquareLabel::mouseMoveEvent(QMouseEvent *ev){
 
 }
