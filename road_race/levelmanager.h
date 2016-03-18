@@ -33,7 +33,7 @@ class LevelManager {
 private:
     int curLevel{0};
     static LevelManager *instance_;
-    difficultyStruct *duff;
+    difficultyStruct *duff{new difficultyStruct()};
     LevelManager(){}
  public:
     static LevelManager& instance();

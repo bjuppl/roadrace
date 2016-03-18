@@ -264,10 +264,12 @@ void Game::setDiff(string newdiff){
     diff = newdiff;
 //sets modifiers
     if (diff == "Ez"){
+        std::cout << "Easy" << std::endl;
         LevelManager::instance().getDuff()->waterMod = 20;
         LevelManager::instance().getDuff()->goldMod = 5;
         LevelManager::instance().getDuff()->woodMod = 10;
         LevelManager::instance().getDuff()->stoneMod = 5;
+        std::cout << "End of easy" << std::endl;
 
     }
     else if (diff == "Md"){
