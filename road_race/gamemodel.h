@@ -96,6 +96,8 @@ public:
 
     void updateResources();
 
+    void purchaseAddition( Square* source );
+
     //getters n setters
 
     vector<Structure*> getStructure() { return structure_types; }

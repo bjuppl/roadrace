@@ -163,6 +163,10 @@ Updater& Updater::instance() {
     return *instance_;
 }
 
+void Game::purchaseAddition(Square *source) {
+
+}
+
 void Game::setGameLoader(GameFileManager *gfm) {
     delete gfm;
     loader = gfm;
