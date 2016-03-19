@@ -28,6 +28,7 @@ private:
     void fillResourceList();
     QPixmap setmap(Square *sq, int size);
     void newDiff();
+    void BuildStruct(Square *proc);
 
     //getterMethods
     bool getEndGame() { return end; }

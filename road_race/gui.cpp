@@ -30,10 +30,14 @@ void GuiManager::fillResourceList(){
         std::cout << "There is no current player. Oopsies!" <<std::endl;
         return;
     }
+    int w = Game::instance().getCurPlayer()->getGold();
+    int x = Game::instance().getCurPlayer()->getWater();
+    int y = Game::instance().getCurPlayer()->getWood();
+    int z = Game::instance().getCurPlayer()->getStone();
     ui->Go1->setText(QString::fromStdString(to_string(Game::instance().getCurPlayer()->getGold())));
     ui->Wa1->setText(QString::fromStdString(to_string(Game::instance().getCurPlayer()->getWater())));
     ui->wo1->setText(QString::fromStdString(to_string(Game::instance().getCurPlayer()->getWood())));
-    ui->Sto1->setText(QString::fromStdString(to_string(Game::instance().getCurPlayer()->getStone())));
+    ui->Sto1->setText(QString::fromStdString(to_string(z)));
 
 }
 
@@ -119,9 +123,7 @@ QPixmap GuiManager::setmap(Square *sq, int size){
         QPixmap map(":/win");
           QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
         return result;
-    }
-}
-
+    }}
 void GuiManager::on_helpBtn_clicked()
 {
     //QMessageBox(this,"Help Screen","",0,0);
@@ -137,12 +139,38 @@ void GuiManager::newDiff(){
     }
     else if(ui->HardBtn->isChecked()){
         string hard = "Ha";
-        Game::instance().setDiff(hard);
-    }
+        Game::instance().setDiff(hard);}
     else{
         string easy = "Ez";
-        Game::instance().setDiff(easy);
-    }
+        Game::instance().setDiff(easy);}}
+
+
+
+
+
+
+
+
+
+
+void GuiManager::BuildStruct(Square *proc){
+ if(proc->getAddition() == "No"){
+    QMessageBox::StandardButton canBuild;
+    canBuild = QMessageBox::question(GuiManager::instance().getUi()->gridLayoutWidget,"You clicked one of your own squares!","Build a structure?",QMessageBox::Yes|QMessageBox::No);
+    if (canBuild == QMessageBox::Yes){
+     Player *name = proc->getOwner();
+     string type = proc->getType();
+     Structure *struc = Game::instance().resourceCheck(name,type);
+     if(struc != nullptr){
+     proc->setStruct(struc);
+     proc->setAddition(struc->shortName);
+     }
+    else{
+         QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Alert!","You don't have enough resources!",0);
+     }
+}
+
+}
 }
 void GuiManager::endGame(SquareLabel* x)
 {
