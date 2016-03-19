@@ -378,9 +378,17 @@ bool Square::canGet(Square *prev){
             return false;
         }
     }
-    else{
-        return true;
-    }
+   if(prev->getType() == "Fo"){
+       if(prev->getAddition() == "De"){
+           return true;
+       }
+       else{
+           return false;
+       }
+   }
+       else{
+           return true;
+       }
 
 }
 
