@@ -4,6 +4,7 @@
 #include "title.h"
 #include <QMainWindow>
 #include <QSignalMapper>
+#include "cheater.h"
 namespace Ui {
 class RoadRace;
 }
@@ -24,6 +25,9 @@ private slots:
 
     void on_btnOpenGame_clicked();
     void labelClicked();
+    void on_helpBtn_clicked();
+    void on_cheatBtn_clicked();
+    void openCheat();
 private:
     Ui::RoadRace *ui;
     QTcpSocket *server;
