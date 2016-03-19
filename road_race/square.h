@@ -75,7 +75,8 @@ public:
     int getY(){return y;}
     void setX(int nx){x = nx;}
     void setY(int ny){y = ny;}
-
+    Structure *getStruct(){return path;}
+    void setStruct(Structure *nstruct){path = nstruct;}
 };
 
 class ForestSq: public Square{
