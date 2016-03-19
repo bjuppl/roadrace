@@ -190,6 +190,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
                 c1 = list1.at(y+1);
                 c2 = list1.at(y-1);
                 c3 = list2.at(y);
+                c4 = nullptr;
             }
             //normal
             else{

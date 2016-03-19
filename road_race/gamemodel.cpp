@@ -333,7 +333,7 @@ Structure *Game::resourceCheck(Player *owner,string type){
             Structure *tu = Game::instance().getStructure("Tu");
             int newwater = (water-50);
             int newstone = (stone-100);
-            int newgold = (gold-300);
+            int newgold = (gold-100);
             owner->setStone(newstone);
             owner->setWater(newwater);
             owner->setGold(newgold);

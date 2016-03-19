@@ -91,10 +91,18 @@ void RoadRace::on_btnOpenGame_clicked()
 
     //Give our GUI manager access to ui
     GuiManager::instance().setUi( ui );
+    GuiManager::instance().init();
+
+    Updater::instance().start();
+    //sets a difficulty based on the radio button, easy if nothing else is pressed
+   GuiManager::instance().newDiff();
+    std::cout << Game::instance().getGameLoader()->toGameFile() << std::endl;
+
+    ui->btnStuff->setDisabled(true);
 
        this->loadFile();
 
-       
+
        }
 
 
