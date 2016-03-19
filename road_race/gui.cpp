@@ -124,10 +124,7 @@ QPixmap GuiManager::setmap(Square *sq, int size){
           QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
         return result;
     }}
-void GuiManager::on_helpBtn_clicked()
-{
-    //QMessageBox(this,"Help Screen","",0,0);
-}
+
 void GuiManager::newDiff(){
     if(ui->EsyBtn->isChecked()){
         string easy = "Ez";
@@ -143,14 +140,6 @@ void GuiManager::newDiff(){
     else{
         string easy = "Ez";
         Game::instance().setDiff(easy);}}
-
-
-
-
-
-
-
-
 
 
 void GuiManager::BuildStruct(Square *proc){
@@ -177,3 +166,9 @@ void GuiManager::endGame(SquareLabel* x)
     Updater::instance().stop();
     QMessageBox::information(x,"Congratualtions!!","You have won the game! But can you do it again?.",0,0);
 }
+
+
+
+
+
+

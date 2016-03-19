@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     gui.cpp \
     title.cpp\
     levelmanager.cpp \
-    squarelabel.cpp
+    squarelabel.cpp \
+    cheater.cpp
 
     
 
@@ -40,12 +41,14 @@ HEADERS  += roadrace.h \
     gui.h \
     title.h\
     levelmanager.h \
-    squarelabel.h
+    squarelabel.h \
+    cheater.h
     
 
 
 FORMS    += roadrace.ui \
-    title.ui
+    title.ui \
+    cheater.ui
 
 CONFIG += c++11
 

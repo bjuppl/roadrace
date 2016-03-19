@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'roadrace.ui'
 **
-** Created by: Qt User Interface Compiler version 5.4.1
+** Created by: Qt User Interface Compiler version 5.5.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -54,8 +54,6 @@ public:
     QRadioButton *EsyBtn;
     QRadioButton *MedBtn;
     QRadioButton *HardBtn;
-    QPushButton *cheatBtn;
-    QPushButton *SaveBtn;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -127,7 +125,7 @@ public:
         textBrowser->setStyleSheet(QStringLiteral("background:transparent;"));
         helpBtn = new QPushButton(centralWidget);
         helpBtn->setObjectName(QStringLiteral("helpBtn"));
-        helpBtn->setGeometry(QRect(460, 0, 85, 27));
+        helpBtn->setGeometry(QRect(500, 10, 85, 27));
         EsyBtn = new QRadioButton(centralWidget);
         EsyBtn->setObjectName(QStringLiteral("EsyBtn"));
         EsyBtn->setGeometry(QRect(30, 460, 102, 22));
@@ -137,12 +135,6 @@ public:
         HardBtn = new QRadioButton(centralWidget);
         HardBtn->setObjectName(QStringLiteral("HardBtn"));
         HardBtn->setGeometry(QRect(30, 500, 111, 22));
-        cheatBtn = new QPushButton(centralWidget);
-        cheatBtn->setObjectName(QStringLiteral("cheatBtn"));
-        cheatBtn->setGeometry(QRect(570, 0, 85, 27));
-        SaveBtn = new QPushButton(centralWidget);
-        SaveBtn->setObjectName(QStringLiteral("SaveBtn"));
-        SaveBtn->setGeometry(QRect(20, 560, 111, 27));
         RoadRace->setCentralWidget(centralWidget);
         mainToolBar = new QToolBar(RoadRace);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -183,8 +175,6 @@ public:
         EsyBtn->setText(QApplication::translate("RoadRace", "n00b Mode", 0));
         MedBtn->setText(QApplication::translate("RoadRace", "normal Mode", 0));
         HardBtn->setText(QApplication::translate("RoadRace", "l33t Mode", 0));
-        cheatBtn->setText(QApplication::translate("RoadRace", "Cheater...", 0));
-        SaveBtn->setText(QApplication::translate("RoadRace", "Save the Game", 0));
     } // retranslateUi
 
 };

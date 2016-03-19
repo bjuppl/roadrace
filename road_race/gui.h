@@ -40,7 +40,10 @@ private:
     void endGame(SquareLabel* x);
 
 private slots:
-    void on_helpBtn_clicked();
+
+    void on_helpBtn_pressed();
+
+
 };
 
 
