@@ -8,6 +8,9 @@
 #include <QLabel>
 #include <QMessageBox>
 #include "levelmanager.h"
+#include <iostream>
+#include <fstream>
+#include <string>
 
 class Game;
 class GameFileManager;
@@ -140,4 +143,11 @@ void RoadRace::openCheat(){
     cheat1->show();
     cheat1->activateWindow();
     cheat1->raise();
+}
+void RoadRace::on_SaveBtn_clicked()
+{
+    string output = Game::instance().getGameLoader()->toGameFile();
+    ofstream outfile("savefile.rr");
+    outfile << output;
+    outfile.close();
 }

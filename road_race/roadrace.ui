@@ -237,8 +237,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="helpBtn">
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>20</y>
+      <x>460</x>
+      <y>0</y>
       <width>85</width>
       <height>27</height>
      </rect>
@@ -289,14 +289,27 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="cheatBtn">
     <property name="geometry">
      <rect>
-      <x>590</x>
-      <y>30</y>
+      <x>570</x>
+      <y>0</y>
       <width>85</width>
       <height>27</height>
      </rect>
     </property>
     <property name="text">
      <string>Cheater...</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="SaveBtn">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>560</y>
+      <width>111</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Save the Game</string>
     </property>
    </widget>
   </widget>
