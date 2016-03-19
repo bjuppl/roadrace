@@ -60,11 +60,13 @@ SOURCES       = ../road_race/main.cpp \
 		../road_race/gui.cpp \
 		../road_race/title.cpp \
 		../road_race/levelmanager.cpp \
-		../road_race/squarelabel.cpp qrc_resources.cpp \
+		../road_race/squarelabel.cpp \
+		../road_race/cheater.cpp qrc_resources.cpp \
 		moc_roadrace.cpp \
 		moc_gamemodel.cpp \
 		moc_title.cpp \
-		moc_squarelabel.cpp
+		moc_squarelabel.cpp \
+		moc_cheater.cpp
 OBJECTS       = main.o \
 		roadrace.o \
 		network.o \
@@ -78,11 +80,13 @@ OBJECTS       = main.o \
 		title.o \
 		levelmanager.o \
 		squarelabel.o \
+		cheater.o \
 		qrc_resources.o \
 		moc_roadrace.o \
 		moc_gamemodel.o \
 		moc_title.o \
-		moc_squarelabel.o
+		moc_squarelabel.o \
+		moc_cheater.o
 DIST          = ../road_race/single-player.rr \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/shell-unix.conf \
@@ -154,7 +158,8 @@ DIST          = ../road_race/single-player.rr \
 		../road_race/gui.h \
 		../road_race/title.h \
 		../road_race/levelmanager.h \
-		../road_race/squarelabel.h ../road_race/main.cpp \
+		../road_race/squarelabel.h \
+		../road_race/cheater.h ../road_race/main.cpp \
 		../road_race/roadrace.cpp \
 		../road_race/network.cpp \
 		../road_race/gamemodel.cpp \
@@ -166,7 +171,8 @@ DIST          = ../road_race/single-player.rr \
 		../road_race/gui.cpp \
 		../road_race/title.cpp \
 		../road_race/levelmanager.cpp \
-		../road_race/squarelabel.cpp
+		../road_race/squarelabel.cpp \
+		../road_race/cheater.cpp
 QMAKE_TARGET  = road_race
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = road_race
@@ -194,7 +200,7 @@ first: all
 
 ####### Build rules
 
-$(TARGET): ui_roadrace.h ui_title.h $(OBJECTS)  
+$(TARGET): ui_roadrace.h ui_title.h ui_cheater.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../road_race/road_race.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/qmake.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -343,9 +349,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../road_race/resources.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../road_race/roadrace.h ../road_race/network.h ../road_race/gamemodel.h ../road_race/highscore.h ../road_race/square.h ../road_race/gamefile.h ../road_race/player.h ../road_race/utils.h ../road_race/gui.h ../road_race/title.h ../road_race/levelmanager.h ../road_race/squarelabel.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../road_race/main.cpp ../road_race/roadrace.cpp ../road_race/network.cpp ../road_race/gamemodel.cpp ../road_race/highscore.cpp ../road_race/square.cpp ../road_race/gamefile.cpp ../road_race/player.cpp ../road_race/utils.cpp ../road_race/gui.cpp ../road_race/title.cpp ../road_race/levelmanager.cpp ../road_race/squarelabel.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../road_race/roadrace.ui ../road_race/title.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../road_race/roadrace.h ../road_race/network.h ../road_race/gamemodel.h ../road_race/highscore.h ../road_race/square.h ../road_race/gamefile.h ../road_race/player.h ../road_race/utils.h ../road_race/gui.h ../road_race/title.h ../road_race/levelmanager.h ../road_race/squarelabel.h ../road_race/cheater.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../road_race/main.cpp ../road_race/roadrace.cpp ../road_race/network.cpp ../road_race/gamemodel.cpp ../road_race/highscore.cpp ../road_race/square.cpp ../road_race/gamefile.cpp ../road_race/player.cpp ../road_race/utils.cpp ../road_race/gui.cpp ../road_race/title.cpp ../road_race/levelmanager.cpp ../road_race/squarelabel.cpp ../road_race/cheater.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../road_race/roadrace.ui ../road_race/title.ui ../road_race/cheater.ui $(DISTDIR)/
 
 
 clean:compiler_clean 
@@ -382,12 +388,13 @@ qrc_resources.cpp: ../road_race/resources.qrc \
 		../road_race/win.jpg
 	/usr/lib/x86_64-linux-gnu/qt5/bin/rcc -name resources ../road_race/resources.qrc -o qrc_resources.cpp
 
-compiler_moc_header_make_all: moc_roadrace.cpp moc_gamemodel.cpp moc_title.cpp moc_squarelabel.cpp
+compiler_moc_header_make_all: moc_roadrace.cpp moc_gamemodel.cpp moc_title.cpp moc_squarelabel.cpp moc_cheater.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_roadrace.cpp moc_gamemodel.cpp moc_title.cpp moc_squarelabel.cpp
+	-$(DEL_FILE) moc_roadrace.cpp moc_gamemodel.cpp moc_title.cpp moc_squarelabel.cpp moc_cheater.cpp
 moc_roadrace.cpp: ../road_race/network.h \
 		../road_race/title.h \
 		../road_race/roadrace.h \
+		../road_race/cheater.h \
 		../road_race/roadrace.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/user/roadrace/road_race -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../road_race/roadrace.h -o moc_roadrace.cpp
 
@@ -401,14 +408,16 @@ moc_gamemodel.cpp: ../road_race/square.h \
 		../road_race/roadrace.h \
 		../road_race/network.h \
 		../road_race/title.h \
-		../road_race/levelmanager.h \
+		../road_race/cheater.h \
 		../road_race/squarelabel.h \
+		../road_race/levelmanager.h \
 		../road_race/gamemodel.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/user/roadrace/road_race -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../road_race/gamemodel.h -o moc_gamemodel.cpp
 
 moc_title.cpp: ../road_race/roadrace.h \
 		../road_race/network.h \
 		../road_race/title.h \
+		../road_race/cheater.h \
 		../road_race/title.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/user/roadrace/road_race -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../road_race/title.h -o moc_title.cpp
 
@@ -422,21 +431,28 @@ moc_squarelabel.cpp: ../road_race/player.h \
 		../road_race/roadrace.h \
 		../road_race/network.h \
 		../road_race/title.h \
-		../road_race/levelmanager.h \
+		../road_race/cheater.h \
 		../road_race/squarelabel.h \
+		../road_race/levelmanager.h \
 		../road_race/squarelabel.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/user/roadrace/road_race -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../road_race/squarelabel.h -o moc_squarelabel.cpp
 
+moc_cheater.cpp: ../road_race/cheater.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/user/roadrace/road_race -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../road_race/cheater.h -o moc_cheater.cpp
+
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_roadrace.h ui_title.h
+compiler_uic_make_all: ui_roadrace.h ui_title.h ui_cheater.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_roadrace.h ui_title.h
+	-$(DEL_FILE) ui_roadrace.h ui_title.h ui_cheater.h
 ui_roadrace.h: ../road_race/roadrace.ui
 	/usr/lib/x86_64-linux-gnu/qt5/bin/uic ../road_race/roadrace.ui -o ui_roadrace.h
 
 ui_title.h: ../road_race/title.ui
 	/usr/lib/x86_64-linux-gnu/qt5/bin/uic ../road_race/title.ui -o ui_title.h
+
+ui_cheater.h: ../road_race/cheater.ui
+	/usr/lib/x86_64-linux-gnu/qt5/bin/uic ../road_race/cheater.ui -o ui_cheater.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -450,12 +466,14 @@ compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean
 
 main.o: ../road_race/main.cpp ../road_race/roadrace.h \
 		../road_race/network.h \
-		../road_race/title.h
+		../road_race/title.h \
+		../road_race/cheater.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../road_race/main.cpp
 
 roadrace.o: ../road_race/roadrace.cpp ../road_race/roadrace.h \
 		../road_race/network.h \
 		../road_race/title.h \
+		../road_race/cheater.h \
 		ui_roadrace.h \
 		../road_race/gamefile.h \
 		../road_race/gamemodel.h \
@@ -481,13 +499,15 @@ gamemodel.o: ../road_race/gamemodel.cpp ../road_race/gamemodel.h \
 		../road_race/roadrace.h \
 		../road_race/network.h \
 		../road_race/title.h \
+		../road_race/cheater.h \
 		../road_race/levelmanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gamemodel.o ../road_race/gamemodel.cpp
 
 highscore.o: ../road_race/highscore.cpp ../road_race/highscore.h \
 		../road_race/roadrace.h \
 		../road_race/network.h \
-		../road_race/title.h
+		../road_race/title.h \
+		../road_race/cheater.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o highscore.o ../road_race/highscore.cpp
 
 square.o: ../road_race/square.cpp ../road_race/square.h \
@@ -500,8 +520,9 @@ square.o: ../road_race/square.cpp ../road_race/square.h \
 		../road_race/roadrace.h \
 		../road_race/network.h \
 		../road_race/title.h \
-		../road_race/levelmanager.h \
-		../road_race/squarelabel.h
+		../road_race/cheater.h \
+		../road_race/squarelabel.h \
+		../road_race/levelmanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o square.o ../road_race/square.cpp
 
 gamefile.o: ../road_race/gamefile.cpp ../road_race/gamefile.h \
@@ -515,6 +536,7 @@ gamefile.o: ../road_race/gamefile.cpp ../road_race/gamefile.h \
 		../road_race/roadrace.h \
 		../road_race/network.h \
 		../road_race/title.h \
+		../road_race/cheater.h \
 		../road_race/levelmanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gamefile.o ../road_race/gamefile.cpp
 
@@ -528,8 +550,9 @@ player.o: ../road_race/player.cpp ../road_race/player.h \
 		../road_race/roadrace.h \
 		../road_race/network.h \
 		../road_race/title.h \
-		../road_race/levelmanager.h \
-		../road_race/squarelabel.h
+		../road_race/cheater.h \
+		../road_race/squarelabel.h \
+		../road_race/levelmanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o player.o ../road_race/player.cpp
 
 utils.o: ../road_race/utils.cpp ../road_race/utils.h
@@ -540,6 +563,7 @@ gui.o: ../road_race/gui.cpp ../road_race/gui.h \
 		../road_race/roadrace.h \
 		../road_race/network.h \
 		../road_race/title.h \
+		../road_race/cheater.h \
 		../road_race/gamemodel.h \
 		../road_race/square.h \
 		../road_race/player.h \
@@ -552,6 +576,7 @@ gui.o: ../road_race/gui.cpp ../road_race/gui.h \
 title.o: ../road_race/title.cpp ../road_race/title.h \
 		../road_race/roadrace.h \
 		../road_race/network.h \
+		../road_race/cheater.h \
 		ui_title.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o title.o ../road_race/title.cpp
 
@@ -561,6 +586,7 @@ levelmanager.o: ../road_race/levelmanager.cpp ../road_race/levelmanager.h \
 		../road_race/roadrace.h \
 		../road_race/network.h \
 		../road_race/title.h \
+		../road_race/cheater.h \
 		../road_race/gamemodel.h \
 		../road_race/square.h \
 		../road_race/player.h \
@@ -580,8 +606,25 @@ squarelabel.o: ../road_race/squarelabel.cpp ../road_race/squarelabel.h \
 		../road_race/roadrace.h \
 		../road_race/network.h \
 		../road_race/title.h \
+		../road_race/cheater.h \
 		../road_race/levelmanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o squarelabel.o ../road_race/squarelabel.cpp
+
+cheater.o: ../road_race/cheater.cpp ../road_race/cheater.h \
+		ui_cheater.h \
+		../road_race/player.h \
+		../road_race/square.h \
+		../road_race/gamemodel.h \
+		../road_race/gamefile.h \
+		../road_race/utils.h \
+		../road_race/gui.h \
+		ui_roadrace.h \
+		../road_race/roadrace.h \
+		../road_race/network.h \
+		../road_race/title.h \
+		../road_race/squarelabel.h \
+		../road_race/levelmanager.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cheater.o ../road_race/cheater.cpp
 
 qrc_resources.o: qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp
@@ -597,6 +640,9 @@ moc_title.o: moc_title.cpp
 
 moc_squarelabel.o: moc_squarelabel.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_squarelabel.o moc_squarelabel.cpp
+
+moc_cheater.o: moc_cheater.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_cheater.o moc_cheater.cpp
 
 ####### Install
 
