@@ -1,0 +1,12 @@
+RoadRaceDoc 0
+alias game password none
+round 1
+players me 
+info me resources Go,0 Wo,140 St,91 Wa,300 status score,0 startTime,0
+board 5,5
+Ri,Bo,me Fo,No,me Ca,No, Ca,No, Ri,No, 
+Pl,No,me Mo,No,me Mo,No, Mo,No, Fo,No, 
+Mo,No,me Mo,No, Ri,No, Mo,No, Pl,No, 
+Ri,No, Mo,No, Ri,No, Ri,No, Ca,No, 
+Ca,No, Ca,No, Fo,No, Mo,No, Wi,No, 
+EndRoadRaceDoc

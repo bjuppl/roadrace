@@ -13,7 +13,6 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -33,7 +32,6 @@ public:
     QLabel *label_2;
     QLabel *label_3;
     QLabel *label_4;
-    QCheckBox *checkBox;
     QLabel *label_5;
     QPushButton *yesBtn;
     QPushButton *canBtn;
@@ -67,9 +65,6 @@ public:
         label_4 = new QLabel(cheater);
         label_4->setObjectName(QStringLiteral("label_4"));
         label_4->setGeometry(QRect(20, 240, 121, 17));
-        checkBox = new QCheckBox(cheater);
-        checkBox->setObjectName(QStringLiteral("checkBox"));
-        checkBox->setGeometry(QRect(200, 190, 191, 22));
         label_5 = new QLabel(cheater);
         label_5->setObjectName(QStringLiteral("label_5"));
         label_5->setGeometry(QRect(180, 20, 91, 17));
@@ -92,7 +87,6 @@ public:
         label_2->setText(QApplication::translate("cheater", "Set stone amount", 0));
         label_3->setText(QApplication::translate("cheater", "Set gold amount", 0));
         label_4->setText(QApplication::translate("cheater", "Set water amount", 0));
-        checkBox->setText(QApplication::translate("cheater", "Be able to claim any squares", 0));
         label_5->setText(QApplication::translate("cheater", "HAAAAXXXX!", 0));
         yesBtn->setText(QApplication::translate("cheater", "Accept", 0));
         canBtn->setText(QApplication::translate("cheater", "Cancel", 0));

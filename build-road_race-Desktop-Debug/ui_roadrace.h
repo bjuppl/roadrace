@@ -55,6 +55,7 @@ public:
     QRadioButton *MedBtn;
     QRadioButton *HardBtn;
     QPushButton *cheatBtn;
+    QPushButton *SaveBtn;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -126,7 +127,7 @@ public:
         textBrowser->setStyleSheet(QStringLiteral("background:transparent;"));
         helpBtn = new QPushButton(centralWidget);
         helpBtn->setObjectName(QStringLiteral("helpBtn"));
-        helpBtn->setGeometry(QRect(470, 20, 85, 27));
+        helpBtn->setGeometry(QRect(460, 0, 85, 27));
         EsyBtn = new QRadioButton(centralWidget);
         EsyBtn->setObjectName(QStringLiteral("EsyBtn"));
         EsyBtn->setGeometry(QRect(30, 460, 102, 22));
@@ -138,7 +139,10 @@ public:
         HardBtn->setGeometry(QRect(30, 500, 111, 22));
         cheatBtn = new QPushButton(centralWidget);
         cheatBtn->setObjectName(QStringLiteral("cheatBtn"));
-        cheatBtn->setGeometry(QRect(590, 30, 85, 27));
+        cheatBtn->setGeometry(QRect(570, 0, 85, 27));
+        SaveBtn = new QPushButton(centralWidget);
+        SaveBtn->setObjectName(QStringLiteral("SaveBtn"));
+        SaveBtn->setGeometry(QRect(20, 560, 111, 27));
         RoadRace->setCentralWidget(centralWidget);
         mainToolBar = new QToolBar(RoadRace);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -180,6 +184,7 @@ public:
         MedBtn->setText(QApplication::translate("RoadRace", "normal Mode", 0));
         HardBtn->setText(QApplication::translate("RoadRace", "l33t Mode", 0));
         cheatBtn->setText(QApplication::translate("RoadRace", "Cheater...", 0));
+        SaveBtn->setText(QApplication::translate("RoadRace", "Save the Game", 0));
     } // retranslateUi
 
 };
