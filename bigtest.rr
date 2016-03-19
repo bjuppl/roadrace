@@ -1,0 +1,14 @@
+RoadRaceDoc00000000000
+alias Name none Password Irrelevant
+round 1
+players Nerevar,
+info Nerevar resources Go,0 Wa,0 Sto,0 Wo,0 status score,0 start_time,000000
+board 7,5
+Pl,No,Nerevar Fo,No,No Mo,No,No Fo,No,No Fo,No,No 
+Fo,No,No Mo,No,No Ri,No,No Fo,No,No Fo,No,No 
+Ca,No,No Ri,No,No Ca,No,No Ri,No,No Pl,No,No 
+Fo,No,No Pl,No,No Ca,No,No Fo,No,No Ri,No,No 
+Fo,No,No Ri,No,No Ca,No,No Ca,No,No Pl,No,No 
+Ca,No,No Ca,No,No Ca,No,No Ca,No,No Ca,No,No 
+Mo,No,No Ca,No,No Ca,No,No Mo,No,No Ri,No,No 
+EndRoadRaceDoc
