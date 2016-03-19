@@ -45,8 +45,8 @@ public:
     QWidget *gridLayoutWidget;
     QGridLayout *gameLayout;
     QLabel *wo1;
-    QLabel *Sto1;
     QLabel *Go1;
+    QLabel *Sto1;
     QLabel *Wa1;
     QLabel *name1;
     QTextBrowser *textBrowser;
@@ -107,12 +107,12 @@ public:
         wo1 = new QLabel(centralWidget);
         wo1->setObjectName(QStringLiteral("wo1"));
         wo1->setGeometry(QRect(70, 140, 101, 17));
-        Sto1 = new QLabel(centralWidget);
-        Sto1->setObjectName(QStringLiteral("Sto1"));
-        Sto1->setGeometry(QRect(70, 180, 91, 17));
         Go1 = new QLabel(centralWidget);
         Go1->setObjectName(QStringLiteral("Go1"));
-        Go1->setGeometry(QRect(70, 200, 91, 17));
+        Go1->setGeometry(QRect(70, 180, 91, 17));
+        Sto1 = new QLabel(centralWidget);
+        Sto1->setObjectName(QStringLiteral("Sto1"));
+        Sto1->setGeometry(QRect(70, 200, 91, 17));
         Wa1 = new QLabel(centralWidget);
         Wa1->setObjectName(QStringLiteral("Wa1"));
         Wa1->setGeometry(QRect(70, 160, 91, 17));
@@ -162,15 +162,15 @@ public:
         lblWa->setText(QApplication::translate("RoadRace", "Water", 0));
         lblGo->setText(QApplication::translate("RoadRace", "Gold", 0));
         wo1->setText(QString());
-        Sto1->setText(QString());
         Go1->setText(QString());
+        Sto1->setText(QString());
         Wa1->setText(QString());
         name1->setText(QString());
         textBrowser->setHtml(QApplication::translate("RoadRace", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'.Helvetica Neue DeskInterface'; font-size:10pt;\">Currently in single-player mode. Upgrade for more options.</span></p></body></html>", 0));
+"</style></head><body style=\" font-family:'Droid Sans'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'.Helvetica Neue DeskInterface';\">Currently in single-player mode. Upgrade for more options.</span></p></body></html>", 0));
         helpBtn->setText(QApplication::translate("RoadRace", "Help!", 0));
         EsyBtn->setText(QApplication::translate("RoadRace", "n00b Mode", 0));
         MedBtn->setText(QApplication::translate("RoadRace", "normal Mode", 0));
