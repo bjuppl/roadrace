@@ -16,13 +16,7 @@ Updater *Updater::instance_ = NULL;
 
 Game::Game() {
     vector<Resource*> rl;
-    rl.push_back(new Resource("water","Wa",10));
-    rl.push_back(new Resource("wood","Wo",3));
-    rl.push_back(new Resource("stone","St",1));
-    rl.push_back(new Resource("gold","Go",1));
-    rl.push_back(new Resource("[none]","No",0)); //so resourceType gets can return "No" and we know what to do with it
-    rl.push_back(new Resource("[none]","",0)); //so resourceType gets can return nempty string and we know what to do with it
-    resource_types = rl;
+
 
     vector<Structure*> sl;
     //Bo = boat, Br = bridge, Wa = wall, Tu = tunnel
@@ -31,7 +25,7 @@ Game::Game() {
     vector<Price> b = {Price("Wo",200),Price("St",100)};
     sl.push_back(new Structure("bridge","Br",b));
     vector<Price> c = {Price("Wo",50),Price("St",300)};
-    sl.push_back(new Structure("wall","wa",c));
+    sl.push_back(new Structure("wall","Wa",c));
     vector<Price> d = {Price("Wa",50),Price("Go",100),Price("St",50)};
     sl.push_back(new Structure("tunnel","Tu",d));
 
@@ -272,7 +266,7 @@ void Game::setDiff(string newdiff){
         LevelManager::instance().getDuff()->waterMod = 20;
         LevelManager::instance().getDuff()->goldMod = 5;
         LevelManager::instance().getDuff()->woodMod = 10;
-        LevelManager::instance().getDuff()->stoneMod = 5;
+        LevelManager::instance().getDuff()->stoneMod = 7;
         std::cout << "End of easy" << std::endl;
 
     }
@@ -302,4 +296,56 @@ void Game::setDiff(string newdiff){
 
     std::cout << "OK!" << std::endl;
 
+}
+Structure *Game::resourceCheck(Player *owner,string type){
+    if(type == "Ca"){
+
+       int wood = owner->getWood();
+       int stone = owner->getStone();
+       if (wood >= 50 && stone >= 300){
+           int newwood = (wood-50);
+           int newstone = (stone-300);
+           owner->setStone(newstone);
+           owner->setWood(newwood);
+           Structure *br = Game::instance().getStructure("Br");
+           return br;
+       }
+       else{
+           return nullptr;
+       }
+    }
+    if(type == "Ri"){
+        int wood = owner->getWood();
+        int stone = owner->getStone();
+        if (wood >= 200 && stone >= 100){
+            Structure *bo = Game::instance().getStructure("Bo");
+            int newwood = (wood-200);
+            int newstone = (stone-100);
+            owner->setStone(newstone);
+            owner->setWood(newwood);
+            return bo;
+        }
+        else{
+            return nullptr;
+        }
+    }
+    if(type == "Mo"){
+        int water = owner->getWater();
+        int stone = owner->getStone();
+        int gold = owner->getGold();
+        if (water >= 50 && stone >= 50 && gold >= 100){
+            Structure *tu = Game::instance().getStructure("Tu");
+            int newwater = (water-50);
+            int newstone = (stone-100);
+            int newgold = (gold-300);
+            owner->setStone(newstone);
+            owner->setWater(newwater);
+            owner->setGold(newgold);
+            return tu;
+        }
+        else{
+            return nullptr;
+        }
+    }
+    return nullptr;
 }

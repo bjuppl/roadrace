@@ -100,7 +100,7 @@ public:
 
     //getters n setters
 
-    vector<Structure*> getStructure() { return structure_types; }
+    vector<Structure*> getStructures() { return structure_types; }
     Structure *getStructure ( string shortName );
     vector<Resource*> getResources() { return resource_types; }
     Resource *getResource ( string shortName );
@@ -134,7 +134,7 @@ public:
     void setPlayerList ( vector<Player*> pl ) { player_list = pl; }
     void setWidth ( int w ) { width = w; }
     void setHeight ( int h ) { height = h; }
-
+    Structure *resourceCheck(Player *owner,string type);
 };
 class Updater : public QObject{
     Q_OBJECT
