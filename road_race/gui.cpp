@@ -2,11 +2,11 @@
 #include "roadrace.h"
 #include "gamemodel.h"
 #include "ui_roadrace.h"
-
 #include "square.h"
 #include "player.h"
 #include <QLabel>
 #include <QMessageBox>
+
 class Square;
 class Player;
 
@@ -123,13 +123,8 @@ QPixmap GuiManager::setmap(Square *sq, int size){
         QPixmap map(":/win");
           QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
         return result;
-    }
-}
+    }}
 
-void GuiManager::on_helpBtn_clicked()
-{
-    //QMessageBox(this,"Help Screen","",0,0);
-}
 void GuiManager::newDiff(){
     if(ui->EsyBtn->isChecked()){
         string easy = "Ez";
@@ -141,13 +136,11 @@ void GuiManager::newDiff(){
     }
     else if(ui->HardBtn->isChecked()){
         string hard = "Ha";
-        Game::instance().setDiff(hard);
-    }
+        Game::instance().setDiff(hard);}
     else{
         string easy = "Ez";
-        Game::instance().setDiff(easy);
-    }
-}
+        Game::instance().setDiff(easy);}}
+
 
 void GuiManager::BuildStruct(Square *proc){
  if(proc->getAddition() == "No"){
@@ -168,3 +161,14 @@ void GuiManager::BuildStruct(Square *proc){
 
 }
 }
+void GuiManager::endGame(SquareLabel* x)
+{
+    Updater::instance().stop();
+    QMessageBox::information(x,"Congratualtions!!","You have won the game! But can you do it again?.",0,0);
+}
+
+
+
+
+
+

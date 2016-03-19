@@ -28,7 +28,8 @@ Game::Game() {
     sl.push_back(new Structure("wall","Wa",c));
     vector<Price> d = {Price("Wa",50),Price("Go",100),Price("St",50)};
     sl.push_back(new Structure("tunnel","Tu",d));
-
+    vector<Price> e = {Price("Go",100),Price("Wa",75)};
+    sl.push_back(new Structure("deforest","De",e));
     structure_types = sl;
 
 }
@@ -39,7 +40,6 @@ void Game::start(){
 }
 
 void Game::updateResources() {
-
     for ( size_t i=0; i<player_list.size(); i++ ) {
         vector<Square*> mysquares;
         Player *p = player_list[i];
@@ -54,8 +54,6 @@ void Game::updateResources() {
             }
         }
     }
-
-
 }
 
 vector<Square*> Game::getPlayerSquares(Player *owner) {
@@ -337,7 +335,7 @@ Structure *Game::resourceCheck(Player *owner,string type){
             Structure *tu = Game::instance().getStructure("Tu");
             int newwater = (water-50);
             int newstone = (stone-100);
-            int newgold = (gold-300);
+            int newgold = (gold-100);
             owner->setStone(newstone);
             owner->setWater(newwater);
             owner->setGold(newgold);
@@ -345,6 +343,18 @@ Structure *Game::resourceCheck(Player *owner,string type){
         }
         else{
             return nullptr;
+        }
+    }
+    if (type == "Fo"){
+        int gold = owner->getGold();
+        int water = owner->getWater();
+        if (water >= 75 && gold >= 100){
+            Structure *de = Game::instance().getStructure("De");
+            int newwater = (water-75);
+            int newgold = (gold-100);
+            owner->setWater(newwater);
+            owner->setGold(newgold);
+            return de;
         }
     }
     return nullptr;

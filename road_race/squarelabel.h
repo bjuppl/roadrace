@@ -34,6 +34,7 @@ public:
    void leaveEvent(QHoverEvent *event);
    bool event(QEvent *e);
    QPixmap setmap(string image);
+   void endGame();
    /*void setFrame(QFrame *f){
        frame = f;
    }
@@ -57,8 +58,6 @@ signals:
     void hovered();
 
 };
-
-
 
 
 #endif // SQUARELABEL_H
