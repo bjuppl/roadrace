@@ -88,16 +88,19 @@ void GuiManager::generateSquareGrid() {
         //ui->gameLayout->setRowMinimumHeight(index,size);
 
     }
-     ui->gameLayout->setSpacing(0);
+    ui->gameLayout->setSpacing(0);
 }
+
+
+
+
 QPixmap GuiManager::setmap(Square *sq, int size){
     string image = sq->getImage();
 
     if(image == "Fo"){
-        QPixmap map(":/forrest");
-        QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
-
-        return result;
+            QPixmap map(":/forrest");
+            QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
+            return result;
     }
     if(image == "Ca"){
         QPixmap map(":/canyon");
