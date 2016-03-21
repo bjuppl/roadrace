@@ -184,7 +184,7 @@ void GuiManager::newDiff(){
 
 
 void GuiManager::BuildStruct(Square *proc){
- if(proc->getAddition() == "No"){
+ if(proc->getAddition() == "No" && proc->getType() != "Pl"){
     QMessageBox::StandardButton canBuild;
     canBuild = QMessageBox::question(GuiManager::instance().getUi()->gridLayoutWidget,"You clicked one of your own squares!","Build a structure?",QMessageBox::Yes|QMessageBox::No);
     if (canBuild == QMessageBox::Yes){
@@ -196,7 +196,10 @@ void GuiManager::BuildStruct(Square *proc){
      proc->setAddition(struc->shortName);
      }
     else{
+
+
          QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Alert!","You don't have enough resources!",0);
+
      }
 }
 
