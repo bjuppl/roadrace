@@ -35,6 +35,7 @@ public:
    bool event(QEvent *e);
    QPixmap setmap(string image);
    void endGame();
+   void updateMap(SquareLabel *lbl);
    /*void setFrame(QFrame *f){
        frame = f;
    }

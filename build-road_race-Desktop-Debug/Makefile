@@ -373,14 +373,17 @@ qrc_resources.cpp: ../road_race/resources.qrc \
 		../road_race/forrest.jpg \
 		../road_race/water.jpg \
 		../road_race/canyon.jpg \
+		../road_race/bridge.jpg \
 		../road_race/wooden_bridge_clip_art_17037.jpg \
 		../road_race/grass.jpg \
 		../road_race/wall.jpg \
 		../road_race/sevenbyseven.rr \
 		../road_race/single-player.rr \
 		../road_race/mountain.jpg \
+		../road_race/boat.jpg \
 		../road_race/gamefile.rr \
-		../road_race/win.jpg
+		../road_race/win.jpg \
+		../road_race/cleared.jpg
 	/usr/lib/x86_64-linux-gnu/qt5/bin/rcc -name resources ../road_race/resources.qrc -o qrc_resources.cpp
 
 compiler_moc_header_make_all: moc_roadrace.cpp moc_gamemodel.cpp moc_squarelabel.cpp moc_cheater.cpp
