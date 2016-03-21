@@ -17,8 +17,8 @@
    <widget class="QPushButton" name="btnStuff">
     <property name="geometry">
      <rect>
-      <x>710</x>
-      <y>10</y>
+      <x>670</x>
+      <y>20</y>
       <width>115</width>
       <height>32</height>
      </rect>
@@ -310,6 +310,19 @@ p, li { white-space: pre-wrap; }
     </property>
     <property name="text">
      <string>Save the Game</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="tst2Btn">
+    <property name="geometry">
+     <rect>
+      <x>810</x>
+      <y>20</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Use 7X7 test</string>
     </property>
    </widget>
   </widget>

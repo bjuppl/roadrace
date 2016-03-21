@@ -13,5 +13,6 @@
         <file alias="boat">boat.jpg</file>
         <file alias="bridge">bridge.jpg</file>
         <file alias="cleared">cleared.jpg</file>
+	<file alias="seven">sevenbyseven.rr</file>
     </qresource>
 </RCC>
