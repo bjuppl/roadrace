@@ -114,7 +114,7 @@ void RoadRace::on_helpBtn_clicked(){
                                                                                          "\n"
                                                                                          "The key for which square gives which resource and requires what structure is as follows:\n"
                                                                                          "\n"
-                                                                                         "Forest squares can be deforested or 75 water and 100 gold. They give Wood as a resource. Look for the squares with green leaves against a white backgroud.\n"
+                                                                                         "Forest squares can be deforested or 75 water and 100 gold. They give Wood as a resource. Look for the squares which resemble camoflauge.\n"
                                                                                          "\n"
                                                                                          "Canyon squares can have a bridge built for 300 stone and 100 wood. They give Gold as a resource. These brown squares resemble mesa rock.\n"
                                                                                          "\n"
@@ -127,6 +127,8 @@ void RoadRace::on_helpBtn_clicked(){
                                                                                          "Resources are given at specific time intervals. The amount depends on the difficulty selected.\n"
                                                                                          "\n"
                                                                                          "The more of a certian square you possess, the of that resource you get. For example owning two river squares gives 30 water per tick on easy versus just 15 for one square."
+                                                                                         "\n"
+                                                                                         "Files are saved as savefile.rr to your roadrace folder upon clicking the save button, and you can set the number of resouces you currently own with Cheater..."
                                                                                          "\n"
                                                                                          "Now go, and race to the finish!",0,0);
 }
@@ -146,10 +148,12 @@ void RoadRace::openCheat(){
 }
 void RoadRace::on_SaveBtn_clicked()
 {
+    if (Game::instance().getGameLoader() != nullptr){
     string output = Game::instance().getGameLoader()->toGameFile();
-    ofstream outfile("savefile.rr");
+    ofstream outfile("..\\savefile.rr");
     outfile << output;
     outfile.close();
+    }
 }
 void RoadRace::on_tst2Btn_clicked()
 {
