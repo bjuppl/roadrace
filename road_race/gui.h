@@ -26,7 +26,7 @@ private:
     void init();
     void generateSquareGrid();
     void fillResourceList();
-    QPixmap setmap(Square *sq, int size);
+    QPixmap setmap(Square *sq, QSize size);
     void newDiff();
     void BuildStruct(Square *proc);
 
