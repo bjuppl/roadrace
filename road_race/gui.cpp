@@ -208,7 +208,7 @@ void GuiManager::BuildStruct(Square *proc){
 void GuiManager::endGame(SquareLabel* x)
 {
     Updater::instance().stop();
-    QMessageBox::information(x,"Congratualtions!!","You have won the game! But can you do it again?.",0,0);
+    QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Congratualtions!!","You have won the game! But can you do it again?.",0,0);
 }
 
 
