@@ -19,10 +19,14 @@ std::vector<std::string> LevelManager::getLevel(int num) {
 std::vector<std::string> LevelManager::getLevel(std::string level ) {
     std::vector<std::string> contents;
     const std::string test = "test";
+    const std::string seven = "seven";
     if ( level == test ) {
         int o = 1;
         if ( o == 1 ) { contents = resourceFileContents("single-player"); }
         else { contents = resourceFileContents("sampleGame"); }
+    }
+    if (level == seven){
+        contents = resourceFileContents("seven");
     }
     return contents;
 
