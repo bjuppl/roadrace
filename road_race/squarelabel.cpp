@@ -356,8 +356,9 @@ QPixmap SquareLabel::setmap(string image){
 
 }
 void SquareLabel::leaveEvent(QHoverEvent *event){
-    QPixmap map = setmap(square->getImage());
+    QSize size(square->getSize(),square->getSize());
 
+    QPixmap map =  GuiManager::instance().setmap(square,size);
     this->setPixmap(map);
 }
 
