@@ -158,7 +158,7 @@ void RoadRace::on_SaveBtn_clicked()
 {
     if (Game::instance().getGameLoader() != nullptr){
     string output = Game::instance().getGameLoader()->toGameFile();
-    ofstream outfile("..\\savefile.rr");
+    ofstream outfile("savefile.rr");
     outfile << output;
     outfile.close();
     }
