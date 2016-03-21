@@ -103,13 +103,13 @@ if (ui->EsyBtn->isChecked() || ui->MedBtn->isChecked() || ui->HardBtn->isChecked
     GuiManager::instance().init();
 
     Updater::instance().start();
-    //sets a difficulty based on the radio button, easy if nothing else is pressed
+    //sets a difficulty based on the radio button
    GuiManager::instance().newDiff();
     std::cout << Game::instance().getGameLoader()->toGameFile() << std::endl;
 
     ui->btnStuff->setDisabled(true);
+    ui->tst2Btn->setDisabled(true);
 
-       this->loadFile();
 }
     else{
         QMessageBox::information(ui->centralWidget,"Alert","You did not specify a difficulty!",0,0);
