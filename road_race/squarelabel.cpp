@@ -267,7 +267,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
         }
     }
     else{
-        //handle owned squares until I decide what to do with them.
+        //handle owned squares
         GuiManager::instance().BuildStruct(square);
     }
 
