@@ -70,7 +70,8 @@ void GuiManager::generateSquareGrid() {
             SquareLabel *lbl = new SquareLabel(proc,ui->gridLayoutWidget);
 
             proc->setLabel(lbl);
-            QPixmap map = setmap(proc, size);
+            QSize size1(size,size);
+            QPixmap map = setmap(proc, size1);
             lbl->setPixmap(map);
             lbl->setFixedHeight(size);
             lbl->setFixedWidth(size);
