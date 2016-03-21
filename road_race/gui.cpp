@@ -97,36 +97,73 @@ void GuiManager::generateSquareGrid() {
 QPixmap GuiManager::setmap(Square *sq, int size){
     string image = sq->getImage();
 
-    if(image == "Fo"){
+    if(sq->getAddition() == "No")
+    {
+        if(image == "Fo"){
             QPixmap map(":/forrest");
             QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
             return result;
+        }
+        if(image == "Ca"){
+            QPixmap map(":/canyon");
+            QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
+            return result;
+        }
+        if(image == "Ri"){
+            QPixmap map(":/water");
+            QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
+            return result;
+        }
+        if (image == "Mo"){
+            QPixmap map(":/mountain");
+            QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
+            return result;
+        }
+        if(image == "Pl"){
+            QPixmap map(":/grass");
+            QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
+            return result;
+        }
+        if(image == "Wi"){
+            QPixmap map(":/win");
+            QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
+            return result;
+        }
+    } else {
+        if(image == "Fo"){
+            QPixmap map(":/cleared");
+            QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
+            return result;
+        }
+        if(image == "Ca"){
+            QPixmap map(":/bridge");
+            QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
+            return result;
+        }
+        if(image == "Ri"){
+            QPixmap map(":/boat");
+            QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
+            return result;
+        }
+        if (image == "Mo"){
+            QPixmap map(":/mountain");
+            QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
+            return result;
+        }
+        if(image == "Pl"){
+            QPixmap map(":/grass");
+            QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
+            return result;
+        }
+        if(image == "Wi"){
+            QPixmap map(":/win");
+            QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
+            return result;
     }
-    if(image == "Ca"){
-        QPixmap map(":/canyon");
-        QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
-        return result;
-    }
-    if(image == "Ri"){
-        QPixmap map(":/water");
-          QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
-        return result;
-    }
-    if (image == "Mo"){
-        QPixmap map(":/mountain");
-          QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
-        return result;
-    }
-    if(image == "Pl"){
-        QPixmap map(":/grass");
-          QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
-        return result;
-    }
-    if(image == "Wi"){
-        QPixmap map(":/win");
-          QPixmap result = map.scaled(QSize(size,size), Qt::KeepAspectRatio);
-        return result;
-    }}
+
+}
+
+}
 
 void GuiManager::newDiff(){
     if(ui->EsyBtn->isChecked()){
