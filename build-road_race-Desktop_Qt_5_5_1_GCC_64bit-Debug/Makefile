@@ -58,13 +58,11 @@ SOURCES       = ../road_race/main.cpp \
 		../road_race/player.cpp \
 		../road_race/utils.cpp \
 		../road_race/gui.cpp \
-		../road_race/title.cpp \
 		../road_race/levelmanager.cpp \
 		../road_race/squarelabel.cpp \
 		../road_race/cheater.cpp qrc_resources.cpp \
 		moc_roadrace.cpp \
 		moc_gamemodel.cpp \
-		moc_title.cpp \
 		moc_squarelabel.cpp \
 		moc_cheater.cpp
 OBJECTS       = main.o \
@@ -77,14 +75,12 @@ OBJECTS       = main.o \
 		player.o \
 		utils.o \
 		gui.o \
-		title.o \
 		levelmanager.o \
 		squarelabel.o \
 		cheater.o \
 		qrc_resources.o \
 		moc_roadrace.o \
 		moc_gamemodel.o \
-		moc_title.o \
 		moc_squarelabel.o \
 		moc_cheater.o
 DIST          = ../road_race/single-player.rr \
@@ -232,7 +228,6 @@ DIST          = ../road_race/single-player.rr \
 		../road_race/player.h \
 		../road_race/utils.h \
 		../road_race/gui.h \
-		../road_race/title.h \
 		../road_race/levelmanager.h \
 		../road_race/squarelabel.h \
 		../road_race/cheater.h ../road_race/main.cpp \
@@ -245,7 +240,6 @@ DIST          = ../road_race/single-player.rr \
 		../road_race/player.cpp \
 		../road_race/utils.cpp \
 		../road_race/gui.cpp \
-		../road_race/title.cpp \
 		../road_race/levelmanager.cpp \
 		../road_race/squarelabel.cpp \
 		../road_race/cheater.cpp
@@ -276,7 +270,7 @@ first: all
 
 ####### Build rules
 
-$(TARGET): ui_roadrace.h ui_title.h ui_cheater.h $(OBJECTS)  
+$(TARGET): ui_roadrace.h ui_cheater.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../road_race/road_race.pro ../../../Qt5.5.1/5.5/gcc_64/mkspecs/linux-g++/qmake.conf ../../../Qt5.5.1/5.5/gcc_64/mkspecs/features/spec_pre.prf \
@@ -577,9 +571,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../road_race/resources.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../road_race/roadrace.h ../road_race/network.h ../road_race/gamemodel.h ../road_race/highscore.h ../road_race/square.h ../road_race/gamefile.h ../road_race/player.h ../road_race/utils.h ../road_race/gui.h ../road_race/title.h ../road_race/levelmanager.h ../road_race/squarelabel.h ../road_race/cheater.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../road_race/main.cpp ../road_race/roadrace.cpp ../road_race/network.cpp ../road_race/gamemodel.cpp ../road_race/highscore.cpp ../road_race/square.cpp ../road_race/gamefile.cpp ../road_race/player.cpp ../road_race/utils.cpp ../road_race/gui.cpp ../road_race/title.cpp ../road_race/levelmanager.cpp ../road_race/squarelabel.cpp ../road_race/cheater.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../road_race/roadrace.ui ../road_race/title.ui ../road_race/cheater.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../road_race/roadrace.h ../road_race/network.h ../road_race/gamemodel.h ../road_race/highscore.h ../road_race/square.h ../road_race/gamefile.h ../road_race/player.h ../road_race/utils.h ../road_race/gui.h ../road_race/levelmanager.h ../road_race/squarelabel.h ../road_race/cheater.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../road_race/main.cpp ../road_race/roadrace.cpp ../road_race/network.cpp ../road_race/gamemodel.cpp ../road_race/highscore.cpp ../road_race/square.cpp ../road_race/gamefile.cpp ../road_race/player.cpp ../road_race/utils.cpp ../road_race/gui.cpp ../road_race/levelmanager.cpp ../road_race/squarelabel.cpp ../road_race/cheater.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../road_race/roadrace.ui ../road_race/cheater.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -611,6 +605,7 @@ qrc_resources.cpp: ../road_race/resources.qrc \
 		../road_race/wooden_bridge_clip_art_17037.jpg \
 		../road_race/grass.jpg \
 		../road_race/wall.jpg \
+		../road_race/sevenbyseven.rr \
 		../road_race/single-player.rr \
 		../road_race/mountain.jpg \
 		../road_race/boat.jpg \
@@ -619,9 +614,9 @@ qrc_resources.cpp: ../road_race/resources.qrc \
 		../road_race/cleared.jpg
 	/home/zach/Qt5.5.1/5.5/gcc_64/bin/rcc -name resources ../road_race/resources.qrc -o qrc_resources.cpp
 
-compiler_moc_header_make_all: moc_roadrace.cpp moc_gamemodel.cpp moc_title.cpp moc_squarelabel.cpp moc_cheater.cpp
+compiler_moc_header_make_all: moc_roadrace.cpp moc_gamemodel.cpp moc_squarelabel.cpp moc_cheater.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_roadrace.cpp moc_gamemodel.cpp moc_title.cpp moc_squarelabel.cpp moc_cheater.cpp
+	-$(DEL_FILE) moc_roadrace.cpp moc_gamemodel.cpp moc_squarelabel.cpp moc_cheater.cpp
 moc_roadrace.cpp: ../road_race/network.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/QTcpSocket \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/qtcpsocket.h \
@@ -691,9 +686,8 @@ moc_roadrace.cpp: ../road_race/network.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qpoint.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qset.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qcontiguouscache.h \
-		../road_race/title.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QMainWindow \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qwidget.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qwindowdefs.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qwindowdefs_win.h \
@@ -730,14 +724,13 @@ moc_roadrace.cpp: ../road_race/network.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qfiledevice.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qvector2d.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qtouchdevice.h \
-		../road_race/roadrace.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QMainWindow \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qicon.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QSignalMapper \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsignalmapper.h \
 		../road_race/cheater.h \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
 		../road_race/roadrace.h
 	/home/zach/Qt5.5.1/5.5/gcc_64/bin/moc $(DEFINES) -I/home/zach/Qt5.5.1/5.5/gcc_64/mkspecs/linux-g++ -I/home/zach/RoadRace/roadrace/road_race -I/home/zach/Qt5.5.1/5.5/gcc_64/include -I/home/zach/Qt5.5.1/5.5/gcc_64/include/QtWidgets -I/home/zach/Qt5.5.1/5.5/gcc_64/include/QtGui -I/home/zach/Qt5.5.1/5.5/gcc_64/include/QtNetwork -I/home/zach/Qt5.5.1/5.5/gcc_64/include/QtCore -I. ../road_race/roadrace.h -o moc_roadrace.cpp
 
@@ -921,12 +914,11 @@ moc_gamemodel.cpp: ../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QObject \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/QTcpSocket \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/qtcpsocket.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/qabstractsocket.h \
-		../road_race/title.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QSignalMapper \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsignalmapper.h \
 		../road_race/cheater.h \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
 		../road_race/squarelabel.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/QMouseEvent \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/QHoverEvent \
@@ -938,125 +930,6 @@ moc_gamemodel.cpp: ../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QObject \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QIODevice \
 		../road_race/gamemodel.h
 	/home/zach/Qt5.5.1/5.5/gcc_64/bin/moc $(DEFINES) -I/home/zach/Qt5.5.1/5.5/gcc_64/mkspecs/linux-g++ -I/home/zach/RoadRace/roadrace/road_race -I/home/zach/Qt5.5.1/5.5/gcc_64/include -I/home/zach/Qt5.5.1/5.5/gcc_64/include/QtWidgets -I/home/zach/Qt5.5.1/5.5/gcc_64/include/QtGui -I/home/zach/Qt5.5.1/5.5/gcc_64/include/QtNetwork -I/home/zach/Qt5.5.1/5.5/gcc_64/include/QtCore -I. ../road_race/gamemodel.h -o moc_gamemodel.cpp
-
-moc_title.cpp: ../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qwidget.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qwindowdefs.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qglobal.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qconfig.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qfeatures.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsystemdetection.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qprocessordetection.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qcompilerdetection.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qtypeinfo.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qtypetraits.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsysinfo.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qlogging.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qflags.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qatomic.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qbasicatomic.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qatomic_bootstrap.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qgenericatomic.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qatomic_cxx11.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qatomic_gcc.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qatomic_msvc.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qatomic_armv7.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qatomic_armv6.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qatomic_armv5.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qatomic_ia64.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qatomic_mips.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qatomic_x86.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qatomic_unix.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qglobalstatic.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qmutex.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qnumeric.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qobjectdefs.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qnamespace.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qwindowdefs_win.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qobject.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qstring.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qchar.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qbytearray.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qrefcount.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qarraydata.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qstringbuilder.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qlist.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qalgorithms.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qiterator.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qbytearraylist.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qstringlist.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qregexp.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qstringmatcher.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qcoreevent.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qscopedpointer.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qmetatype.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qvarlengtharray.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qcontainerfwd.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qisenum.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qobject_impl.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qmargins.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qpaintdevice.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qrect.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsize.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qpoint.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qpalette.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qcolor.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qrgb.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qbrush.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qpair.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qvector.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qmatrix.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qpolygon.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qregion.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qdatastream.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qiodevice.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qline.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qtransform.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qpainterpath.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qimage.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qpixelformat.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qpixmap.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsharedpointer.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qshareddata.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qhash.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsharedpointer_impl.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qfont.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qfontmetrics.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qfontinfo.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qsizepolicy.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qcursor.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qkeysequence.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qevent.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qvariant.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qmap.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qdebug.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qtextstream.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qlocale.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qset.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qcontiguouscache.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qurl.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qurlquery.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qfile.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qfiledevice.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qvector2d.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qtouchdevice.h \
-		../road_race/roadrace.h \
-		../road_race/network.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/QTcpSocket \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/qtcpsocket.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/qabstractsocket.h \
-		../road_race/title.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QMainWindow \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qmainwindow.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qtabwidget.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qicon.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QSignalMapper \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsignalmapper.h \
-		../road_race/cheater.h \
-		../road_race/title.h
-	/home/zach/Qt5.5.1/5.5/gcc_64/bin/moc $(DEFINES) -I/home/zach/Qt5.5.1/5.5/gcc_64/mkspecs/linux-g++ -I/home/zach/RoadRace/roadrace/road_race -I/home/zach/Qt5.5.1/5.5/gcc_64/include -I/home/zach/Qt5.5.1/5.5/gcc_64/include/QtWidgets -I/home/zach/Qt5.5.1/5.5/gcc_64/include/QtGui -I/home/zach/Qt5.5.1/5.5/gcc_64/include/QtNetwork -I/home/zach/Qt5.5.1/5.5/gcc_64/include/QtCore -I. ../road_race/title.h -o moc_title.cpp
 
 moc_squarelabel.cpp: ../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QLabel \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qlabel.h \
@@ -1238,12 +1111,11 @@ moc_squarelabel.cpp: ../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QLabel \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/QTcpSocket \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/qtcpsocket.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/qabstractsocket.h \
-		../road_race/title.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QSignalMapper \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsignalmapper.h \
 		../road_race/cheater.h \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
 		../road_race/squarelabel.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/QMouseEvent \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/QHoverEvent \
@@ -1364,14 +1236,11 @@ moc_cheater.cpp: ../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_roadrace.h ui_title.h ui_cheater.h
+compiler_uic_make_all: ui_roadrace.h ui_cheater.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_roadrace.h ui_title.h ui_cheater.h
+	-$(DEL_FILE) ui_roadrace.h ui_cheater.h
 ui_roadrace.h: ../road_race/roadrace.ui
 	/home/zach/Qt5.5.1/5.5/gcc_64/bin/uic ../road_race/roadrace.ui -o ui_roadrace.h
-
-ui_title.h: ../road_race/title.ui
-	/home/zach/Qt5.5.1/5.5/gcc_64/bin/uic ../road_race/title.ui -o ui_title.h
 
 ui_cheater.h: ../road_race/cheater.ui
 	/home/zach/Qt5.5.1/5.5/gcc_64/bin/uic ../road_race/cheater.ui -o ui_cheater.h
@@ -1456,9 +1325,8 @@ main.o: ../road_race/main.cpp ../road_race/roadrace.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qpoint.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qset.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qcontiguouscache.h \
-		../road_race/title.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QMainWindow \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qwidget.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qwindowdefs.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qwindowdefs_win.h \
@@ -1495,13 +1363,13 @@ main.o: ../road_race/main.cpp ../road_race/roadrace.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qfiledevice.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qvector2d.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qtouchdevice.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QMainWindow \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qicon.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QSignalMapper \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsignalmapper.h \
 		../road_race/cheater.h \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QApplication \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qapplication.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1581,9 +1449,8 @@ roadrace.o: ../road_race/roadrace.cpp ../road_race/roadrace.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qpoint.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qset.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qcontiguouscache.h \
-		../road_race/title.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QMainWindow \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qwidget.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qwindowdefs.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qwindowdefs_win.h \
@@ -1620,13 +1487,13 @@ roadrace.o: ../road_race/roadrace.cpp ../road_race/roadrace.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qfiledevice.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qvector2d.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qtouchdevice.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QMainWindow \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qicon.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QSignalMapper \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsignalmapper.h \
 		../road_race/cheater.h \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
 		ui_roadrace.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QVariant \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QAction \
@@ -1964,12 +1831,11 @@ gamemodel.o: ../road_race/gamemodel.cpp ../road_race/gamemodel.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/QTcpSocket \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/qtcpsocket.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/qabstractsocket.h \
-		../road_race/title.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QSignalMapper \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsignalmapper.h \
 		../road_race/cheater.h \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
 		../road_race/levelmanager.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QFile \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QResource \
@@ -2049,9 +1915,8 @@ highscore.o: ../road_race/highscore.cpp ../road_race/highscore.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qpoint.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qset.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qcontiguouscache.h \
-		../road_race/title.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QMainWindow \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qwidget.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qwindowdefs.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qwindowdefs_win.h \
@@ -2088,13 +1953,13 @@ highscore.o: ../road_race/highscore.cpp ../road_race/highscore.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qfiledevice.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qvector2d.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qtouchdevice.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QMainWindow \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qicon.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QSignalMapper \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsignalmapper.h \
-		../road_race/cheater.h
+		../road_race/cheater.h \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o highscore.o ../road_race/highscore.cpp
 
 square.o: ../road_race/square.cpp ../road_race/square.h \
@@ -2277,12 +2142,11 @@ square.o: ../road_race/square.cpp ../road_race/square.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/QTcpSocket \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/qtcpsocket.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/qabstractsocket.h \
-		../road_race/title.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QSignalMapper \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsignalmapper.h \
 		../road_race/cheater.h \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
 		../road_race/squarelabel.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/QMouseEvent \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/QHoverEvent \
@@ -2479,12 +2343,11 @@ gamefile.o: ../road_race/gamefile.cpp ../road_race/gamefile.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/QTcpSocket \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/qtcpsocket.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/qabstractsocket.h \
-		../road_race/title.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QSignalMapper \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsignalmapper.h \
 		../road_race/cheater.h \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
 		../road_race/levelmanager.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QFile \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QResource \
@@ -2673,12 +2536,11 @@ player.o: ../road_race/player.cpp ../road_race/player.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/QTcpSocket \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/qtcpsocket.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/qabstractsocket.h \
-		../road_race/title.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QSignalMapper \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsignalmapper.h \
 		../road_race/cheater.h \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
 		../road_race/squarelabel.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/QMouseEvent \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/QHoverEvent \
@@ -2864,12 +2726,11 @@ gui.o: ../road_race/gui.cpp ../road_race/gui.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/QTcpSocket \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/qtcpsocket.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/qabstractsocket.h \
-		../road_race/title.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QSignalMapper \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsignalmapper.h \
 		../road_race/cheater.h \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
 		../road_race/gamemodel.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QObject \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QTimer \
@@ -2891,158 +2752,6 @@ gui.o: ../road_race/gui.cpp ../road_race/gui.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QMessageBox \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qmessagebox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gui.o ../road_race/gui.cpp
-
-title.o: ../road_race/title.cpp ../road_race/title.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qwidget.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qwindowdefs.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qglobal.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qconfig.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qfeatures.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsystemdetection.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qprocessordetection.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qcompilerdetection.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qtypeinfo.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qtypetraits.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsysinfo.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qlogging.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qflags.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qatomic.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qbasicatomic.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qatomic_bootstrap.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qgenericatomic.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qatomic_cxx11.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qatomic_gcc.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qatomic_msvc.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qatomic_armv7.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qatomic_armv6.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qatomic_armv5.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qatomic_ia64.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qatomic_mips.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qatomic_x86.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qatomic_unix.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qglobalstatic.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qmutex.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qnumeric.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qobjectdefs.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qnamespace.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qwindowdefs_win.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qobject.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qstring.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qchar.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qbytearray.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qrefcount.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qarraydata.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qstringbuilder.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qlist.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qalgorithms.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qiterator.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qbytearraylist.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qstringlist.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qregexp.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qstringmatcher.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qcoreevent.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qscopedpointer.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qmetatype.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qvarlengtharray.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qcontainerfwd.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qisenum.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qobject_impl.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qmargins.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qpaintdevice.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qrect.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsize.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qpoint.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qpalette.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qcolor.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qrgb.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qbrush.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qpair.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qvector.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qmatrix.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qpolygon.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qregion.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qdatastream.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qiodevice.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qline.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qtransform.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qpainterpath.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qimage.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qpixelformat.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qpixmap.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsharedpointer.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qshareddata.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qhash.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsharedpointer_impl.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qfont.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qfontmetrics.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qfontinfo.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qsizepolicy.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qcursor.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qkeysequence.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qevent.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qvariant.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qmap.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qdebug.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qtextstream.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qlocale.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qset.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qcontiguouscache.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qurl.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qurlquery.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qfile.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qfiledevice.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qvector2d.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qtouchdevice.h \
-		../road_race/roadrace.h \
-		../road_race/network.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/QTcpSocket \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/qtcpsocket.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/qabstractsocket.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QMainWindow \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qmainwindow.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qtabwidget.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qicon.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QSignalMapper \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsignalmapper.h \
-		../road_race/cheater.h \
-		ui_title.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QVariant \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QAction \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qaction.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qactiongroup.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QApplication \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qapplication.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qcoreapplication.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qeventloop.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qguiapplication.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qinputmethod.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QButtonGroup \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qbuttongroup.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QHeaderView \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qheaderview.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qabstractitemview.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qframe.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qabstractitemmodel.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qitemselectionmodel.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qstyleoption.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qabstractspinbox.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qvalidator.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qregularexpression.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qslider.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qabstractslider.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qstyle.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qtabbar.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qrubberband.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QPushButton \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qpushbutton.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qabstractbutton.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o title.o ../road_race/title.cpp
 
 levelmanager.o: ../road_race/levelmanager.cpp ../road_race/levelmanager.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QFile \
@@ -3221,12 +2930,11 @@ levelmanager.o: ../road_race/levelmanager.cpp ../road_race/levelmanager.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/QTcpSocket \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/qtcpsocket.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/qabstractsocket.h \
-		../road_race/title.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QSignalMapper \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsignalmapper.h \
 		../road_race/cheater.h \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
 		../road_race/gamemodel.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QObject \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QTimer \
@@ -3422,12 +3130,11 @@ squarelabel.o: ../road_race/squarelabel.cpp ../road_race/squarelabel.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/QTcpSocket \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/qtcpsocket.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/qabstractsocket.h \
-		../road_race/title.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QSignalMapper \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsignalmapper.h \
 		../road_race/cheater.h \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QDialog \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qdialog.h \
 		../road_race/levelmanager.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QFile \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QResource \
@@ -3625,7 +3332,6 @@ cheater.o: ../road_race/cheater.cpp ../road_race/cheater.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/QTcpSocket \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/qtcpsocket.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtNetwork/qabstractsocket.h \
-		../road_race/title.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/QSignalMapper \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtCore/qsignalmapper.h \
 		../road_race/squarelabel.h \
@@ -3647,9 +3353,6 @@ moc_roadrace.o: moc_roadrace.cpp
 
 moc_gamemodel.o: moc_gamemodel.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_gamemodel.o moc_gamemodel.cpp
-
-moc_title.o: moc_title.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_title.o moc_title.cpp
 
 moc_squarelabel.o: moc_squarelabel.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_squarelabel.o moc_squarelabel.cpp
