@@ -53,7 +53,7 @@ void RoadRace::on_btnStuff_clicked()
     std::cout << Game::instance().getGameLoader()->toGameFile() << std::endl;
 
     ui->btnStuff->setDisabled(true);
-
+    ui->tst2Btn->setDisabled(true);
 }
 //receive data from the serveer
 void RoadRace::dataReceived() {
@@ -150,4 +150,26 @@ void RoadRace::on_SaveBtn_clicked()
     ofstream outfile("savefile.rr");
     outfile << output;
     outfile.close();
+}
+void RoadRace::on_tst2Btn_clicked()
+{
+
+    //Give our GUI manager access to ui
+    GuiManager::instance().setUi( ui );
+
+    Game::instance().setGameLoader(
+          new GameFileManager(
+              LevelManager::instance().getLevel("seven")
+         )
+     );
+
+    GuiManager::instance().init();
+
+    Updater::instance().start();
+    //sets a difficulty based on the radio button, easy if nothing else is pressed
+   GuiManager::instance().newDiff();
+    std::cout << Game::instance().getGameLoader()->toGameFile() << std::endl;
+
+    ui->btnStuff->setDisabled(true);
+    ui->tst2Btn->setDisabled(true);
 }

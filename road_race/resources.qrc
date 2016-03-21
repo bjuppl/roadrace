@@ -10,5 +10,6 @@
         <file alias="sampleGame">gamefile.rr</file>
         <file alias="single-player">single-player.rr</file>
         <file alias="win">win.jpg</file>
+        <file alias="seven">sevenbyseven.rr</file>
     </qresource>
 </RCC>
