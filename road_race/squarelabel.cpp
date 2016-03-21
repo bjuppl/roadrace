@@ -15,10 +15,10 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
     if (proc->getOwner() == nullptr){
         size_t x = proc->getX();
         size_t y = proc->getY();
-    //use for comparison against x and y
+        //use for comparison against x and y
         int height = Game::instance().getHeight();
         int width = Game::instance().getWidth();
-    // alias x-1
+        // alias x-1
 
         int x2 = (x-1);
 
@@ -37,11 +37,11 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             Player *newowner;
             //normal squares
             if(x >= 0 && x != squareList.size()){
-             list1 = squareList.at(x);
-             list2 = squareList.at(x2);
-             c1 = list1.at(0);
-              c2 = list2.at(0);
-              c3 = list1.at(1);
+                list1 = squareList.at(x);
+                list2 = squareList.at(x2);
+                c1 = list1.at(0);
+                c2 = list2.at(0);
+                c3 = list1.at(1);
 
             }
             //handle bottom left corner
@@ -54,21 +54,21 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             }
             if((c1!= nullptr) && (c1->getOwner() != nullptr)){
                 if (proc->canGet(c1)){
-                valid = true;
+                    valid = true;
                 }
-                 else{buildErr = true;}
+                else{buildErr = true;}
             }
             else if((c2!= nullptr) && (c2->getOwner() != nullptr && valid == false)){
                 newowner = c2->getOwner();
                 if (proc->canGet(c2)){
-                valid = true;
+                    valid = true;
                 }
                 else{buildErr = true;}
             }
             else if(c3->getOwner() != nullptr && valid == false){
                 newowner = c3->getOwner();
                 if (proc->canGet(c3)){
-                valid = true;
+                    valid = true;
                 }
                 else{buildErr = true;}
             }
@@ -77,16 +77,16 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
                     QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Alert!","You do not have a valid road to over come the obstacle in your way.",0,0);
                 }
                 else{
-                QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Alert!","You do not currently own a square adjacent to this one.",0,0);
+                    QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Alert!","You do not currently own a square adjacent to this one.",0,0);
                 }
             }
             if(valid == true){
                 //helps with calling again
-            c1=nullptr;
-            c2=nullptr;
-            c3=nullptr;
-            proc->setOwner(newowner);
-            owner = QString::fromUtf8(newowner->getName().c_str());
+                c1=nullptr;
+                c2=nullptr;
+                c3=nullptr;
+                proc->setOwner(newowner);
+                owner = QString::fromUtf8(newowner->getName().c_str());
             }
         }
         //handles the right most edge
@@ -103,22 +103,22 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             bool buildErr = false;
             //normal processing
             if(x > 0 && (x != squareList.size()-1)){
-             list1 = squareList.at(x+1);
-             if(x2 >= 0){
-             list2 = squareList.at(x2);
-              c2 = list2.at(y);
-             }
-             list3 = squareList.at(x);
-             c1 = list1.at(y);
-             c3 = list3.at(y-1);
+                list1 = squareList.at(x+1);
+                if(x2 >= 0){
+                    list2 = squareList.at(x2);
+                    c2 = list2.at(y);
+                }
+                list3 = squareList.at(x);
+                c1 = list1.at(y);
+                c3 = list3.at(y-1);
             }
             //bottom & top right corners
             else{
                 if(x2 == -1){
-                  list2 = squareList.at(x+1);
+                    list2 = squareList.at(x+1);
                 }
                 else{
-                list2 = squareList.at(x2);
+                    list2 = squareList.at(x2);
                 }
                 list3 = squareList.at(x);
                 c1=nullptr;
@@ -128,21 +128,21 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             if((c1!= nullptr) && (c1->getOwner() != nullptr)){
                 newowner = c1->getOwner();
                 if (proc->canGet(c1)){
-                valid = true;
+                    valid = true;
                 }
                 else{buildErr = true;}
             }
             else if((c2!= nullptr) && (c2->getOwner() != nullptr) && valid == false){
                 newowner = c2->getOwner();
                 if (proc->canGet(c2)){
-                valid = true;
+                    valid = true;
                 }
                 else{buildErr = true;}
             }
             else if(c3->getOwner() != nullptr && valid == false){
                 newowner = c3->getOwner();
                 if (proc->canGet(c3)){
-                valid = true;
+                    valid = true;
                 }
                 else{buildErr = true;}
             }
@@ -151,15 +151,15 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
                     QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Alert!","You do not have a valid road to over come the obstacle in your way.",0,0);
                 }
                 else{
-                QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Alert!","You do not currently own a square adjacent to this one.",0,0);
+                    QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Alert!","You do not currently own a square adjacent to this one.",0,0);
                 }
             }
             if(valid == true){
-            c1=nullptr;
-            c2=nullptr;
-            c3=nullptr;
-            proc->setOwner(newowner);
-            owner = QString::fromStdString(newowner->getName());
+                c1=nullptr;
+                c2=nullptr;
+                c3=nullptr;
+                proc->setOwner(newowner);
+                owner = QString::fromStdString(newowner->getName());
             }
         }
         //handles inner squares
@@ -205,57 +205,55 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             if((c1!= nullptr) && (c1->getOwner() != nullptr)){
                 newowner = c1->getOwner();
                 if (proc->canGet(c1)){
-                valid = true;
+                    valid = true;
                 }
                 else{buildErr = true;}
             }
             if((c2!= nullptr) && (c2->getOwner() != nullptr && valid == false)){
                 newowner = c2->getOwner();
                 if (proc->canGet(c2)){
-                valid = true;
+                    valid = true;
                 }
                 else{buildErr = true;}
             }
             if((c3!= nullptr) && (c3->getOwner() != nullptr && valid == false)){
                 newowner = c3->getOwner();
                 if (proc->canGet(c3)){
-                valid = true;
+                    valid = true;
                 }
                 else{buildErr = true;}
             }
             if((c4!= nullptr) && (c4->getOwner() != nullptr) && valid == false){
                 newowner = c4->getOwner();
                 if (proc->canGet(c4)){
-                valid = true;
+                    valid = true;
                 }
                 else{buildErr = true;}
             }
-           if(valid == false){
-               if(buildErr){
-                   QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Alert!","You do not have a valid road to over come the obstacle in your way.",0,0);
-               }
-               else{
-                QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Alert!","You do not currently own a square adjacent to this one.",0,0);
-            }
+            if(valid == false){
+                if(buildErr){
+                    QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Alert!","You do not have a valid road to over come the obstacle in your way.",0,0);
+                }
+                else{
+                    QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Alert!","You do not currently own a square adjacent to this one.",0,0);
+                }
             }
             if(valid == true){
-            c1=nullptr;
-            c2=nullptr;
-            c3=nullptr;
-            c4=nullptr;
-            proc->setOwner(newowner);
-            if ( newowner != nullptr ) {
-                owner = QString::fromUtf8(newowner->getName().c_str());
-            }
+                c1=nullptr;
+                c2=nullptr;
+                c3=nullptr;
+                c4=nullptr;
+                proc->setOwner(newowner);
+                if ( newowner != nullptr ) {
+                    owner = QString::fromUtf8(newowner->getName().c_str());
+                }
 
-        }
+            }
         }
         if(owner != nullptr){
-
-
             //set text/border
-        this->setText(owner);
-        this->setStyleSheet("border:" + QString::fromStdString(to_string(proc->getBorder())) + "px solid " + QString::fromStdString(proc->getOwner()->getColor()));
+            this->setText(owner);
+            this->setStyleSheet("border:" + QString::fromStdString(to_string(proc->getBorder())) + "px solid " + QString::fromStdString(proc->getOwner()->getColor()));
 
             if(this->square->getType() == "Wi") {
                 GuiManager::instance().endGame(this);
@@ -266,18 +264,43 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
 
 
 
+        }
     }
-}
     else{
         //handle owned squares until I decide what to do with them.
-            GuiManager::instance().BuildStruct(square);
+        GuiManager::instance().BuildStruct(square);
     }
+
+    if(this->square->getAddition() == "De")
+    {
+        vector<vector<Square*>> squares = Game::instance().getSquares();
+        int size = GuiManager::instance().getUi()->gridLayoutWidget->width()/squares.size()/2;
+        QPixmap map(":/cleared");
+        this->setPixmap(map.scaled(QSize(size,size), Qt::KeepAspectRatio));
+    }
+    if(this->square->getAddition() == "Bo")
+    {
+        vector<vector<Square*>> squares = Game::instance().getSquares();
+        int size = GuiManager::instance().getUi()->gridLayoutWidget->width()/squares.size()/2;
+        QPixmap map(":/boat");
+        this->setPixmap(map.scaled(QSize(size,size), Qt::KeepAspectRatio));
+    }
+    if(this->square->getAddition() == "Br")
+    {
+        vector<vector<Square*>> squares = Game::instance().getSquares();
+        int size = GuiManager::instance().getUi()->gridLayoutWidget->width()/squares.size()/2;
+        QPixmap map(":/bridge");
+        this->setPixmap(map.scaled(QSize(size,size), Qt::KeepAspectRatio));
+    }
+
     emit clicked();
 
 }
 void SquareLabel::mouseMoveEvent(QMouseEvent *ev){
 
 }
+
+
 QPixmap SquareLabel::setmap(string image){
 
 
@@ -316,13 +339,13 @@ QPixmap SquareLabel::setmap(string image){
 }
 void SquareLabel::enterEvent(QHoverEvent *event){
 
-          if(square->getOwner() != nullptr){
-            QString owner = QString::fromUtf8(square->getOwner()->getName().c_str());
-            this->setText(owner);
-          }
-          else{
-              this->setText("Unowned");
-          }
+    if(square->getOwner() != nullptr){
+        QString owner = QString::fromUtf8(square->getOwner()->getName().c_str());
+        this->setText(owner);
+    }
+    else{
+        this->setText("Unowned");
+    }
 }
 void SquareLabel::leaveEvent(QHoverEvent *event){
     QPixmap map = setmap(square->getImage());
@@ -342,9 +365,9 @@ bool SquareLabel::event(QEvent *e){
         return true;
         break;
     case QEvent::HoverLeave:
-         leaveEvent(static_cast<QHoverEvent*>(e));
-         return true;
-         break;
+        leaveEvent(static_cast<QHoverEvent*>(e));
+        return true;
+        break;
     default:
         break;
     }
@@ -378,17 +401,17 @@ bool Square::canGet(Square *prev){
             return false;
         }
     }
-   if(prev->getType() == "Fo"){
-       if(prev->getAddition() == "De"){
-           return true;
-       }
-       else{
-           return false;
-       }
-   }
-       else{
-           return true;
-       }
+    if(prev->getType() == "Fo"){
+        if(prev->getAddition() == "De"){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    else{
+        return true;
+    }
 
 }
 
