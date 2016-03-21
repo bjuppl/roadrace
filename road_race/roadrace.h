@@ -1,7 +1,6 @@
 #ifndef ROADRACE_H
 #define ROADRACE_H
 #include "network.h"
-#include "title.h"
 #include <QMainWindow>
 #include <QSignalMapper>
 #include "cheater.h"
@@ -29,6 +28,7 @@ private slots:
     void on_cheatBtn_clicked();
     void openCheat();
     void on_SaveBtn_clicked();
+    void on_tst2Btn_clicked();
 private:
     Ui::RoadRace *ui;
     QTcpSocket *server;
