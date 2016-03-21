@@ -292,12 +292,30 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
         QPixmap map(":/bridge");
         this->setPixmap(map.scaled(QSize(size,size), Qt::KeepAspectRatio));
     }
+    if(this->square->getAddition() == "Tu")
+    {
+        vector<vector<Square*>> squares = Game::instance().getSquares();
+        int size = GuiManager::instance().getUi()->gridLayoutWidget->width()/squares.size()/2;
+        QPixmap map(":/tunnel");
+        this->setPixmap(map.scaled(QSize(size,size), Qt::KeepAspectRatio));
+    }
 
     emit clicked();
 
 }
 void SquareLabel::mouseMoveEvent(QMouseEvent *ev){
 
+}
+
+void SquareLabel::enterEvent(QHoverEvent *event){
+
+    if(square->getOwner() != nullptr){
+        QString owner = QString::fromUtf8(square->getOwner()->getName().c_str());
+        this->setText(owner);
+    }
+    else{
+        this->setText("Unowned");
+    }
 }
 
 
@@ -337,26 +355,11 @@ QPixmap SquareLabel::setmap(string image){
     }
 
 }
-void SquareLabel::enterEvent(QHoverEvent *event){
-
-    if(square->getOwner() != nullptr){
-        QString owner = QString::fromUtf8(square->getOwner()->getName().c_str());
-        this->setText(owner);
-    }
-    else{
-        this->setText("Unowned");
-    }
-}
 void SquareLabel::leaveEvent(QHoverEvent *event){
     QSize size(square->getSize(),square->getSize());
 
     QPixmap map =  GuiManager::instance().setmap(square,size);
     this->setPixmap(map);
-
-
-
-
-
 }
 
 bool SquareLabel::event(QEvent *e){

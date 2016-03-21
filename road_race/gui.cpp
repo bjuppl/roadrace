@@ -147,7 +147,7 @@ QPixmap GuiManager::setmap(Square *sq, QSize size){
             return result;
         }
         if (image == "Mo"){
-            QPixmap map(":/mountain");
+            QPixmap map(":/tunnel");
             QPixmap result = map.scaled(size, Qt::KeepAspectRatio);
             return result;
         }
