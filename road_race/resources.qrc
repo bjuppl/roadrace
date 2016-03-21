@@ -12,7 +12,8 @@
         <file alias="win">win.jpg</file>
         <file alias="boat">boat.jpg</file>
         <file alias="bridge">bridge.jpg</file>
-        <file alias="cleared">cleared.jpg</file>
-	<file alias="seven">sevenbyseven.rr</file>
+        <file alias="seven">sevenbyseven.rr</file>
+        <file alias="cleared">cleared.png</file>
+        <file alias="tunnel">tunnel.jpg</file>
     </qresource>
 </RCC>
