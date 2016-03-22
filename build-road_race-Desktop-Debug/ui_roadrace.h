@@ -184,9 +184,9 @@ public:
 "</style></head><body style=\" font-family:'Droid Sans'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'.Helvetica Neue DeskInterface';\">Currently in single-player mode. Upgrade for more options.</span></p></body></html>", 0));
         helpBtn->setText(QApplication::translate("RoadRace", "Help!", 0));
-        EsyBtn->setText(QApplication::translate("RoadRace", "n00b Mode", 0));
-        MedBtn->setText(QApplication::translate("RoadRace", "normal Mode", 0));
-        HardBtn->setText(QApplication::translate("RoadRace", "l33t Mode", 0));
+        EsyBtn->setText(QApplication::translate("RoadRace", "Easy Mode", 0));
+        MedBtn->setText(QApplication::translate("RoadRace", "Normal Mode", 0));
+        HardBtn->setText(QApplication::translate("RoadRace", "Hard Mode", 0));
         cheatBtn->setText(QApplication::translate("RoadRace", "Cheater...", 0));
         SaveBtn->setText(QApplication::translate("RoadRace", "Save the Game", 0));
         tst2Btn->setText(QApplication::translate("RoadRace", "Use 7X7 test", 0));

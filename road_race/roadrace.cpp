@@ -36,6 +36,7 @@ RoadRace::~RoadRace()
 //handle the btnStuff clicked event
 void RoadRace::on_btnStuff_clicked()
 {
+    if (ui->EsyBtn->isChecked() || ui->MedBtn->isChecked() || ui->HardBtn->isChecked()){
     //Give our GUI manager access to ui
     GuiManager::instance().setUi( ui );
 
@@ -48,12 +49,16 @@ void RoadRace::on_btnStuff_clicked()
     GuiManager::instance().init();
 
     Updater::instance().start();
-    //sets a difficulty based on the radio button, easy if nothing else is pressed
+    //sets a difficulty based on the radio button
    GuiManager::instance().newDiff();
     std::cout << Game::instance().getGameLoader()->toGameFile() << std::endl;
 
     ui->btnStuff->setDisabled(true);
     ui->tst2Btn->setDisabled(true);
+    }
+    else{
+        QMessageBox::information(ui->centralWidget,"Alert","You did not select a difficulty.");
+    }
 }
 //receive data from the serveer
 void RoadRace::dataReceived() {
@@ -87,7 +92,7 @@ void RoadRace::loadFile() {
 
 void RoadRace::on_btnOpenGame_clicked()
 {
-
+if (ui->EsyBtn->isChecked() || ui->MedBtn->isChecked() || ui->HardBtn->isChecked()){
     std::string fileName = ui->iptGameFileName->text().toStdString();
 
     //Open a game with the properties in the given file
@@ -98,14 +103,17 @@ void RoadRace::on_btnOpenGame_clicked()
     GuiManager::instance().init();
 
     Updater::instance().start();
-    //sets a difficulty based on the radio button, easy if nothing else is pressed
+    //sets a difficulty based on the radio button
    GuiManager::instance().newDiff();
     std::cout << Game::instance().getGameLoader()->toGameFile() << std::endl;
 
     ui->btnStuff->setDisabled(true);
+    ui->tst2Btn->setDisabled(true);
 
-       this->loadFile();
-
+}
+    else{
+        QMessageBox::information(ui->centralWidget,"Alert","You did not specify a difficulty!",0,0);
+    }
 
        }
 
@@ -126,7 +134,7 @@ void RoadRace::on_helpBtn_clicked(){
                                                                                          "\n"
                                                                                          "Resources are given at specific time intervals. The amount depends on the difficulty selected.\n"
                                                                                          "\n"
-                                                                                         "The more of a certian square you possess, the of that resource you get. For example owning two river squares gives 30 water per tick on easy versus just 15 for one square."
+                                                                                         "The more of a certain square you possess, the of that resource you get. For example owning two river squares gives 30 water per tick on easy versus just 15 for one square."
                                                                                          "\n"
                                                                                          "Files are saved as savefile.rr to your roadrace folder upon clicking the save button, and you can set the number of resouces you currently own with Cheater..."
                                                                                          "\n"
@@ -150,14 +158,14 @@ void RoadRace::on_SaveBtn_clicked()
 {
     if (Game::instance().getGameLoader() != nullptr){
     string output = Game::instance().getGameLoader()->toGameFile();
-    ofstream outfile("..\\savefile.rr");
+    ofstream outfile("savefile.rr");
     outfile << output;
     outfile.close();
     }
 }
 void RoadRace::on_tst2Btn_clicked()
 {
-
+if (ui->EsyBtn->isChecked() || ui->MedBtn->isChecked() || ui->HardBtn->isChecked()){
     //Give our GUI manager access to ui
     GuiManager::instance().setUi( ui );
 
@@ -176,4 +184,8 @@ void RoadRace::on_tst2Btn_clicked()
 
     ui->btnStuff->setDisabled(true);
     ui->tst2Btn->setDisabled(true);
+}
+    else{
+        QMessageBox::information(ui->centralWidget,"Alert","You did not specify a difficulty!",0,0);
+    }
 }

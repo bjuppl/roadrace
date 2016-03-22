@@ -257,7 +257,7 @@ p, li { white-space: pre-wrap; }
      </rect>
     </property>
     <property name="text">
-     <string>n00b Mode</string>
+     <string>Easy Mode</string>
     </property>
    </widget>
    <widget class="QRadioButton" name="MedBtn">
@@ -270,7 +270,7 @@ p, li { white-space: pre-wrap; }
      </rect>
     </property>
     <property name="text">
-     <string>normal Mode</string>
+     <string>Normal Mode</string>
     </property>
    </widget>
    <widget class="QRadioButton" name="HardBtn">
@@ -283,7 +283,7 @@ p, li { white-space: pre-wrap; }
      </rect>
     </property>
     <property name="text">
-     <string>l33t Mode</string>
+     <string>Hard Mode</string>
     </property>
    </widget>
    <widget class="QPushButton" name="cheatBtn">
