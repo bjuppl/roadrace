@@ -110,6 +110,7 @@ string Game::load(){
 void Game::update(){
     Game::instance().updateResources();
     GuiManager::instance().fillResourceList();
+    GuiManager::instance().setTimeBox( Updater::instance().getDuration()/1000 );
 }
 
 bool Game::applyCommand(string command) {
@@ -142,10 +143,12 @@ Game& Game::instance() {
 }
 void Updater::start(){
     timer->start(interval_ms);
+    started_at = time.currentMSecsSinceEpoch();
 }
 
 void Updater::stop() {
     timer->stop();
+    duration = time.currentMSecsSinceEpoch() - started_at;
 }
 
 Updater& Updater::instance() {
@@ -153,6 +156,10 @@ Updater& Updater::instance() {
         instance_ = new Updater();
     }
     return *instance_;
+}
+
+void Game::purchaseAddition(Square *source) {
+
 }
 
 void Game::setGameLoader(GameFileManager *gfm) {

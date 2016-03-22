@@ -6,6 +6,7 @@
 
 #include <QObject>
 #include <QTimer>
+#include <QTime>
 
 #include "square.h"
 #include "gamefile.h"
@@ -96,6 +97,8 @@ public:
 
     void updateResources();
 
+    void purchaseAddition( Square* source );
+
     //getters n setters
 
     vector<Structure*> getStructures() { return structure_types; }
@@ -138,6 +141,9 @@ class Updater : public QObject{
     Q_OBJECT
 
 private:
+    QDateTime time;
+    size_t started_at;
+    size_t duration;
     QTimer *timer;
     int interval_ms{1000}; //default
     Updater() {
@@ -148,7 +154,7 @@ private:
 
     static Updater *instance_;
 private slots:
-    void run() { Game::instance().update(); }
+    void run() { duration = time.currentMSecsSinceEpoch() - started_at;Game::instance().update();  }
 
 public:
     static Updater &instance();
@@ -156,6 +162,8 @@ public:
     void start();
     void stop();
 
+    size_t getStartTime () { return started_at; }
+    size_t getDuration() { return time.currentMSecsSinceEpoch() - started_at; }
     int getMs() { return interval_ms; }
     void setMs ( int ms ) { interval_ms = ms; }
     ~Updater () { delete instance_; delete timer; }

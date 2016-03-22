@@ -19,6 +19,7 @@ private:
  public:
     static GuiManager& instance();
     void setUi ( Ui::RoadRace *ui_ ) { ui = ui_; }
+    void setTimeBox( size_t time ) { ui->lblTime->setText(QString::fromStdString(std::to_string(time))); }
     Ui::RoadRace *getUi ( ) { return ui; }
 
     ~GuiManager() { delete instance_; }
