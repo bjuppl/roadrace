@@ -1,7 +1,8 @@
 #include <string>
 #include <iostream>
 #include <istream>
-
+#include <random>
+#include <QMessageBox>
 #include "gamemodel.h"
 #include "gui.h"
 #include "player.h"
@@ -10,7 +11,11 @@
 using namespace std;
 
 class Player;
-
+int random_int(int min, int max) {
+    static std::default_random_engine engine { std::random_device{}() };
+    std::uniform_int_distribution<int> distro{min, max};
+    return distro(engine);
+}
 Game *Game::instance_ = NULL;
 Updater *Updater::instance_ = NULL;
 
@@ -30,6 +35,8 @@ Game::Game() {
     sl.push_back(new Structure("tunnel","Tu",d));
     vector<Price> e = {Price("Go",100),Price("Wa",75)};
     sl.push_back(new Structure("deforest","De",e));
+    vector<Price> f = {Price("",0)};
+    sl.push_back(new Structure("ruins","Ru",f));
     structure_types = sl;
 
 }
@@ -144,11 +151,13 @@ Game& Game::instance() {
 void Updater::start(){
     timer->start(interval_ms);
     started_at = time.currentMSecsSinceEpoch();
+    eventTime->start(30000);
 }
 
 void Updater::stop() {
     timer->stop();
     duration = time.currentMSecsSinceEpoch() - started_at;
+    eventTime->stop();
 }
 
 Updater& Updater::instance() {
@@ -226,7 +235,93 @@ void Game::setResources(vector<Resource *> vr) {
     }
     resource_types = vr;
 }
+void Updater::eventrun(){
+    if (LevelManager::instance().getRand()){
+        int random = random_int(0,6);
+        if(random == 0){
+          //spontaneously give a player 50 of a resource
+            int goodInt = random_int(0,3);
+            string recType = LevelManager::instance().upRec(goodInt);
+            string name = Game::instance().getCurPlayer()->getName();
+            QString displayName;
+            QString displayResc;
+            displayResc = displayResc.fromStdString(recType);
+            displayName = displayName.fromStdString(name);
+            QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Random Event!",displayName + " has had an unusually productive cycle. +50 " + displayResc + ".",0,0);
+        }
+        if(random == 1){
+         //retract 50 of a resource
+            int badInt = random_int(0,3);
+            string recType = LevelManager::instance().downRec(badInt);
+            string name = Game::instance().getCurPlayer()->getName();
+            QString displayName;
+            QString displayRec;
+            displayRec = displayRec.fromStdString(recType);
+            displayName = displayName.fromStdString(name);
+            QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Random Event!",displayName + " has just gotten robbed! Oh dear. -50" + displayRec + ".",0,0);
+        }
+        if(random == 2){
+         //remove a structure
+          int height = Game::instance().getHeight();
+          int width = Game::instance().getWidth();
+          int rndWid = random_int(0,width-1);
+          int rndHei = random_int(0,height-1);
+          bool foo = LevelManager::instance().killStruct(rndHei,rndWid);
+          if (foo == true){
+          QString ht = ht.fromStdString(to_string(rndHei));
+          QString wi = wi.fromStdString(to_string(rndWid));
+          QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Random Event!","Oh no! A structure has just collapsed at " +  wi + "," + ht +".",0,0);
+        }
+        }
+        if(random == 3){
+        //rains fall and flood a square turning it into a river
+            int height = Game::instance().getHeight();
+            int width = Game::instance().getWidth();
+            int rndWid = random_int(0,width-1);
+            int rndHei = random_int(0,height-1);
+            bool foo = LevelManager::instance().riverSquare(rndHei,rndWid);
+            if (foo == true){
+            QString ht = ht.fromStdString(to_string(rndHei));
+            QString wi = wi.fromStdString(to_string(rndWid));
+            QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Random Event!","Oh no! Heavy rains have turned the square at " +  wi + "," + ht +" into a river, washing away any progress!.",0,0);
+          }
+        }
+        if(random == 4){
+        //a non plain square burns away, leaving a plain
+            int height = Game::instance().getHeight();
+            int width = Game::instance().getWidth();
+            int rndWid = random_int(0,width-1);
+            int rndHei = random_int(0,height-1);
+            bool foo = LevelManager::instance().burnSquare(rndHei,rndWid);
+            if (foo == true){
+            QString ht = ht.fromStdString(to_string(rndHei));
+            QString wi = wi.fromStdString(to_string(rndWid));
+            QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Random Event!","Oh no! Flames have burnt " +  wi + "," + ht +" to a crisp! Only some grass remains.",0,0);
 
+        }
+        }
+        if(random == 5){
+        //earthquake turns a square into a canyon
+            int height = Game::instance().getHeight();
+            int width = Game::instance().getWidth();
+            int rndWid = random_int(0,width-1);
+            int rndHei = random_int(0,height-1);
+            bool foo = LevelManager::instance().quakeSquare(rndHei,rndWid);
+            if (foo == true){
+            QString ht = ht.fromStdString(to_string(rndHei));
+            QString wi = wi.fromStdString(to_string(rndWid));
+            QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Random Event!","Oh no! Flames have burnt " +  wi + "," + ht +" to a crisp! Only some grass remains.",0,0);
+        }
+        }
+        if(random == 6){
+            QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Lucky","Nothing Happened.... this time.",0,0);
+        }
+
+    else{
+
+    }
+}
+}
 
 
 //destory a road or forturess on a square

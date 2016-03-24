@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -35,6 +36,7 @@ public:
     QLabel *label_5;
     QPushButton *yesBtn;
     QPushButton *canBtn;
+    QCheckBox *RndBox;
 
     void setupUi(QDialog *cheater)
     {
@@ -74,6 +76,9 @@ public:
         canBtn = new QPushButton(cheater);
         canBtn->setObjectName(QStringLiteral("canBtn"));
         canBtn->setGeometry(QRect(280, 320, 85, 27));
+        RndBox = new QCheckBox(cheater);
+        RndBox->setObjectName(QStringLiteral("RndBox"));
+        RndBox->setGeometry(QRect(180, 70, 191, 22));
 
         retranslateUi(cheater);
 
@@ -90,6 +95,7 @@ public:
         label_5->setText(QApplication::translate("cheater", "HAAAAXXXX!", 0));
         yesBtn->setText(QApplication::translate("cheater", "Accept", 0));
         canBtn->setText(QApplication::translate("cheater", "Cancel", 0));
+        RndBox->setText(QApplication::translate("cheater", "Shut off Random events", 0));
     } // retranslateUi
 
 };

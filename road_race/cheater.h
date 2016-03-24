@@ -22,6 +22,8 @@ private slots:
 
 
 
+    void on_RndBox_toggled(bool checked);
+
 private:
     Ui::cheater *ui;
 };

@@ -4,6 +4,7 @@
 #include "gamemodel.h"
 #include <QLineEdit>
 #include <string>
+#include "levelmanager.h"
 cheater::cheater(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::cheater)
@@ -52,3 +53,10 @@ void cheater::on_yesBtn_clicked()
     this->hide();
 }
 
+
+void cheater::on_RndBox_toggled(bool checked)
+{
+    if (checked){
+        LevelManager::instance().setRand(false);
+    }
+}
