@@ -35,6 +35,8 @@ private:
     static LevelManager *instance_;
     difficultyStruct *duff{new difficultyStruct()};
     LevelManager(){}
+    //enable random events
+    bool randEn = true;
  public:
     static LevelManager& instance();
 
@@ -47,7 +49,14 @@ private:
 
     std::vector<std::string> resourceFileContents( std::string alias );
     difficultyStruct *getDuff(){return duff;}
-
+    bool getRand(){return randEn;}
+    void setRand(bool rand){randEn = rand;}
+    string upRec(int goodRes);
+    string downRec(int badRes);
+    bool killStruct(int hit,int wid);
+    bool riverSquare(int hit,int wid);
+    bool burnSquare(int hit, int wid);
+    bool quakeSquare(int hit, int wid);
 };
 
 
