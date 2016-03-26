@@ -37,6 +37,7 @@ private:
     LevelManager(){}
     //enable random events
     bool randEn = true;
+    string burn;
  public:
     static LevelManager& instance();
 
@@ -57,6 +58,8 @@ private:
     bool riverSquare(int hit,int wid);
     bool burnSquare(int hit, int wid);
     bool quakeSquare(int hit, int wid);
+    bool eruption(int hit, int wid);
+    string getBurn(){return burn;}
 };
 
 

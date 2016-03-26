@@ -85,6 +85,9 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
                 c1=nullptr;
                 c2=nullptr;
                 c3=nullptr;
+                if(proc->getType() == "Sw"){
+                newowner->setSwamped(true);
+                }
                 proc->setOwner(newowner);
                 owner = QString::fromUtf8(newowner->getName().c_str());
             }
@@ -158,6 +161,9 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
                 c1=nullptr;
                 c2=nullptr;
                 c3=nullptr;
+                if(proc->getType() == "Sw"){
+                    newowner->setSwamped(true);
+                }
                 proc->setOwner(newowner);
                 owner = QString::fromStdString(newowner->getName());
             }
@@ -244,6 +250,9 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
                 c3=nullptr;
                 c4=nullptr;
                 proc->setOwner(newowner);
+                if(proc->getType() == "Sw"){
+                    newowner->setSwamped(true);
+                }
                 if ( newowner != nullptr ) {
                     owner = QString::fromUtf8(newowner->getName().c_str());
                 }
@@ -407,6 +416,14 @@ bool Square::canGet(Square *prev){
     }
     if(prev->getType() == "Fo"){
         if(prev->getAddition() == "De"){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    if(prev->getType() == "La"){
+        if(prev->getAddition() == "Ha"){
             return true;
         }
         else{

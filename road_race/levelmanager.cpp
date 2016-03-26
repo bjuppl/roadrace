@@ -187,3 +187,22 @@ bool LevelManager::quakeSquare(int hit, int wid){
         return false;
     }
 }
+bool LevelManager::eruption(int hit, int wid){
+    Square *victim = Game::instance().getSquare(wid,hit);
+    Structure *killStruct = Game::instance().getStructure("Ru");
+    if(victim->getImage() != "Ri" && victim->getOwner() != nullptr){
+    victim->setStruct(killStruct);
+    victim->setAddition("No");
+    SquareLabel *vicLbl = victim->getLabel();
+    int size = GuiManager::instance().getUi()->gridLayoutWidget->width()/Game::instance().getSize()/2;
+    QSize size1(size,size);
+    vicLbl->setPixmap(GuiManager::instance().setmap(victim,size1));
+    burn = victim->getResourceType();
+    Game::instance().setVPos(wid,hit);
+    victim->setBurn(true);
+    return true;
+    }
+    else{
+        return false;
+    }
+}

@@ -37,6 +37,10 @@ Game::Game() {
     sl.push_back(new Structure("deforest","De",e));
     vector<Price> f = {Price("",0)};
     sl.push_back(new Structure("ruins","Ru",f));
+    vector<Price> g = {Price("Wa",150),Price("Go",200),Price("St",200)};
+    sl.push_back(new Structure("drained","Cl",g));
+    vector<Price> h = {Price("Wa",200),Price("St",200),Price("Wo",200)};
+    sl.push_back(new Structure("hardened","Ha",h));
     structure_types = sl;
 
 }
@@ -118,6 +122,18 @@ void Game::update(){
     Game::instance().updateResources();
     GuiManager::instance().fillResourceList();
     GuiManager::instance().setTimeBox( Updater::instance().getDuration()/1000 );
+    int x = Updater::instance().getTime();
+    x++;
+    if(x == 9){
+        if(Game::instance().getVx() != 444){
+        Game::instance().getSquare(Game::instance().getVx(),Game::instance().getVy())->setBurn(false);
+        }
+        x = 0;
+        Updater::instance().setTime(x);
+    }
+    else{
+        Updater::instance().setTime(x);
+    }
 }
 
 bool Game::applyCommand(string command) {
@@ -237,7 +253,7 @@ void Game::setResources(vector<Resource *> vr) {
 }
 void Updater::eventrun(){
     if (LevelManager::instance().getRand()){
-        int random = random_int(0,6);
+        int random = 7;
         if(random == 0){
           //spontaneously give a player 50 of a resource
             int goodInt = random_int(0,3);
@@ -297,7 +313,6 @@ void Updater::eventrun(){
             QString ht = ht.fromStdString(to_string(rndHei));
             QString wi = wi.fromStdString(to_string(rndWid));
             QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Random Event!","Oh no! Flames have burnt " +  wi + "," + ht +" to a crisp! Only some grass remains.",0,0);
-
         }
         }
         if(random == 5){
@@ -310,13 +325,30 @@ void Updater::eventrun(){
             if (foo == true){
             QString ht = ht.fromStdString(to_string(rndHei));
             QString wi = wi.fromStdString(to_string(rndWid));
-            QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Random Event!","Oh no! Flames have burnt " +  wi + "," + ht +" to a crisp! Only some grass remains.",0,0);
+            QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Random Event!","Oh no! An earthquake has split " +  wi + "," + ht +" open! A wide chasm now exists.",0,0);
         }
         }
         if(random == 6){
-            QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Lucky","Nothing Happened.... this time.",0,0);
+            QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Lucky.","Nothing Happened.... this time.",0,0);
         }
+        if(random == 7){
+            if(Game::instance().getVolc()){
 
+                int height = Game::instance().getHeight();
+                int width = Game::instance().getWidth();
+                int rndWid = random_int(0,width-1);
+                int rndHei = random_int(0,height-1);
+                bool foo = LevelManager::instance().eruption(rndHei,rndWid);
+                if (foo == true){
+                QString ht = ht.fromStdString(to_string(rndHei));
+                QString wi = wi.fromStdString(to_string(rndWid));
+                QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Random Event!","Oh no! The volcano is erupting and has set " +  wi + "," + ht + "on fire!",0,0);
+                }
+            }
+            else{
+                QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Lucky.","Nothing Happened.... this time.",0,0);
+            }
+        }
     else{
 
     }
@@ -453,6 +485,38 @@ Structure *Game::resourceCheck(Player *owner,string type){
             owner->setWater(newwater);
             owner->setGold(newgold);
             return de;
+        }
+    }
+    if (type == "Sw"){
+        int gold = owner->getGold();
+        int water = owner->getWater();
+        int stone = owner->getStone();
+        if (water >= 150 && gold >= 200 && stone >= 200){
+          Structure *cl = Game::instance().getStructure("Cl");
+          gold -= 200;
+          water -= 150;
+          stone -= 200;
+          owner->setWater(water);
+          owner->setGold(gold);
+          owner->setStone(stone);
+          owner->setSwamped(false);
+          return cl;
+        }
+    }
+    if (type == "La"){
+        int stone = owner->getStone();
+        int water = owner->getWater();
+        int wood = owner->getWood();
+        if (water >=200 && stone >= 200 && wood >= 200 ){
+            Structure *ha = Game::instance().getStructure("Ha");
+            wood  -= 200;
+            water -= 200;
+            stone -= 200;
+            owner->setWater(water);
+            owner->setWood(wood);
+            owner->setStone(stone);
+            volcano = false;
+            return ha;
         }
     }
     return nullptr;
