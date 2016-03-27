@@ -3,6 +3,7 @@
 #include "network.h"
 #include <QMainWindow>
 #include <QSignalMapper>
+#include <QTcpSocket>
 #include "cheater.h"
 namespace Ui {
 class RoadRace;
@@ -18,8 +19,13 @@ public:
     //title *child;
 private slots:
     void on_btnStuff_clicked();
+
     void dataReceived();
     void serverDisconnected();
+
+    void connect_server();
+    void send();
+
     void loadFile();
 
     void on_btnOpenGame_clicked();
@@ -31,8 +37,8 @@ private slots:
     void on_tst2Btn_clicked();
 private:
     Ui::RoadRace *ui;
-    QTcpSocket *server;
-    QSignalMapper *signalMapper;
+    QTcpSocket *socket;
+     QSignalMapper *signalMapper;
 };
 
 #endif // ROADRACE_H
