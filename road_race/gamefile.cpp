@@ -5,6 +5,7 @@
 #include "utils.h"
 #include <iostream>
 
+
 std::string GameFileManager::toGameFile() {
 
     std::string output = "";
@@ -193,7 +194,9 @@ GameFileManager::GameFileManager (std::vector<std::string> contents ) {
                            addition = square[1],
                            ownerName = square[2];
 
-
+                   if(terrain == "La"){
+                       Game::instance().setVolc(true);
+                   }
                          if(ownerName == "No"){
                              Player *noOne = nullptr;
                               squares[i].push_back( new Square(terrain,addition,noOne));

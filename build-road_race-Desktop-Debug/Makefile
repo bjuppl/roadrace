@@ -370,21 +370,24 @@ compiler_rcc_make_all: qrc_resources.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) qrc_resources.cpp
 qrc_resources.cpp: ../road_race/resources.qrc \
-		../road_race/forrest.jpg \
-		../road_race/water.jpg \
-		../road_race/canyon.jpg \
-		../road_race/bridge.jpg \
-		../road_race/wooden_bridge_clip_art_17037.jpg \
-		../road_race/tunnel.jpg \
-		../road_race/grass.jpg \
 		../road_race/wall.jpg \
-		../road_race/sevenbyseven.rr \
-		../road_race/single-player.rr \
-		../road_race/mountain.jpg \
+		../road_race/canyon.jpg \
+		../road_race/grass.jpg \
+		../road_race/wooden_bridge_clip_art_17037.jpg \
+		../road_race/swamp.jpg \
 		../road_race/boat.jpg \
+		../road_race/single-player.rr \
+		../road_race/lava.jpg \
 		../road_race/gamefile.rr \
+		../road_race/mountain.jpg \
+		../road_race/water.jpg \
+		../road_race/bridge.jpg \
+		../road_race/cleared.png \
+		../road_race/forrest.jpg \
+		../road_race/random.rr \
 		../road_race/win.jpg \
-		../road_race/cleared.png
+		../road_race/tunnel.jpg \
+		../road_race/sevenbyseven.rr
 	/usr/lib/x86_64-linux-gnu/qt5/bin/rcc -name resources ../road_race/resources.qrc -o qrc_resources.cpp
 
 compiler_moc_header_make_all: moc_roadrace.cpp moc_gamemodel.cpp moc_squarelabel.cpp moc_cheater.cpp
@@ -406,7 +409,6 @@ moc_gamemodel.cpp: ../road_race/square.h \
 		../road_race/network.h \
 		../road_race/cheater.h \
 		../road_race/squarelabel.h \
-		../road_race/levelmanager.h \
 		../road_race/gamemodel.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/user/roadrace/road_race -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../road_race/gamemodel.h -o moc_gamemodel.cpp
 
@@ -421,7 +423,6 @@ moc_squarelabel.cpp: ../road_race/player.h \
 		../road_race/network.h \
 		../road_race/cheater.h \
 		../road_race/squarelabel.h \
-		../road_race/levelmanager.h \
 		../road_race/squarelabel.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/user/roadrace/road_race -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../road_race/squarelabel.h -o moc_squarelabel.cpp
 
@@ -501,8 +502,7 @@ square.o: ../road_race/square.cpp ../road_race/square.h \
 		../road_race/roadrace.h \
 		../road_race/network.h \
 		../road_race/cheater.h \
-		../road_race/squarelabel.h \
-		../road_race/levelmanager.h
+		../road_race/squarelabel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o square.o ../road_race/square.cpp
 
 gamefile.o: ../road_race/gamefile.cpp ../road_race/gamefile.h \
@@ -515,8 +515,7 @@ gamefile.o: ../road_race/gamefile.cpp ../road_race/gamefile.h \
 		ui_roadrace.h \
 		../road_race/roadrace.h \
 		../road_race/network.h \
-		../road_race/cheater.h \
-		../road_race/levelmanager.h
+		../road_race/cheater.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gamefile.o ../road_race/gamefile.cpp
 
 player.o: ../road_race/player.cpp ../road_race/player.h \
@@ -546,8 +545,7 @@ gui.o: ../road_race/gui.cpp ../road_race/gui.h \
 		../road_race/player.h \
 		../road_race/squarelabel.h \
 		../road_race/gamefile.h \
-		../road_race/utils.h \
-		../road_race/levelmanager.h
+		../road_race/utils.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gui.o ../road_race/gui.cpp
 
 levelmanager.o: ../road_race/levelmanager.cpp ../road_race/levelmanager.h \
@@ -574,8 +572,7 @@ squarelabel.o: ../road_race/squarelabel.cpp ../road_race/squarelabel.h \
 		ui_roadrace.h \
 		../road_race/roadrace.h \
 		../road_race/network.h \
-		../road_race/cheater.h \
-		../road_race/levelmanager.h
+		../road_race/cheater.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o squarelabel.o ../road_race/squarelabel.cpp
 
 cheater.o: ../road_race/cheater.cpp ../road_race/cheater.h \

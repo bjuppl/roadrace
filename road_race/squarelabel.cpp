@@ -85,6 +85,9 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
                 c1=nullptr;
                 c2=nullptr;
                 c3=nullptr;
+                if(proc->getType() == "Sw"){
+                newowner->setSwamped(true);
+                }
                 proc->setOwner(newowner);
                 owner = QString::fromUtf8(newowner->getName().c_str());
             }
@@ -158,6 +161,9 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
                 c1=nullptr;
                 c2=nullptr;
                 c3=nullptr;
+                if(proc->getType() == "Sw"){
+                    newowner->setSwamped(true);
+                }
                 proc->setOwner(newowner);
                 owner = QString::fromStdString(newowner->getName());
             }
@@ -244,6 +250,9 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
                 c3=nullptr;
                 c4=nullptr;
                 proc->setOwner(newowner);
+                if(proc->getType() == "Sw"){
+                    newowner->setSwamped(true);
+                }
                 if ( newowner != nullptr ) {
                     owner = QString::fromUtf8(newowner->getName().c_str());
                 }
@@ -299,7 +308,18 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
         QPixmap map(":/tunnel");
         this->setPixmap(map.scaled(QSize(size,size), Qt::KeepAspectRatio));
     }
-
+    if(this->square->getAddition() == "Cl"){
+        vector<vector<Square*>> squares = Game::instance().getSquares();
+        int size = GuiManager::instance().getUi()->gridLayoutWidget->width()/squares.size()/2;
+        QPixmap map(":/grass");
+        this->setPixmap(map.scaled(QSize(size,size), Qt::KeepAspectRatio));
+    }
+    if(this->square->getAddition() == "Ha"){
+        vector<vector<Square*>> squares = Game::instance().getSquares();
+        int size = GuiManager::instance().getUi()->gridLayoutWidget->width()/squares.size()/2;
+        QPixmap map(":/bridge");
+        this->setPixmap(map.scaled(QSize(size,size), Qt::KeepAspectRatio));
+    }
     emit clicked();
 
 }
@@ -321,8 +341,10 @@ void SquareLabel::enterEvent(QHoverEvent *event){
 
 QPixmap SquareLabel::setmap(string image){
 
-
-    if(image == "Fo"){
+    QPixmap map(":/grass");
+    QPixmap result = map.scaled(QSize(Square::getSize(),Square::getSize()), Qt::KeepAspectRatio);
+    return result;
+    /*if(image == "Fo"){
         QPixmap map(":/forrest");
         QPixmap result = map.scaled(QSize(Square::getSize(),Square::getSize()), Qt::KeepAspectRatio);
 
@@ -352,7 +374,7 @@ QPixmap SquareLabel::setmap(string image){
         QPixmap map(":/win");
         QPixmap result = map.scaled(QSize(Square::getSize(),Square::getSize()), Qt::KeepAspectRatio);
         return result;
-    }
+    */
 
 }
 void SquareLabel::leaveEvent(QHoverEvent *event){
@@ -407,6 +429,14 @@ bool Square::canGet(Square *prev){
     }
     if(prev->getType() == "Fo"){
         if(prev->getAddition() == "De"){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    if(prev->getType() == "La"){
+        if(prev->getAddition() == "Ha"){
             return true;
         }
         else{

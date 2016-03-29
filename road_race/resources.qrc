@@ -6,7 +6,7 @@
         <file alias="mountain">mountain.jpg</file>
         <file alias="wall">wall.jpg</file>
         <file alias="water">water.jpg</file>
-        <file alias="bridge">wooden_bridge_clip_art_17037.jpg</file>
+        <file alias="bridge1">wooden_bridge_clip_art_17037.jpg</file>
         <file alias="sampleGame">gamefile.rr</file>
         <file alias="single-player">single-player.rr</file>
         <file alias="win">win.jpg</file>
@@ -15,5 +15,8 @@
         <file alias="seven">sevenbyseven.rr</file>
         <file alias="cleared">cleared.png</file>
         <file alias="tunnel">tunnel.jpg</file>
+        <file alias="swamp">swamp.jpg</file>
+        <file alias="lava">lava.jpg</file>
+        <file alias="randomfile">random.rr</file>
     </qresource>
 </RCC>

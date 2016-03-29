@@ -35,6 +35,7 @@ class Square {
     int width, height;
     int x,y;
     string color;
+    bool burning;
 public:
     Square(string type_,string addition_,Player *owner_) : id(count), type(type_), image(type_), owner(owner_), addition(addition_) { count++; }
     Square(string type_,string addition_) : id(count), type(type_), image(type_), owner(NULL), addition(addition_) { count++; }
@@ -56,6 +57,7 @@ public:
     int getWidth () { return width; }
     std::string getResourceType();
     int getId() { return id; }
+    bool getBurn(){return burning;}
 
     bool canGet(Square *prev);
     static int getSize() { return size; }
@@ -77,6 +79,7 @@ public:
     void setY(int ny){y = ny;}
     Structure *getStruct(){return path;}
     void setStruct(Structure *nstruct){path = nstruct;}
+    void setBurn(bool burn){burning = burn;}
 };
 
 class ForestSq: public Square{
