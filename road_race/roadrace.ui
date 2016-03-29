@@ -369,6 +369,8 @@ p, li { white-space: pre-wrap; }
     </property>
     <property name="text">
      <string>Generate a random World! </string>
+     </property>
+     </widget>
    <widget class="QPushButton" name="btnSendToServer">
     <property name="geometry">
      <rect>
