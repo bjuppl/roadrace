@@ -217,3 +217,14 @@ void GuiManager::endGame(SquareLabel* x)
 
 
 
+
+void GuiManager::on_btnSendToServer_clicked()
+{
+    //window->send();
+}
+
+void GuiManager::on_btnConnect_clicked()
+{
+
+    //window->connect_server();
+}

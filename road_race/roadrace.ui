@@ -17,10 +17,10 @@
    <widget class="QPushButton" name="btnStuff">
     <property name="geometry">
      <rect>
-      <x>670</x>
-      <y>20</y>
+      <x>170</x>
+      <y>0</y>
       <width>115</width>
-      <height>32</height>
+      <height>61</height>
      </rect>
     </property>
     <property name="text">
@@ -30,7 +30,7 @@
    <widget class="QToolButton" name="btnOpenGame">
     <property name="geometry">
      <rect>
-      <x>350</x>
+      <x>700</x>
       <y>10</y>
       <width>101</width>
       <height>41</height>
@@ -43,7 +43,7 @@
    <widget class="QLineEdit" name="iptGameFileName">
     <property name="geometry">
      <rect>
-      <x>32</x>
+      <x>390</x>
       <y>10</y>
       <width>311</width>
       <height>41</height>
@@ -217,8 +217,8 @@ font-size:30px;</string>
    <widget class="QTextBrowser" name="textBrowser">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>351</y>
+      <x>10</x>
+      <y>270</y>
       <width>111</width>
       <height>71</height>
      </rect>
@@ -237,10 +237,10 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="helpBtn">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>820</x>
       <y>0</y>
       <width>85</width>
-      <height>27</height>
+      <height>61</height>
      </rect>
     </property>
     <property name="text">
@@ -250,8 +250,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QRadioButton" name="EsyBtn">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>460</y>
+      <x>10</x>
+      <y>330</y>
       <width>102</width>
       <height>22</height>
      </rect>
@@ -263,8 +263,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QRadioButton" name="MedBtn">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>480</y>
+      <x>10</x>
+      <y>350</y>
       <width>121</width>
       <height>22</height>
      </rect>
@@ -276,8 +276,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QRadioButton" name="HardBtn">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>500</y>
+      <x>10</x>
+      <y>370</y>
       <width>111</width>
       <height>22</height>
      </rect>
@@ -289,10 +289,10 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="cheatBtn">
     <property name="geometry">
      <rect>
-      <x>570</x>
+      <x>10</x>
       <y>0</y>
-      <width>85</width>
-      <height>27</height>
+      <width>91</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="text">
@@ -302,10 +302,10 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="SaveBtn">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>560</y>
-      <width>111</width>
-      <height>27</height>
+      <x>10</x>
+      <y>390</y>
+      <width>131</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">
@@ -315,10 +315,10 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="tst2Btn">
     <property name="geometry">
      <rect>
-      <x>810</x>
-      <y>20</y>
-      <width>101</width>
-      <height>31</height>
+      <x>280</x>
+      <y>0</y>
+      <width>111</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="text">
@@ -352,6 +352,65 @@ p, li { white-space: pre-wrap; }
     </property>
     <property name="text">
      <string>0</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnSendToServer">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>460</y>
+      <width>115</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Send to Server</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="iptServerMsg">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>440</y>
+      <width>113</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="txtServerOutput">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>490</y>
+      <width>151</width>
+      <height>141</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="iptServerName">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>640</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>localhost</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnConnect">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>640</y>
+      <width>81</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Connect</string>
     </property>
    </widget>
   </widget>
