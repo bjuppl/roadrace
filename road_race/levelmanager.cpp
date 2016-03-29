@@ -1,6 +1,12 @@
 #include "levelmanager.h"
 #include "gamemodel.h"
 #include "squarelabel.h"
+#include <random>
+int random_int1(int min, int max) {
+    static std::default_random_engine engine { std::random_device{}() };
+    std::uniform_int_distribution<int> distro{min, max};
+    return distro(engine);
+}
 LevelManager *LevelManager::instance_ = nullptr;
 
 LevelManager& LevelManager::instance() {
@@ -21,6 +27,7 @@ std::vector<std::string> LevelManager::getLevel(std::string level ) {
     std::vector<std::string> contents;
     const std::string test = "test";
     const std::string seven = "seven";
+    const std::string random = "randomfile";
     if ( level == test ) {
         int o = 1;
         if ( o == 1 ) { contents = resourceFileContents("single-player"); }
@@ -28,6 +35,10 @@ std::vector<std::string> LevelManager::getLevel(std::string level ) {
     }
     if (level == seven){
         contents = resourceFileContents("seven");
+    }
+    if (level == random){
+
+        contents = LevelManager::instance().randWorld();
     }
     return contents;
 
@@ -187,3 +198,121 @@ bool LevelManager::quakeSquare(int hit, int wid){
         return false;
     }
 }
+bool LevelManager::eruption(int hit, int wid){
+    Square *victim = Game::instance().getSquare(wid,hit);
+    Structure *killStruct = Game::instance().getStructure("Ru");
+    if(victim->getImage() != "Ri" && victim->getOwner() != nullptr){
+    victim->setStruct(killStruct);
+    victim->setAddition("No");
+    SquareLabel *vicLbl = victim->getLabel();
+    int size = GuiManager::instance().getUi()->gridLayoutWidget->width()/Game::instance().getSize()/2;
+    QSize size1(size,size);
+    vicLbl->setPixmap(GuiManager::instance().setmap(victim,size1));
+    burn = victim->getResourceType();
+    Game::instance().setVPos(wid,hit);
+    victim->setBurn(true);
+    return true;
+    }
+    else{
+        return false;
+    }
+}
+vector<string> LevelManager::randWorld(){
+    //ofstream stream("random2.rr");
+    vector<string> contents;
+    contents.push_back("RoadRaceDoc");
+    contents.push_back("00000000000");
+    contents.push_back("alias Name none Password Irrelevant");
+    contents.push_back("round 1");
+    contents.push_back("players me");
+    contents.push_back("info me resources Go,0 Wa,0 Sto,0 Wo,0 status score,00000000 start_time,0000000");
+    int randHgt = random_int1(5,7);
+    int randWid = randHgt;
+    int lol = randHgt;
+    contents.push_back("board " + to_string(lol) + "," + to_string(randWid));
+    contents.push_back("Ca,Br,me Fo,No,No");
+    int comp = (randHgt-2);
+    int index = 0;
+    string sqstr;
+    while(index < comp){
+
+        int typeint = random_int1(0,5);
+        if(typeint == 0){
+            sqstr += " Pl,No,No";
+        }
+        else if (typeint == 1){
+            sqstr += " Fo,No,No";
+        }
+        else if (typeint == 2){
+            sqstr += " Ri,No,No";
+        }
+        else if (typeint == 3){
+            sqstr += " Ca,No,No";
+        }
+        else if (typeint == 4){
+            sqstr += " Mo,No,No";
+        }
+        else if (typeint == 5){
+            sqstr += " Sw,No,No";
+        }
+        index++;
+    }
+    contents.push_back(sqstr);
+    sqstr = "";
+    index = 1;
+    bool volcano = false;
+    while(index < randHgt){
+        int index2 = 0;
+
+        while(index2 < randWid){
+            int typeint = random_int1(0,6);
+            if (index == (randHgt-1) && index2 == (randWid-1)){
+                sqstr += "Wi,No,No";
+                break;
+            }
+            if(typeint == 0){
+                sqstr += "Pl,No,No ";
+            }
+            else if (typeint == 1){
+                sqstr += "Fo,No,No ";
+            }
+            else if (typeint == 2){
+                sqstr += "Ri,No,No ";
+            }
+            else if (typeint == 3){
+                sqstr += "Ca,No,No ";
+            }
+            else if (typeint == 4){
+                sqstr += "Mo,No,No ";
+            }
+            else if (typeint == 5){
+                sqstr += "Sw,No,No ";
+            }
+            else if (typeint == 6){
+                if(volcano == false){
+                sqstr += "La,No,No ";
+                volcano = true;
+                }
+                else{
+                    sqstr += "Mo,No,No ";
+                }
+            }
+
+
+            index2++;
+        }
+        index++;
+        contents.push_back(sqstr);
+        sqstr = "";
+    }
+
+    contents.push_back("EndRoadRaceDoc");
+    return contents;
+    //ofstream ranFile("random.rr");
+
+    //ranFile << contents.c_str();
+    //ranFile.close();
+    //stream << contents;
+    //stream.close();
+}
+

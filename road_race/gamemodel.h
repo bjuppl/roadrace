@@ -48,6 +48,7 @@ class Game{
   private:
 
     bool isLocalGame {false};
+    bool volcano;
     vector<vector<Square*>> squares;
     vector<Resource*> resource_types;
     vector<Structure*> structure_types;
@@ -61,6 +62,8 @@ class Game{
     Player *curPlayer;
     int width, height;
     string diff;
+    int vx=444;
+    int vy=444;
 
    Game();
   public:
@@ -107,6 +110,9 @@ public:
     int getHeight() { return height; }
     bool getIsLocalGame() { return isLocalGame; }
     Player *getCurPlayer(  ) { return curPlayer; }
+    bool getVolc(){return volcano;}
+    int getVx(){return vx;}
+    int getVy(){return vy;}
 
     void setCurPlayer( Player* c ) { curPlayer = c; }
     void setIsLocalGame( bool tf) { isLocalGame = tf; }
@@ -123,10 +129,9 @@ public:
     void setPlayerList ( vector<Player*> pl ) { player_list = pl; }
     void setWidth ( int w ) { width = w; }
     void setHeight ( int h ) { height = h; }
-    int getSize(){
-        return squares.size();
-    }
-
+    int getSize(){return squares.size();}
+    void setVolc(bool v){ volcano = v;}
+    void setVPos(int x, int y){ vx = x;vy = y;}
     Structure *resourceCheck(Player *owner,string type);
 };
 class Updater : public QObject{
@@ -138,6 +143,7 @@ private:
     size_t duration;
     QTimer *timer;
     QTimer *eventTime;
+    int burnTime=0;
     int interval_ms{1000}; //default
     Updater(){
             eventTime = new QTimer();
@@ -148,7 +154,7 @@ private:
 
     static Updater *instance_;
 private slots:
-    void run() { duration = time.currentMSecsSinceEpoch() - started_at;Game::instance().update();  }
+    void run() { duration = time.currentMSecsSinceEpoch() - started_at;Game::instance().update();}
     void eventrun();
 public:
     static Updater &instance();
@@ -156,6 +162,8 @@ public:
     void start();
     void stop();
 
+    int getTime(){return burnTime;}
+    void setTime(int time){burnTime = time;}
     size_t getStartTime () { return started_at; }
     size_t getDuration() { return time.currentMSecsSinceEpoch() - started_at; }
     int getMs() { return interval_ms; }

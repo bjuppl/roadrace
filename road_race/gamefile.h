@@ -12,7 +12,7 @@ class GameFileManager {
 public:
     GameFileManager( std::vector<std::string> contents );
     static GameFileManager *fromFile( std::string fileName );
-
+    GameFileManager(){}
     std::string toGameFile();
 
 };

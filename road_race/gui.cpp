@@ -130,6 +130,16 @@ QPixmap GuiManager::setmap(Square *sq, QSize size){
             QPixmap result = map.scaled(size, Qt::KeepAspectRatio);
             return result;
         }
+        if(image == "Sw"){
+            QPixmap map(":/swamp");
+            QPixmap result = map.scaled(size, Qt::KeepAspectRatio);
+            return result;
+        }
+        if(image == "La"){
+            QPixmap map(":/lava");
+            QPixmap result = map.scaled(size, Qt::KeepAspectRatio);
+            return result;
+        }
     } else {
         if(image == "Fo"){
             QPixmap map(":/cleared");
@@ -160,8 +170,18 @@ QPixmap GuiManager::setmap(Square *sq, QSize size){
             QPixmap map(":/win");
             QPixmap result = map.scaled(size, Qt::KeepAspectRatio);
             return result;
-    }
+        }
+        if(image == "Sw"){
+            QPixmap map(":/grass");
+            QPixmap result = map.scaled(size, Qt::KeepAspectRatio);
+            return result;
+        }
+       if(image == "La"){
+           QPixmap map(":/bridge");
+           QPixmap result = map.scaled(size, Qt::KeepAspectRatio);
+           return result;
 
+       }
 }
 
 }
@@ -184,7 +204,7 @@ void GuiManager::newDiff(){
 
 
 void GuiManager::BuildStruct(Square *proc){
- if(proc->getAddition() == "No" && proc->getType() != "Pl"){
+    if(proc->getAddition() == "No" && proc->getType() != "Pl"){
     QMessageBox::StandardButton canBuild;
     canBuild = QMessageBox::question(GuiManager::instance().getUi()->gridLayoutWidget,"You clicked one of your own squares!","Build a structure?",QMessageBox::Yes|QMessageBox::No);
     if (canBuild == QMessageBox::Yes){
@@ -194,6 +214,9 @@ void GuiManager::BuildStruct(Square *proc){
      if(struc != nullptr){
      proc->setStruct(struc);
      proc->setAddition(struc->shortName);
+     if(struc->shortName == "Ha"){
+         Game::instance().setVolc(false);
+     }
      }
     else{
 
@@ -202,8 +225,8 @@ void GuiManager::BuildStruct(Square *proc){
 
      }
 }
-
 }
+
 }
 void GuiManager::endGame(SquareLabel* x)
 {

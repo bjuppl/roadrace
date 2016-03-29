@@ -15,6 +15,8 @@ private:
     int startTime;
     std::string name = "";
     std::vector<Square*> squareList;
+    bool swamped;
+
 public:
     Player(std::string newName) : color("black"), goldCount(0), woodCount(0), stoneCount(0), waterCount(0),name(newName) { }
        void setName(std::string name2){ name = name2;}
@@ -39,6 +41,7 @@ public:
        void setWater(int water){ waterCount = water;}
        void setScore(int sc){ score = sc;}
        void setStartTime(int st){ startTime = st;}
+       void setSwamped(bool sw){swamped = sw;}
 };
 
 
