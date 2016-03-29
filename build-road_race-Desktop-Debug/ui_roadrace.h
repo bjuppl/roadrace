@@ -57,6 +57,8 @@ public:
     QPushButton *cheatBtn;
     QPushButton *SaveBtn;
     QPushButton *tst2Btn;
+    QLabel *label_2;
+    QLabel *lblTime;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -124,7 +126,7 @@ public:
         name1->setGeometry(QRect(149, 70, 20, 20));
         textBrowser = new QTextBrowser(centralWidget);
         textBrowser->setObjectName(QStringLiteral("textBrowser"));
-        textBrowser->setGeometry(QRect(20, 241, 111, 181));
+        textBrowser->setGeometry(QRect(20, 351, 111, 71));
         textBrowser->setStyleSheet(QStringLiteral("background:transparent;"));
         helpBtn = new QPushButton(centralWidget);
         helpBtn->setObjectName(QStringLiteral("helpBtn"));
@@ -147,6 +149,13 @@ public:
         tst2Btn = new QPushButton(centralWidget);
         tst2Btn->setObjectName(QStringLiteral("tst2Btn"));
         tst2Btn->setGeometry(QRect(810, 20, 101, 31));
+        label_2 = new QLabel(centralWidget);
+        label_2->setObjectName(QStringLiteral("label_2"));
+        label_2->setGeometry(QRect(20, 220, 121, 16));
+        label_2->setStyleSheet(QStringLiteral("font-weight:bold;"));
+        lblTime = new QLabel(centralWidget);
+        lblTime->setObjectName(QStringLiteral("lblTime"));
+        lblTime->setGeometry(QRect(20, 240, 59, 16));
         RoadRace->setCentralWidget(centralWidget);
         mainToolBar = new QToolBar(RoadRace);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -181,15 +190,17 @@ public:
         textBrowser->setHtml(QApplication::translate("RoadRace", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Droid Sans'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'.Helvetica Neue DeskInterface';\">Currently in single-player mode. Upgrade for more options.</span></p></body></html>", 0));
+"</style></head><body style=\" font-family:'.Helvetica Neue DeskInterface'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">Currently in single-player mode. Upgrade for more options.</span></p></body></html>", 0));
         helpBtn->setText(QApplication::translate("RoadRace", "Help!", 0));
-        EsyBtn->setText(QApplication::translate("RoadRace", "n00b Mode", 0));
-        MedBtn->setText(QApplication::translate("RoadRace", "normal Mode", 0));
-        HardBtn->setText(QApplication::translate("RoadRace", "l33t Mode", 0));
+        EsyBtn->setText(QApplication::translate("RoadRace", "Easy Mode", 0));
+        MedBtn->setText(QApplication::translate("RoadRace", "Normal Mode", 0));
+        HardBtn->setText(QApplication::translate("RoadRace", "Hard Mode", 0));
         cheatBtn->setText(QApplication::translate("RoadRace", "Cheater...", 0));
         SaveBtn->setText(QApplication::translate("RoadRace", "Save the Game", 0));
         tst2Btn->setText(QApplication::translate("RoadRace", "Use 7X7 test", 0));
+        label_2->setText(QApplication::translate("RoadRace", "Time (sec)", 0));
+        lblTime->setText(QApplication::translate("RoadRace", "0", 0));
     } // retranslateUi
 
 };

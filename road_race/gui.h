@@ -1,6 +1,7 @@
 #ifndef GUI_H
 #define GUI_H
 
+#include <QObject>
 #include "ui_roadrace.h"
 #include "roadrace.h"
 #include "gamemodel.h"
@@ -9,17 +10,21 @@
 
 class Square;
 
-class GuiManager {
-
+class GuiManager : QObject {
+Q_OBJECT
 private:
     static GuiManager *instance_;
     Ui::RoadRace *ui;
+    RoadRace *window;
     bool end;
     GuiManager(){}
  public:
     static GuiManager& instance();
     void setUi ( Ui::RoadRace *ui_ ) { ui = ui_; }
+    void setWindow ( RoadRace *win_ ) { window = win_; }
+    void setTimeBox( size_t time ) { ui->lblTime->setText(QString::fromStdString(std::to_string(time))); }
     Ui::RoadRace *getUi ( ) { return ui; }
+    RoadRace *getWindow() { return window; }
 
     ~GuiManager() { delete instance_; }
 
@@ -41,10 +46,12 @@ private:
 
 private slots:
 
-    void on_helpBtn_pressed();
+    //void on_helpBtn_pressed();
 
 
 
+    void on_btnSendToServer_clicked();
+    void on_btnConnect_clicked();
 };
 
 

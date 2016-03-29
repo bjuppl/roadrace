@@ -6,6 +6,7 @@
 
 #include <QObject>
 #include <QTimer>
+#include <QTime>
 
 #include "square.h"
 #include "gamefile.h"
@@ -13,7 +14,7 @@
 
 #include "utils.h"
 #include "gui.h"
-#include "levelmanager.h"
+
 using namespace std;
 
 class GuiManager;
@@ -40,18 +41,6 @@ struct Structure {
     Structure(std::string name_, std::string shortName_, vector<Price> cost_): name(name_), shortName(shortName_), cost(cost_) {}
 };
 
-class Boat: public Structure{
-
-};
-class Tunnel: public Structure{
-
-};
-class Wall: public Structure{
-
-};
-class Bridge: public Structure{
-
-};
 
 //the actual game model
 class Game{
@@ -96,6 +85,8 @@ public:
 
     void updateResources();
 
+    void purchaseAddition( Square* source );
+
     //getters n setters
 
     vector<Structure*> getStructures() { return structure_types; }
@@ -132,30 +123,41 @@ public:
     void setPlayerList ( vector<Player*> pl ) { player_list = pl; }
     void setWidth ( int w ) { width = w; }
     void setHeight ( int h ) { height = h; }
+    int getSize(){
+        return squares.size();
+    }
+
     Structure *resourceCheck(Player *owner,string type);
 };
 class Updater : public QObject{
     Q_OBJECT
 
 private:
+    QDateTime time;
+    size_t started_at;
+    size_t duration;
     QTimer *timer;
+    QTimer *eventTime;
     int interval_ms{1000}; //default
-    Updater() {
-
+    Updater(){
+            eventTime = new QTimer();
             timer = new QTimer();
             connect(timer,SIGNAL(timeout()),this,SLOT(run()));
+            connect(eventTime,SIGNAL(timeout()),this,SLOT(eventrun()));
     }
 
     static Updater *instance_;
 private slots:
-    void run() { Game::instance().update(); }
-
+    void run() { duration = time.currentMSecsSinceEpoch() - started_at;Game::instance().update();  }
+    void eventrun();
 public:
     static Updater &instance();
 
     void start();
     void stop();
 
+    size_t getStartTime () { return started_at; }
+    size_t getDuration() { return time.currentMSecsSinceEpoch() - started_at; }
     int getMs() { return interval_ms; }
     void setMs ( int ms ) { interval_ms = ms; }
     ~Updater () { delete instance_; delete timer; }
@@ -222,10 +224,14 @@ public:
 //for random events
 class eventHandler{
     private:
-    string type;
+
     string image;
     int length;
 public:
+    eventHandler(){
+
+    }
+
     virtual bool execute() = 0;
 };
 

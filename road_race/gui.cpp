@@ -184,7 +184,7 @@ void GuiManager::newDiff(){
 
 
 void GuiManager::BuildStruct(Square *proc){
- if(proc->getAddition() == "No"){
+ if(proc->getAddition() == "No" && proc->getType() != "Pl"){
     QMessageBox::StandardButton canBuild;
     canBuild = QMessageBox::question(GuiManager::instance().getUi()->gridLayoutWidget,"You clicked one of your own squares!","Build a structure?",QMessageBox::Yes|QMessageBox::No);
     if (canBuild == QMessageBox::Yes){
@@ -196,7 +196,10 @@ void GuiManager::BuildStruct(Square *proc){
      proc->setAddition(struc->shortName);
      }
     else{
+
+
          QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Alert!","You don't have enough resources!",0);
+
      }
 }
 
@@ -205,7 +208,7 @@ void GuiManager::BuildStruct(Square *proc){
 void GuiManager::endGame(SquareLabel* x)
 {
     Updater::instance().stop();
-    QMessageBox::information(x,"Congratualtions!!","You have won the game! But can you do it again?.",0,0);
+    QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Congratualtions!!","You have won the game! But can you do it again?.",0,0);
 }
 
 
@@ -214,3 +217,14 @@ void GuiManager::endGame(SquareLabel* x)
 
 
 
+
+void GuiManager::on_btnSendToServer_clicked()
+{
+    //window->send();
+}
+
+void GuiManager::on_btnConnect_clicked()
+{
+
+    //window->connect_server();
+}

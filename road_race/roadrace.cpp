@@ -22,9 +22,11 @@ RoadRace::RoadRace(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    server = new QTcpSocket(this);
-    connect(server, &QTcpSocket::readyRead, this, &RoadRace::dataReceived);
-    connect(server, &QTcpSocket::disconnected, this, &RoadRace::serverDisconnected);
+    socket = new QTcpSocket(this);
+    connect(socket, &QTcpSocket::readyRead, this, &RoadRace::dataReceived);
+   connect(socket, &QTcpSocket::disconnected, this, &RoadRace::serverDisconnected);
+   connect(ui->btnConnect,SIGNAL(clicked()),this,SLOT(connect_server()));
+   connect(ui->btnSendToServer,SIGNAL(clicked()),this,SLOT(send()));
     connect(ui->cheatBtn,SIGNAL(clicked()),this,SLOT(openCheat()));
 }
 
@@ -36,6 +38,7 @@ RoadRace::~RoadRace()
 //handle the btnStuff clicked event
 void RoadRace::on_btnStuff_clicked()
 {
+    if (ui->EsyBtn->isChecked() || ui->MedBtn->isChecked() || ui->HardBtn->isChecked()){
     //Give our GUI manager access to ui
     GuiManager::instance().setUi( ui );
 
@@ -48,18 +51,22 @@ void RoadRace::on_btnStuff_clicked()
     GuiManager::instance().init();
 
     Updater::instance().start();
-    //sets a difficulty based on the radio button, easy if nothing else is pressed
+    //sets a difficulty based on the radio button
    GuiManager::instance().newDiff();
     std::cout << Game::instance().getGameLoader()->toGameFile() << std::endl;
 
     ui->btnStuff->setDisabled(true);
     ui->tst2Btn->setDisabled(true);
+    }
+    else{
+        QMessageBox::information(ui->centralWidget,"Alert","You did not select a difficulty.");
+    }
 }
 //receive data from the serveer
 void RoadRace::dataReceived() {
 
-    while (server->canReadLine()) {
-        QString str = server->readLine();
+    while (socket->canReadLine()) {
+        QString str = socket->readLine();
 
         //ui->txtChat->insertHtml("<b>" + username + "</b>: " + msg + "<br><br>");
     }
@@ -71,6 +78,48 @@ void RoadRace::serverDisconnected()
      ui->statusBar->showMessage("Disconnected.");
      //ui->btnConnect->setEnabled(true);
 }
+
+void RoadRace::connect_server()
+{
+    //QMessageBox::critical(this, "Uh oh", "Please specify name of chat server.");
+
+    QString hostname = ui->iptServerName->text();
+    if (hostname.size() == 0) {
+        QMessageBox::critical(this, "Uh oh", "Please specify name of chat server.");
+        return;
+    }
+    socket->connectToHost(hostname, 3141);
+    if (!socket->waitForConnected())  {
+        QMessageBox::critical(this, "Uh oh", "Unable to connect to server.");
+        return;
+    }
+
+    ui->statusBar->showMessage("Connected.");
+    ui->btnConnect->setEnabled(false);
+    ui->iptServerMsg->setFocus();
+}
+
+
+void RoadRace::send()
+{
+   // QString username = ui->ipt//->text();
+    QString msg = ui->iptServerMsg->text(), username;
+    if (msg.size() > 0) {
+        msg = QString::fromStdString(Game::instance().getCurPlayer()->getName()) + ": " + ui->iptServerMsg->text() + "\n";
+        //QMessageBox::about(this,"We are sending this",msg);
+    } else {
+        return;
+    }
+
+    ui->iptServerMsg->setText("");
+
+    socket->write(msg.toLocal8Bit());
+
+
+   ui->iptServerMsg->setFocus();
+}
+
+
 void RoadRace::loadFile() {
     //Show the squares
     GuiManager::instance().generateSquareGrid();
@@ -87,7 +136,7 @@ void RoadRace::loadFile() {
 
 void RoadRace::on_btnOpenGame_clicked()
 {
-
+if (ui->EsyBtn->isChecked() || ui->MedBtn->isChecked() || ui->HardBtn->isChecked()){
     std::string fileName = ui->iptGameFileName->text().toStdString();
 
     //Open a game with the properties in the given file
@@ -98,14 +147,17 @@ void RoadRace::on_btnOpenGame_clicked()
     GuiManager::instance().init();
 
     Updater::instance().start();
-    //sets a difficulty based on the radio button, easy if nothing else is pressed
+    //sets a difficulty based on the radio button
    GuiManager::instance().newDiff();
     std::cout << Game::instance().getGameLoader()->toGameFile() << std::endl;
 
     ui->btnStuff->setDisabled(true);
+    ui->tst2Btn->setDisabled(true);
 
-       this->loadFile();
-
+}
+    else{
+        QMessageBox::information(ui->centralWidget,"Alert","You did not specify a difficulty!",0,0);
+    }
 
        }
 
@@ -114,7 +166,7 @@ void RoadRace::on_helpBtn_clicked(){
                                                                                          "\n"
                                                                                          "The key for which square gives which resource and requires what structure is as follows:\n"
                                                                                          "\n"
-                                                                                         "Forest squares can be deforested or 75 water and 100 gold. They give Wood as a resource. Look for the squares with green leaves against a white backgroud.\n"
+                                                                                         "Forest squares can be deforested or 75 water and 100 gold. They give Wood as a resource. Look for the squares which resemble camoflauge.\n"
                                                                                          "\n"
                                                                                          "Canyon squares can have a bridge built for 300 stone and 100 wood. They give Gold as a resource. These brown squares resemble mesa rock.\n"
                                                                                          "\n"
@@ -126,7 +178,9 @@ void RoadRace::on_helpBtn_clicked(){
                                                                                          "\n"
                                                                                          "Resources are given at specific time intervals. The amount depends on the difficulty selected.\n"
                                                                                          "\n"
-                                                                                         "The more of a certian square you possess, the of that resource you get. For example owning two river squares gives 30 water per tick on easy versus just 15 for one square."
+                                                                                         "The more of a certain square you possess, the of that resource you get. For example owning two river squares gives 30 water per tick on easy versus just 15 for one square."
+                                                                                         "\n"
+                                                                                         "Files are saved as savefile.rr to your roadrace folder upon clicking the save button, and you can set the number of resouces you currently own with Cheater..."
                                                                                          "\n"
                                                                                          "Now go, and race to the finish!",0,0);
 }
@@ -146,14 +200,16 @@ void RoadRace::openCheat(){
 }
 void RoadRace::on_SaveBtn_clicked()
 {
+    if (Game::instance().getGameLoader() != nullptr){
     string output = Game::instance().getGameLoader()->toGameFile();
     ofstream outfile("savefile.rr");
     outfile << output;
     outfile.close();
+    }
 }
 void RoadRace::on_tst2Btn_clicked()
 {
-
+if (ui->EsyBtn->isChecked() || ui->MedBtn->isChecked() || ui->HardBtn->isChecked()){
     //Give our GUI manager access to ui
     GuiManager::instance().setUi( ui );
 
@@ -172,4 +228,8 @@ void RoadRace::on_tst2Btn_clicked()
 
     ui->btnStuff->setDisabled(true);
     ui->tst2Btn->setDisabled(true);
+}
+    else{
+        QMessageBox::information(ui->centralWidget,"Alert","You did not specify a difficulty!",0,0);
+    }
 }
