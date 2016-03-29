@@ -22,9 +22,11 @@ RoadRace::RoadRace(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    server = new QTcpSocket(this);
-    connect(server, &QTcpSocket::readyRead, this, &RoadRace::dataReceived);
-    connect(server, &QTcpSocket::disconnected, this, &RoadRace::serverDisconnected);
+    socket = new QTcpSocket(this);
+    connect(socket, &QTcpSocket::readyRead, this, &RoadRace::dataReceived);
+   connect(socket, &QTcpSocket::disconnected, this, &RoadRace::serverDisconnected);
+   connect(ui->btnConnect,SIGNAL(clicked()),this,SLOT(connect_server()));
+   connect(ui->btnSendToServer,SIGNAL(clicked()),this,SLOT(send()));
     connect(ui->cheatBtn,SIGNAL(clicked()),this,SLOT(openCheat()));
 }
 
@@ -63,8 +65,8 @@ void RoadRace::on_btnStuff_clicked()
 //receive data from the serveer
 void RoadRace::dataReceived() {
 
-    while (server->canReadLine()) {
-        QString str = server->readLine();
+    while (socket->canReadLine()) {
+        QString str = socket->readLine();
 
         //ui->txtChat->insertHtml("<b>" + username + "</b>: " + msg + "<br><br>");
     }
@@ -76,6 +78,48 @@ void RoadRace::serverDisconnected()
      ui->statusBar->showMessage("Disconnected.");
      //ui->btnConnect->setEnabled(true);
 }
+
+void RoadRace::connect_server()
+{
+    //QMessageBox::critical(this, "Uh oh", "Please specify name of chat server.");
+
+    QString hostname = ui->iptServerName->text();
+    if (hostname.size() == 0) {
+        QMessageBox::critical(this, "Uh oh", "Please specify name of chat server.");
+        return;
+    }
+    socket->connectToHost(hostname, 3141);
+    if (!socket->waitForConnected())  {
+        QMessageBox::critical(this, "Uh oh", "Unable to connect to server.");
+        return;
+    }
+
+    ui->statusBar->showMessage("Connected.");
+    ui->btnConnect->setEnabled(false);
+    ui->iptServerMsg->setFocus();
+}
+
+
+void RoadRace::send()
+{
+   // QString username = ui->ipt//->text();
+    QString msg = ui->iptServerMsg->text(), username;
+    if (msg.size() > 0) {
+        msg = QString::fromStdString(Game::instance().getCurPlayer()->getName()) + ": " + ui->iptServerMsg->text() + "\n";
+        //QMessageBox::about(this,"We are sending this",msg);
+    } else {
+        return;
+    }
+
+    ui->iptServerMsg->setText("");
+
+    socket->write(msg.toLocal8Bit());
+
+
+   ui->iptServerMsg->setFocus();
+}
+
+
 void RoadRace::loadFile() {
     //Show the squares
     GuiManager::instance().generateSquareGrid();
