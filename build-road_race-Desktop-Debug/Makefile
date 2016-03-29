@@ -370,23 +370,24 @@ compiler_rcc_make_all: qrc_resources.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) qrc_resources.cpp
 qrc_resources.cpp: ../road_race/resources.qrc \
-		../road_race/forrest.jpg \
-		../road_race/water.jpg \
-		../road_race/canyon.jpg \
-		../road_race/bridge.jpg \
-		../road_race/tunnel.jpg \
-		../road_race/grass.jpg \
 		../road_race/wall.jpg \
-		../road_race/sevenbyseven.rr \
+		../road_race/canyon.jpg \
+		../road_race/grass.jpg \
+		../road_race/wooden_bridge_clip_art_17037.jpg \
 		../road_race/swamp.jpg \
+		../road_race/boat.jpg \
 		../road_race/single-player.rr \
 		../road_race/lava.jpg \
-		../road_race/mountain.jpg \
-		../road_race/wooden_bridge_clip_art_17037.jpg \
-		../road_race/boat.jpg \
 		../road_race/gamefile.rr \
+		../road_race/mountain.jpg \
+		../road_race/water.jpg \
+		../road_race/bridge.jpg \
+		../road_race/cleared.png \
+		../road_race/forrest.jpg \
+		../road_race/random.rr \
 		../road_race/win.jpg \
-		../road_race/cleared.png
+		../road_race/tunnel.jpg \
+		../road_race/sevenbyseven.rr
 	/usr/lib/x86_64-linux-gnu/qt5/bin/rcc -name resources ../road_race/resources.qrc -o qrc_resources.cpp
 
 compiler_moc_header_make_all: moc_roadrace.cpp moc_gamemodel.cpp moc_squarelabel.cpp moc_cheater.cpp
@@ -527,7 +528,8 @@ player.o: ../road_race/player.cpp ../road_race/player.h \
 		../road_race/roadrace.h \
 		../road_race/network.h \
 		../road_race/cheater.h \
-		../road_race/squarelabel.h
+		../road_race/squarelabel.h \
+		../road_race/levelmanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o player.o ../road_race/player.cpp
 
 utils.o: ../road_race/utils.cpp ../road_race/utils.h

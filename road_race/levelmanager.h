@@ -60,6 +60,7 @@ private:
     bool quakeSquare(int hit, int wid);
     bool eruption(int hit, int wid);
     string getBurn(){return burn;}
+    vector<string> randWorld();
 };
 
 

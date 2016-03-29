@@ -29,6 +29,8 @@ private slots:
     void openCheat();
     void on_SaveBtn_clicked();
     void on_tst2Btn_clicked();
+    void on_RanBtn_clicked();
+
 private:
     Ui::RoadRace *ui;
     QTcpSocket *server;

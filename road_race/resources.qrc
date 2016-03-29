@@ -17,5 +17,6 @@
         <file alias="tunnel">tunnel.jpg</file>
         <file alias="swamp">swamp.jpg</file>
         <file alias="lava">lava.jpg</file>
+        <file alias="randomfile">random.rr</file>
     </qresource>
 </RCC>

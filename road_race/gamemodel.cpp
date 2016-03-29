@@ -188,7 +188,7 @@ void Game::purchaseAddition(Square *source) {
 }
 
 void Game::setGameLoader(GameFileManager *gfm) {
-    delete gfm;
+    //delete gfm;
     loader = gfm;
 }
 

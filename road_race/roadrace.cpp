@@ -11,7 +11,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-
+#include <vector>
 class Game;
 class GameFileManager;
 class GuiManager;
@@ -188,4 +188,32 @@ if (ui->EsyBtn->isChecked() || ui->MedBtn->isChecked() || ui->HardBtn->isChecked
     else{
         QMessageBox::information(ui->centralWidget,"Alert","You did not specify a difficulty!",0,0);
     }
+}
+
+void RoadRace::on_RanBtn_clicked()
+{
+    if (ui->EsyBtn->isChecked() || ui->MedBtn->isChecked() || ui->HardBtn->isChecked()){
+        //Give our GUI manager access to ui
+        GuiManager::instance().setUi( ui );
+
+        Game::instance().setGameLoader(
+              new GameFileManager(
+                  LevelManager::instance().getLevel("randomfile")
+             )
+         );
+
+        GuiManager::instance().init();
+
+        Updater::instance().start();
+        //sets a difficulty based on the radio button
+       GuiManager::instance().newDiff();
+        std::cout << Game::instance().getGameLoader()->toGameFile() << std::endl;
+
+        ui->btnStuff->setDisabled(true);
+        ui->tst2Btn->setDisabled(true);
+
+    }
+        else{
+            QMessageBox::information(ui->centralWidget,"Alert","You did not specify a difficulty!",0,0);
+        }
 }

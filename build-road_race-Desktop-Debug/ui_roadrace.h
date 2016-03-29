@@ -59,6 +59,7 @@ public:
     QPushButton *tst2Btn;
     QLabel *label_2;
     QLabel *lblTime;
+    QPushButton *RanBtn;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -145,7 +146,7 @@ public:
         cheatBtn->setGeometry(QRect(570, 0, 85, 27));
         SaveBtn = new QPushButton(centralWidget);
         SaveBtn->setObjectName(QStringLiteral("SaveBtn"));
-        SaveBtn->setGeometry(QRect(20, 560, 111, 27));
+        SaveBtn->setGeometry(QRect(20, 430, 111, 27));
         tst2Btn = new QPushButton(centralWidget);
         tst2Btn->setObjectName(QStringLiteral("tst2Btn"));
         tst2Btn->setGeometry(QRect(810, 20, 101, 31));
@@ -156,6 +157,9 @@ public:
         lblTime = new QLabel(centralWidget);
         lblTime->setObjectName(QStringLiteral("lblTime"));
         lblTime->setGeometry(QRect(20, 240, 59, 16));
+        RanBtn = new QPushButton(centralWidget);
+        RanBtn->setObjectName(QStringLiteral("RanBtn"));
+        RanBtn->setGeometry(QRect(0, 530, 171, 51));
         RoadRace->setCentralWidget(centralWidget);
         mainToolBar = new QToolBar(RoadRace);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -190,8 +194,8 @@ public:
         textBrowser->setHtml(QApplication::translate("RoadRace", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'.Helvetica Neue DeskInterface'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">Currently in single-player mode. Upgrade for more options.</span></p></body></html>", 0));
+"</style></head><body style=\" font-family:'Droid Sans'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'.Helvetica Neue DeskInterface';\">Currently in single-player mode. Upgrade for more options.</span></p></body></html>", 0));
         helpBtn->setText(QApplication::translate("RoadRace", "Help!", 0));
         EsyBtn->setText(QApplication::translate("RoadRace", "Easy Mode", 0));
         MedBtn->setText(QApplication::translate("RoadRace", "Normal Mode", 0));
@@ -201,6 +205,7 @@ public:
         tst2Btn->setText(QApplication::translate("RoadRace", "Use 7X7 test", 0));
         label_2->setText(QApplication::translate("RoadRace", "Time (sec)", 0));
         lblTime->setText(QApplication::translate("RoadRace", "0", 0));
+        RanBtn->setText(QApplication::translate("RoadRace", "Generate a random World! ", 0));
     } // retranslateUi
 
 };
