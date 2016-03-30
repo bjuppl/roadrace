@@ -1,7 +1,9 @@
 #include "levelmanager.h"
 #include "gamemodel.h"
 #include "squarelabel.h"
+#include "network.h"
 #include <random>
+#include <QMessageBox>
 int random_int1(int min, int max) {
     static std::default_random_engine engine { std::random_device{}() };
     std::uniform_int_distribution<int> distro{min, max};
@@ -138,6 +140,11 @@ bool LevelManager::killStruct(int hit, int wid){
     int size = GuiManager::instance().getUi()->gridLayoutWidget->width()/Game::instance().getSize()/2;
      QSize size1(size,size);
     vicLbl->setPixmap(GuiManager::instance().setmap(victim,size1));
+    string result;
+    result = "Destroyed Struct";
+    string details;
+    details += to_string(wid) + " " + to_string(hit) + " " + victim->getAddition();
+    Network::instance().ActionReciever(result,details);
     return true;
     }
     else{
@@ -156,6 +163,10 @@ bool LevelManager::riverSquare(int hit, int wid){
     int size = GuiManager::instance().getUi()->gridLayoutWidget->width()/Game::instance().getSize()/2;
      QSize size1(size,size);
     vicLbl->setPixmap(GuiManager::instance().setmap(victim,size1));
+    string action = "Change type";
+    string details;
+    details += to_string(wid) + " " + to_string(hit) + " " + victim->getType();
+    Network::instance().ActionReciever(action,details);
     return true;
     }
     else{
@@ -174,6 +185,10 @@ bool LevelManager::burnSquare(int hit, int wid){
     int size = GuiManager::instance().getUi()->gridLayoutWidget->width()/Game::instance().getSize()/2;
      QSize size1(size,size);
     vicLbl->setPixmap(GuiManager::instance().setmap(victim,size1));
+    string action = "Change type";
+    string details;
+    details += to_string(wid) + " " + to_string(hit) + " " + victim->getType();
+    Network::instance().ActionReciever(action,details);
     return true;
     }
     else{
@@ -211,6 +226,10 @@ bool LevelManager::eruption(int hit, int wid){
     burn = victim->getResourceType();
     Game::instance().setVPos(wid,hit);
     victim->setBurn(true);
+    string action = "Change type";
+    string details;
+    details += to_string(wid) + " " + to_string(hit) + " " + victim->getType();
+    Network::instance().ActionReciever(action,details);
     return true;
     }
     else{
@@ -316,3 +335,33 @@ vector<string> LevelManager::randWorld(){
     //stream.close();
 }
 
+void LevelManager::trader(){
+    int gold = Game::instance().getCurPlayer()->getGold();
+    int wood = Game::instance().getCurPlayer()->getWood();
+    int stone = Game::instance().getCurPlayer()->getStone();
+    int water = Game::instance().getCurPlayer()->getWater();
+
+    if (wood >= 50 && wood > gold){
+        QMessageBox::StandardButton trade;
+        trade = QMessageBox::question(GuiManager::instance().getUi()->gridLayoutWidget,"Hello there.","I see you have alot of wood. Would you like to trade 50 of it for 25 gold?",QMessageBox::Yes|QMessageBox::No);
+        if(trade == QMessageBox::Yes){
+
+            wood -= 50;
+            gold += 25;
+            Game::instance().getCurPlayer()->setGold(gold);
+            Game::instance().getCurPlayer()->setWood(wood);
+        }
+        else if(water > 100 && water > stone){
+            QMessageBox::StandardButton trade;
+            trade = QMessageBox::question(GuiManager::instance().getUi()->gridLayoutWidget,"Hello there.","I see you have alot of water. Would you like to trade 100 of it for 75 stone?",QMessageBox::Yes|QMessageBox::No);
+            if(trade == QMessageBox::Yes){
+
+                water -= 100;
+                stone += 75;
+                Game::instance().getCurPlayer()->setStone(stone);
+                Game::instance().getCurPlayer()->setWater(water);
+            }
+        }
+    }
+
+}

@@ -217,8 +217,8 @@ font-size:30px;</string>
    <widget class="QTextBrowser" name="textBrowser">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>270</y>
+      <x>20</x>
+      <y>250</y>
       <width>111</width>
       <height>71</height>
      </rect>
@@ -291,7 +291,7 @@ p, li { white-space: pre-wrap; }
      <rect>
       <x>10</x>
       <y>0</y>
-      <width>91</width>
+      <width>71</width>
       <height>61</height>
      </rect>
     </property>
@@ -302,10 +302,6 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="SaveBtn">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>430</y>
-      <width>111</width>
-      <height>27</height>
       <x>10</x>
       <y>390</y>
       <width>131</width>
@@ -362,20 +358,20 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>530</y>
-      <width>171</width>
-      <height>51</height>
+      <y>590</y>
+      <width>161</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
      <string>Generate a random World! </string>
-     </property>
-     </widget>
+    </property>
+   </widget>
    <widget class="QPushButton" name="btnSendToServer">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>460</y>
+      <x>20</x>
+      <y>450</y>
       <width>115</width>
       <height>32</height>
      </rect>
@@ -387,8 +383,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QLineEdit" name="iptServerMsg">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>440</y>
+      <x>20</x>
+      <y>430</y>
       <width>113</width>
       <height>21</height>
      </rect>
@@ -398,9 +394,9 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>490</y>
+      <y>470</y>
       <width>151</width>
-      <height>141</height>
+      <height>71</height>
      </rect>
     </property>
    </widget>
@@ -408,7 +404,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>640</y>
+      <y>550</y>
       <width>71</width>
       <height>21</height>
      </rect>
@@ -421,7 +417,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>640</y>
+      <y>550</y>
       <width>81</width>
       <height>32</height>
      </rect>

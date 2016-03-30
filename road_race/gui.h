@@ -10,7 +10,7 @@
 
 class Square;
 
-class GuiManager : QObject {
+class GuiManager:QObject {
 Q_OBJECT
 private:
     static GuiManager *instance_;

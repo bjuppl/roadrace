@@ -1,6 +1,7 @@
 #include "squarelabel.h"
 #include "gamemodel.h"
 #include "gui.h"
+#include <QDebug>
 #include <iostream>
 #include <QMessageBox>
 
@@ -269,7 +270,14 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             }
             this->setText(owner);
             this->setStyleSheet("border:" + QString::fromStdString(to_string(proc->getBorder())) + "px solid " + QString::fromStdString(proc->getOwner()->getColor()));
-
+            string action = "New Owner";
+            string details;
+            int procx = proc->getX();
+            int procy = proc->getY();
+            details += to_string(procx) + " " + to_string(procy) + " " + proc->getOwner()->getName();
+            qDebug() << QString::fromStdString(details);
+            QString msg = QString::fromStdString(Network::instance().ActionReciever(action,details));
+            GuiManager::instance().getWindow()->actionSender(msg);
 
 
 
@@ -278,6 +286,13 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
     else{
         //handle owned squares
         GuiManager::instance().BuildStruct(square);
+        string action = "New Struct";
+        string details;
+        int procx = square->getX();
+        int procy = square->getY();
+        details += to_string(procx) + " " + to_string(procy) + " " + square->getAddition();
+        QString msg = QString::fromStdString(Network::instance().ActionReciever(action,details));
+        GuiManager::instance().getWindow()->actionSender(msg);
     }
 
     if(this->square->getAddition() == "De")
@@ -450,3 +465,6 @@ bool Square::canGet(Square *prev){
 }
 
 
+void SquareLabel::action(){
+
+}
