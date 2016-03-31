@@ -12,6 +12,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <QDebug>
 class Game;
 class GameFileManager;
 class GuiManager;
@@ -65,13 +66,13 @@ void RoadRace::on_btnStuff_clicked()
 //receive data from the serveer
 void RoadRace::dataReceived() {
 
-    while (socket->canReadLine()) {
-        QString str = socket->readLine();
 
+        QString str = socket->readLine();
+        qDebug() << str;
         //ui->txtChat->insertHtml("<b>" + username + "</b>: " + msg + "<br><br>");
     }
 
-}
+
 //handles a client disconnecting from a server
 void RoadRace::serverDisconnected()
 {
