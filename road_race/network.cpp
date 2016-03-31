@@ -21,10 +21,12 @@ void Network::SquareAssign(){
     Square *proc = Game::instance().getSquare(x,y);
 
     Player *reqPlayer;
-
+    int size = GuiManager::instance().getUi()->gridLayoutWidget->width()/Game::instance().getSquares().size()/2;
     proc->setOwner(reqPlayer);
+    QSize size1(size,size);
     SquareLabel *lbl = proc->getLabel();
     lbl->setStyleSheet("border:" + QString::fromStdString(to_string(proc->getBorder())) + "px solid " + QString::fromStdString(proc->getOwner()->getColor()));
+    GuiManager::instance().setmap(proc,size1);
 }
 void Network::SquareUnassign(){
     int x;
@@ -35,6 +37,7 @@ void Network::SquareUnassign(){
     proc->setOwner(none);
     SquareLabel *lbl = proc->getLabel();
     lbl->setStyleSheet("border:" + QString::fromUtf8("black") + "px solid " + QString::fromUtf8("black"));
+
 
 }
 string Network::ActionReciever(string action, string details){
@@ -52,8 +55,8 @@ string Network::ActionReciever(string action, string details){
            playername += details.at(index);
            index++;
        }
-       string result = "Square " + to_string(x) + "," + to_string(y) + " has changed hands to " +playername + ".";
-       qDebug() << QString::fromStdString(result);
+       string result = "NO Square " + to_string(x) + "," + to_string(y) + " has changed hands to " +playername + ".";
+       //qDebug() << QString::fromStdString(result);
        return result;
    }
    if(action == "New Struct"){
@@ -70,8 +73,8 @@ string Network::ActionReciever(string action, string details){
            structname += details.at(index);
            index++;
        }
-       result = "Square " + to_string(x) + "," + to_string(y) + " has had " + structname  + " added.";
-       qDebug() << QString::fromStdString(result);
+       result = "NS Square " + to_string(x) + "," + to_string(y) + " has added " + structname;
+       //qDebug() << QString::fromStdString(result);
        return result;
 
    }
@@ -89,8 +92,8 @@ string Network::ActionReciever(string action, string details){
            structname += details.at(index);
            index++;
        }
-       result = "Square " + to_string(x) + "," + to_string(y) + " has had " + structname  + " removed.";
-       qDebug() << QString::fromStdString(result);
+       result = "SB Square " + to_string(x) + "," + to_string(y) + " has removed " + structname;
+       //qDebug() << QString::fromStdString(result);
        return result;
 
    }
@@ -108,8 +111,8 @@ string Network::ActionReciever(string action, string details){
            typename1 += details.at(index);
            index++;
        }
-       result = "Square " + to_string(x) + "," + to_string(y) + "has changed to " + typename1 +".";
-       qDebug() << QString::fromStdString(result);
+       result = "NT Square " + to_string(x) + "," + to_string(y) + " has changed to " + typename1;
+       //qDebug() << QString::fromStdString(result);
        return result;
    }
 }
