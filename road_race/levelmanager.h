@@ -59,6 +59,7 @@ private:
     bool burnSquare(int hit, int wid);
     bool quakeSquare(int hit, int wid);
     bool eruption(int hit, int wid);
+    void trader();
     string getBurn(){return burn;}
     vector<string> randWorld();
 };

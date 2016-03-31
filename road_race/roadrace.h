@@ -16,6 +16,7 @@ class RoadRace : public QMainWindow
 public:
     explicit RoadRace(QWidget *parent = 0);
     ~RoadRace();
+    void actionSender(QString msgstr);
     //title *child;
 private slots:
     void on_btnStuff_clicked();

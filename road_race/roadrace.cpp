@@ -119,6 +119,14 @@ void RoadRace::send()
    ui->iptServerMsg->setFocus();
 }
 
+void RoadRace::actionSender(QString msgstr){
+    if(msgstr.size() > 0){
+        socket->write(msgstr.toLocal8Bit());
+    }
+    else{
+        return;
+    }
+}
 
 void RoadRace::loadFile() {
     //Show the squares

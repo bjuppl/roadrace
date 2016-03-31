@@ -253,7 +253,8 @@ void Game::setResources(vector<Resource *> vr) {
 }
 void Updater::eventrun(){
     if (LevelManager::instance().getRand()){
-        int random = 7;
+        int random = random_int(0,7);
+
         if(random == 0){
           //spontaneously give a player 50 of a resource
             int goodInt = random_int(0,3);
@@ -317,16 +318,8 @@ void Updater::eventrun(){
         }
         if(random == 5){
         //earthquake turns a square into a canyon
-            int height = Game::instance().getHeight();
-            int width = Game::instance().getWidth();
-            int rndWid = random_int(0,width-1);
-            int rndHei = random_int(0,height-1);
-            bool foo = LevelManager::instance().quakeSquare(rndHei,rndWid);
-            if (foo == true){
-            QString ht = ht.fromStdString(to_string(rndHei));
-            QString wi = wi.fromStdString(to_string(rndWid));
-            QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Random Event!","Oh no! An earthquake has split " +  wi + "," + ht +" open! A wide chasm now exists.",0,0);
-        }
+            LevelManager::instance().trader();
+
         }
         if(random == 6){
             QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Lucky.","Nothing Happened.... this time.",0,0);
@@ -354,6 +347,7 @@ void Updater::eventrun(){
     }
 }
 }
+
 
 
 //destory a road or forturess on a square
@@ -521,3 +515,4 @@ Structure *Game::resourceCheck(Player *owner,string type){
     }
     return nullptr;
 }
+
