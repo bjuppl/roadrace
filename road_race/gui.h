@@ -1,7 +1,7 @@
 #ifndef GUI_H
 #define GUI_H
 
-#include <QObject>
+//#include <QObject>
 #include "ui_roadrace.h"
 #include "roadrace.h"
 #include "gamemodel.h"

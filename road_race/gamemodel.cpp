@@ -253,7 +253,7 @@ void Game::setResources(vector<Resource *> vr) {
 }
 void Updater::eventrun(){
     if (LevelManager::instance().getRand()){
-        int random = 7;
+        int random = random_int(0,7);
         if(random == 0){
           //spontaneously give a player 50 of a resource
             int goodInt = random_int(0,3);
