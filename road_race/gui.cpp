@@ -251,3 +251,8 @@ void GuiManager::on_btnConnect_clicked()
 
     //window->connect_server();
 }
+
+void GuiManager::on_testBtn_clicked()
+{
+
+}

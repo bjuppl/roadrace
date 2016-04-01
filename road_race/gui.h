@@ -52,6 +52,7 @@ private slots:
 
     void on_btnSendToServer_clicked();
     void on_btnConnect_clicked();
+    void on_testBtn_clicked();
 };
 
 
