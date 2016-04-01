@@ -4,6 +4,7 @@
 #include "gamemodel.h"
 #include "gui.h"
 #include "cheater.h"
+#include "multiplayer.h"
 #include "square.h"
 #include <QLabel>
 #include <QMessageBox>
@@ -29,6 +30,7 @@ RoadRace::RoadRace(QWidget *parent) :
    connect(ui->btnConnect,SIGNAL(clicked()),this,SLOT(connect_server()));
    connect(ui->btnSendToServer,SIGNAL(clicked()),this,SLOT(send()));
     connect(ui->cheatBtn,SIGNAL(clicked()),this,SLOT(openCheat()));
+    connect(ui->testBtn,SIGNAL(clicked()),this,SLOT(openMulti()));
 }
 
 //destructor
@@ -76,7 +78,7 @@ void RoadRace::dataReceived() {
 //handles a client disconnecting from a server
 void RoadRace::serverDisconnected()
 {
-     ui->statusBar->showMessage("Disconnected.");
+     //ui->statusBar->showMessage("Disconnected.");
      //ui->btnConnect->setEnabled(true);
 }
 
@@ -98,6 +100,7 @@ void RoadRace::connect_server()
     ui->statusBar->showMessage("Connected.");
     ui->btnConnect->setEnabled(false);
     ui->iptServerMsg->setFocus();
+    Game::instance().setIsLocalGame(true);
 }
 
 
@@ -207,6 +210,13 @@ void RoadRace::openCheat(){
     cheat1->activateWindow();
     cheat1->raise();
 }
+void RoadRace::openMulti(){
+    static multiplayer *multi1 = new multiplayer(this);
+    multi1->show();
+    multi1->activateWindow();
+    multi1->raise();
+}
+
 void RoadRace::on_SaveBtn_clicked()
 {
     if (Game::instance().getGameLoader() != nullptr){

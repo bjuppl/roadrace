@@ -290,7 +290,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
         string details;
         int procx = square->getX();
         int procy = square->getY();
-        details += to_string(procx) + " " + to_string(procy) + " " + square->getAddition();
+        details += to_string(procx) + " " + to_string(procy) + " " + square->getAddition() + " " + square->getOwner()->getName();
         QString msg = QString::fromStdString(Network::instance().ActionReciever(action,details));
         GuiManager::instance().getWindow()->actionSender(msg);
     }

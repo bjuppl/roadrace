@@ -6,6 +6,7 @@
 #include <memory>
 #include <string>
 #include <QDebug>
+#include "utils.h"
 Network *Network::instance_ = NULL;
 Network& Network::instance() {
     if ( instance_ == NULL ) {
@@ -113,6 +114,27 @@ string Network::ActionReciever(string action, string details){
        }
        result = "NT Square " + to_string(x) + "," + to_string(y) + " has changed to " + typename1;
        //qDebug() << QString::fromStdString(result);
+       return result;
+   }
+   if (action == "New Sources"){
+       string result = "NR ";
+       string plname;
+       vector<string> strs;
+       char delim = ' ';
+       strs = split(details,delim);
+       plname = strs.at(0);
+       int index = 1;
+       result += plname + " ";
+       while (index < strs.size()){
+
+           if((strs.at(index) == "Wo") ||(strs.at(index) == "Wa") || (strs.at(index) == "Sto") || (strs.at(index) == "Go")){
+               result+= strs.at(index) + ",";
+           }
+           else{
+               result += strs.at(index) + " ";
+           }
+           index++;
+       }
        return result;
    }
 }

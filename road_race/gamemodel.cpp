@@ -8,6 +8,7 @@
 #include "player.h"
 #include "square.h"
 #include "levelmanager.h"
+#include "network.h"
 using namespace std;
 
 class Player;
@@ -51,18 +52,42 @@ void Game::start(){
 }
 
 void Game::updateResources() {
+    string type;
+    string name;
+    vector<string> signalstrs;
     for ( size_t i=0; i<player_list.size(); i++ ) {
         vector<Square*> mysquares;
+
         Player *p = player_list[i];
+        name = p->getName();
         mysquares = getPlayerSquares(p);
+        type = "";
         for ( size_t j=0; j<mysquares.size(); j++ ) {
             if(mysquares.at(j)->getType() != "Wi")
             {
                 std::string rtype = mysquares.at(j)->getResourceType();
                 int add = getResource(rtype)->value;
-
+                string resourceInt;
+                resourceInt = to_string(p->getResource(rtype));
+                type += " "+ rtype + " " + resourceInt;
                 p->incResource(rtype, add);
             }
+
+        }
+        if(Game::instance().getIsLocalGame() == true){
+            string action = "New Sources";
+            string details = p->getName();
+            details += type;
+            string signal = Network::instance().ActionReciever(action,details);
+            signalstrs.push_back(signal);
+        }
+    }
+    if(signalstrs.size() > 0){
+        int i = 0;
+        while (i < signalstrs.size()){
+            QString sendstr = QString::fromStdString(signalstrs.at(i));
+            GuiManager::instance().getWindow()->actionSender(sendstr);
+            i++;
         }
     }
 }
