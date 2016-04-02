@@ -75,6 +75,7 @@ void RoadRace::dataReceived() {
 }
 
 
+
 //handles a client disconnecting from a server
 void RoadRace::serverDisconnected()
 {
@@ -108,11 +109,16 @@ void RoadRace::send()
 {
    // QString username = ui->ipt//->text();
     QString msg = ui->iptServerMsg->text(), username;
-    if (msg.size() > 0) {
+    if (msg.size() > 0 && Game::instance().getCurPlayer() != nullptr) {
         msg = QString::fromStdString(Game::instance().getCurPlayer()->getName()) + ": " + ui->iptServerMsg->text() + "\n";
         //QMessageBox::about(this,"We are sending this",msg);
     } else {
+        if(msg.size() > 0){
+            msg += "None: " + ui->iptServerMsg->text() + "\n";
+        }
+        else{
         return;
+        }
     }
 
     ui->iptServerMsg->setText("");
@@ -211,10 +217,16 @@ void RoadRace::openCheat(){
     cheat1->raise();
 }
 void RoadRace::openMulti(){
+    if(ui->btnConnect->isEnabled() == false){
     static multiplayer *multi1 = new multiplayer(this);
     multi1->show();
     multi1->activateWindow();
     multi1->raise();
+    }
+    else{
+        QMessageBox::information(ui->btnConnect,"Alert","Please find a server!",0,0);
+    }
+
 }
 
 void RoadRace::on_SaveBtn_clicked()
