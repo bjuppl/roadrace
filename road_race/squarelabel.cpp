@@ -260,7 +260,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
 
             }
         }
-        if(owner != nullptr){
+        if(owner != nullptr && (proc->getOwner()== Game::instance().getCurPlayer())){
             //set text/border
             this->setText(owner);
             this->setStyleSheet("border:" + QString::fromStdString(to_string(proc->getBorder())) + "px solid " + QString::fromStdString(proc->getOwner()->getColor()));

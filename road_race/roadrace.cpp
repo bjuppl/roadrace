@@ -70,9 +70,9 @@ void RoadRace::dataReceived() {
 
 
         QString str = socket->readLine();
-        qDebug() << str;
-        //ui->txtChat->insertHtml("<b>" + username + "</b>: " + msg + "<br><br>");
-    }
+        qDebug() << "Stuff " + str;
+        ui->txtServerOutput->insertHtml(str);
+}
 
 
 //handles a client disconnecting from a server

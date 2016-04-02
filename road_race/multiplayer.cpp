@@ -46,7 +46,7 @@ void multiplayer::connect_server(){
         level = "random";
     }
     QString sendstr;
-    sendstr += gameName + " " + gamePass + " " + playerNumstr + level;
+    sendstr += "NG " + gameName + " " + gamePass + " " + playerNumstr + " " +level;
     QString hostname = "localhost";
     if (hostname.size() == 0) {
         QMessageBox::critical(this, "Uh oh", "Please specify name of chat server.");
