@@ -15,19 +15,34 @@ Network& Network::instance() {
     return *instance_;
 }
 
-void Network::SquareAssign(){
+void Network::SquareAssign(vector<string> proc1){
     int x;
     int y;
-
+    string sizestr = proc1.at(2);
+    string str1;
+    string str2;
+    qDebug() << QString::fromStdString(sizestr);
+    str1 += sizestr.at(0);
+    str2 += sizestr.at(2);
+    x = stoi(str1);
+    y = stoi(str2);
     Square *proc = Game::instance().getSquare(x,y);
-
-    Player *reqPlayer;
+    string name = proc1.at(7);
+    int ss = Game::instance().getPlayerList().size();
+    Player *reqPlayer = Game::instance().getPlayer(name);
+    int index = 0;
+   /* while(index < Game::instance().getPlayerList().size()){
+        Player *test = Game::instance().getPlayerList().at(index);
+        string x = test->getName();
+        qDebug() << QString::fromStdString(x);
+        index++;
+   */
+    qDebug() << QString::fromStdString(name);
     int size = GuiManager::instance().getUi()->gridLayoutWidget->width()/Game::instance().getSquares().size()/2;
     proc->setOwner(reqPlayer);
     QSize size1(size,size);
-    SquareLabel *lbl = proc->getLabel();
-    lbl->setStyleSheet("border:" + QString::fromStdString(to_string(proc->getBorder())) + "px solid " + QString::fromStdString(proc->getOwner()->getColor()));
-    GuiManager::instance().setmap(proc,size1);
+    //SquareLabel *lbl = GuiManager::instance().getUi()->gridLayoutWidget->childAt(x,y);
+    //lbl->setStyleSheet("border:" + QString::fromStdString(to_string(proc->getBorder())) + "px solid " + QString::fromStdString(proc->getOwner()->getColor()));
 }
 void Network::SquareUnassign(){
     int x;
@@ -56,7 +71,7 @@ string Network::ActionReciever(string action, string details){
            playername += details.at(index);
            index++;
        }
-       string result = "NO Square " + to_string(x) + "," + to_string(y) + " has changed hands to " +playername + ".";
+       string result = "NO Square " + to_string(x) + "," + to_string(y) + " has changed hands to" +playername;
        //qDebug() << QString::fromStdString(result);
        return result;
    }
@@ -74,7 +89,7 @@ string Network::ActionReciever(string action, string details){
            structname += details.at(index);
            index++;
        }
-       result = "NS Square " + to_string(x) + "," + to_string(y) + " has added " + structname;
+       result = "NS Square " + to_string(x) + "," + to_string(y) + " has added" + structname;
        //qDebug() << QString::fromStdString(result);
        return result;
 
@@ -140,8 +155,13 @@ string Network::ActionReciever(string action, string details){
 }
 void Network::actionHandler(QString actStr){
 
-    //update square
-
+    if(actStr.at(0) == 'N' && actStr.at(1)== 'O'){
+        string pro = actStr.toStdString();
+        vector<string> proc = split(pro,' ');
+        if(Game::instance().getCurPlayer()->getName() != proc.at(7)){
+        SquareAssign(proc);
+    }
+}
     //update struct
 
     //update player

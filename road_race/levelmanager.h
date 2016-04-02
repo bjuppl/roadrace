@@ -62,6 +62,7 @@ private:
     void trader();
     string getBurn(){return burn;}
     vector<string> randWorld();
+    void prepSquares(QString str);
 };
 
 

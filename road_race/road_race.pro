@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     levelmanager.cpp \
     squarelabel.cpp \
     cheater.cpp \
-    multiplayer.cpp
+    multiplayer.cpp \
+    joiner.cpp
 
     
 
@@ -42,13 +43,15 @@ HEADERS  += roadrace.h \
     levelmanager.h \
     squarelabel.h \
     cheater.h \
-    multiplayer.h
+    multiplayer.h \
+    joiner.h
     
 
 
 FORMS    += roadrace.ui \
     cheater.ui \
-    multiplayer.ui
+    multiplayer.ui \
+    joiner.ui
 
 CONFIG += c++11
 
