@@ -53,20 +53,20 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
                 c2 = list2.at(0);
                 c3 = list3.at(1);
             }
-            if((c1!= nullptr) && (c1->getOwner() != nullptr)){
+            if((c1!= nullptr) && (c1->getOwner() != nullptr) &&(c1->getOwner() == Game::instance().getCurPlayer())){
                 if (proc->canGet(c1)){
                     valid = true;
                 }
                 else{buildErr = true;}
             }
-            else if((c2!= nullptr) && (c2->getOwner() != nullptr && valid == false)){
+            else if((c2!= nullptr) && (c2->getOwner() != nullptr && valid == false)&&(c2->getOwner() == Game::instance().getCurPlayer())){
                 newowner = c2->getOwner();
                 if (proc->canGet(c2)){
                     valid = true;
                 }
                 else{buildErr = true;}
             }
-            else if(c3->getOwner() != nullptr && valid == false){
+            else if((c3->getOwner() != nullptr) && (valid == false) &&(c3->getOwner() == Game::instance().getCurPlayer())){
                 newowner = c3->getOwner();
                 if (proc->canGet(c3)){
                     valid = true;
@@ -129,21 +129,21 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
                 c2 = list2.at(y);
                 c3 = list3.at(y-1);
             }
-            if((c1!= nullptr) && (c1->getOwner() != nullptr)){
+            if((c1!= nullptr) && (c1->getOwner() != nullptr)&&(c1->getOwner() == Game::instance().getCurPlayer())){
                 newowner = c1->getOwner();
                 if (proc->canGet(c1)){
                     valid = true;
                 }
                 else{buildErr = true;}
             }
-            else if((c2!= nullptr) && (c2->getOwner() != nullptr) && valid == false){
+            else if((c2!= nullptr) && (c2->getOwner() != nullptr) && (valid == false) &&(c2->getOwner() == Game::instance().getCurPlayer())){
                 newowner = c2->getOwner();
                 if (proc->canGet(c2)){
                     valid = true;
                 }
                 else{buildErr = true;}
             }
-            else if(c3->getOwner() != nullptr && valid == false){
+            else if((c3->getOwner() != nullptr) && (valid == false) &&(c3->getOwner() == Game::instance().getCurPlayer())){
                 newowner = c3->getOwner();
                 if (proc->canGet(c3)){
                     valid = true;
@@ -209,28 +209,28 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
                 c3 = list2.at(y);
                 c4 = list3.at(y);
             }
-            if((c1!= nullptr) && (c1->getOwner() != nullptr)){
+            if((c1!= nullptr) && (c1->getOwner() != nullptr)&&(c1->getOwner() == Game::instance().getCurPlayer())){
                 newowner = c1->getOwner();
                 if (proc->canGet(c1)){
                     valid = true;
                 }
                 else{buildErr = true;}
             }
-            if((c2!= nullptr) && (c2->getOwner() != nullptr && valid == false)){
+            if((c2!= nullptr) && (c2->getOwner() != nullptr) && (valid == false)&&(c2->getOwner() == Game::instance().getCurPlayer())){
                 newowner = c2->getOwner();
                 if (proc->canGet(c2)){
                     valid = true;
                 }
                 else{buildErr = true;}
             }
-            if((c3!= nullptr) && (c3->getOwner() != nullptr && valid == false)){
+            if((c3!= nullptr) && (c3->getOwner() != nullptr && valid == false)&&(c3->getOwner() == Game::instance().getCurPlayer())){
                 newowner = c3->getOwner();
                 if (proc->canGet(c3)){
                     valid = true;
                 }
                 else{buildErr = true;}
             }
-            if((c4!= nullptr) && (c4->getOwner() != nullptr) && valid == false){
+            if((c4!= nullptr) && (c4->getOwner() != nullptr) && (valid == false) &&(c4->getOwner() == Game::instance().getCurPlayer())){
                 newowner = c4->getOwner();
                 if (proc->canGet(c4)){
                     valid = true;

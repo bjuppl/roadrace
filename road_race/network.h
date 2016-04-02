@@ -10,7 +10,7 @@ class Network {
 
 public:
     static Network& instance();
-    void SquareAssign();
+    void SquareAssign(vector<string> proc1);
     void SquareUnassign();
     string ActionReciever(string action, string details);
     void actionHandler(QString actStr);
