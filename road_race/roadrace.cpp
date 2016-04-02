@@ -109,8 +109,14 @@ void RoadRace::send()
 {
    // QString username = ui->ipt//->text();
     QString msg = ui->iptServerMsg->text(), username;
-    if (msg.size() > 0 && Game::instance().getCurPlayer() != nullptr) {
-        msg = QString::fromStdString(Game::instance().getCurPlayer()->getName()) + ": " + ui->iptServerMsg->text() + "\n";
+    if (msg.size() > 0) {
+        std::string name = Game::instance().getCurPlayer() == NULL ?
+                    "[No player]" :
+                    Game::instance().getCurPlayer()->getName();
+
+
+
+        msg = QString::fromStdString(name) + ": " + ui->iptServerMsg->text() + "\n";
         //QMessageBox::about(this,"We are sending this",msg);
     } else {
         if(msg.size() > 0){
