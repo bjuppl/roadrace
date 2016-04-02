@@ -3,6 +3,7 @@
 #include "player.h"
 #include "square.h"
 #include "utils.h"
+#include "network.h"
 #include <iostream>
 
 
@@ -203,6 +204,12 @@ GameFileManager::GameFileManager (std::vector<std::string> contents ) {
                          }
                  else{
                    Player *owner = Game::instance().getPlayer(ownerName);
+                   string action = "New Owner";
+                   string details;
+                   details += to_string(j) + " " + to_string(i) + " " +ownerName + ".";
+                   //Network::instance().ActionReciever(action,details);
+
+
                    squares[i].push_back( new Square(terrain,addition,owner));
                     }
                  }

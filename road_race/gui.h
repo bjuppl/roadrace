@@ -10,7 +10,7 @@
 
 class Square;
 
-class GuiManager : QObject {
+class GuiManager:QObject {
 Q_OBJECT
 private:
     static GuiManager *instance_;
@@ -52,6 +52,7 @@ private slots:
 
     void on_btnSendToServer_clicked();
     void on_btnConnect_clicked();
+    void on_testBtn_clicked();
 };
 
 

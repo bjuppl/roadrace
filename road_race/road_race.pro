@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     gui.cpp \
     levelmanager.cpp \
     squarelabel.cpp \
-    cheater.cpp
+    cheater.cpp \
+    multiplayer.cpp
 
     
 
@@ -40,17 +41,19 @@ HEADERS  += roadrace.h \
     gui.h \
     levelmanager.h \
     squarelabel.h \
-    cheater.h
+    cheater.h \
+    multiplayer.h
     
 
 
 FORMS    += roadrace.ui \
-    cheater.ui
+    cheater.ui \
+    multiplayer.ui
 
 CONFIG += c++11
 
 RESOURCES += resources.qrc
-
+QT += xml
 DISTFILES += \
     single-player.rr
 

@@ -27,6 +27,7 @@ public:
         setMouseTracking(true);
         this->setAttribute(Qt::WA_Hover,true);
         connect(this,SIGNAL(clicked()),this,SLOT(labelClicked()));
+        connect(this,SIGNAL(clicked()),this,SLOT(action()));
     }
    void mousePressEvent(QMouseEvent *ev);
    void mouseMoveEvent(QMouseEvent *ev);
@@ -53,7 +54,7 @@ private slots:
     void labelClicked(){
 
     }
-
+    void action();
 signals:
     void clicked();
     void hovered();

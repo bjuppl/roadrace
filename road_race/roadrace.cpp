@@ -4,6 +4,7 @@
 #include "gamemodel.h"
 #include "gui.h"
 #include "cheater.h"
+#include "multiplayer.h"
 #include "square.h"
 #include <QLabel>
 #include <QMessageBox>
@@ -12,6 +13,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <QDebug>
 class Game;
 class GameFileManager;
 class GuiManager;
@@ -28,6 +30,7 @@ RoadRace::RoadRace(QWidget *parent) :
    connect(ui->btnConnect,SIGNAL(clicked()),this,SLOT(connect_server()));
    connect(ui->btnSendToServer,SIGNAL(clicked()),this,SLOT(send()));
     connect(ui->cheatBtn,SIGNAL(clicked()),this,SLOT(openCheat()));
+    connect(ui->testBtn,SIGNAL(clicked()),this,SLOT(openMulti()));
 }
 
 //destructor
@@ -65,17 +68,18 @@ void RoadRace::on_btnStuff_clicked()
 //receive data from the serveer
 void RoadRace::dataReceived() {
 
-    while (socket->canReadLine()) {
+
         QString str = socket->readLine();
-
-        //ui->txtChat->insertHtml("<b>" + username + "</b>: " + msg + "<br><br>");
-    }
-
+        qDebug() << "Stuff " + str;
+        ui->txtServerOutput->insertHtml(str);
 }
+
+
+
 //handles a client disconnecting from a server
 void RoadRace::serverDisconnected()
 {
-     ui->statusBar->showMessage("Disconnected.");
+     //ui->statusBar->showMessage("Disconnected.");
      //ui->btnConnect->setEnabled(true);
 }
 
@@ -97,6 +101,7 @@ void RoadRace::connect_server()
     ui->statusBar->showMessage("Connected.");
     ui->btnConnect->setEnabled(false);
     ui->iptServerMsg->setFocus();
+    Game::instance().setIsLocalGame(true);
 }
 
 
@@ -114,7 +119,12 @@ void RoadRace::send()
         msg = QString::fromStdString(name) + ": " + ui->iptServerMsg->text() + "\n";
         //QMessageBox::about(this,"We are sending this",msg);
     } else {
+        if(msg.size() > 0){
+            msg += "None: " + ui->iptServerMsg->text() + "\n";
+        }
+        else{
         return;
+        }
     }
 
     ui->iptServerMsg->setText("");
@@ -125,6 +135,14 @@ void RoadRace::send()
    ui->iptServerMsg->setFocus();
 }
 
+void RoadRace::actionSender(QString msgstr){
+    if(msgstr.size() > 0){
+        socket->write(msgstr.toLocal8Bit());
+    }
+    else{
+        return;
+    }
+}
 
 void RoadRace::loadFile() {
     //Show the squares
@@ -204,6 +222,19 @@ void RoadRace::openCheat(){
     cheat1->activateWindow();
     cheat1->raise();
 }
+void RoadRace::openMulti(){
+    if(ui->btnConnect->isEnabled() == false){
+    static multiplayer *multi1 = new multiplayer(this);
+    multi1->show();
+    multi1->activateWindow();
+    multi1->raise();
+    }
+    else{
+        QMessageBox::information(ui->btnConnect,"Alert","Please find a server!",0,0);
+    }
+
+}
+
 void RoadRace::on_SaveBtn_clicked()
 {
     if (Game::instance().getGameLoader() != nullptr){
