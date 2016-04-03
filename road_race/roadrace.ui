@@ -302,8 +302,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="SaveBtn">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>390</y>
+      <x>120</x>
+      <y>330</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -370,8 +370,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="btnSendToServer">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>450</y>
+      <x>30</x>
+      <y>470</y>
       <width>115</width>
       <height>32</height>
      </rect>
@@ -380,23 +380,13 @@ p, li { white-space: pre-wrap; }
      <string>Send to Server</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="iptServerMsg">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>430</y>
-      <width>113</width>
-      <height>21</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QTextEdit" name="txtServerOutput">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>470</y>
+      <y>500</y>
       <width>151</width>
-      <height>71</height>
+      <height>41</height>
      </rect>
     </property>
    </widget>
@@ -450,6 +440,16 @@ p, li { white-space: pre-wrap; }
     </property>
     <property name="text">
      <string>Join Game</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="iptServerMsg">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>390</y>
+      <width>131</width>
+      <height>81</height>
+     </rect>
     </property>
    </widget>
   </widget>

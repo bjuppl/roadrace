@@ -123,19 +123,19 @@ void RoadRace::connect_server()
 void RoadRace::send()
 {
    // QString username = ui->ipt//->text();
-    QString msg = ui->iptServerMsg->text(), username;
-    if (msg.size() > 0) {
-        std::string name = Game::instance().getCurPlayer() == NULL ?
+    QString msg = ui->iptServerMsg->toPlainText();
+    if (Game::instance().getCurPlayer() != nullptr) {
+       /* std::string name = Game::instance().getCurPlayer() == NULL ?
                     "[No player]" :
                     Game::instance().getCurPlayer()->getName();
+*/
+    string name = Game::instance().getCurPlayer()->getName();
 
-
-
-        msg = QString::fromStdString(name) + ": " + ui->iptServerMsg->text() + "\n";
+        msg = QString::fromStdString(name) + ": " + ui->iptServerMsg->toPlainText() + "\n";
         //QMessageBox::about(this,"We are sending this",msg);
     } else {
         if(msg.size() > 0){
-            msg += "None: " + ui->iptServerMsg->text();
+            msg += "None: " + ui->iptServerMsg->toPlainText();
         }
         else{
         return;
