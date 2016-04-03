@@ -298,3 +298,8 @@ void RoadRace::on_RanBtn_clicked()
             QMessageBox::information(ui->centralWidget,"Alert","You did not specify a difficulty!",0,0);
         }
 }
+
+void RoadRace::on_btnSendToServer_clicked()
+{
+
+}
