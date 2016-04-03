@@ -35,6 +35,8 @@ void multiplayer::connect_server(){
     QString gameName = ui->nameBox->text();
     QString gamePass = ui->passBox->text();
     QString playerNumstr = ui->numBox->text();
+    QString Player1;
+    Player1 = ui->playerBox->text();
     QString level;
     if (ui->fiveBtn->isChecked()){
         level = "five";
@@ -46,7 +48,14 @@ void multiplayer::connect_server(){
         level = "random";
     }
     QString sendstr;
-    sendstr += "NG " + gameName + " " + gamePass + " " + playerNumstr + " " +level;
+    string plname = Player1.toStdString();
+    Player *pl1 = new Player(plname);
+    pl1->setColor("red");
+    vector<Player*> players;
+    players.push_back(pl1);
+    Game::instance().setPlayerList(players);
+    Game::instance().setCurPlayer(pl1);
+    sendstr += "NG " + gameName + " " + gamePass + " " + playerNumstr + " " + Player1 + " " +level;
     QString hostname = "localhost";
     if (hostname.size() == 0) {
         QMessageBox::critical(this, "Uh oh", "Please specify name of chat server.");

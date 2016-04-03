@@ -6,6 +6,7 @@
 #include "cheater.h"
 #include "multiplayer.h"
 #include "square.h"
+#include "joiner.h"
 #include <QLabel>
 #include <QMessageBox>
 #include "levelmanager.h"
@@ -31,6 +32,7 @@ RoadRace::RoadRace(QWidget *parent) :
    connect(ui->btnSendToServer,SIGNAL(clicked()),this,SLOT(send()));
     connect(ui->cheatBtn,SIGNAL(clicked()),this,SLOT(openCheat()));
     connect(ui->testBtn,SIGNAL(clicked()),this,SLOT(openMulti()));
+    connect(ui->joinBtn,SIGNAL(clicked()),this,SLOT(openJoin()));
 }
 
 //destructor
@@ -70,8 +72,21 @@ void RoadRace::dataReceived() {
 
 
         QString str = socket->readLine();
-        qDebug() << "Stuff " + str;
-        ui->txtServerOutput->insertHtml(str);
+        qDebug() << str;
+        ui->txtServerOutput->insertHtml(str + "\n");
+        if(str.at(0) == 'N' & str.at(1)== 'G'){
+             GuiManager::instance().setUi( ui );
+            LevelManager::instance().prepSquares(str);
+
+        }
+       else if(str.at(0) == 'C' & str.at(1)== 'G'){
+             GuiManager::instance().setUi( ui );
+            LevelManager::instance().prepSquares(str);
+
+        }
+        else{
+            Network::instance().actionHandler(str);
+        }
 }
 
 
@@ -120,7 +135,7 @@ void RoadRace::send()
         //QMessageBox::about(this,"We are sending this",msg);
     } else {
         if(msg.size() > 0){
-            msg += "None: " + ui->iptServerMsg->text() + "\n";
+            msg += "None: " + ui->iptServerMsg->text();
         }
         else{
         return;
@@ -228,6 +243,8 @@ void RoadRace::openMulti(){
     multi1->show();
     multi1->activateWindow();
     multi1->raise();
+    Game::instance().setIsLocalGame(false);
+     GuiManager::instance().setUi( ui );
     }
     else{
         QMessageBox::information(ui->btnConnect,"Alert","Please find a server!",0,0);
@@ -299,7 +316,15 @@ void RoadRace::on_RanBtn_clicked()
         }
 }
 
-void RoadRace::on_btnSendToServer_clicked()
-{
-
-}
+void RoadRace::openJoin(){
+    if(ui->btnConnect->isEnabled() == false){
+    static joiner *multi1 = new joiner(this);
+    multi1->show();
+    multi1->activateWindow();
+    multi1->raise();
+    Game::instance().setIsLocalGame(false);
+     GuiManager::instance().setUi( ui );
+    }
+    else{
+        QMessageBox::information(ui->btnConnect,"Alert","Please find a server!",0,0);
+    }

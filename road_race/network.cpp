@@ -15,19 +15,34 @@ Network& Network::instance() {
     return *instance_;
 }
 
-void Network::SquareAssign(){
+void Network::SquareAssign(vector<string> proc1){
     int x;
     int y;
-
+    string sizestr = proc1.at(2);
+    string str1;
+    string str2;
+    qDebug() << QString::fromStdString(sizestr);
+    str1 += sizestr.at(0);
+    str2 += sizestr.at(2);
+    x = stoi(str1);
+    y = stoi(str2);
     Square *proc = Game::instance().getSquare(x,y);
-
-    Player *reqPlayer;
+    string name = proc1.at(7);
+    int ss = Game::instance().getPlayerList().size();
+    Player *reqPlayer = Game::instance().getPlayer(name);
+    int index = 0;
+   /* while(index < Game::instance().getPlayerList().size()){
+        Player *test = Game::instance().getPlayerList().at(index);
+        string x = test->getName();
+        qDebug() << QString::fromStdString(x);
+        index++;
+   */
+    qDebug() << QString::fromStdString(name);
     int size = GuiManager::instance().getUi()->gridLayoutWidget->width()/Game::instance().getSquares().size()/2;
     proc->setOwner(reqPlayer);
     QSize size1(size,size);
-    SquareLabel *lbl = proc->getLabel();
-    lbl->setStyleSheet("border:" + QString::fromStdString(to_string(proc->getBorder())) + "px solid " + QString::fromStdString(proc->getOwner()->getColor()));
-    GuiManager::instance().setmap(proc,size1);
+    //SquareLabel *lbl = GuiManager::instance().getUi()->gridLayoutWidget->childAt(x,y);
+    //lbl->setStyleSheet("border:" + QString::fromStdString(to_string(proc->getBorder())) + "px solid " + QString::fromStdString(proc->getOwner()->getColor()));
 }
 void Network::SquareUnassign(){
     int x;
@@ -41,6 +56,30 @@ void Network::SquareUnassign(){
 
 
 }
+void Network::StructMaker(vector<string> proc1){
+    int x;
+    int y;
+    string sizestr = proc1.at(2);
+    string str1;
+    string str2;
+    qDebug() << QString::fromStdString(sizestr);
+    str1 += sizestr.at(0);
+    str2 += sizestr.at(2);
+    x = stoi(str1);
+    y = stoi(str2);
+    Square *sqr = Game::instance().getSquare(x,y);
+    SquareLabel *lbl = dynamic_cast<SquareLabel*>(GuiManager::instance().getUi()->gameLayout->itemAtPosition(x,y)->widget());
+    Structure *addition;
+    string name = proc1.at(5);
+    addition = Game::instance().getStructure(name);
+    sqr->setStruct(addition);
+    sqr->setAddition(name);
+     int size = GuiManager::instance().getUi()->gridLayoutWidget->width()/Game::instance().getSquares().size()/2;
+      QSize size1(size,size);
+    QPixmap thing = GuiManager::instance().setmap(sqr,size1);
+    lbl->setPixmap(thing);
+}
+
 string Network::ActionReciever(string action, string details){
    if(action == "New Owner"){
 
@@ -56,7 +95,7 @@ string Network::ActionReciever(string action, string details){
            playername += details.at(index);
            index++;
        }
-       string result = "NO Square " + to_string(x) + "," + to_string(y) + " has changed hands to " +playername + ".";
+       string result = "NO Square " + to_string(x) + "," + to_string(y) + " has changed hands to" +playername;
        //qDebug() << QString::fromStdString(result);
        return result;
    }
@@ -74,7 +113,7 @@ string Network::ActionReciever(string action, string details){
            structname += details.at(index);
            index++;
        }
-       result = "NS Square " + to_string(x) + "," + to_string(y) + " has added " + structname;
+       result = "NS Square " + to_string(x) + "," + to_string(y) + " has added" + structname;
        //qDebug() << QString::fromStdString(result);
        return result;
 
@@ -140,11 +179,24 @@ string Network::ActionReciever(string action, string details){
 }
 void Network::actionHandler(QString actStr){
 
-    //update square
+    if(actStr.at(0) == 'N' && actStr.at(1)== 'O'){
+        string pro = actStr.toStdString();
+        vector<string> proc = split(pro,' ');
+        if(Game::instance().getCurPlayer()->getName() != proc.at(7)){
+        SquareAssign(proc);
+    }
+    }
+        if(actStr.at(0) == 'N' && actStr.at(1)== 'S'){
+            string pro = actStr.toStdString();
+            vector<string> proc = split(pro,' ');
 
+            StructMaker(proc);
+
+        }
+}
     //update struct
 
     //update player
 
     //update misc.
-}
+
