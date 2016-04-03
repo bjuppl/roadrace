@@ -328,3 +328,5 @@ void RoadRace::openJoin(){
     else{
         QMessageBox::information(ui->btnConnect,"Alert","Please find a server!",0,0);
     }
+
+   }
