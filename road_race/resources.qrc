@@ -18,5 +18,15 @@
         <file alias="swamp">swamp.jpg</file>
         <file alias="lava">lava.jpg</file>
         <file alias="randomfile">random.rr</file>
+        <file alias="acquireSound">Acquire.wav</file>
+        <file alias="constructionSound">Construction.wav</file>
+        <file alias="explosionSound">Explosion.wav</file>
+        <file alias="fireSound">Fire.wav</file>
+        <file alias="moneySound">Money.wav</file>
+        <file alias="swampSound">Swamp Sickness.wav</file>
+        <file alias="thiefSound">Thief.wav</file>
+        <file alias="waterSound">Water.wav</file>
+        <file alias="winningSound">Winning.wav</file>
+        <file alias="charred">Charred.jpg</file>
     </qresource>
 </RCC>
