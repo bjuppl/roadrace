@@ -10,7 +10,7 @@ class Sound {
    QSoundEffect* effect;
 
 public:
-   void playSound(QString s);
+   void playSound(QString s, float volume);
    static Sound& instance();
 };
 
