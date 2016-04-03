@@ -2,6 +2,7 @@
 #include "gamemodel.h"
 #include "squarelabel.h"
 #include "network.h"
+#include "sound.h"
 #include <random>
 #include <QMessageBox>
 #include <QDebug>
@@ -70,6 +71,7 @@ std::vector<std::string> LevelManager::resourceFileContents(std::string alias ) 
 }
 string LevelManager::upRec(int goodRes){
     string result;
+    Sound::instance().playSound(":/moneySound",1);
     if(goodRes == 0){
         int wood = Game::instance().getCurPlayer()->getWood();
         wood += 50;
@@ -101,6 +103,7 @@ string LevelManager::upRec(int goodRes){
 }
 string LevelManager::downRec(int badRes){
     string result;
+    Sound::instance().playSound(":/thiefSound",1);
     if(badRes == 0){
         int wood = Game::instance().getCurPlayer()->getWood();
         wood -= 50;
@@ -168,6 +171,7 @@ bool LevelManager::riverSquare(int hit, int wid){
     string details;
     details += to_string(wid) + " " + to_string(hit) + " " + victim->getType();
     Network::instance().ActionReciever(action,details);
+    Sound::instance().playSound(":/waterSound",1);
     return true;
     }
     else{
@@ -184,12 +188,13 @@ bool LevelManager::burnSquare(int hit, int wid){
     victim->setImage("Pl");
     SquareLabel *vicLbl = victim->getLabel();
     int size = GuiManager::instance().getUi()->gridLayoutWidget->width()/Game::instance().getSize()/2;
-     QSize size1(size,size);
+    QSize size1(size,size);
     vicLbl->setPixmap(GuiManager::instance().setmap(victim,size1));
     string action = "Change type";
     string details;
     details += to_string(wid) + " " + to_string(hit) + " " + victim->getType();
     Network::instance().ActionReciever(action,details);
+    Sound::instance().playSound(":/fireSound",1);
     return true;
     }
     else{
@@ -197,6 +202,7 @@ bool LevelManager::burnSquare(int hit, int wid){
     }
 }
 bool LevelManager::quakeSquare(int hit, int wid){
+    Sound::instance().playSound(":/explosionSound",1);
     Square *victim = Game::instance().getSquare(wid,hit);
     Structure *killStruct = Game::instance().getStructure("Ru");
     if(victim->getImage() != "Ca"){
@@ -215,6 +221,7 @@ bool LevelManager::quakeSquare(int hit, int wid){
     }
 }
 bool LevelManager::eruption(int hit, int wid){
+    Sound::instance().playSound(":/explosionSound",1);
     Square *victim = Game::instance().getSquare(wid,hit);
     Structure *killStruct = Game::instance().getStructure("Ru");
     if(victim->getImage() != "Ri" && victim->getOwner() != nullptr){
@@ -337,6 +344,7 @@ vector<string> LevelManager::randWorld(){
 }
 
 void LevelManager::trader(){
+    Sound::instance().playSound(":/moneySound",1);
     int gold = Game::instance().getCurPlayer()->getGold();
     int wood = Game::instance().getCurPlayer()->getWood();
     int stone = Game::instance().getCurPlayer()->getStone();
