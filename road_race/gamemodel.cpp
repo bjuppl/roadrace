@@ -82,14 +82,14 @@ void Game::updateResources() {
             signalstrs.push_back(signal);
         }
     }
-    if(signalstrs.size() > 0){
+   /* if(signalstrs.size() > 0){
         int i = 0;
         while (i < signalstrs.size()){
             QString sendstr = QString::fromStdString(signalstrs.at(i));
             GuiManager::instance().getWindow()->actionSender(sendstr);
             i++;
         }
-    }
+    }*/
 }
 
 vector<Square*> Game::getPlayerSquares(Player *owner) {
