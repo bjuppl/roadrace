@@ -38,12 +38,8 @@ private slots:
     void on_tst2Btn_clicked();
     void on_RanBtn_clicked();
     void openMulti();
-<<<<<<< HEAD
-    void on_btnSendToServer_clicked();
 
-=======
     void openJoin();
->>>>>>> upstream/master
 private:
     Ui::RoadRace *ui;
     QTcpSocket *socket;
