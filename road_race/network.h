@@ -12,6 +12,7 @@ public:
     static Network& instance();
     void SquareAssign(vector<string> proc1);
     void SquareUnassign();
+    void StructMaker(vector<string> proc1);
     string ActionReciever(string action, string details);
     void actionHandler(QString actStr);
 };

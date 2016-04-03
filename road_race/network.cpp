@@ -56,6 +56,30 @@ void Network::SquareUnassign(){
 
 
 }
+void Network::StructMaker(vector<string> proc1){
+    int x;
+    int y;
+    string sizestr = proc1.at(2);
+    string str1;
+    string str2;
+    qDebug() << QString::fromStdString(sizestr);
+    str1 += sizestr.at(0);
+    str2 += sizestr.at(2);
+    x = stoi(str1);
+    y = stoi(str2);
+    Square *sqr = Game::instance().getSquare(x,y);
+    SquareLabel *lbl = dynamic_cast<SquareLabel*>(GuiManager::instance().getUi()->gameLayout->itemAtPosition(x,y)->widget());
+    Structure *addition;
+    string name = proc1.at(5);
+    addition = Game::instance().getStructure(name);
+    sqr->setStruct(addition);
+    sqr->setAddition(name);
+     int size = GuiManager::instance().getUi()->gridLayoutWidget->width()/Game::instance().getSquares().size()/2;
+      QSize size1(size,size);
+    QPixmap thing = GuiManager::instance().setmap(sqr,size1);
+    lbl->setPixmap(thing);
+}
+
 string Network::ActionReciever(string action, string details){
    if(action == "New Owner"){
 
@@ -161,10 +185,18 @@ void Network::actionHandler(QString actStr){
         if(Game::instance().getCurPlayer()->getName() != proc.at(7)){
         SquareAssign(proc);
     }
+    }
+        if(actStr.at(0) == 'N' && actStr.at(1)== 'S'){
+            string pro = actStr.toStdString();
+            vector<string> proc = split(pro,' ');
+
+            StructMaker(proc);
+
+        }
 }
     //update struct
 
     //update player
 
     //update misc.
-}
+
