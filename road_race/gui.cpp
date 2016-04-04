@@ -43,8 +43,6 @@ void GuiManager::fillResourceList(){
 }
 
 void GuiManager::generateSquareGrid() {
-    //TEST CODE
-    Sound::instance().playSound(":/fireSound",1);
 
     std::cout << getUi()->label->text().toStdString() << std::endl;
 
