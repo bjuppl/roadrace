@@ -11,6 +11,7 @@
 
 class Network;
 
+#include <QDebug>
 multiplayer::multiplayer(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::multiplayer)
@@ -71,6 +72,14 @@ void multiplayer::connect_server(){
     players.push_back(pl1);
     Game::instance().setPlayerList(players);
     Game::instance().setCurPlayer(pl1);
+
+    sendstr += "new_game\n";
+    sendstr += "alias " + gameName + " junk\n";
+    sendstr += "password " + gamePass + " junk\n";
+    sendstr += "players " + playerNumstr + " junk\n";
+    sendstr += "name " + Player1 + " junk\n";
+    sendstr += "level 1";
+
     string ng = "new_game\n", alias = "alias ", pass = "password ", name = "name ", pls = "players ", lev = "level ", nl = "\n";
     string sto = ng +
             alias + gameName.toStdString() + nl +
@@ -79,6 +88,7 @@ void multiplayer::connect_server(){
             name  + Player1.toStdString() +nl +
             lev  +level.toStdString() + nl;
     sendstr = QString::fromStdString(sto);
+
     QString hostname = "localhost";
     if (hostname.size() == 0) {
         QMessageBox::critical(this, "Uh oh", "Please specify name of chat server.");
@@ -90,6 +100,7 @@ void multiplayer::connect_server(){
         return;
     }
     socket->write(sendstr.toLocal8Bit());
+    qDebug() << sendstr;
     this->hide();
 
     Network::instance().setSocket(socket);

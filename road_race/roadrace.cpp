@@ -75,10 +75,16 @@ void RoadRace::dataReceived() {
             qDebug() << str;
             ui->txtServerOutput->insertHtml(str + "\n");
 
+
         }
+
         /*if(str.at(0) == 'N' & str.at(1)== 'G'){
-             GuiManager::instance().setUi( ui );
-            LevelManager::instance().prepSquares(str);
+        GuiManager::instance().setUi( ui );
+
+
+
+        ui->btnStuff->setDisabled(true);
+        ui->tst2Btn->setDisabled(true);
 
         }
        else if(str.at(0) == 'C' & str.at(1)== 'G'){
@@ -124,9 +130,23 @@ void RoadRace::connect_server()
 
 void RoadRace::send()
 {
+
+  /* // QString username = ui->ipt//->text();
+    QString msg = ui->iptServerMsg->toPlainText();
+    if (Game::instance().getCurPlayer() != nullptr) {
+       /* std::string name = Game::instance().getCurPlayer() == NULL ?
+                    "[No player]" :
+                    Game::instance().getCurPlayer()->getName();
+*/
+    /*string name = Game::instance().getCurPlayer()->getName();
+
+        msg = QString::fromStdString(name) + ": " + ui->iptServerMsg->toPlainText() + "\n";
+        //QMessageBox::about(this,"We are sending this",msg);
+
     QString msg = ui->iptServerMsg->toPlainText();
     if (Game::instance().getCurPlayer() != nullptr) {
         ui->iptServerMsg->toPlainText() + "\n";
+
     } else {
         if(msg.size() > 0){
             msg += ui->iptServerMsg->toPlainText() + "\n";
@@ -134,10 +154,10 @@ void RoadRace::send()
         else{
         return;
         }
-    }
-
+    }*/
+    QString msg = ui->iptServerMsg->toPlainText();
     ui->iptServerMsg->setText("");
-
+   qDebug() << msg;
     socket->write(msg.toLocal8Bit());
 
 

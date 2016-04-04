@@ -216,6 +216,7 @@ void GuiManager::BuildStruct(Square *proc){
      if(struc != nullptr){
      proc->setStruct(struc);
      proc->setAddition(struc->shortName);
+      Sound::instance().playSound(":/constructionSound",1);
      if(struc->shortName == "Ha"){
          Game::instance().setVolc(false);
      }
