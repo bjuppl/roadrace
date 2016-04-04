@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui widgets network
+QT       += core gui widgets network multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -12,6 +12,7 @@ TARGET = road_race
 TEMPLATE = app
 
 CONFIG += c++11
+
 
 SOURCES += main.cpp\
         roadrace.cpp \
@@ -27,7 +28,8 @@ SOURCES += main.cpp\
     squarelabel.cpp \
     cheater.cpp \
     multiplayer.cpp \
-    joiner.cpp
+    joiner.cpp \
+    sound.cpp
 
     
 
@@ -44,7 +46,8 @@ HEADERS  += roadrace.h \
     squarelabel.h \
     cheater.h \
     multiplayer.h \
-    joiner.h
+    joiner.h \
+    sound.h
     
 
 
