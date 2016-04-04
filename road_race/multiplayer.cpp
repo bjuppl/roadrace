@@ -8,6 +8,7 @@
 #include "square.h"
 #include <string>
 #include <QMessageBox>
+#include <QDebug>
 multiplayer::multiplayer(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::multiplayer)
@@ -55,7 +56,12 @@ void multiplayer::connect_server(){
     players.push_back(pl1);
     Game::instance().setPlayerList(players);
     Game::instance().setCurPlayer(pl1);
-    sendstr += "NG " + gameName + " " + gamePass + " " + playerNumstr + " " + Player1 + " " +level;
+    sendstr += "new_game\n";
+    sendstr += "alias " + gameName + " junk\n";
+    sendstr += "password " + gamePass + " junk\n";
+    sendstr += "players " + playerNumstr + " junk\n";
+    sendstr += "name " + Player1 + " junk\n";
+    sendstr += "level 1";
     QString hostname = "localhost";
     if (hostname.size() == 0) {
         QMessageBox::critical(this, "Uh oh", "Please specify name of chat server.");
@@ -67,5 +73,6 @@ void multiplayer::connect_server(){
         return;
     }
     socket->write(sendstr.toLocal8Bit());
+    qDebug() << sendstr;
     this->hide();
 }
