@@ -69,30 +69,25 @@ void RoadRace::on_btnStuff_clicked()
 }
 //receive data from the serveer
 void RoadRace::dataReceived() {
-
+   const QString gamestr = "RoadRaceDoc";
+   QString str;
+   bool launch;
+   vector<QString> proc;
         while (socket->canReadLine()) {
-            QString str = socket->readLine();
-            qDebug() << str;
+             str = socket->readLine();
+           if(str.at(0) == 'R' && str.at(5) == 'a'){
+            launch = true;
+           }
             ui->txtServerOutput->insertHtml(str + "\n");
-
-
-        }
-
-        /*if(str.at(0) == 'N' & str.at(1)== 'G'){
-        GuiManager::instance().setUi( ui );
-
-
-
-        ui->btnStuff->setDisabled(true);
-        ui->tst2Btn->setDisabled(true);
+           proc.push_back(str);
 
         }
-       else if(str.at(0) == 'C' & str.at(1)== 'G'){
+    if(launch == true){
              GuiManager::instance().setUi( ui );
-            LevelManager::instance().prepSquares(str);
+            LevelManager::instance().prepSquares(proc);
 
         }
-        else{
+      /*  else{
             Network::instance().actionHandler(str);
         }*/
 }
