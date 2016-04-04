@@ -1,6 +1,7 @@
 #include "squarelabel.h"
 #include "gamemodel.h"
 #include "gui.h"
+#include "sound.h"
 #include <QDebug>
 #include <iostream>
 #include <QMessageBox>
@@ -278,7 +279,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             qDebug() << QString::fromStdString(details);
             QString msg = QString::fromStdString(Network::instance().ActionReciever(action,details));
             GuiManager::instance().getWindow()->actionSender(msg);
-
+            Sound::instance().playSound(":/acquireSound",1);
 
 
         }
