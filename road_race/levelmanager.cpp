@@ -374,9 +374,16 @@ void LevelManager::trader(){
     }
 
 }
-void LevelManager::prepSquares(QString str){
-    string proc = str.toStdString();
-    vector<string> proc1 = split(proc,'\n');
+void LevelManager::prepSquares(vector<QString> proc){
+    string proc2;
+    int levelind = 0;
+
+    vector<string> proc1;
+    while (levelind < proc.size() ){
+        proc2 = proc.at(levelind).toStdString();
+     proc1.push_back(proc2);
+        levelind++;
+    }
 
      Game::instance().setGameLoader(new GameFileManager(proc1));
 
