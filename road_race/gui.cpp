@@ -4,6 +4,7 @@
 #include "ui_roadrace.h"
 #include "square.h"
 #include "player.h"
+#include "sound.h"
 #include <QLabel>
 #include <QMessageBox>
 
@@ -42,6 +43,7 @@ void GuiManager::fillResourceList(){
 }
 
 void GuiManager::generateSquareGrid() {
+
     std::cout << getUi()->label->text().toStdString() << std::endl;
 
 

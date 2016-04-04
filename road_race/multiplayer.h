@@ -21,6 +21,7 @@ private slots:
 
     void on_okBtn_clicked();
     void connect_server();
+    void data_received();
     //void serverDisconnected();
 private:
     Ui::multiplayer *ui;

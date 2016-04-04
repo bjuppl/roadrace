@@ -70,10 +70,17 @@ void RoadRace::on_btnStuff_clicked()
 //receive data from the serveer
 void RoadRace::dataReceived() {
 
+        while (socket->canReadLine()) {
+            QString str = socket->readLine();
+            qDebug() << str;
+            ui->txtServerOutput->insertHtml(str + "\n");
 
         QString str = socket->readLine();
         qDebug() << str;
         ui->txtServerOutput->insertHtml(str + "\n");
+
+        }
+
         /*if(str.at(0) == 'N' & str.at(1)== 'G'){
              GuiManager::instance().setUi( ui );
             LevelManager::instance().prepSquares(str);
@@ -122,6 +129,7 @@ void RoadRace::connect_server()
 
 void RoadRace::send()
 {
+<<<<<<< HEAD
   /* // QString username = ui->ipt//->text();
     QString msg = ui->iptServerMsg->toPlainText();
     if (Game::instance().getCurPlayer() != nullptr) {
@@ -133,9 +141,14 @@ void RoadRace::send()
 
         msg = QString::fromStdString(name) + ": " + ui->iptServerMsg->toPlainText() + "\n";
         //QMessageBox::about(this,"We are sending this",msg);
+=======
+    QString msg = ui->iptServerMsg->toPlainText();
+    if (Game::instance().getCurPlayer() != nullptr) {
+        ui->iptServerMsg->toPlainText() + "\n";
+>>>>>>> upstream/master
     } else {
         if(msg.size() > 0){
-            msg += "None: " + ui->iptServerMsg->toPlainText();
+            msg += ui->iptServerMsg->toPlainText() + "\n";
         }
         else{
         return;
@@ -315,6 +328,7 @@ void RoadRace::on_RanBtn_clicked()
             QMessageBox::information(ui->centralWidget,"Alert","You did not specify a difficulty!",0,0);
         }
 }
+
 void RoadRace::openJoin(){
     if(ui->btnConnect->isEnabled() == false){
     static joiner *multi1 = new joiner(this);
@@ -327,4 +341,5 @@ void RoadRace::openJoin(){
     else{
         QMessageBox::information(ui->btnConnect,"Alert","Please find a server!",0,0);
     }
-}
+
+   }
