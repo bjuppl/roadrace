@@ -15,10 +15,10 @@ Sound& Sound::instance() {
     return *instance_;
 }
 
-void Sound::playSound(QString s)
+void Sound::playSound(QString s, float volume)
 {
     effect = new QSoundEffect;
     effect->setSource(QUrl::fromLocalFile(s));
-    effect->setVolume(0.25f);
+    effect->setVolume(volume);
     effect->play();
 }
