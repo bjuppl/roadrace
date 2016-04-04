@@ -15,6 +15,16 @@ Network& Network::instance() {
     return *instance_;
 }
 
+//Fix:: potential for a memory leak here
+void Network::setSocket(QTcpSocket *s){
+    if (global_socket != nullptr) {
+        //global_socket->disconnectFromHost();
+        //global_socket->deleteLater();
+    }
+
+    global_socket = s;
+}
+
 void Network::SquareAssign(vector<string> proc1){
     int x;
     int y;
