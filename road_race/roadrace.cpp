@@ -70,11 +70,13 @@ void RoadRace::on_btnStuff_clicked()
 //receive data from the serveer
 void RoadRace::dataReceived() {
 
+        while (socket->canReadLine()) {
+            QString str = socket->readLine();
+            qDebug() << str;
+            ui->txtServerOutput->insertHtml(str + "\n");
 
-        QString str = socket->readLine();
-        qDebug() << str;
-        ui->txtServerOutput->insertHtml(str + "\n");
-        if(str.at(0) == 'N' & str.at(1)== 'G'){
+        }
+        /*if(str.at(0) == 'N' & str.at(1)== 'G'){
              GuiManager::instance().setUi( ui );
             LevelManager::instance().prepSquares(str);
 
@@ -86,7 +88,7 @@ void RoadRace::dataReceived() {
         }
         else{
             Network::instance().actionHandler(str);
-        }
+        }*/
 }
 
 
@@ -122,20 +124,12 @@ void RoadRace::connect_server()
 
 void RoadRace::send()
 {
-   // QString username = ui->ipt//->text();
     QString msg = ui->iptServerMsg->toPlainText();
     if (Game::instance().getCurPlayer() != nullptr) {
-       /* std::string name = Game::instance().getCurPlayer() == NULL ?
-                    "[No player]" :
-                    Game::instance().getCurPlayer()->getName();
-*/
-    string name = Game::instance().getCurPlayer()->getName();
-
-        msg = QString::fromStdString(name) + ": " + ui->iptServerMsg->toPlainText() + "\n";
-        //QMessageBox::about(this,"We are sending this",msg);
+        ui->iptServerMsg->toPlainText() + "\n";
     } else {
         if(msg.size() > 0){
-            msg += "None: " + ui->iptServerMsg->toPlainText();
+            msg += ui->iptServerMsg->toPlainText() + "\n";
         }
         else{
         return;
@@ -315,6 +309,7 @@ void RoadRace::on_RanBtn_clicked()
             QMessageBox::information(ui->centralWidget,"Alert","You did not specify a difficulty!",0,0);
         }
 }
+
 void RoadRace::openJoin(){
     if(ui->btnConnect->isEnabled() == false){
     static joiner *multi1 = new joiner(this);
@@ -327,4 +322,5 @@ void RoadRace::openJoin(){
     else{
         QMessageBox::information(ui->btnConnect,"Alert","Please find a server!",0,0);
     }
-}
+
+   }
