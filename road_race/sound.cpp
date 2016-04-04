@@ -1,4 +1,5 @@
 #include <sound.h>
+#include <roadrace.h>
 #include <QString>
 #include <QFile>
 #include <QObject>
