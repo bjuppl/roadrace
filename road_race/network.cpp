@@ -27,7 +27,7 @@ void Network::SquareAssign(vector<string> proc1){
     x = stoi(str1);
     y = stoi(str2);
     Square *proc = Game::instance().getSquare(x,y);
-    string name = proc1.at(7);
+    string name = proc1.at(0);
     int ss = Game::instance().getPlayerList().size();
     Player *reqPlayer = Game::instance().getPlayer(name);
     int index = 0;
@@ -70,7 +70,7 @@ void Network::StructMaker(vector<string> proc1){
     Square *sqr = Game::instance().getSquare(x,y);
     SquareLabel *lbl = dynamic_cast<SquareLabel*>(GuiManager::instance().getUi()->gameLayout->itemAtPosition(x,y)->widget());
     Structure *addition;
-    string name = proc1.at(5);
+    string name = proc1.at(3);
     addition = Game::instance().getStructure(name);
     sqr->setStruct(addition);
     sqr->setAddition(name);
