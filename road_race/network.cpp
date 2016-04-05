@@ -105,8 +105,8 @@ string Network::ActionReciever(string action, string details){
            playername += details.at(index);
            index++;
        }
-       string result = "NO Square " + to_string(x) + "," + to_string(y) + " has changed hands to" +playername;
-       //qDebug() << QString::fromStdString(result);
+       string result = "own " + to_string(x) + "," + to_string(y);
+       qDebug() << QString::fromStdString(result);
        return result;
    }
    if(action == "New Struct"){
@@ -123,8 +123,8 @@ string Network::ActionReciever(string action, string details){
            structname += details.at(index);
            index++;
        }
-       result = "NS Square " + to_string(x) + "," + to_string(y) + " has added" + structname;
-       //qDebug() << QString::fromStdString(result);
+       result = "get " + to_string(x) + "," + to_string(y) + structname;
+       qDebug() << QString::fromStdString(result);
        return result;
 
    }
@@ -187,20 +187,17 @@ string Network::ActionReciever(string action, string details){
        return result;
    }
 }
-void Network::actionHandler(QString actStr){
+void Network::actionHandler(vector<string> action){
 
-    if(actStr.at(0) == 'N' && actStr.at(1)== 'O'){
-        string pro = actStr.toStdString();
-        vector<string> proc = split(pro,' ');
-        if(Game::instance().getCurPlayer()->getName() != proc.at(7)){
-        SquareAssign(proc);
+    if(action.at(1) == "assign"){
+        if(Game::instance().getCurPlayer()->getName() != action.at(0)){
+        SquareAssign(action);
     }
     }
-        if(actStr.at(0) == 'N' && actStr.at(1)== 'S'){
-            string pro = actStr.toStdString();
-            vector<string> proc = split(pro,' ');
+        if(action.at(0) == "build"){
 
-            StructMaker(proc);
+
+            StructMaker(action);
 
         }
 }

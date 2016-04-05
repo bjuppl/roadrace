@@ -221,7 +221,7 @@ bool LevelManager::quakeSquare(int hit, int wid){
     }
 }
 bool LevelManager::eruption(int hit, int wid){
-    Sound::instance().playSound(":/explosionSound",1);
+
     Square *victim = Game::instance().getSquare(wid,hit);
     Structure *killStruct = Game::instance().getStructure("Ru");
     if(victim->getImage() != "Ri" && victim->getOwner() != nullptr){
