@@ -18,6 +18,7 @@ struct difficultyStruct{
     int goldMod;
     int waterMod;
     int stoneMod;
+
     difficultyStruct(int wm, int gm, int wam, int stm){
 
         woodMod = wm;
@@ -40,6 +41,8 @@ private:
     string burn;
  public:
     static LevelManager& instance();
+
+    static string my_name;
 
     ~LevelManager() { delete instance_;
                       delete duff;

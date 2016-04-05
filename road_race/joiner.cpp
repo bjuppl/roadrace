@@ -7,9 +7,10 @@
 #include <sstream>
 #include "iostream"
 #include "network.h"
+#include "levelmanager.h"
 
 class Network;
-
+class LevelManager;
 joiner::joiner(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::joiner)
@@ -77,6 +78,9 @@ void joiner::on_joinBtn_clicked()
         players.push_back(pl1);
         Game::instance().setPlayerList(players);
         Game::instance().setCurPlayer(pl1);*/
+
+        LevelManager::my_name =pname.toStdString();
+
     socket->write(request.toLocal8Bit());
     this->hide();
 

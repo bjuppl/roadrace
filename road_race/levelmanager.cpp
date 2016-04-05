@@ -6,6 +6,9 @@
 #include <random>
 #include <QMessageBox>
 #include <QDebug>
+
+string LevelManager::my_name = "";
+class Player;
 int random_int1(int min, int max) {
     static std::default_random_engine engine { std::random_device{}() };
     std::uniform_int_distribution<int> distro{min, max};
@@ -391,6 +394,21 @@ void LevelManager::prepSquares(vector<QString> proc){
 
      Updater::instance().start();
      //sets a difficulty based on the radio button
+
+     int num = 0;
+     for ( size_t i=0; i<Game::instance().getPlayerList().size(); i++ ) {
+        if ( Game::instance().getPlayerList()[i]->getName() == my_name) {
+            num = i;
+            break;
+        }
+     }
+
+     Game::instance().setCurPlayer(Game::instance().getPlayerList()[num]);
+
+     int x = num == 0 || num == 2 ? 0 : 7;
+     int y = num == 0 || num == 3 ? 0 : 7;
+
+     Game::instance().getSquare(x,y)->setOwner(Game::instance().getCurPlayer());
     GuiManager::instance().newDiff();
     GuiManager::instance().generateSquareGrid();
      std::cout << Game::instance().getGameLoader()->toGameFile() << std::endl;

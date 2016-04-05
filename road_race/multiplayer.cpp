@@ -8,6 +8,9 @@
 #include "square.h"
 #include <string>
 #include <QMessageBox>
+#include "levelmanager.h"
+
+class LevelManager;
 
 class Network;
 
@@ -106,6 +109,8 @@ void multiplayer::connect_server(){
     socket->write(sendstr.toLocal8Bit());
     qDebug() << sendstr;
     this->hide();
+
+    LevelManager::my_name = name;
 
     Network::instance().setSocket(socket);
 
