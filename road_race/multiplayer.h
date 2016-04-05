@@ -1,6 +1,8 @@
 #ifndef MULTIPLAYER_H
 #define MULTIPLAYER_H
 
+#include "network.h"
+
 #include <QDialog>
 #include <QSignalMapper>
 #include <QTcpSocket>

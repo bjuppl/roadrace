@@ -8,6 +8,9 @@
 #include "square.h"
 #include <string>
 #include <QMessageBox>
+
+class Network;
+
 #include <QDebug>
 multiplayer::multiplayer(QWidget *parent) :
     QDialog(parent),
@@ -99,4 +102,8 @@ void multiplayer::connect_server(){
     socket->write(sendstr.toLocal8Bit());
     qDebug() << sendstr;
     this->hide();
+
+    Network::instance().setSocket(socket);
+
+
 }

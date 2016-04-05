@@ -17,7 +17,7 @@ public:
 
 private slots:
     void on_killBtn_clicked();
-
+    void data_received();
     void on_joinBtn_clicked();
 
 private:
