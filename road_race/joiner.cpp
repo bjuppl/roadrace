@@ -40,6 +40,8 @@ void joiner::data_received() {
         output.push_back(str.toStdString());
     }
 
+    Network::instance().handleData(output);
+
     if ( output.size() == 0 || output[0] == "game_init_error\n") {
         QMessageBox::information(0,"Error","There was a problem connecting. Perhaps you were unlucky?",0,0);
     }
