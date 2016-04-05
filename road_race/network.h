@@ -14,7 +14,7 @@ public:
     void SquareUnassign();
     void StructMaker(vector<string> proc1);
     string ActionReciever(string action, string details);
-    void actionHandler(QString actStr);
+    void actionHandler(vector<string> action);
 };
 
 

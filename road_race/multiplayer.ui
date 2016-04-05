@@ -79,7 +79,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Five</string>
+    <string>TestSet1</string>
    </property>
   </widget>
   <widget class="QRadioButton" name="sevBtn">
@@ -92,7 +92,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Seven</string>
+    <string>TestSet2</string>
    </property>
   </widget>
   <widget class="QRadioButton" name="randBtn">
@@ -105,7 +105,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Random</string>
+    <string>TestSet3</string>
    </property>
   </widget>
   <widget class="QLabel" name="label">

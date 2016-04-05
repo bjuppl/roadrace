@@ -66,6 +66,7 @@ void RoadRace::on_btnStuff_clicked()
     else{
         QMessageBox::information(ui->centralWidget,"Alert","You did not select a difficulty.");
     }
+    Game::instance().setIsLocalGame(false);
 }
 //receive data from the serveer
 void RoadRace::dataReceived() {
@@ -160,12 +161,14 @@ void RoadRace::send()
 }
 
 void RoadRace::actionSender(QString msgstr){
+   if(Game::instance().getIsLocalGame()){
     if(msgstr.size() > 0){
         socket->write(msgstr.toLocal8Bit());
     }
     else{
         return;
     }
+   }
 }
 
 void RoadRace::loadFile() {
