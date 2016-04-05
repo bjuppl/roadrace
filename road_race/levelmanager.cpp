@@ -221,7 +221,7 @@ bool LevelManager::quakeSquare(int hit, int wid){
     }
 }
 bool LevelManager::eruption(int hit, int wid){
-    Sound::instance().playSound(":/explosionSound",1);
+
     Square *victim = Game::instance().getSquare(wid,hit);
     Structure *killStruct = Game::instance().getStructure("Ru");
     if(victim->getImage() != "Ri" && victim->getOwner() != nullptr){
@@ -374,71 +374,24 @@ void LevelManager::trader(){
     }
 
 }
-void LevelManager::prepSquares(QString str){
-    string proc = str.toStdString();
-    vector<string> proc1 = split(proc,' ');
-    int index = 1;
-    vector<string> squarevec;
-    while(index < proc1.size()){
-        if(proc1.at(index) == "board"){
-            int i2 = index;
-            while(i2 < proc1.size()){
-                squarevec.push_back(proc1.at(i2));
-                i2++;
-            }
-            break;
-        }
-        index++;
+void LevelManager::prepSquares(vector<QString> proc){
+    string proc2;
+    int levelind = 0;
+
+    vector<string> proc1;
+    while (levelind < proc.size() ){
+        proc2 = proc.at(levelind).toStdString();
+     proc1.push_back(proc2);
+        levelind++;
     }
-    string sizestr = squarevec.at(1);
-    string str1;
-    string str2;
-    qDebug() << QString::fromStdString(sizestr);
-    str1 += sizestr.at(0);
-    str2 += sizestr.at(2);
-    int x = stoi(str1);
-    int y = stoi(str2);
-    Game::instance().setWidth(x);
-    Game::instance().setHeight(y);
-    vector<vector<Square*>> squares;
-    int i3 =1;
-    int index2 = 0;
-    int dd = squarevec.size();
-    squarevec.erase(squarevec.begin());
-     while(index2 < squarevec.size()){
-         vector<Square*> minivec;
-         int i4 = 0;
-         while(i4 < y){
-             QString debugStr = "DEBUG: " + QString::fromStdString(squarevec.at(i3));
-             qDebug() << debugStr;
-             vector<string> squarestrs = split(squarevec.at(i3),',');
-             if(squarevec.at(i3) != "EndRoadRaceDoc"){
-                 if(squarestrs.at(2) == "No"){
-             minivec.push_back(new Square(squarestrs.at(0),squarestrs.at(1),nullptr));
-                 }
-                 else{
-                     string ownerName = squarestrs.at(2);
-                     Player *owner = Game::instance().getPlayer(ownerName);
-                     if(owner == nullptr){
-                         vector<Player*> players = Game::instance().getPlayerList();
-                         owner = new Player(ownerName);
-                         players.push_back(owner);
-                         Game::instance().setPlayerList(players);
-                         qDebug() << "Name" + QString::fromStdString(ownerName);
-                     }
-                     minivec.push_back(new Square(squarestrs.at(0),squarestrs.at(1),owner));
-                 }
-             }
-             else{
-                 index2 = squarevec.size();
-                 break;
-             }
-             i3++;
-             i4++;
-         }
-         squares.push_back(minivec);
-         index2++;
-     }
-     Game::instance().setSquares(squares);
-     GuiManager::instance().generateSquareGrid();
-    }
+
+     Game::instance().setGameLoader(new GameFileManager(proc1));
+
+     GuiManager::instance().init();
+
+     Updater::instance().start();
+     //sets a difficulty based on the radio button
+    GuiManager::instance().newDiff();
+    GuiManager::instance().generateSquareGrid();
+     std::cout << Game::instance().getGameLoader()->toGameFile() << std::endl;
+}

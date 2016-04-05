@@ -7,12 +7,43 @@
 #include <string>
 #include <QDebug>
 #include "utils.h"
+#include "levelmanager.h"
+class LevelManager;
 Network *Network::instance_ = NULL;
 Network& Network::instance() {
     if ( instance_ == NULL ) {
         instance_ = new Network;
     }
     return *instance_;
+}
+
+void Network::handleData(vector<string> data){
+    vector<QString> gamefile;
+    bool start_load = false, prep = false;
+    for ( size_t i=0; i<data.size(); i++ ) {
+        vector<string> conts = split(data[i],' ');
+        //cout << conts[0] << endl;
+        if (conts[0] == "RoadRaceDoc" || start_load ) {
+            start_load = true;
+            prep = true;
+            gamefile.push_back(QString::fromStdString(split(data[i],'\n')[0]));
+        } if ( start_load && conts[0] == "EndRoadRaceDoc") {
+            start_load = false;
+        }
+    }
+    if (prep) {
+        LevelManager::instance().prepSquares(gamefile);
+    }
+}
+
+//Fix:: potential for a memory leak here
+void Network::setSocket(QTcpSocket *s){
+    if (global_socket != nullptr) {
+        //global_socket->disconnectFromHost();
+        //global_socket->deleteLater();
+    }
+
+    global_socket = s;
 }
 
 void Network::SquareAssign(vector<string> proc1){
@@ -27,7 +58,7 @@ void Network::SquareAssign(vector<string> proc1){
     x = stoi(str1);
     y = stoi(str2);
     Square *proc = Game::instance().getSquare(x,y);
-    string name = proc1.at(7);
+    string name = proc1.at(0);
     int ss = Game::instance().getPlayerList().size();
     Player *reqPlayer = Game::instance().getPlayer(name);
     int index = 0;
@@ -70,7 +101,7 @@ void Network::StructMaker(vector<string> proc1){
     Square *sqr = Game::instance().getSquare(x,y);
     SquareLabel *lbl = dynamic_cast<SquareLabel*>(GuiManager::instance().getUi()->gameLayout->itemAtPosition(x,y)->widget());
     Structure *addition;
-    string name = proc1.at(5);
+    string name = proc1.at(3);
     addition = Game::instance().getStructure(name);
     sqr->setStruct(addition);
     sqr->setAddition(name);
@@ -95,8 +126,8 @@ string Network::ActionReciever(string action, string details){
            playername += details.at(index);
            index++;
        }
-       string result = "NO Square " + to_string(x) + "," + to_string(y) + " has changed hands to" +playername;
-       //qDebug() << QString::fromStdString(result);
+       string result = "own " + to_string(x) + "," + to_string(y);
+       qDebug() << QString::fromStdString(result);
        return result;
    }
    if(action == "New Struct"){
@@ -113,8 +144,8 @@ string Network::ActionReciever(string action, string details){
            structname += details.at(index);
            index++;
        }
-       result = "NS Square " + to_string(x) + "," + to_string(y) + " has added" + structname;
-       //qDebug() << QString::fromStdString(result);
+       result = "get " + to_string(x) + "," + to_string(y) + structname;
+       qDebug() << QString::fromStdString(result);
        return result;
 
    }
@@ -177,20 +208,17 @@ string Network::ActionReciever(string action, string details){
        return result;
    }
 }
-void Network::actionHandler(QString actStr){
+void Network::actionHandler(vector<string> action){
 
-    if(actStr.at(0) == 'N' && actStr.at(1)== 'O'){
-        string pro = actStr.toStdString();
-        vector<string> proc = split(pro,' ');
-        if(Game::instance().getCurPlayer()->getName() != proc.at(7)){
-        SquareAssign(proc);
+    if(action.at(1) == "assign"){
+        if(Game::instance().getCurPlayer()->getName() != action.at(0)){
+        SquareAssign(action);
     }
     }
-        if(actStr.at(0) == 'N' && actStr.at(1)== 'S'){
-            string pro = actStr.toStdString();
-            vector<string> proc = split(pro,' ');
+        if(action.at(0) == "build"){
 
-            StructMaker(proc);
+
+            StructMaker(action);
 
         }
 }

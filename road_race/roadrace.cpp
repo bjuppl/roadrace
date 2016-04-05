@@ -66,27 +66,29 @@ void RoadRace::on_btnStuff_clicked()
     else{
         QMessageBox::information(ui->centralWidget,"Alert","You did not select a difficulty.");
     }
+    Game::instance().setIsLocalGame(false);
 }
 //receive data from the serveer
 void RoadRace::dataReceived() {
-
+   const QString gamestr = "RoadRaceDoc";
+   QString str;
+   bool launch;
+   vector<QString> proc;
         while (socket->canReadLine()) {
-            QString str = socket->readLine();
-            qDebug() << str;
+             str = socket->readLine();
+           if(str.at(0) == 'R' && str.at(5) == 'a'){
+            launch = true;
+           }
             ui->txtServerOutput->insertHtml(str + "\n");
+           proc.push_back(str);
 
         }
-        /*if(str.at(0) == 'N' & str.at(1)== 'G'){
+    if(launch == true){
              GuiManager::instance().setUi( ui );
-            LevelManager::instance().prepSquares(str);
+            LevelManager::instance().prepSquares(proc);
 
         }
-       else if(str.at(0) == 'C' & str.at(1)== 'G'){
-             GuiManager::instance().setUi( ui );
-            LevelManager::instance().prepSquares(str);
-
-        }
-        else{
+      /*  else{
             Network::instance().actionHandler(str);
         }*/
 }
@@ -124,9 +126,23 @@ void RoadRace::connect_server()
 
 void RoadRace::send()
 {
+
+  /* // QString username = ui->ipt//->text();
+    QString msg = ui->iptServerMsg->toPlainText();
+    if (Game::instance().getCurPlayer() != nullptr) {
+       /* std::string name = Game::instance().getCurPlayer() == NULL ?
+                    "[No player]" :
+                    Game::instance().getCurPlayer()->getName();
+*/
+    /*string name = Game::instance().getCurPlayer()->getName();
+
+        msg = QString::fromStdString(name) + ": " + ui->iptServerMsg->toPlainText() + "\n";
+        //QMessageBox::about(this,"We are sending this",msg);
+
     QString msg = ui->iptServerMsg->toPlainText();
     if (Game::instance().getCurPlayer() != nullptr) {
         ui->iptServerMsg->toPlainText() + "\n";
+
     } else {
         if(msg.size() > 0){
             msg += ui->iptServerMsg->toPlainText() + "\n";
@@ -134,10 +150,10 @@ void RoadRace::send()
         else{
         return;
         }
-    }
-
+    }*/
+    QString msg = ui->iptServerMsg->toPlainText();
     ui->iptServerMsg->setText("");
-
+   qDebug() << msg;
     socket->write(msg.toLocal8Bit());
 
 
@@ -145,12 +161,14 @@ void RoadRace::send()
 }
 
 void RoadRace::actionSender(QString msgstr){
+   if(Game::instance().getIsLocalGame()){
     if(msgstr.size() > 0){
         socket->write(msgstr.toLocal8Bit());
     }
     else{
         return;
     }
+   }
 }
 
 void RoadRace::loadFile() {
@@ -317,10 +335,15 @@ void RoadRace::openJoin(){
     multi1->activateWindow();
     multi1->raise();
     Game::instance().setIsLocalGame(false);
-     GuiManager::instance().setUi( ui );
+    GuiManager::instance().setUi( ui );
     }
     else{
         QMessageBox::information(ui->btnConnect,"Alert","Please find a server!",0,0);
     }
 
-   }
+}
+
+void RoadRace::on_joinBtn_clicked()
+{
+
+}
