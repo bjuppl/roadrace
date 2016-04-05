@@ -9,6 +9,7 @@
 #include "square.h"
 #include "levelmanager.h"
 #include "network.h"
+#include "sound.h"
 using namespace std;
 
 class Player;
@@ -361,6 +362,7 @@ void Updater::eventrun(){
                 QString ht = ht.fromStdString(to_string(rndHei));
                 QString wi = wi.fromStdString(to_string(rndWid));
                 QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Random Event!","Oh no! The volcano is erupting and has set " +  wi + "," + ht + "on fire!",0,0);
+                Sound::instance().playSound(":/explosionSound",1);
                 }
             }
             else{
