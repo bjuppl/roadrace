@@ -112,6 +112,7 @@ void Network::StructMaker(vector<string> proc1){
 }
 
 string Network::ActionReciever(string action, string details){
+    string result;
    if(action == "New Owner"){
 
        string str1;
@@ -126,12 +127,11 @@ string Network::ActionReciever(string action, string details){
            playername += details.at(index);
            index++;
        }
-       string result = "own " + to_string(x) + "," + to_string(y);
+       result = "own " + to_string(x) + "," + to_string(y);
        qDebug() << QString::fromStdString(result);
-       return result;
+       //return result;
    }
    if(action == "New Struct"){
-       string result;
        string str1;
        str1 += details.at(0);
        string str2;
@@ -146,11 +146,10 @@ string Network::ActionReciever(string action, string details){
        }
        result = "get " + to_string(x) + "," + to_string(y) + structname;
        qDebug() << QString::fromStdString(result);
-       return result;
+       //return result;
 
    }
    if(action == "Destroyed Struct"){
-       string result;
        string str1;
        str1 += details.at(0);
        string str2;
@@ -165,11 +164,11 @@ string Network::ActionReciever(string action, string details){
        }
        result = "SB Square " + to_string(x) + "," + to_string(y) + " has removed " + structname;
        //qDebug() << QString::fromStdString(result);
-       return result;
+       //return result;
 
    }
    if (action == "Change type"){
-       string result;
+       //string result;
        string str1;
        str1 += details.at(0);
        string str2;
@@ -184,10 +183,10 @@ string Network::ActionReciever(string action, string details){
        }
        result = "NT Square " + to_string(x) + "," + to_string(y) + " has changed to " + typename1;
        //qDebug() << QString::fromStdString(result);
-       return result;
+       //return result;
    }
    if (action == "New Sources"){
-       string result = "NR ";
+       result = "NR ";
        string plname;
        vector<string> strs;
        char delim = ' ';
@@ -205,9 +204,16 @@ string Network::ActionReciever(string action, string details){
            }
            index++;
        }
-       return result;
+       //return result;
    }
+   Network::instance().say(result);
+   return result;
 }
+
+void Network::say(string out) {
+    this->global_socket->write(QString::fromStdString(out).toLocal8Bit());
+}
+
 void Network::actionHandler(vector<string> action){
 
     if(action.at(1) == "assign"){

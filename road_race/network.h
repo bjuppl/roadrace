@@ -19,6 +19,8 @@ public:
     void StructMaker(vector<string> proc1);
     string ActionReciever(string action, string details);
     void actionHandler(vector<string> action);
+
+    void say( string out );
 };
 
 
