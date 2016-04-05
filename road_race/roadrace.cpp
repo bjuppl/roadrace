@@ -337,10 +337,15 @@ void RoadRace::openJoin(){
     multi1->activateWindow();
     multi1->raise();
     Game::instance().setIsLocalGame(false);
-     GuiManager::instance().setUi( ui );
+    GuiManager::instance().setUi( ui );
     }
     else{
         QMessageBox::information(ui->btnConnect,"Alert","Please find a server!",0,0);
     }
 
-   }
+}
+
+void RoadRace::on_joinBtn_clicked()
+{
+
+}
