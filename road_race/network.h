@@ -10,6 +10,7 @@ class Network {
    Network (){}
 
 public:
+   void handleData ( vector<string> data );
     static Network& instance();
     void setSocket(QTcpSocket *s);
     QTcpSocket *getSocket() { return global_socket; }

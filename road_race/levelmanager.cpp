@@ -392,5 +392,6 @@ void LevelManager::prepSquares(vector<QString> proc){
      Updater::instance().start();
      //sets a difficulty based on the radio button
     GuiManager::instance().newDiff();
+    GuiManager::instance().generateSquareGrid();
      std::cout << Game::instance().getGameLoader()->toGameFile() << std::endl;
 }

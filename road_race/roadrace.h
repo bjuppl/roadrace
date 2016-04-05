@@ -40,6 +40,8 @@ private slots:
     void openMulti();
 
     void openJoin();
+    void on_joinBtn_clicked();
+
 private:
     Ui::RoadRace *ui;
     QTcpSocket *socket;

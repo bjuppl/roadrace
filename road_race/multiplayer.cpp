@@ -39,12 +39,16 @@ void multiplayer::on_okBtn_clicked()
 }
 
 void multiplayer::data_received() {
+    vector<string> output;
     while (socket->canReadLine()) {
         QString str = socket->readLine();
         qDebug() << str;
+        output.push_back(str.toStdString());
         GuiManager::instance().getUi()->txtServerOutput->insertHtml(str + "\n");
 
     }
+
+    Network::instance().handleData(output);
 
 }
 

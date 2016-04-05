@@ -7,12 +7,33 @@
 #include <string>
 #include <QDebug>
 #include "utils.h"
+#include "levelmanager.h"
+class LevelManager;
 Network *Network::instance_ = NULL;
 Network& Network::instance() {
     if ( instance_ == NULL ) {
         instance_ = new Network;
     }
     return *instance_;
+}
+
+void Network::handleData(vector<string> data){
+    vector<QString> gamefile;
+    bool start_load = false, prep = false;
+    for ( size_t i=0; i<data.size(); i++ ) {
+        vector<string> conts = split(data[i],' ');
+        //cout << conts[0] << endl;
+        if (conts[0] == "RoadRaceDoc" || start_load ) {
+            start_load = true;
+            prep = true;
+            gamefile.push_back(QString::fromStdString(split(data[i],'\n')[0]));
+        } if ( start_load && conts[0] == "EndRoadRaceDoc") {
+            start_load = false;
+        }
+    }
+    if (prep) {
+        LevelManager::instance().prepSquares(gamefile);
+    }
 }
 
 //Fix:: potential for a memory leak here
