@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1256</width>
+    <width>1062</width>
     <height>848</height>
    </rect>
   </property>
@@ -17,24 +17,29 @@
    <widget class="QPushButton" name="btnStuff">
     <property name="geometry">
      <rect>
-      <x>220</x>
-      <y>0</y>
-      <width>115</width>
+      <x>10</x>
+      <y>50</y>
+      <width>71</width>
       <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string>Use Test Case</string>
+     <string>Test Case</string>
     </property>
    </widget>
    <widget class="QToolButton" name="btnOpenGame">
     <property name="geometry">
      <rect>
-      <x>780</x>
-      <y>0</y>
-      <width>121</width>
-      <height>41</height>
+      <x>160</x>
+      <y>100</y>
+      <width>81</width>
+      <height>31</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>&amp;Open Game...</string>
@@ -43,10 +48,10 @@
    <widget class="QLineEdit" name="iptGameFileName">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>0</y>
-      <width>311</width>
-      <height>41</height>
+      <x>10</x>
+      <y>100</y>
+      <width>141</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
@@ -57,7 +62,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>30</y>
+      <y>130</y>
       <width>111</width>
       <height>71</height>
      </rect>
@@ -74,7 +79,7 @@ font-size:30px;</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>90</y>
+      <y>190</y>
       <width>81</width>
       <height>17</height>
      </rect>
@@ -90,7 +95,7 @@ font-size:30px;</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>110</y>
+      <y>210</y>
       <width>41</width>
       <height>17</height>
      </rect>
@@ -103,7 +108,7 @@ font-size:30px;</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>170</y>
+      <y>270</y>
       <width>41</width>
       <height>20</height>
      </rect>
@@ -116,7 +121,7 @@ font-size:30px;</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>130</y>
+      <y>230</y>
       <width>41</width>
       <height>16</height>
      </rect>
@@ -129,7 +134,7 @@ font-size:30px;</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>150</y>
+      <y>250</y>
       <width>31</width>
       <height>20</height>
      </rect>
@@ -141,8 +146,8 @@ font-size:30px;</string>
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>50</y>
+      <x>260</x>
+      <y>160</y>
       <width>781</width>
       <height>621</height>
      </rect>
@@ -153,7 +158,7 @@ font-size:30px;</string>
     <property name="geometry">
      <rect>
       <x>70</x>
-      <y>110</y>
+      <y>210</y>
       <width>101</width>
       <height>17</height>
      </rect>
@@ -166,7 +171,7 @@ font-size:30px;</string>
     <property name="geometry">
      <rect>
       <x>70</x>
-      <y>150</y>
+      <y>250</y>
       <width>91</width>
       <height>17</height>
      </rect>
@@ -179,7 +184,7 @@ font-size:30px;</string>
     <property name="geometry">
      <rect>
       <x>70</x>
-      <y>170</y>
+      <y>270</y>
       <width>91</width>
       <height>17</height>
      </rect>
@@ -192,7 +197,7 @@ font-size:30px;</string>
     <property name="geometry">
      <rect>
       <x>70</x>
-      <y>130</y>
+      <y>230</y>
       <width>91</width>
       <height>17</height>
      </rect>
@@ -217,10 +222,10 @@ font-size:30px;</string>
    <widget class="QPushButton" name="helpBtn">
     <property name="geometry">
      <rect>
-      <x>910</x>
-      <y>0</y>
-      <width>85</width>
-      <height>41</height>
+      <x>130</x>
+      <y>320</y>
+      <width>111</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
@@ -231,7 +236,7 @@ font-size:30px;</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>290</y>
+      <y>380</y>
       <width>102</width>
       <height>22</height>
      </rect>
@@ -244,7 +249,7 @@ font-size:30px;</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>310</y>
+      <y>400</y>
       <width>121</width>
       <height>22</height>
      </rect>
@@ -260,7 +265,7 @@ font-size:30px;</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>330</y>
+      <y>420</y>
       <width>111</width>
       <height>22</height>
      </rect>
@@ -272,9 +277,9 @@ font-size:30px;</string>
    <widget class="QPushButton" name="cheatBtn">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>220</y>
-      <width>71</width>
+      <x>10</x>
+      <y>320</y>
+      <width>111</width>
       <height>31</height>
      </rect>
     </property>
@@ -291,8 +296,8 @@ font-size:30px;</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>360</y>
-      <width>191</width>
+      <y>440</y>
+      <width>111</width>
       <height>31</height>
      </rect>
     </property>
@@ -303,21 +308,21 @@ font-size:30px;</string>
    <widget class="QPushButton" name="tst2Btn">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>0</y>
-      <width>111</width>
+      <x>90</x>
+      <y>50</y>
+      <width>71</width>
       <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string>Use 7X7 test</string>
+     <string>7X7 test</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>190</y>
+      <y>290</y>
       <width>121</width>
       <height>16</height>
      </rect>
@@ -333,7 +338,7 @@ font-size:30px;</string>
     <property name="geometry">
      <rect>
       <x>130</x>
-      <y>190</y>
+      <y>290</y>
       <width>59</width>
       <height>16</height>
      </rect>
@@ -345,22 +350,22 @@ font-size:30px;</string>
    <widget class="QPushButton" name="RanBtn">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>610</y>
-      <width>191</width>
-      <height>61</height>
+      <x>170</x>
+      <y>50</y>
+      <width>71</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string>Generate a random World! </string>
+     <string>Random</string>
     </property>
    </widget>
    <widget class="QPushButton" name="btnSendToServer">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>460</y>
-      <width>191</width>
+      <y>540</y>
+      <width>231</width>
       <height>32</height>
      </rect>
     </property>
@@ -372,8 +377,8 @@ font-size:30px;</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>500</y>
-      <width>191</width>
+      <y>580</y>
+      <width>231</width>
       <height>51</height>
      </rect>
     </property>
@@ -382,9 +387,9 @@ font-size:30px;</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>560</y>
-      <width>91</width>
-      <height>41</height>
+      <y>640</y>
+      <width>131</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
@@ -394,10 +399,10 @@ font-size:30px;</string>
    <widget class="QPushButton" name="btnConnect">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>560</y>
+      <x>150</x>
+      <y>640</y>
       <width>91</width>
-      <height>41</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
@@ -409,7 +414,7 @@ font-size:30px;</string>
      <rect>
       <x>10</x>
       <y>0</y>
-      <width>101</width>
+      <width>111</width>
       <height>41</height>
      </rect>
     </property>
@@ -420,9 +425,9 @@ font-size:30px;</string>
    <widget class="QPushButton" name="joinBtn">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>130</x>
       <y>0</y>
-      <width>91</width>
+      <width>111</width>
       <height>41</height>
      </rect>
     </property>
@@ -434,8 +439,8 @@ font-size:30px;</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>400</y>
-      <width>191</width>
+      <y>480</y>
+      <width>231</width>
       <height>51</height>
      </rect>
     </property>
@@ -443,8 +448,8 @@ font-size:30px;</string>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>270</y>
+      <x>10</x>
+      <y>360</y>
       <width>91</width>
       <height>21</height>
      </rect>
@@ -460,41 +465,12 @@ font-size:30px;</string>
      <string>Difficulty</string>
     </property>
    </widget>
-   <widget class="QSlider" name="volumeSlider">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>240</y>
-      <width>91</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="maximum">
-     <number>100</number>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>220</y>
-      <width>81</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string> - Volume +</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>1060</x>
-      <y>380</y>
-      <width>55</width>
+      <x>10</x>
+      <y>680</y>
+      <width>91</width>
       <height>17</height>
      </rect>
     </property>
@@ -505,11 +481,30 @@ font-size:30px;</string>
    <widget class="QTextEdit" name="statusBox">
     <property name="geometry">
      <rect>
-      <x>1000</x>
-      <y>400</y>
-      <width>251</width>
-      <height>181</height>
+      <x>10</x>
+      <y>700</y>
+      <width>191</width>
+      <height>101</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>0</y>
+      <width>751</width>
+      <height>211</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>../../../../../media/zach/UUI/logo.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>
