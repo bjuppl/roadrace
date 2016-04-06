@@ -1,4 +1,4 @@
-#include "network.h"
+﻿#include "network.h"
 #include "gamemodel.h"
 #include "player.h"
 #include "gui.h"
@@ -206,14 +206,16 @@ string Network::ActionReciever(string action, string details){
        }
        //return result;
    }
-   if(Game::instance().getIsLocalGame()){
+
    Network::instance().say(result);
-   }
+
    return result;
 }
 
 void Network::say(string out) {
-    out.append("\n");
+    out += "\n";
+    QString test = QString::fromStdString(out);
+    qDebug() << test;
     this->global_socket->write(QString::fromStdString(out).toLocal8Bit());
 }
 
