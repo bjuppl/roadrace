@@ -31,6 +31,7 @@ public:
     }
    void mousePressEvent(QMouseEvent *ev);
    void mouseMoveEvent(QMouseEvent *ev);
+   void mouseDoubleClickEvent(QMouseEvent *ev);
    void enterEvent(QHoverEvent *event);
    void leaveEvent(QHoverEvent *event);
    bool event(QEvent *e);

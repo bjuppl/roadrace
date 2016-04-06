@@ -206,11 +206,14 @@ string Network::ActionReciever(string action, string details){
        }
        //return result;
    }
+   if(Game::instance().getIsLocalGame()){
    Network::instance().say(result);
+   }
    return result;
 }
 
 void Network::say(string out) {
+    out.append("\n");
     this->global_socket->write(QString::fromStdString(out).toLocal8Bit());
 }
 

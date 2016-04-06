@@ -207,9 +207,7 @@ void GuiManager::newDiff(){
 
 void GuiManager::BuildStruct(Square *proc){
     if(proc->getAddition() == "No" && proc->getType() != "Pl"){
-    QMessageBox::StandardButton canBuild;
-    canBuild = QMessageBox::question(GuiManager::instance().getUi()->gridLayoutWidget,"You clicked one of your own squares!","Build a structure?",QMessageBox::Yes|QMessageBox::No);
-    if (canBuild == QMessageBox::Yes){
+
      Player *name = proc->getOwner();
      string type = proc->getType();
      Structure *struc = Game::instance().resourceCheck(name,type);
@@ -230,7 +228,7 @@ void GuiManager::BuildStruct(Square *proc){
 }
 }
 
-}
+
 void GuiManager::endGame(SquareLabel* x)
 {
     Updater::instance().stop();
