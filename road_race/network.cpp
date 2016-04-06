@@ -206,9 +206,10 @@ string Network::ActionReciever(string action, string details){
        }
        //return result;
    }
-
+    if(Game::instance().getIsLocalGame() == true)
+    {
    Network::instance().say(result);
-
+}
    return result;
 }
 

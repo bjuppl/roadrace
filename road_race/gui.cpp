@@ -45,7 +45,7 @@ void GuiManager::fillResourceList(){
 void GuiManager::generateSquareGrid() {
 
     std::cout << getUi()->label->text().toStdString() << std::endl;
-
+    Sound::instance().playSoundTrack();
 
     ui->gameLayout->setContentsMargins(100,100,100,100);
     vector<vector<Square*>> squaresList = Game::instance().getSquares();
@@ -81,8 +81,7 @@ void GuiManager::generateSquareGrid() {
             std::string color = owner == NULL ? "black" : owner->getColor();
             lbl->setStyleSheet("border:" + QString::fromStdString(to_string(border)) +  "px solid " + QString::fromStdString(color) + ";\n");
             ui->gameLayout->addWidget(lbl,index,sub_index,0);
-
-
+            lbl->setAlignment(Qt::AlignCenter);
             proc->setX(index);
             proc->setY(sub_index);
             lbl->show();

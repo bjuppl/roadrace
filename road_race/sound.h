@@ -11,6 +11,7 @@ class Sound {
 
 public:
    void playSound(QString s, float volume);
+   void playSoundTrack();
    static Sound& instance();
 };
 
