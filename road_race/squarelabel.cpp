@@ -284,7 +284,15 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
 
         }
     }
-    else{
+
+    emit clicked();
+
+}
+void SquareLabel::mouseMoveEvent(QMouseEvent *ev){
+
+}
+void SquareLabel::mouseDoubleClickEvent(QMouseEvent *ev){
+
         //handle owned squares
         GuiManager::instance().BuildStruct(square);
         string action = "New Struct";
@@ -294,7 +302,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
         details += to_string(procx) + " " + to_string(procy) + " " + square->getAddition() + " " + square->getOwner()->getName();
         QString msg = QString::fromStdString(Network::instance().ActionReciever(action,details));
         GuiManager::instance().getWindow()->actionSender(msg);
-    }
+
 
     if(this->square->getAddition() == "De")
     {
@@ -337,10 +345,6 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
         this->setPixmap(map.scaled(QSize(size,size), Qt::KeepAspectRatio));
     }
     emit clicked();
-
-}
-void SquareLabel::mouseMoveEvent(QMouseEvent *ev){
-
 }
 
 void SquareLabel::enterEvent(QHoverEvent *event){
