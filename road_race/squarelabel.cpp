@@ -354,7 +354,8 @@ void SquareLabel::enterEvent(QHoverEvent *event){
         this->setText(owner);
     }
     else{
-        this->setText("Unowned");
+        QPixmap map(":/unknown");
+        this->setPixmap(map.scaled(QSize(Square::getSize(),Square::getSize()), Qt::KeepAspectRatio));
     }
 }
 

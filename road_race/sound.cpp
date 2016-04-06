@@ -23,3 +23,12 @@ void Sound::playSound(QString s, float volume)
     effect->setVolume(volume);
     effect->play();
 }
+
+void Sound::playSoundTrack()
+{
+    effect = new QSoundEffect;
+    effect->setSource(QUrl::fromLocalFile(":/music"));
+    effect->setVolume(.5f);
+    effect->setLoopCount(QSoundEffect::Infinite);
+    effect->play();
+}
