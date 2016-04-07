@@ -361,44 +361,6 @@ void SquareLabel::enterEvent(QHoverEvent *event){
 }
 
 
-QPixmap SquareLabel::setmap(string image){
-
-    QPixmap map(":/grass");
-    QPixmap result = map.scaled(QSize(Square::getSize(),Square::getSize()), Qt::KeepAspectRatio);
-    return result;
-    /*if(image == "Fo"){
-        QPixmap map(":/forrest");
-        QPixmap result = map.scaled(QSize(Square::getSize(),Square::getSize()), Qt::KeepAspectRatio);
-
-        return result;
-    }
-    if(image == "Ca"){
-        QPixmap map(":/canyon");
-        QPixmap result = map.scaled(QSize(Square::getSize(),Square::getSize()), Qt::KeepAspectRatio);
-        return result;
-    }
-    if(image == "Ri"){
-        QPixmap map(":/water");
-        QPixmap result = map.scaled(QSize(Square::getSize(),Square::getSize()), Qt::KeepAspectRatio);
-        return result;
-    }
-    if (image == "Mo"){
-        QPixmap map(":/mountain");
-        QPixmap result = map.scaled(QSize(Square::getSize(),Square::getSize()), Qt::KeepAspectRatio);
-        return result;
-    }
-    if(image == "Pl"){
-        QPixmap map(":/grass");
-        QPixmap result = map.scaled(QSize(Square::getSize(),Square::getSize()), Qt::KeepAspectRatio);
-        return result;
-    }
-    if(image == "Wi"){
-        QPixmap map(":/win");
-        QPixmap result = map.scaled(QSize(Square::getSize(),Square::getSize()), Qt::KeepAspectRatio);
-        return result;
-    */
-
-}
 void SquareLabel::leaveEvent(QHoverEvent *event){
     QSize size(square->getSize(),square->getSize());
 

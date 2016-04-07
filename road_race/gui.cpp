@@ -231,7 +231,16 @@ void GuiManager::BuildStruct(Square *proc){
 void GuiManager::endGame(SquareLabel* x)
 {
     Updater::instance().stop();
-    QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Congratualtions!!","You have won the game! But can you do it again?.",0,0);
+    Sound::instance().playSound(":/winningSound",1);
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(GuiManager::instance().getUi()->gridLayoutWidget,"Congratualtions!!","You have won the game! Would you like to play another game.",QMessageBox::No|QMessageBox::Yes);
+    if (reply == QMessageBox::Yes) {
+        GuiManager::instance().getUi()->gridLayoutWidget->deleteLater();
+        //Player* player = Game::instance().getCurPlayer();
+        //delete player;
+    } else {
+        QApplication::quit();
+    }
 }
 
 
