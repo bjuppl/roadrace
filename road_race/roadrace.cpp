@@ -59,7 +59,7 @@ void RoadRace::on_btnStuff_clicked()
     //sets a difficulty based on the radio button
    GuiManager::instance().newDiff();
     std::cout << Game::instance().getGameLoader()->toGameFile() << std::endl;
-
+    Game::instance().setIsLocalGame(false);
     ui->btnStuff->setDisabled(true);
     ui->tst2Btn->setDisabled(true);
     }

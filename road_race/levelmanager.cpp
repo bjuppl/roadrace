@@ -411,5 +411,6 @@ void LevelManager::prepSquares(vector<QString> proc){
      Game::instance().getSquare(x,y)->setOwner(Game::instance().getCurPlayer());
     GuiManager::instance().newDiff();
     GuiManager::instance().generateSquareGrid();
+    Game::instance().setIsLocalGame(true);
      std::cout << Game::instance().getGameLoader()->toGameFile() << std::endl;
 }

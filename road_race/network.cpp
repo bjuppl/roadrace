@@ -112,7 +112,8 @@ void Network::StructMaker(vector<string> proc1){
 }
 
 string Network::ActionReciever(string action, string details){
-    string result;
+    string result =
+            Game::instance().getCurPlayer()->getName() + " game " + Game::instance().getId() + " player " + Game::instance().getCurPlayer()->getName() + "\n";
    if(action == "New Owner"){
 
        string str1;
@@ -127,7 +128,7 @@ string Network::ActionReciever(string action, string details){
            playername += details.at(index);
            index++;
        }
-       result = "own " + to_string(x) + "," + to_string(y);
+       result += " own " + to_string(x) + "," + to_string(y);
        qDebug() << QString::fromStdString(result);
        //return result;
    }
@@ -144,7 +145,7 @@ string Network::ActionReciever(string action, string details){
            structname += details.at(index);
            index++;
        }
-       result = "get " + to_string(x) + "," + to_string(y) + structname;
+       result += Game::instance().getCurPlayer()->getName() + " get " + to_string(x) + "," + to_string(y) + structname;
        qDebug() << QString::fromStdString(result);
        //return result;
 
@@ -162,7 +163,7 @@ string Network::ActionReciever(string action, string details){
            structname += details.at(index);
            index++;
        }
-       result = "SB Square " + to_string(x) + "," + to_string(y) + " has removed " + structname;
+       result += "SB Square " + to_string(x) + "," + to_string(y) + " has removed " + structname;
        //qDebug() << QString::fromStdString(result);
        //return result;
 
@@ -214,10 +215,12 @@ string Network::ActionReciever(string action, string details){
 }
 
 void Network::say(string out) {
-    out += "\n";
+   out += "\n";
     QString test = QString::fromStdString(out);
     qDebug() << test;
+    if(Game::instance().getIsLocalGame() != false){
     this->global_socket->write(QString::fromStdString(out).toLocal8Bit());
+    }
 }
 
 void Network::actionHandler(vector<string> action){
