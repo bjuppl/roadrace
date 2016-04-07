@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1004</width>
-    <height>722</height>
+    <width>1256</width>
+    <height>848</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -484,6 +484,29 @@ font-size:30px;</string>
     </property>
     <property name="text">
      <string> - Volume +</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>1060</x>
+      <y>380</y>
+      <width>55</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>New Info</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="statusBox">
+    <property name="geometry">
+     <rect>
+      <x>1000</x>
+      <y>400</y>
+      <width>251</width>
+      <height>181</height>
+     </rect>
     </property>
    </widget>
   </widget>
