@@ -38,5 +38,6 @@
         <file alias="music">soundtrack.wav</file>
         <file alias="yellowME">yellowME.png</file>
         <file alias="yellowSkull">yellowSkull.png</file>
+        <file>logo.png</file>
     </qresource>
 </RCC>
