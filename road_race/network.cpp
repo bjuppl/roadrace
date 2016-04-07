@@ -141,11 +141,12 @@ string Network::ActionReciever(string action, string details){
        int y = stoi(str2);
        int index = 3;
        string structname;
-       while(index < (details.size())){
-           structname += details.at(index);
+
+           structname += details.at(3);
            index++;
-       }
-       result += Game::instance().getCurPlayer()->getName() + " get " + to_string(x) + "," + to_string(y) + structname;
+           structname += details.at(4);
+           structname += details.at(5);
+       result +=" get " + to_string(x) + "," + to_string(y) + structname;
        qDebug() << QString::fromStdString(result);
        //return result;
 
