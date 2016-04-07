@@ -252,6 +252,9 @@ font-size:30px;</string>
     <property name="text">
      <string>Normal Mode</string>
     </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QRadioButton" name="HardBtn">
     <property name="geometry">

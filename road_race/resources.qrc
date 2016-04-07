@@ -9,7 +9,6 @@
         <file alias="bridge1">wooden_bridge_clip_art_17037.jpg</file>
         <file alias="sampleGame">gamefile.rr</file>
         <file alias="single-player">single-player.rr</file>
-        <file alias="win">win.jpg</file>
         <file alias="boat">boat.jpg</file>
         <file alias="bridge">bridge.jpg</file>
         <file alias="seven">sevenbyseven.rr</file>
@@ -28,5 +27,7 @@
         <file alias="waterSound">Water.wav</file>
         <file alias="winningSound">Winning.wav</file>
         <file alias="charred">Charred.jpg</file>
+        <file alias="unknown">block.png</file>
+        <file alias="win">castle.png</file>
     </qresource>
 </RCC>
