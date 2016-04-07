@@ -351,7 +351,8 @@ void SquareLabel::enterEvent(QHoverEvent *event){
 
     if(square->getOwner() != nullptr){
         QString owner = QString::fromUtf8(square->getOwner()->getName().c_str());
-        this->setText(owner);
+        QPixmap map(":/redME");
+        this->setPixmap(map.scaled(QSize(Square::getSize(),Square::getSize()), Qt::KeepAspectRatio));
     }
     else{
         QPixmap map(":/unknown");
