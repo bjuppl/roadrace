@@ -59,7 +59,7 @@ void RoadRace::on_btnStuff_clicked()
     //sets a difficulty based on the radio button
    GuiManager::instance().newDiff();
     std::cout << Game::instance().getGameLoader()->toGameFile() << std::endl;
-
+    Game::instance().setIsLocalGame(false);
     ui->btnStuff->setDisabled(true);
     ui->tst2Btn->setDisabled(true);
     }
@@ -250,17 +250,14 @@ void RoadRace::openCheat(){
     cheat1->raise();
 }
 void RoadRace::openMulti(){
-    if(ui->btnConnect->isEnabled() == false){
+
     static multiplayer *multi1 = new multiplayer(this);
     multi1->show();
     multi1->activateWindow();
     multi1->raise();
     Game::instance().setIsLocalGame(false);
      GuiManager::instance().setUi( ui );
-    }
-    else{
-        QMessageBox::information(ui->btnConnect,"Alert","Please find a server!",0,0);
-    }
+
 
 }
 
@@ -329,17 +326,13 @@ void RoadRace::on_RanBtn_clicked()
 }
 
 void RoadRace::openJoin(){
-    if(ui->btnConnect->isEnabled() == false){
+
     static joiner *multi1 = new joiner(this);
     multi1->show();
     multi1->activateWindow();
     multi1->raise();
     Game::instance().setIsLocalGame(false);
     GuiManager::instance().setUi( ui );
-    }
-    else{
-        QMessageBox::information(ui->btnConnect,"Alert","Please find a server!",0,0);
-    }
 
 }
 

@@ -1,4 +1,4 @@
-#include <string>
+﻿#include <string>
 #include <iostream>
 #include <istream>
 #include <random>
@@ -75,13 +75,13 @@ void Game::updateResources() {
             }
 
         }
-        if(Game::instance().getIsLocalGame() == true){
+        /*if(Game::instance().getIsLocalGame() == true){
             string action = "New Sources";
             string details = p->getName();
             details += type;
             string signal = Network::instance().ActionReciever(action,details);
             signalstrs.push_back(signal);
-        }
+        }*/
     }
    /* if(signalstrs.size() > 0){
         int i = 0;
@@ -290,7 +290,8 @@ void Updater::eventrun(){
             QString displayResc;
             displayResc = displayResc.fromStdString(recType);
             displayName = displayName.fromStdString(name);
-            QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Random Event!",displayName + " has had an unusually productive cycle. +50 " + displayResc + ".",0,0);
+            QString msg = displayName + " has had an unusually productive cycle. +50 " + displayResc + "\n";
+           GuiManager::instance().getUi()->statusBox->append(msg);
         }
         if(random == 1){
          //retract 50 of a resource
@@ -301,7 +302,8 @@ void Updater::eventrun(){
             QString displayRec;
             displayRec = displayRec.fromStdString(recType);
             displayName = displayName.fromStdString(name);
-            QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Random Event!",displayName + " has just gotten robbed! Oh dear. -50" + displayRec + ".",0,0);
+           QString msg = "Random Event! " + displayName + " has just gotten robbed! Oh dear. -50" + displayRec + ".\n";
+           GuiManager::instance().getUi()->statusBox->append(msg);
         }
         if(random == 2){
          //remove a structure
@@ -313,7 +315,8 @@ void Updater::eventrun(){
           if (foo == true){
           QString ht = ht.fromStdString(to_string(rndHei));
           QString wi = wi.fromStdString(to_string(rndWid));
-          QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Random Event!","Oh no! A structure has just collapsed at " +  wi + "," + ht +".",0,0);
+          QString msg = "Random Event! Oh no! A structure has just collapsed at " +  wi + "," + ht +".\n";
+          GuiManager::instance().getUi()->statusBox->append(msg);
         }
         }
         if(random == 3){
@@ -326,8 +329,9 @@ void Updater::eventrun(){
             if (foo == true){
             QString ht = ht.fromStdString(to_string(rndHei));
             QString wi = wi.fromStdString(to_string(rndWid));
-            QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Random Event!","Oh no! Heavy rains have turned the square at " +  wi + "," + ht +" into a river, washing away any progress!.",0,0);
-          }
+            QString msg ="Random Event! Oh no! Heavy rains have turned the square at " +  wi + "," + ht +" into a river, washing away any progress!.\n";
+            GuiManager::instance().getUi()->statusBox->append(msg);
+            }
         }
         if(random == 4){
         //a non plain square burns away, leaving a plain
@@ -339,7 +343,8 @@ void Updater::eventrun(){
             if (foo == true){
             QString ht = ht.fromStdString(to_string(rndHei));
             QString wi = wi.fromStdString(to_string(rndWid));
-            QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Random Event!","Oh no! Flames have burnt " +  wi + "," + ht +" to a crisp! Only some grass remains.",0,0);
+            QString msg = "Random Event! Oh no! Flames have burnt " +  wi + "," + ht +" to a crisp! Only some grass remains.\n";
+            GuiManager::instance().getUi()->statusBox->append(msg);
         }
         }
         if(random == 5){
@@ -348,7 +353,7 @@ void Updater::eventrun(){
 
         }
         if(random == 6){
-            QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Lucky.","Nothing Happened.... this time.",0,0);
+            QString msg ="Lucky. Nothing Happened.... this time.\n";
         }
         if(random == 7){
             if(Game::instance().getVolc()){
@@ -361,7 +366,8 @@ void Updater::eventrun(){
                 if (foo == true){
                 QString ht = ht.fromStdString(to_string(rndHei));
                 QString wi = wi.fromStdString(to_string(rndWid));
-                QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Random Event!","Oh no! The volcano is erupting and has set " +  wi + "," + ht + "on fire!",0,0);
+               QString msg = "Random Event! Oh no! The volcano is erupting and has set " +  wi + "," + ht + "on fire!\n";
+               GuiManager::instance().getUi()->statusBox->append(msg);
                 Sound::instance().playSound(":/explosionSound",1);
                 }
             }
