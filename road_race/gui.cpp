@@ -235,20 +235,16 @@ void GuiManager::endGame(SquareLabel* x)
     QMessageBox::StandardButton reply;
     reply = QMessageBox::question(GuiManager::instance().getUi()->gridLayoutWidget,"Congratualtions!!","You have won the game! Would you like to play another game.",QMessageBox::No|QMessageBox::Yes);
     if (reply == QMessageBox::Yes) {
-        GuiManager::instance().getUi()->gridLayoutWidget->deleteLater();
-        //Player* player = Game::instance().getCurPlayer();
-        //delete player;
+        //GuiManager::instance().getUi()->gridLayoutWidget->deleteLater();
+        GuiManager::instance().getUi()->btnStuff->setEnabled(true);
+        GuiManager::instance().getUi()->tst2Btn->setEnabled(true);
+        GuiManager::instance().getUi()->RanBtn->setEnabled(true);
+        Player* player = Game::instance().getCurPlayer();
+        delete player;
     } else {
         QApplication::quit();
     }
 }
-
-
-
-
-
-
-
 
 void GuiManager::on_btnSendToServer_clicked()
 {
