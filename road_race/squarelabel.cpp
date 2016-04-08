@@ -38,7 +38,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             bool buildErr = false;
             Player *newowner;
             //normal squares
-            if(x >= 0 && x != squareList.size()){
+            if(x >= 0 && x != squareList.size()-1){
                 list1 = squareList.at(x);
                 list2 = squareList.at(x2);
                 c1 = list1.at(0);
@@ -109,10 +109,10 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             //normal processing
             if(x > 0 && (x != squareList.size()-1)){
                 list1 = squareList.at(x+1);
-                if(x2 >= 0){
+
                     list2 = squareList.at(x2);
                     c2 = list2.at(y);
-                }
+
                 list3 = squareList.at(x);
                 c1 = list1.at(y);
                 c3 = list3.at(y-1);
@@ -137,20 +137,21 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
                 }
                 else{buildErr = true;}
             }
-            else if((c2!= nullptr) && (c2->getOwner() != nullptr) && (valid == false) &&(c2->getOwner() == Game::instance().getCurPlayer())){
+            if((c2!= nullptr) && (c2->getOwner() != nullptr) && (valid == false) &&(c2->getOwner() == Game::instance().getCurPlayer())){
                 newowner = c2->getOwner();
                 if (proc->canGet(c2)){
                     valid = true;
                 }
-                else{buildErr = true;}
-            }
-            else if((c3->getOwner() != nullptr) && (valid == false) &&(c3->getOwner() == Game::instance().getCurPlayer())){
+                    else{buildErr = true;}
+                }
+            if((c3->getOwner() != nullptr) && (valid == false) &&(c3->getOwner() == Game::instance().getCurPlayer())){
                 newowner = c3->getOwner();
                 if (proc->canGet(c3)){
                     valid = true;
                 }
                 else{buildErr = true;}
-            }
+                }
+
             if(valid == false){
                 if(buildErr){
                     QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget,"Alert!","You do not have a valid road to over come the obstacle in your way.",0,0);
