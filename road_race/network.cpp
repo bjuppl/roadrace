@@ -117,7 +117,7 @@ void Network::StructMaker(vector<string> proc1){
 }
 
 string Network::ActionReciever(string action, string details){
-    string result = Game::instance().getCurPlayer()->getName() + " game " + Game::instance().getId() + " player " + Game::instance().getCurPlayer()->getName() + "\n";
+    string result = "game " + Game::instance().getId() + " player " + Game::instance().getCurPlayer()->getName() + "\n";
    if(action == "New Owner"){
 
        string str1;
