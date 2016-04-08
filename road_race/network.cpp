@@ -19,7 +19,7 @@ Network& Network::instance() {
 
 void Network::handleData(vector<string> data){
     vector<QString> gamefile;
-    bool start_load = false, prep = false;
+    bool start_load = false, prep = false,owner = false;
     for ( size_t i=0; i<data.size(); i++ ) {
         vector<string> conts = split(data[i],' ');
         //cout << conts[0] << endl;
@@ -29,6 +29,11 @@ void Network::handleData(vector<string> data){
             gamefile.push_back(QString::fromStdString(split(data[i],'\n')[0]));
         } if ( start_load && conts[0] == "EndRoadRaceDoc") {
             start_load = false;
+        }
+        string proc = data.at(0);
+        vector<string> proc2 = split(proc,' ');
+        if(proc2.at(0) == "Ct"){
+            Network::instance().SquareAssign(proc2);
         }
     }
     if (prep) {
@@ -49,7 +54,7 @@ void Network::setSocket(QTcpSocket *s){
 void Network::SquareAssign(vector<string> proc1){
     int x;
     int y;
-    string sizestr = proc1.at(2);
+    string sizestr = proc1.at(3);
     string str1;
     string str2;
     qDebug() << QString::fromStdString(sizestr);
@@ -58,7 +63,7 @@ void Network::SquareAssign(vector<string> proc1){
     x = stoi(str1);
     y = stoi(str2);
     Square *proc = Game::instance().getSquare(x,y);
-    string name = proc1.at(0);
+    string name = proc1.at(1);
     int ss = Game::instance().getPlayerList().size();
     Player *reqPlayer = Game::instance().getPlayer(name);
     int index = 0;
@@ -112,8 +117,7 @@ void Network::StructMaker(vector<string> proc1){
 }
 
 string Network::ActionReciever(string action, string details){
-    string result =
-            Game::instance().getCurPlayer()->getName() + " game " + Game::instance().getId() + " player " + Game::instance().getCurPlayer()->getName() + "\n";
+    string result = Game::instance().getCurPlayer()->getName() + " game " + Game::instance().getId() + " player " + Game::instance().getCurPlayer()->getName() + "\n";
    if(action == "New Owner"){
 
        string str1;
@@ -128,9 +132,13 @@ string Network::ActionReciever(string action, string details){
            playername += details.at(index);
            index++;
        }
+
        result += " own " + to_string(x) + "," + to_string(y);
-       qDebug() << QString::fromStdString(result);
-       //return result;
+       if(Game::instance().getIsLocalGame() == true)
+       {
+      Network::instance().say(result);
+   }
+       return result;
    }
    if(action == "New Struct"){
        string str1;
@@ -147,8 +155,8 @@ string Network::ActionReciever(string action, string details){
            structname += details.at(4);
            structname += details.at(5);
        result +=" get " + to_string(x) + "," + to_string(y) + structname;
-       qDebug() << QString::fromStdString(result);
-       //return result;
+       //qDebug() << QString::fromStdString(result);
+       return result;
 
    }
    if(action == "Destroyed Struct"){
@@ -166,7 +174,7 @@ string Network::ActionReciever(string action, string details){
        }
        result += "SB Square " + to_string(x) + "," + to_string(y) + " has removed " + structname;
        //qDebug() << QString::fromStdString(result);
-       //return result;
+       return result;
 
    }
    if (action == "Change type"){
@@ -185,10 +193,10 @@ string Network::ActionReciever(string action, string details){
        }
        result = "NT Square " + to_string(x) + "," + to_string(y) + " has changed to " + typename1;
        //qDebug() << QString::fromStdString(result);
-       //return result;
+       return result;
    }
    if (action == "New Sources"){
-       result = "NR ";
+       //result = "NR ";
        string plname;
        vector<string> strs;
        char delim = ' ';
@@ -199,14 +207,14 @@ string Network::ActionReciever(string action, string details){
        while (index < strs.size()){
 
            if((strs.at(index) == "Wo") ||(strs.at(index) == "Wa") || (strs.at(index) == "Sto") || (strs.at(index) == "Go")){
-               result+= strs.at(index) + ",";
+               //result+= strs.at(index) + ",";
            }
            else{
-               result += strs.at(index) + " ";
+               //result += strs.at(index) + " ";
            }
            index++;
        }
-       //return result;
+       return result;
    }
     if(Game::instance().getIsLocalGame() == true)
     {
@@ -216,7 +224,7 @@ string Network::ActionReciever(string action, string details){
 }
 
 void Network::say(string out) {
-   out += "\n";
+    out += "\n";
     QString test = QString::fromStdString(out);
     qDebug() << test;
     if(Game::instance().getIsLocalGame() != false){

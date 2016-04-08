@@ -80,25 +80,8 @@ public:
     Structure *getStruct(){return path;}
     void setStruct(Structure *nstruct){path = nstruct;}
     void setBurn(bool burn){burning = burn;}
-};
-
-class ForestSq: public Square{
 
 };
-class MountainSq: public Square{
 
-};
-class RiverSq: public Square{
-
-};
-class PlainSq: public Square{
-
-};
-class CanyonSq: public Square{
-
-};
-class WinSq: public Square{
-
-};
 
 #endif // SQUARE_H
