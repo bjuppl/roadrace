@@ -42,11 +42,12 @@ public:
        void setScore(int sc){ score = sc;}
        void setStartTime(int st){ startTime = st;}
        void setSwamped(bool sw){swamped = sw;}
+
        
        
        
        
-       
+
        ~Player(){
 
        }

@@ -204,6 +204,7 @@ if (ui->EsyBtn->isChecked() || ui->MedBtn->isChecked() || ui->HardBtn->isChecked
 
     ui->btnStuff->setDisabled(true);
     ui->tst2Btn->setDisabled(true);
+    ui->RanBtn->setDisabled(true);
 
 }
     else{
@@ -217,19 +218,19 @@ void RoadRace::on_helpBtn_clicked(){
                                                                                          "\n"
                                                                                          "The key for which square gives which resource and requires what structure is as follows:\n"
                                                                                          "\n"
-                                                                                         "Forest squares can be deforested or 75 water and 100 gold. They give Wood as a resource. Look for the squares which resemble camoflauge.\n"
+                                                                                         "Forest squares can be deforested for 75 water and 100 gold. \nThey give Wood as a resource. Look for the squares which resemble camoflauge.\n"
                                                                                          "\n"
-                                                                                         "Canyon squares can have a bridge built for 300 stone and 100 wood. They give Gold as a resource. These brown squares resemble mesa rock.\n"
+                                                                                         "Canyon squares require 300 stone and 100 wood for a bridge.\nThey give Gold as a resource. These brown squares resemble mesa rock.\n"
                                                                                          "\n"
-                                                                                         "River squares can have a boat built for 200 water and 100 stone.They give Water as a resource. The distincitve blue of these squares should be obvious.\n"
+                                                                                         "River squares require 200 water and 100 stone for a boat. \nThey give Water as a resource. The distincitve blue of these squares should be obvious.\n"
                                                                                          "\n"
-                                                                                         "Mountain squares can have a tunnel made for 50 stone, 50 wood, and 100 gold. They give Stone as a resource. These squares show their majestic grey cliffs.\n"
+                                                                                         "Mountain squares recquire 50 stone, 50 wood, and 100 gold for tunnels. \nThey give Stone as a resource. These squares show their majestic grey cliffs.\n"
                                                                                          "\n"
-                                                                                         "Plains squares give no resources and require no structures to traverse. The lush green grasslands look rather inviting.\n"
+                                                                                         "Plains squares give no resources and require no structures to traverse. \nThe lush green grasslands look rather inviting.\n"
                                                                                          "\n"
                                                                                          "Resources are given at specific time intervals. The amount depends on the difficulty selected.\n"
                                                                                          "\n"
-                                                                                         "The more of a certain square you possess, the of that resource you get. For example owning two river squares gives 30 water per tick on easy versus just 15 for one square."
+                                                                                         "The more of a certain square you possess, the more of that resource you get. For example owning two river squares give 30 water per tick on easy versus just 15 for one square."
                                                                                          "\n"
                                                                                          "Files are saved as savefile.rr to your roadrace folder upon clicking the save button, and you can set the number of resouces you currently own with Cheater..."
                                                                                          "\n"
@@ -291,6 +292,7 @@ if (ui->EsyBtn->isChecked() || ui->MedBtn->isChecked() || ui->HardBtn->isChecked
 
     ui->btnStuff->setDisabled(true);
     ui->tst2Btn->setDisabled(true);
+    ui->RanBtn->setDisabled(true);
 }
     else{
         QMessageBox::information(ui->centralWidget,"Alert","You did not specify a difficulty!",0,0);
@@ -318,6 +320,7 @@ void RoadRace::on_RanBtn_clicked()
 
         ui->btnStuff->setDisabled(true);
         ui->tst2Btn->setDisabled(true);
+        ui->RanBtn->setDisabled(true);
 
     }
         else{
