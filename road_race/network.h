@@ -28,7 +28,7 @@ void SquareAssign(Player *player, Square *sq);
     void StructMaker(Player *player,Square *sq, string structname);
     string ActionReciever(string action, string details);
     void actionHandler(vector<string> action);
-
+    void changeType(Square *square, string type);
     void say( string out );
 };
 
