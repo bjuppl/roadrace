@@ -8,6 +8,8 @@
 #include <QDebug>
 #include "utils.h"
 #include "levelmanager.h"
+#include <sstream>
+
 class LevelManager;
 Network *Network::instance_ = NULL;
 Network& Network::instance() {
@@ -19,23 +21,203 @@ Network& Network::instance() {
 
 void Network::handleData(vector<string> data){
     vector<QString> gamefile;
-    bool start_load = false, prep = false,owner = false;
+    bool firstLineGone = false,
+            start_load = false,
+            prep = false,
+            owner = false;
     for ( size_t i=0; i<data.size(); i++ ) {
+        if ( data[i].size() == 0 ) {
+            continue;
+        }
         vector<string> conts = split(data[i],' ');
-        //cout << conts[0] << endl;
-        if (conts[0] == "RoadRaceDoc" || start_load ) {
+
+        stringstream strm;
+        strm.str(data[i]);
+
+        string command = "";
+
+        strm >> command;
+
+        //Start a full game doc
+        if (command == "RoadRaceDoc" || start_load ) {
+            firstLineGone = true;
             start_load = true;
             prep = true;
             gamefile.push_back(QString::fromStdString(split(data[i],'\n')[0]));
-        } if ( start_load && conts[0] == "EndRoadRaceDoc") {
+            continue;
+        }
+
+        //End a full game doc
+        if ( start_load && command == "EndRoadRaceDoc") {
             start_load = false;
+            continue;
         }
-        string proc = data.at(0);
-        qDebug() << "proc is " + QString::fromStdString(proc);
-        vector<string> proc2 = split(proc,' ');
-        if(proc2.at(0) == "Ct"){
-           // Network::instance().SquareAssign(proc2);
+
+        //Other communications initiated by server
+
+        const string OWN = "own",
+                GET = "get",
+                CHANGE = "change",
+                KILL = "kill",
+                GAME_JOINED = "game_joined",
+                START_GAME = "start_game",
+                GAME_INIT = "game_init",
+                GAME_NO_INIT = "game_no_init",
+                ALIAS_FAIL = "alias_fail",
+                NAME_FAIL = "name_fail",
+                PASSWORD_FAIL = "password_fail";
+
+
+        if ( command == GAME_JOINED ) {
+            continue;
         }
+
+        else if ( command == START_GAME ) {
+            continue;
+        }
+
+        else if ( command == GAME_INIT ) {
+            continue;
+        }
+
+        else if ( command == GAME_NO_INIT ) {
+            continue;
+        }
+
+        else if ( command == ALIAS_FAIL ) {
+            continue;
+        }
+
+        else if ( command == NAME_FAIL ) {
+            continue;
+        }
+
+        else if ( command == PASSWORD_FAIL ) {
+            continue;
+        }
+
+
+        //Otherwise
+        string player_name = command;
+
+        Player * p = Game::instance().getPlayer(player_name);
+
+        if ( p == nullptr ) {
+            cout << "The player " << player_name << " does not exist. " << endl;
+            continue;
+        }
+
+        strm >> command;
+
+        string gameId;
+
+        if ( !firstLineGone) {
+            gameId = command;
+            firstLineGone = true;
+            strm >> command;
+        }
+
+        while ( strm ) {
+            if ( command == OWN ) {
+
+            } else if ( command == GET ) {
+
+                strm >> command;
+
+                const string GAMEFILE = "gamefile",
+                        DRAGON = "dragon";
+
+                if ( !strm ) {
+                    cout << "Invalid GET command. What do you even want?" << endl;
+                    continue;
+                }
+
+                if (command == GAMEFILE) {
+                    cout << "GET GAMEFILE -- This should hopefully have been handled by the server" << endl;
+                } else if ( command  == DRAGON ) {
+                    cout << "GET DRAGON -- command not currently supported. Too bad." << endl;
+                } else {
+                    // Building an addition
+                    string type;
+                    strm >> type;
+
+                    if ( !strm ) {
+                        cout << "What type of addition did you want to build? " << endl;
+                        continue;
+                    }
+
+                    vector<string> coords;
+                    coords == split(command,',');
+                    if ( coords.size() < 2 ) {
+                        cout << "Coordinates not specified" << endl;
+                        continue;
+                    }
+
+                    int x, y;
+                    try {
+                        x = stoi(coords[0]);
+                        y = stoi(coords[1]);
+                    } catch (...) {
+                        cout << "Coordinates invalid: " << coords[0] << "," << coords[1] << "." << endl;
+                        continue;
+                    }
+
+                    Square *s = Game::instance().getSquare(x,y);
+
+                    if ( s == nullptr  ) {
+                        cout << "Coordinates out of bounds: " << coords[0] << "," << coords[1] << "." << endl;
+                        continue;
+                    }
+
+                    //Network::instance().structMaker( p, s, type );
+                    cout << "Structure " << type << " added at " << coords[0] << "," << coords[1] << "." << endl;
+
+                    continue;
+                }
+
+            } else if ( command == CHANGE ) {
+
+                vector<string> coords;
+                coords == split(command,',');
+                if ( coords.size() < 2 ) {
+                    cout << "Coordinates not specified" << endl;
+                    continue;
+                }
+
+                int x, y;
+                try {
+                    x = stoi(coords[0]);
+                    y = stoi(coords[1]);
+                } catch (...) {
+                    cout << "Coordinates invalid: " << coords[0] << "," << coords[1] << "." << endl;
+                    continue;
+                }
+
+                Square *s = Game::instance().getSquare(x,y);
+
+                if ( s == nullptr  ) {
+                    cout << "Coordinates out of bounds: " << coords[0] << "," << coords[1] << "." << endl;
+                    continue;
+                }
+
+                //Network::instance().squareAssign( p, s );
+                cout << "Square at " << coords[0] << "," << coords[1] << " changed owners to " << p->getName() << endl;
+
+                continue;
+
+            } else if ( command == KILL ) {
+
+            } else if ( command == GAME_JOINED ) {
+
+            } else {
+                cout << "I didn't really know what to do with that command." << endl;
+                continue;
+            }
+
+
+            strm >> command;
+        }
+
     }
     if (prep) {
         LevelManager::instance().prepSquares(gamefile);
