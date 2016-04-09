@@ -169,7 +169,7 @@ void Network::handleData(vector<string> data){
                         continue;
                     }
 
-                    //Network::instance().structMaker( p, s, type );
+                    Network::instance().StructMaker( p, s, type );
                     cout << "Structure " << type << " added at " << coords[0] << "," << coords[1] << "." << endl;
 
                     continue;
@@ -200,7 +200,7 @@ void Network::handleData(vector<string> data){
                     continue;
                 }
 
-                //Network::instance().squareAssign( p, s );
+                Network::instance().SquareAssign( p, s );
                 cout << "Square at " << coords[0] << "," << coords[1] << " changed owners to " << p->getName() << endl;
 
                 continue;
