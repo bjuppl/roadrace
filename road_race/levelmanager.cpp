@@ -109,31 +109,43 @@ string LevelManager::downRec(int badRes){
     Sound::instance().playSound(":/thiefSound",1);
     if(badRes == 0){
         int wood = Game::instance().getCurPlayer()->getWood();
+        if(wood > 50){
         wood -= 50;
         Game::instance().getCurPlayer()->setWood(wood);
         result = "wood";
         return result;
+        }
     }
     if(badRes == 1){
         int gold = Game::instance().getCurPlayer()->getGold();
+        if(gold > 50){
         gold -= 50;
         Game::instance().getCurPlayer()->setGold(gold);
         result = "gold";
         return result;
+        }
     }
     if(badRes == 2){
         int water = Game::instance().getCurPlayer()->getWater();
+        if(water < 50){
         water -= 50;
         Game::instance().getCurPlayer()->setWater(water);
         result = "water";
         return result;
+        }
     }
     if(badRes == 3){
 
         int stone = Game::instance().getCurPlayer()->getStone();
+        if(stone > 50){
         stone -= 50;
         Game::instance().getCurPlayer()->setStone(stone);
         result = "stone";
+        return result;
+        }
+    }
+    else{
+        result = "None";
         return result;
     }
 }

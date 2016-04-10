@@ -30,23 +30,23 @@ void cheater::on_yesBtn_clicked()
     int wa = proc->getWater();
     int go = proc->getGold();
     int sto = proc->getStone();
-    if(ui->woodBox->toPlainText()!= nullptr){
-    string wo = ui->woodBox->toPlainText().toStdString();
+    if(ui->woodBox->text()!= nullptr){
+    string wo = ui->woodBox->text().toStdString();
     wod += stoi(wo,0,10);
     proc->setWood(wod);
     }
-    if(ui->waBOx->toPlainText() != nullptr){
-    string was = ui->waBOx->toPlainText().toStdString();
+    if(ui->waBOx->text() != nullptr){
+    string was = ui->waBOx->text().toStdString();
     wa += stoi(was);
      proc->setWater(wa);
     }
-    if(ui->goBox->toPlainText() != nullptr){
-    string got = ui->goBox->toPlainText().toStdString();
+    if(ui->goBox->text() != nullptr){
+    string got = ui->goBox->text().toStdString();
     go += stoi(got);
      proc->setGold(go);
     }
-    if(ui->stoBox->toPlainText() != nullptr){
-    string stot = ui->stoBox->toPlainText().toStdString();
+    if(ui->stoBox->text() != nullptr){
+    string stot = ui->stoBox->text().toStdString();
     sto = stoi(stot);
     proc->setStone(sto);
     }
