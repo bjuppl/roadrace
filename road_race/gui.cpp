@@ -141,6 +141,11 @@ QPixmap GuiManager::setmap(Square *sq, QSize size){
             QPixmap result = map.scaled(size, Qt::KeepAspectRatio);
             return result;
         }
+        if(image == "Ch"){
+            QPixmap map(":/charred");
+            QPixmap result = map.scaled(size, Qt::KeepAspectRatio);
+            return result;
+        }
     } else {
         if(image == "Fo"){
             QPixmap map(":/cleared");

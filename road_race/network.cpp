@@ -259,6 +259,19 @@ void Network::StructMaker(Player *player,Square *sq1, string structname){
     lbl->setPixmap(thing);
     }
 }
+void Network::changeType(Square *square, string type){
+    square->setType(type);
+    Structure *stru = Game::instance().getStructure("Ru");
+    square->setStruct(stru);
+    square->setAddition("No");
+    int x = square->getX();
+    int y = square->getY();
+    int size = GuiManager::instance().getUi()->gridLayoutWidget->width()/Game::instance().getSquares().size()/2;
+    QSize size1(size,size);
+    SquareLabel *lbl = dynamic_cast<SquareLabel*>(GuiManager::instance().getUi()->gridLayoutWidget->childAt(x,y));
+    QPixmap thing = GuiManager::instance().setmap(square,size1);
+    lbl->setPixmap(thing);
+}
 
 string Network::ActionReciever(string action, string details){
     string result = "game " + Game::instance().getId() + " player " + Game::instance().getCurPlayer()->getName() + "\n";

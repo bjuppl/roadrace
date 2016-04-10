@@ -89,6 +89,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
                 c3=nullptr;
                 if(proc->getType() == "Sw"){
                 newowner->setSwamped(true);
+                Sound::instance().playSound(":/swampSound",1);
                 }
                 proc->setOwner(newowner);
                 owner = QString::fromUtf8(newowner->getName().c_str());
@@ -165,6 +166,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
                 c2=nullptr;
                 c3=nullptr;
                 if(proc->getType() == "Sw"){
+                    Sound::instance().playSound(":/swampSound",1);
                     newowner->setSwamped(true);
                 }
                 proc->setOwner(newowner);
@@ -254,6 +256,7 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
                 c4=nullptr;
                 proc->setOwner(newowner);
                 if(proc->getType() == "Sw"){
+                    Sound::instance().playSound(":/swampSound",1);
                     newowner->setSwamped(true);
                 }
                 if ( newowner != nullptr ) {

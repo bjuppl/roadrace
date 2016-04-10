@@ -281,7 +281,7 @@ void Updater::eventrun(){
     if (LevelManager::instance().getRand()){
         int random = random_int(0,7);
 
-        if(random == 0){
+           if(random == 0){
           //spontaneously give a player 50 of a resource
             int goodInt = random_int(0,3);
             string recType = LevelManager::instance().upRec(goodInt);
@@ -302,8 +302,14 @@ void Updater::eventrun(){
             QString displayRec;
             displayRec = displayRec.fromStdString(recType);
             displayName = displayName.fromStdString(name);
+            if(recType != "None"){
            QString msg = "Random Event! " + displayName + " has just gotten robbed! Oh dear. -50" + displayRec + ".\n";
            GuiManager::instance().getUi()->statusBox->append(msg);
+            }
+            else{
+                QString msg = "Random Event! " + displayName + "did not have anything worth stealing Nice.\n";
+                GuiManager::instance().getUi()->statusBox->append(msg);
+            }
         }
         if(random == 2){
          //remove a structure
