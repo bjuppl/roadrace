@@ -37,6 +37,7 @@
         <file alias="redSkull">redSkull.png</file>
         <file alias="yellowME">yellowME.png</file>
         <file alias="yellowSkull">yellowSkull.png</file>
-        <file>logo.png</file>
+        <file alias="logo">logo.png</file>
+        <file alias="music">music.wav</file>
     </qresource>
 </RCC>

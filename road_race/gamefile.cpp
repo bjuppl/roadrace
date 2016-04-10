@@ -214,6 +214,16 @@ GameFileManager::GameFileManager (std::vector<std::string> contents ) {
                     }
                  }
             }
+            int index4 = 0;
+            while (index4 < Game::instance().getPlayerList().size())
+            {
+                vector<Player*> player = Game::instance().getPlayerList();
+                player.at(index4)->setWood(300);
+                player.at(index4)->setGold(300);
+                player.at(index4)->setWater(300);
+                player.at(index4)->setStone(300);
+                index4++;
+            }
             Game::instance().setSquares(squares);
         } else if ( identifier == endFile ) {
             break;
