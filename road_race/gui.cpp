@@ -237,16 +237,23 @@ void GuiManager::endGame(SquareLabel* x)
 {
     Updater::instance().stop();
     Sound::instance().playSound(":/winningSound",1);
-    QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(GuiManager::instance().getUi()->gridLayoutWidget,"Congratualtions!!","You have won the game! Would you like to play another game.",QMessageBox::No|QMessageBox::Yes);
-    if (reply == QMessageBox::Yes) {
-        //Game::instance().~Game();
-        GuiManager::instance().getUi()->btnStuff->setEnabled(true);
-        GuiManager::instance().getUi()->tst2Btn->setEnabled(true);
-        GuiManager::instance().getUi()->RanBtn->setEnabled(true);
-    } else {
-        QApplication::quit();
+    QString time = GuiManager::instance().getUi()->lblTime->text();
+    if(GuiManager::instance().getUi()->EsyBtn->isChecked())
+    {
+        int score = time.toInt() * 70;
+        time = QString::number(score);
+    } else if (GuiManager::instance().getUi()->MedBtn->isChecked())
+    {
+        int score = time.toInt() * 100;
+        time = QString::number(score);
     }
+    else if (GuiManager::instance().getUi()->HardBtn->isChecked())
+    {
+        int score = time.toInt() * 130;
+        time = QString::number(score);
+    }
+    QMessageBox::information(GuiManager::instance().getUi()->gridLayoutWidget, "You Won!","Your score is " + time + "! But can you do it again? ;)");
+    QApplication::quit();
 }
 
 void GuiManager::on_btnSendToServer_clicked()

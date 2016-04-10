@@ -269,10 +269,6 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             //set text/border
             this->setText(owner);
             this->setStyleSheet("border:" + QString::fromStdString(to_string(proc->getBorder())) + "px solid " + QString::fromStdString(proc->getOwner()->getColor()));
-
-            if(this->square->getType() == "Wi") {
-                GuiManager::instance().endGame(this);
-            }
             QPixmap map(":/redME");
             this->setPixmap(map.scaled(QSize(Square::getSize(),Square::getSize()), Qt::KeepAspectRatio));
             this->setStyleSheet("border:" + QString::fromStdString(to_string(proc->getBorder())) + "px solid " + QString::fromStdString(proc->getOwner()->getColor()));
@@ -284,9 +280,11 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             //qDebug() << QString::fromStdString(details);
             QString msg = QString::fromStdString(Network::instance().ActionReciever(action,details));
             GuiManager::instance().getWindow()->actionSender(msg);
-            Sound::instance().playSound(":/acquireSound",1);
-
-
+            if(this->square->getType() == "Wi") {
+                GuiManager::instance().endGame(this);
+            } else {
+                Sound::instance().playSound(":/acquireSound",1);
+            }
         }
     }
 
