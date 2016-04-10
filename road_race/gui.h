@@ -6,9 +6,9 @@
 #include "roadrace.h"
 #include "gamemodel.h"
 #include "squarelabel.h"
-#include "square.h"
 
 class Square;
+class RoadRace;
 
 class GuiManager:QObject {
 Q_OBJECT
