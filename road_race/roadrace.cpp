@@ -60,8 +60,8 @@ void RoadRace::on_btnStuff_clicked()
    GuiManager::instance().newDiff();
     std::cout << Game::instance().getGameLoader()->toGameFile() << std::endl;
     Game::instance().setIsLocalGame(false);
-    ui->btnStuff->setDisabled(true);
-    ui->tst2Btn->setDisabled(true);
+    //ui->btnStuff->setDisabled(true);
+    //ui->tst2Btn->setDisabled(true);
     }
     else{
         QMessageBox::information(ui->centralWidget,"Alert","You did not select a difficulty.");
