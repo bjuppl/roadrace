@@ -28,7 +28,6 @@ private slots:
     void send();
 
     void loadFile();
-
     void on_btnOpenGame_clicked();
     void labelClicked();
     void on_helpBtn_clicked();

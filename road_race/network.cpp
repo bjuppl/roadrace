@@ -263,7 +263,7 @@ void Network::changeType(Square *square, string type){
     square->setType(type);
     Structure *stru = Game::instance().getStructure("Ru");
     square->setStruct(stru);
-    square->setAddition("Ru");
+    square->setAddition("No");
     int x = square->getX();
     int y = square->getY();
     int size = GuiManager::instance().getUi()->gridLayoutWidget->width()/Game::instance().getSquares().size()/2;

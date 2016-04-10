@@ -239,9 +239,9 @@ bool LevelManager::eruption(int hit, int wid){
 
     Square *victim = Game::instance().getSquare(wid,hit);
     Structure *killStruct = Game::instance().getStructure("Ru");
-    if(victim->getImage() != "Ri" && victim->getOwner() != nullptr){
+    if(victim->getImage() != "Ri" && victim->getType() != "Wi" && victim->getOwner() != nullptr){
     victim->setStruct(killStruct);
-    victim->setAddition("No");
+    victim->setImage("Ch");
     SquareLabel *vicLbl = victim->getLabel();
     int size = GuiManager::instance().getUi()->gridLayoutWidget->width()/Game::instance().getSize()/2;
     QSize size1(size,size);

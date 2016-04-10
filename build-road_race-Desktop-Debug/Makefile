@@ -405,7 +405,6 @@ qrc_resources.cpp: ../road_race/resources.qrc \
 		../road_race/castle.png \
 		../road_race/greenME.png \
 		../road_race/redSkull.png \
-		../road_race/logo.png \
 		../road_race/yellowSkull.png \
 		../road_race/Thief.wav \
 		../road_race/wall.jpg \
@@ -425,6 +424,7 @@ qrc_resources.cpp: ../road_race/resources.qrc \
 		../road_race/sevenbyseven.rr \
 		../road_race/blueME.png \
 		../road_race/Water.wav \
+		../road_race/logo.png \
 		../road_race/swamp.jpg \
 		../road_race/tunnel.jpg \
 		../road_race/Fire.wav \
