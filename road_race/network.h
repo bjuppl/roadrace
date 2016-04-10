@@ -17,6 +17,7 @@ class Network {
     QTcpSocket *global_socket;
    static Network *instance_;
    Network (){}
+   QString hostname;
 
 public:
    void handleData ( vector<string> data );
@@ -28,8 +29,10 @@ void SquareAssign(Player *player, Square *sq);
     void StructMaker(Player *player,Square *sq, string structname);
     string ActionReciever(string action, string details);
     void actionHandler(vector<string> action);
-
+    void changeType(Square *square, string type);
     void say( string out );
+    void setHost(QString host){hostname = host;}
+    QString getHost(){return hostname;}
 };
 
 

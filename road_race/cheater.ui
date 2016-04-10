@@ -13,46 +13,6 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QTextEdit" name="woodBox">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>70</y>
-     <width>104</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="goBox">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>200</y>
-     <width>104</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="waBOx">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>260</y>
-     <width>104</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="stoBox">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>130</y>
-     <width>104</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
@@ -155,6 +115,46 @@
    </property>
    <property name="text">
     <string>Shut off Random events</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="woodBox">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>70</y>
+     <width>113</width>
+     <height>27</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="stoBox">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>130</y>
+     <width>113</width>
+     <height>27</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="goBox">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>200</y>
+     <width>113</width>
+     <height>27</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="waBOx">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>260</y>
+     <width>113</width>
+     <height>27</height>
+    </rect>
    </property>
   </widget>
  </widget>

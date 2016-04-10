@@ -107,20 +107,12 @@ void RoadRace::connect_server()
     //QMessageBox::critical(this, "Uh oh", "Please specify name of chat server.");
 
     QString hostname = ui->iptServerName->text();
-    if (hostname.size() == 0) {
-        QMessageBox::critical(this, "Uh oh", "Please specify name of chat server.");
-        return;
-    }
-    socket->connectToHost(hostname, 3141);
-    if (!socket->waitForConnected())  {
-        QMessageBox::critical(this, "Uh oh", "Unable to connect to server.");
-        return;
-    }
-
-    ui->statusBar->showMessage("Connected.");
-    ui->btnConnect->setEnabled(false);
-    ui->iptServerMsg->setFocus();
-    Game::instance().setIsLocalGame(true);
+   if(hostname.size() > 0){
+       Network::instance().setHost(hostname);
+   }
+   else{
+        QMessageBox::information(ui->btnConnect,"Alert","You did not give us a host name.",0,0);
+   }
 }
 
 
