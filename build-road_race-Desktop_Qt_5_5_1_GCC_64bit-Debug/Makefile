@@ -647,7 +647,7 @@ qrc_resources.cpp: ../road_race/resources.qrc \
 		../road_race/sevenbyseven.rr \
 		../road_race/blueME.png \
 		../road_race/Water.wav \
-		../road_race/logo2.png \
+		../road_race/logo.png \
 		../road_race/swamp.jpg \
 		../road_race/tunnel.jpg \
 		../road_race/Fire.wav \
@@ -4180,15 +4180,14 @@ cheater.o: ../road_race/cheater.cpp ../road_race/cheater.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qrubberband.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QLabel \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qlabel.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QPushButton \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qpushbutton.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QTextEdit \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qtextedit.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qtextdocument.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qtextoption.h \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QLineEdit \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qlineedit.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qtextcursor.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qtextformat.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qpen.h \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qtextoption.h \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QPushButton \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qpushbutton.h \
 		../road_race/player.h \
 		../road_race/square.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QGridLayout \
@@ -4208,14 +4207,15 @@ cheater.o: ../road_race/cheater.cpp ../road_race/cheater.h \
 		../road_race/utils.h \
 		../road_race/gui.h \
 		ui_roadrace.h \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QLineEdit \
-		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qlineedit.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QMainWindow \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QRadioButton \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qradiobutton.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QStatusBar \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qstatusbar.h \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QTextEdit \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qtextedit.h \
+		../../../Qt5.5.1/5.5/gcc_64/include/QtGui/qtextdocument.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QToolBar \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/qtoolbar.h \
 		../../../Qt5.5.1/5.5/gcc_64/include/QtWidgets/QToolButton \

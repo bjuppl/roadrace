@@ -213,7 +213,7 @@ public:
         statusBox->setGeometry(QRect(10, 700, 231, 101));
         logo = new QLabel(centralWidget);
         logo->setObjectName(QStringLiteral("logo"));
-        logo->setGeometry(QRect(250, -20, 801, 231));
+        logo->setGeometry(QRect(240, -20, 821, 261));
         logo->setPixmap(QPixmap(QString::fromUtf8("://logo")));
         logo->setScaledContents(true);
         RoadRace->setCentralWidget(centralWidget);

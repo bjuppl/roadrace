@@ -17,18 +17,14 @@
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QTextEdit>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_cheater
 {
 public:
-    QTextEdit *woodBox;
-    QTextEdit *goBox;
-    QTextEdit *waBOx;
-    QTextEdit *stoBox;
     QLabel *label;
     QLabel *label_2;
     QLabel *label_3;
@@ -37,24 +33,16 @@ public:
     QPushButton *yesBtn;
     QPushButton *canBtn;
     QCheckBox *RndBox;
+    QLineEdit *woodBox;
+    QLineEdit *stoBox;
+    QLineEdit *goBox;
+    QLineEdit *waBOx;
 
     void setupUi(QDialog *cheater)
     {
         if (cheater->objectName().isEmpty())
             cheater->setObjectName(QStringLiteral("cheater"));
         cheater->resize(400, 370);
-        woodBox = new QTextEdit(cheater);
-        woodBox->setObjectName(QStringLiteral("woodBox"));
-        woodBox->setGeometry(QRect(20, 70, 104, 21));
-        goBox = new QTextEdit(cheater);
-        goBox->setObjectName(QStringLiteral("goBox"));
-        goBox->setGeometry(QRect(20, 200, 104, 21));
-        waBOx = new QTextEdit(cheater);
-        waBOx->setObjectName(QStringLiteral("waBOx"));
-        waBOx->setGeometry(QRect(20, 260, 104, 21));
-        stoBox = new QTextEdit(cheater);
-        stoBox->setObjectName(QStringLiteral("stoBox"));
-        stoBox->setGeometry(QRect(20, 130, 104, 21));
         label = new QLabel(cheater);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(20, 50, 101, 17));
@@ -79,6 +67,18 @@ public:
         RndBox = new QCheckBox(cheater);
         RndBox->setObjectName(QStringLiteral("RndBox"));
         RndBox->setGeometry(QRect(180, 70, 191, 22));
+        woodBox = new QLineEdit(cheater);
+        woodBox->setObjectName(QStringLiteral("woodBox"));
+        woodBox->setGeometry(QRect(20, 70, 113, 27));
+        stoBox = new QLineEdit(cheater);
+        stoBox->setObjectName(QStringLiteral("stoBox"));
+        stoBox->setGeometry(QRect(20, 130, 113, 27));
+        goBox = new QLineEdit(cheater);
+        goBox->setObjectName(QStringLiteral("goBox"));
+        goBox->setGeometry(QRect(20, 200, 113, 27));
+        waBOx = new QLineEdit(cheater);
+        waBOx->setObjectName(QStringLiteral("waBOx"));
+        waBOx->setGeometry(QRect(20, 260, 113, 27));
 
         retranslateUi(cheater);
 
