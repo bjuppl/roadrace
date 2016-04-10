@@ -496,10 +496,10 @@ font-size:30px;</string>
    <widget class="QLabel" name="logo">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>240</x>
       <y>-20</y>
-      <width>801</width>
-      <height>231</height>
+      <width>821</width>
+      <height>261</height>
      </rect>
     </property>
     <property name="text">
