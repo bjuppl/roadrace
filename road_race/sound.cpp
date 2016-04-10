@@ -28,7 +28,7 @@ void Sound::playSoundTrack()
 {
     effect = new QSoundEffect;
     effect->setSource(QUrl::fromLocalFile(":/music"));
-    effect->setVolume(1);
+    effect->setVolume(.6f);
     effect->setLoopCount(QSoundEffect::Infinite);
     effect->play();
 }

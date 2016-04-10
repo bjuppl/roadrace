@@ -18,7 +18,6 @@ SOURCES += main.cpp\
         roadrace.cpp \
         network.cpp \
         gamemodel.cpp\
-        highscore.cpp \
     square.cpp \
     gamefile.cpp \
     player.cpp \
@@ -36,7 +35,6 @@ SOURCES += main.cpp\
 HEADERS  += roadrace.h \
             network.h \
             gamemodel.h\
-            highscore.h \
     square.h \
     gamefile.h \
     player.h \
