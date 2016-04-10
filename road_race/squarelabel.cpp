@@ -273,7 +273,8 @@ void SquareLabel::mousePressEvent(QMouseEvent *ev){
             if(this->square->getType() == "Wi") {
                 GuiManager::instance().endGame(this);
             }
-            this->setText(owner);
+            QPixmap map(":/redME");
+            this->setPixmap(map.scaled(QSize(Square::getSize(),Square::getSize()), Qt::KeepAspectRatio));
             this->setStyleSheet("border:" + QString::fromStdString(to_string(proc->getBorder())) + "px solid " + QString::fromStdString(proc->getOwner()->getColor()));
             string action = "New Owner";
             string details;
