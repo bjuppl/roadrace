@@ -96,7 +96,7 @@ void multiplayer::connect_server(){
             lev  +level.toStdString() + nl;
     sendstr = QString::fromStdString(sto);
 
-    QString hostname = "127.0.0.1";
+    QString hostname = Network::instance().getHost();
     if (hostname.size() == 0) {
         QMessageBox::critical(this, "Uh oh", "Please specify name of chat server.");
         return;

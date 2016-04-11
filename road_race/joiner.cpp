@@ -60,7 +60,7 @@ void joiner::on_joinBtn_clicked()
     strm << "join " << gname.toStdString() << "\n" << "password " <<  gpass.toStdString() << "\n" << "name " << pname.toStdString() << "\n";
     request = QString::fromStdString(strm.str());
 
-    QString hostname = "localhost";
+    QString hostname = Network::instance().getHost();
     if (hostname.size() == 0) {
         QMessageBox::critical(this, "Uh oh", "Please specify name of chat server.");
         return;

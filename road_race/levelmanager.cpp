@@ -421,8 +421,15 @@ void LevelManager::prepSquares(vector<QString> proc){
      int y = num == 0 || num == 3 ? 0 : 7;
 
      Game::instance().getSquare(x,y)->setOwner(Game::instance().getCurPlayer());
+
+     Game::instance().setIsLocalGame(true);
+
+     string action = "New Owner";
+     string details;
+     details += to_string(x) + " " + to_string(y) + " " + Game::instance().getCurPlayer()->getName();
+
+     Network::instance().ActionReciever(action, details);
     GuiManager::instance().newDiff();
     GuiManager::instance().generateSquareGrid();
-    Game::instance().setIsLocalGame(true);
      std::cout << Game::instance().getGameLoader()->toGameFile() << std::endl;
 }
