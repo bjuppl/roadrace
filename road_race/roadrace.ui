@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1062</width>
-    <height>848</height>
+    <width>1097</width>
+    <height>819</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <rect>
       <x>10</x>
       <y>50</y>
-      <width>71</width>
+      <width>91</width>
       <height>41</height>
      </rect>
     </property>
@@ -310,7 +310,7 @@ font-size:30px;</string>
      <rect>
       <x>90</x>
       <y>50</y>
-      <width>71</width>
+      <width>81</width>
       <height>41</height>
      </rect>
     </property>
@@ -350,9 +350,9 @@ font-size:30px;</string>
    <widget class="QPushButton" name="RanBtn">
     <property name="geometry">
      <rect>
-      <x>170</x>
+      <x>160</x>
       <y>50</y>
-      <width>71</width>
+      <width>81</width>
       <height>41</height>
      </rect>
     </property>
@@ -406,7 +406,7 @@ font-size:30px;</string>
      </rect>
     </property>
     <property name="text">
-     <string>Connect</string>
+     <string>Change</string>
     </property>
    </widget>
    <widget class="QPushButton" name="testBtn">
@@ -489,7 +489,7 @@ font-size:30px;</string>
       <x>10</x>
       <y>700</y>
       <width>231</width>
-      <height>101</height>
+      <height>71</height>
      </rect>
     </property>
    </widget>

@@ -263,7 +263,7 @@ void GuiManager::on_btnSendToServer_clicked()
 
 void GuiManager::on_btnConnect_clicked()
 {
-
+    Network::instance().setHost(ui->iptServerName->text());
     //window->connect_server();
 }
 

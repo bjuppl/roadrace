@@ -10,6 +10,8 @@
 #include "levelmanager.h"
 #include <sstream>
 
+#include <QMessageBox>
+
 class LevelManager;
 Network *Network::instance_ = NULL;
 Network& Network::instance() {
@@ -78,7 +80,9 @@ void Network::handleData(vector<string> data){
                 GAME_DATA = "game_data";
 
 
+        QWidget *q = GuiManager::instance().getUi()->centralWidget;
         if ( command == GAME_JOINED ) {
+            //QMessageBox::information(q, "Welcome","Thanks for joining the game! It will start shortly.");
             continue;
         }
 
@@ -87,6 +91,7 @@ void Network::handleData(vector<string> data){
         }
 
         else if ( command == START_GAME ) {
+            QMessageBox::information(q, "Game starting!","Everyone joined!");
             continue;
         }
 
@@ -99,18 +104,23 @@ void Network::handleData(vector<string> data){
         }
 
         else if ( command == GAME_NO_INIT ) {
+            QMessageBox::critical(q, "Hmm","Unable to start this game.");
             return;
         }
 
         else if ( command == ALIAS_FAIL ) {
+            QMessageBox::critical(q, "Hmm","That game alias is already taken, sry.");
+
             return;
         }
 
         else if ( command == NAME_FAIL ) {
+            QMessageBox::critical(q, "Hmm","A player in this game already HAS that name.");
             return;
         }
 
         else if ( command == PASSWORD_FAIL ) {
+            QMessageBox::critical(q, "Hmm","That password is incorrect!");
             return;
         }
 
@@ -160,7 +170,7 @@ void Network::handleData(vector<string> data){
                 Square *s = Game::instance().getSquare(x,y);
 
                 if ( s == nullptr  ) {
-                    cout << "Coordinates out of bounds: " << coords[0] << "," << coords[1] << "." << endl;
+                    cout << "Coordinates out of bounds: " << ql[0].toStdString() << "," << ql[1].toStdString() << "." << endl;
                     return;
                 }
 
@@ -199,30 +209,40 @@ void Network::handleData(vector<string> data){
                     }
 
                     vector<string> coords;
-                    coords == split(command,',');
-                    if ( coords.size() < 2 ) {
-                        cout << "Coordinates not specified" << endl;
+                    QString qs = QString::fromStdString(command);
+                    QStringList ql = qs.split(',');
+
+                    for ( size_t i=0; i<ql.size(); i++ ) {
+                        cout << "Coordinate " << i << ": " << ql[i].toStdString() << endl;
+                    }
+
+                    if ( ql.size() < 2 ) {
+                        cout << "Coordinates not specified: " << command << endl;
                         return;
                     }
 
                     int x, y;
                     try {
-                        x = stoi(coords[0]);
-                        y = stoi(coords[1]);
+                        x = ql.at(0).toInt();
+                        y = ql.at(1).toInt();
                     } catch (...) {
-                        cout << "Coordinates invalid: " << coords[0] << "," << coords[1] << "." << endl;
+                        cout << "Coordinates invalid: " << ql.at(0).toStdString() << "," << ql.at(1).toStdString() << "." << endl;
                         return;
                     }
+
+                    cout << "x: " << x << endl;
+                    cout << "y: " << y << endl;
 
                     Square *s = Game::instance().getSquare(x,y);
 
                     if ( s == nullptr  ) {
-                        cout << "Coordinates out of bounds: " << coords[0] << "," << coords[1] << "." << endl;
+                        cout << "Coordinates out of bounds: " << ql[0].toStdString() << "," << ql[1].toStdString() << "." << endl;
                         return;
                     }
 
+
                     Network::instance().StructMaker( p, s, type );
-                    cout << "Structure " << type << " added at " << coords[0] << "," << coords[1] << "." << endl;
+                    cout << "Structure " << type << " added at " << ql[0].toStdString() << "," << ql[1].toStdString() << "." << endl;
 
                     return;
                 }
@@ -256,26 +276,18 @@ void Network::setSocket(QTcpSocket *s){
 }
 
 void Network::SquareAssign(Player *player, Square *sq){
-    cout << 257 << endl;
     sq->setOwner(player);
-    cout << 259 << endl;
     int x = sq->getX();
-    cout << 261 << endl;
 
     int y = sq->getY();
-    cout << 264 << endl;
 
     int size = GuiManager::instance().getUi()->gridLayoutWidget->width()/Game::instance().getSquares().size()/2;
-    cout << 267 << endl;
 
     QSize size1(size,size);
-    cout << 270 << endl;
 
     //SquareLabel *lbl = dynamic_cast<SquareLabel*>(GuiManager::instance().getUi()->gameLayout->itemAtPosition(x,y));
-    cout << 272 << endl;
 
     sq->getLabel()->setStyleSheet("border:" + QString::fromStdString(to_string(sq->getBorder())) + "px solid " + QString::fromStdString(sq->getOwner()->getColor()));
-    cout << 276 << endl;
 
 }
 void Network::StructMaker(Player *player,Square *sq1, string structname){
@@ -287,9 +299,8 @@ void Network::StructMaker(Player *player,Square *sq1, string structname){
     int y = sq1->getY();
     int size = GuiManager::instance().getUi()->gridLayoutWidget->width()/Game::instance().getSquares().size()/2;
      QSize size1(size,size);
-    SquareLabel *lbl = dynamic_cast<SquareLabel*>(GuiManager::instance().getUi()->gameLayout->itemAtPosition(x,y));
     QPixmap thing = GuiManager::instance().setmap(sq1,size1);
-    lbl->setPixmap(thing);
+    sq1->getLabel()->setPixmap(thing);
     }
 }
 void Network::changeType(Square *square, string type){
@@ -301,13 +312,17 @@ void Network::changeType(Square *square, string type){
     int y = square->getY();
     int size = GuiManager::instance().getUi()->gridLayoutWidget->width()/Game::instance().getSquares().size()/2;
     QSize size1(size,size);
-    SquareLabel *lbl = dynamic_cast<SquareLabel*>(GuiManager::instance().getUi()->gridLayoutWidget->childAt(x,y));
     QPixmap thing = GuiManager::instance().setmap(square,size1);
-    lbl->setPixmap(thing);
+    square->getLabel()->setPixmap(thing);
 }
 
 string Network::ActionReciever(string action, string details){
     string result = "game " + Game::instance().getId() + " player " + Game::instance().getCurPlayer()->getName() + "\n";
+    if ( action == "Win") {
+        result += Game::instance().getCurPlayer()->getName() + " win";
+        Network::instance().say(result);
+        return result;
+    }
    if(action == "New Owner"){
 
        string str1;

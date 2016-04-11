@@ -17,7 +17,7 @@ class Network {
     QTcpSocket *global_socket;
    static Network *instance_;
    Network (){}
-   QString hostname;
+   QString hostname{"localhost"};
 
 public:
    void handleData ( vector<string> data );
