@@ -154,6 +154,9 @@ void Network::handleData(vector<string> data){
                     return;
                 }
 
+                cout << "x: " << x << endl;
+                cout << "y: " << y << endl;
+
                 Square *s = Game::instance().getSquare(x,y);
 
                 if ( s == nullptr  ) {
@@ -161,8 +164,10 @@ void Network::handleData(vector<string> data){
                     return;
                 }
 
+                s->setOwner(p);
+
                 Network::instance().SquareAssign( p, s );
-                cout << "Square at " << coords[0] << "," << coords[1] << " changed owners to " << p->getName() << endl;
+                cout << "Square at " << ql[0].toStdString() << "," << ql[1].toStdString() << " changed owners to " << p->getName() << endl;
 
                 return;
 
@@ -251,15 +256,27 @@ void Network::setSocket(QTcpSocket *s){
 }
 
 void Network::SquareAssign(Player *player, Square *sq){
-
+    cout << 257 << endl;
     sq->setOwner(player);
+    cout << 259 << endl;
     int x = sq->getX();
+    cout << 261 << endl;
+
     int y = sq->getY();
+    cout << 264 << endl;
+
     int size = GuiManager::instance().getUi()->gridLayoutWidget->width()/Game::instance().getSquares().size()/2;
+    cout << 267 << endl;
 
     QSize size1(size,size);
-    SquareLabel *lbl = dynamic_cast<SquareLabel*>(GuiManager::instance().getUi()->gameLayout->itemAtPosition(x,y));
-    lbl->setStyleSheet("border:" + QString::fromStdString(to_string(sq->getBorder())) + "px solid " + QString::fromStdString(sq->getOwner()->getColor()));
+    cout << 270 << endl;
+
+    //SquareLabel *lbl = dynamic_cast<SquareLabel*>(GuiManager::instance().getUi()->gameLayout->itemAtPosition(x,y));
+    cout << 272 << endl;
+
+    sq->getLabel()->setStyleSheet("border:" + QString::fromStdString(to_string(sq->getBorder())) + "px solid " + QString::fromStdString(sq->getOwner()->getColor()));
+    cout << 276 << endl;
+
 }
 void Network::StructMaker(Player *player,Square *sq1, string structname){
     if(sq1->getOwner() == player){
